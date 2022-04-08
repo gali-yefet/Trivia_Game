@@ -1,10 +1,10 @@
 #include "JsonResponsePacketSerializer.h"
-#include "json/include/nlohmann/json.hpp"
+#include "json/single_include/nlohmann/json.hpp"
 
 #define CODE '6'
 
 // for convenience
-using json = nlohmann::json_pointer;
+using json = nlohmann::json;
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeLoginResponse(LoginResponse s)
 {

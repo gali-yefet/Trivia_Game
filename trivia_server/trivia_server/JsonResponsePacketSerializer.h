@@ -25,8 +25,4 @@ public:
 	static std::vector<unsigned char> serializeSignUpResponse(struct SignupResponse s);
 	static std::vector<unsigned char> serializeErrorResponse(struct ErrorResponse s);
 
-private:
-	std::vector<unsigned char> buffer;
-
-
 };
