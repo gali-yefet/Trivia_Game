@@ -92,9 +92,16 @@ out: void
 */
 void Communicator::HandleNewClient(SOCKET socket)
 {
-	sendData(socket, "Hello");
-	std::string msg = getData(socket, 5);
-	std::cout << msg << std::endl;
+	try
+	{
+		sendData(socket, "Hello");
+		std::string msg = getData(socket, 5);
+		std::cout << msg << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "Exception was thrown in function: " << e.what() << std::endl;
+	}
 }
 
 /*
