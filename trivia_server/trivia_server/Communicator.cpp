@@ -1,11 +1,9 @@
 #include "Communicator.h"
-
 #include "LoginRequesHandler.h"
 #include <exception>
 #include <thread>
 #include <string>
 
-#define TRACE(msg, ...) printf(msg "\n", __VA_ARGS__);
 static const unsigned int IFACE = 0;
 
 /*
