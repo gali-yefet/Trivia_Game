@@ -1,3 +1,15 @@
-﻿  JsonResponsePacketSerializer.cpp
-MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol _main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
-C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe : fatal error LNK1120: 1 unresolved externals
+﻿  Communicator.cpp
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\IRequestHandler.h(16,17): error C2143: syntax error: missing ';' before '*'
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\IRequestHandler.h(16,17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\IRequestHandler.h(16,30): error C2238: unexpected token(s) preceding ';'
+  JsonRequestPacketDeserializer.cpp
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\IRequestHandler.h(16,17): error C2143: syntax error: missing ';' before '*'
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\IRequestHandler.h(16,17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\IRequestHandler.h(16,30): error C2238: unexpected token(s) preceding ';'
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\JsonRequestPacketDeserializer.cpp(16,9): error C2039: 'newHandler': is not a member of 'RequestResult'
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\IRequestHandler.h(13): message : see declaration of 'RequestResult'
+  LoginRequestHandler.cpp
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\IRequestHandler.h(16,17): error C2143: syntax error: missing ';' before '*'
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\IRequestHandler.h(16,17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\IRequestHandler.h(16,30): error C2238: unexpected token(s) preceding ';'
+  Generating Code...
