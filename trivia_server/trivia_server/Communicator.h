@@ -1,4 +1,4 @@
-#pragma once
+#pragma comment (lib, "ws2_32.lib")
 #include "IRequestHandler.h"
 #include <WinSock2.h>
 #include <Windows.h>

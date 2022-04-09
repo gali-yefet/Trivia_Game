@@ -5,7 +5,8 @@
 #include <thread>
 #include <string>
 
-static const unsigned int IFACE = 0;
+
+#define IFACE 0;
 
 /*
 create the server socket
@@ -87,7 +88,7 @@ void Communicator::bindAndListen()
 }
 
 /*
-communicate with the client (right now - send hello, and get hello back)
+communicate with the client
 in: client socket
 out: void
 */
@@ -150,4 +151,3 @@ std::string Communicator::getData(const SOCKET sc, const int bytesNum, const int
 	delete[] data;
 	return received;
 }
-

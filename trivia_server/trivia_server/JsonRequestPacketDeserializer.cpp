@@ -8,7 +8,7 @@ bool JsonRequestPacketDeseializer::isRequestRelevant(RequestInfo r)
 
 RequestResult JsonRequestPacketDeseializer::handleRequest(RequestInfo r)
 {
-	RequestResult result;
+	 RequestResult result;
 	
 	std::string data(r.json.begin(), r.json.end());// converts the data from bytes to string
 	result.buffer = data;

@@ -3,20 +3,20 @@
 #include <iostream>
 #include <vector>
 
-struct LoginResponse
+typedef struct LoginResponse
 {
 	unsigned int status;
-};
+}LoginResponse;
 
-struct SignupResponse
+typedef struct SignupResponse
 {
 	unsigned int status;
-};
+}SignupResponse;
 
-struct ErrorResponse
+typedef struct ErrorResponse
 {
 	std::string message;
-};
+}ErrorResponse;
 
 class JsonResponsePacketSerializer
 {

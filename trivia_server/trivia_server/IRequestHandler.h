@@ -1,22 +1,25 @@
 #pragma once
+#define SIGN_CODE 6
+
 #include <iostream>
 #include <vector>
 #include <ctime>
 
-struct RequestInfo
+class IRequestHandler; // the RequestResult struct uses this class, so we need to declare it first
+
+typedef struct RequestInfo
 {
 	int requestCode;
-	time_t receivalTime; 
+	time_t receivalTime;
 	std::vector<unsigned char> json;
-};
+}RequestInfo;
 
-struct RequestResult
+typedef struct RequestResult
 {
 	std::string buffer;
 	IRequestHandler* newHandler;
-};
+}RequestResult;
 
-#define SIGN_CODE 6
 
 class IRequestHandler
 {
@@ -26,6 +29,4 @@ public:
 	virtual RequestResult handleRequest(RequestInfo r) = 0;
 
 };
-
-
 
