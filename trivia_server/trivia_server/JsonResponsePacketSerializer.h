@@ -25,4 +25,7 @@ public:
 	static std::vector<unsigned char> serializeSignUpResponse(SignupResponse s);
 	static std::vector<unsigned char> serializeErrorResponse(ErrorResponse s);
 
+private:
+	static std::vector<unsigned char> serializeLogins(char code, std::string data);
+
 };

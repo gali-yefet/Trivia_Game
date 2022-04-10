@@ -1,7 +1,9 @@
 #include "JsonResponsePacketSerializer.h"
 #include "json/single_include/nlohmann/json.hpp"
 
-#define CODE '6'
+#define SIGN_CODE '5'
+#define LOGIN_CODE '6'
+#define ERROR_CODE '7'
 
 // for convenience
 using json = nlohmann::json;
@@ -11,15 +13,10 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeLoginResponse(
 	// create an empty structure (null)
 	json j;
 
-	//add status key into the json
 	j["status"] = s.status;
 
 	std::string data = j.dump();  // returns the json as a string
-
-	std::string message = CODE + std::to_string(static_cast<int>(data.length() * 2)) + data; //make the full response as a string
-
-	std::vector<unsigned char> bytes_buffer(message.begin(), message.end());// enter the response to a vector of bytes
-	return bytes_buffer;
+	return serializeLogins(LOGIN_CODE, data);
 }
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeSignUpResponse(SignupResponse s)
@@ -27,15 +24,10 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeSignUpResponse
 	// create an empty structure (null)
 	json j;
 
-	//add status key into the json
 	j["status"] = s.status;
 
 	std::string data = j.dump();  // returns the json as a string
-
-	std::string message = CODE + std::to_string(static_cast<int>(data.length() * 2)) + data; //make the full response as a string
-
-	std::vector<unsigned char> bytes_buffer(message.begin(), message.end());// enter the response to a vector of bytes
-	return bytes_buffer;
+	return serializeLogins(SIGN_CODE, data);
 }
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeErrorResponse(ErrorResponse s)
@@ -43,12 +35,15 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeErrorResponse(
 	// create an empty structure (null)
 	json j;
 
-	//add status key into the json
 	j["message"] = s.message;
 
 	std::string data = j.dump();  // returns the json as a string
+	return serializeLogins(ERROR_CODE, data);
+}
 
-	std::string message = CODE + std::to_string(static_cast<int>(data.length() * 2)) + data; //make the full response as a string
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeLogins(char code, std::string data)
+{
+	std::string message = code + std::to_string(static_cast<int>(data.length() * sizeof(unsigned char))) + data; //make the full response as a string
 
 	std::vector<unsigned char> bytes_buffer(message.begin(), message.end());// enter the response to a vector of bytes
 	return bytes_buffer;
