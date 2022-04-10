@@ -3,18 +3,18 @@
 #include <iostream>
 #include <vector>
 
-struct LoginRequest
+typedef struct LoginRequest
 {
 	std::string username;
 	std::string password;
-};
+}LoginRequest;
 
-struct SignupRequest
+typedef struct SignupRequest
 {
 	std::string username;
 	std::string password;
 	std::string email;
-};
+}SignupRequest;
 
 class JsonRequestPacketDeseializer : public LoginRequestHandler
 {

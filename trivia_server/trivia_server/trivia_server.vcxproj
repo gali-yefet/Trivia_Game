@@ -146,6 +146,11 @@
   <ItemGroup>
     <ClCompile Include="JsonRequestPacketDeserializer.cpp" />
     <ClCompile Include="JsonResponsePacketSerializer.cpp" />
+<<<<<<< HEAD
+=======
+    <ClCompile Include="LoginRequestHandler.cpp" />
+    <ClCompile Include="Source.cpp" />
+>>>>>>> b069233964a4355901da2ed0df2bc141cb10726e
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
