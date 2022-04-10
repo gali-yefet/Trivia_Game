@@ -6,14 +6,14 @@
 struct RequestInfo
 {
 	int requestCode;
-	time_t receivalTime; 
+	std::time_t receivalTime; 
 	std::vector<unsigned char> json;
 };
 
 struct RequestResult
 {
 	std::string buffer;
-	IRequestHandler* newHandler;
+	//IRequestHandler* newHandler;
 };
 
 #define SIGN_CODE 6
