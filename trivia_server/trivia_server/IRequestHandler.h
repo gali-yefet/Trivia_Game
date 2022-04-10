@@ -10,24 +10,15 @@ class IRequestHandler; // the RequestResult struct uses this class, so we need t
 typedef struct RequestInfo
 {
 	int requestCode;
-<<<<<<< HEAD
 	std::time_t receivalTime; 
-=======
-	time_t receivalTime;
->>>>>>> b069233964a4355901da2ed0df2bc141cb10726e
 	std::vector<unsigned char> json;
 }RequestInfo;
 
 typedef struct RequestResult
 {
 	std::string buffer;
-<<<<<<< HEAD
-	//IRequestHandler* newHandler;
-};
-=======
 	IRequestHandler* newHandler;
 }RequestResult;
->>>>>>> b069233964a4355901da2ed0df2bc141cb10726e
 
 
 class IRequestHandler
