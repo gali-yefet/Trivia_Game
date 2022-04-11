@@ -1,5 +1,3 @@
-#pragma comment (lib, "ws2_32.lib")
-
 #include "Server.h"
 #include "WSAInitializer.h"
 #include <exception>

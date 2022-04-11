@@ -1,2 +1,15 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+﻿  JsonRequestPacketDeserializer.cpp
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\JsonRequestPacketDeserializer.cpp(16,9): error C2039: 'newHandler': is not a member of 'RequestResult'
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\IRequestHandler.h(13): message : see declaration of 'RequestResult'
+  LoginRequestHandler.cpp
+  Generating Code...
+=======
+﻿  Communicator.cpp
+  trivia_server.vcxproj -> C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe
+>>>>>>> b069233964a4355901da2ed0df2bc141cb10726e
+=======
 ﻿  Source.cpp
   trivia_server.vcxproj -> C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe
+>>>>>>> 5060f6ee31128b8355c8d61e7e55d48b17568996
