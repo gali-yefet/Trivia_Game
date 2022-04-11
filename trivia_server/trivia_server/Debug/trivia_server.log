@@ -1,4 +1,2 @@
-﻿  JsonRequestPacketDeserializer.cpp
-  JsonResponsePacketSerializer.cpp
-  Generating Code...
+﻿  Source.cpp
   trivia_server.vcxproj -> C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe
