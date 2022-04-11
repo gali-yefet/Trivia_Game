@@ -10,7 +10,7 @@ class IRequestHandler; // the RequestResult struct uses this class, so we need t
 typedef struct RequestInfo
 {
 	int requestCode;
-	time_t receivalTime;
+	std::time_t receivalTime; 
 	std::vector<unsigned char> json;
 }RequestInfo;
 

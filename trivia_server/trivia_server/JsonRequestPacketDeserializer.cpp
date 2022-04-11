@@ -21,7 +21,7 @@ RequestResult JsonRequestPacketDeseializer::handleRequest(RequestInfo r)
 LoginRequest JsonRequestPacketDeseializer::deserializeLoginRequest(RequestInfo r)
 {
 	LoginRequest l;
-	JsonRequestPacketDeseializer j;
+	JsonRequestPacketDeseializer j;// has to be for runnig the function while its a static function and virtual cant be static
 	if(j.isRequestRelevant(r))
 	{
 		std::string data(r.json.begin(), r.json.end());// converts the data from bytes to string

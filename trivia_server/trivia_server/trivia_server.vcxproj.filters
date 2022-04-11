@@ -24,12 +24,6 @@
     <ClInclude Include="IRequestHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LoginRequestHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Communicator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JsonResponsePacketSerializer.cpp">

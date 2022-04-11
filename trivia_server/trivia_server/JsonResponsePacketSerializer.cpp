@@ -41,6 +41,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeErrorResponse(
 	return serializeLogins(ERROR_CODE, data);
 }
 
+
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeLogins(char code, std::string data)
 {
 	std::string message = code + std::to_string(static_cast<int>(data.length() * sizeof(unsigned char))) + data; //make the full response as a string
