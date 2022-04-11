@@ -15,33 +15,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <ClInclude Include="JsonResponsePacketSerializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="JsonRequestPacketDeserializer.h">
-=======
-    <ClInclude Include="Server.h">
+		<Filter>Header Files</Filter>
+	</ClInclude>
+
+	<ClInclude Include="Server.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Communicator.h">
->>>>>>> 5060f6ee31128b8355c8d61e7e55d48b17568996
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IRequestHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-<<<<<<< HEAD
   </ItemGroup>
-  <ItemGroup>
+<ItemGroup>
     <ClCompile Include="JsonResponsePacketSerializer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="JsonRequestPacketDeserializer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-<<<<<<< HEAD
-=======
     <ClCompile Include="Communicator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -51,8 +48,7 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
->>>>>>> b069233964a4355901da2ed0df2bc141cb10726e
-=======
+
     <ClInclude Include="LoginRequesHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -73,6 +69,5 @@
     <ClCompile Include="WSAInitializer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
->>>>>>> 5060f6ee31128b8355c8d61e7e55d48b17568996
   </ItemGroup>
 </Project>
