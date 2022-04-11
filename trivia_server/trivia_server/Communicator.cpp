@@ -1,12 +1,20 @@
 #include "Communicator.h"
+<<<<<<< HEAD
 #include "LoginRequestHandler.h"
 #include "JsonRequestPacketDeserializer.h"
+=======
+#include "LoginRequesHandler.h"
+>>>>>>> 5060f6ee31128b8355c8d61e7e55d48b17568996
 #include <exception>
 #include <thread>
 #include <string>
 
+<<<<<<< HEAD
 
 #define IFACE 0;
+=======
+static const unsigned int IFACE = 0;
+>>>>>>> 5060f6ee31128b8355c8d61e7e55d48b17568996
 
 /*
 create the server socket
@@ -60,7 +68,11 @@ void Communicator::startHandleRequest()
 		tr.detach();
 
 		//insert the client to the clients map
+<<<<<<< HEAD
 		LoginRequestHandler* handler = new LoginRequestHandler();
+=======
+		LoginRquestHandler* handler = new LoginRquestHandler();
+>>>>>>> 5060f6ee31128b8355c8d61e7e55d48b17568996
 		m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, handler));
 		TRACE("Client accepted !");
 	}
@@ -88,7 +100,11 @@ void Communicator::bindAndListen()
 }
 
 /*
+<<<<<<< HEAD
 communicate with the client
+=======
+communicate with the client (right now - send hello, and get hello back)
+>>>>>>> 5060f6ee31128b8355c8d61e7e55d48b17568996
 in: client socket
 out: void
 */
@@ -96,6 +112,7 @@ void Communicator::HandleNewClient(SOCKET socket)
 {
 	try
 	{
+<<<<<<< HEAD
 		RequestInfo r;
 		r.receivalTime = time(&r.receivalTime);
 		std::string msg = getData(socket, 1); // get the message code
@@ -107,6 +124,11 @@ void Communicator::HandleNewClient(SOCKET socket)
 		JsonRequestPacketDeseializer j;
 		RequestResult res = j.handleRequest(r);
 		sendData(socket, res.buffer);
+=======
+		sendData(socket, "Hello");
+		std::string msg = getData(socket, 5);
+		std::cout << msg << std::endl;
+>>>>>>> 5060f6ee31128b8355c8d61e7e55d48b17568996
 	}
 	catch (const std::exception& e)
 	{
@@ -150,4 +172,9 @@ std::string Communicator::getData(const SOCKET sc, const int bytesNum, const int
 	std::string received(data);
 	delete[] data;
 	return received;
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> 5060f6ee31128b8355c8d61e7e55d48b17568996

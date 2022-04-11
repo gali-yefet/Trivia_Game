@@ -29,4 +29,3 @@ public:
 	virtual RequestResult handleRequest(RequestInfo r) = 0;
 
 };
-
