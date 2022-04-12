@@ -10,7 +10,8 @@
 create the server socket
 in: void
 */
-Communicator::Communicator()
+Communicator::Communicator(RequestHandlerFactory& handlerFactory):
+	m_handlerFactory(handlerFactory)
 {
 	// this server use TCP. that's why SOCK_STREAM & IPPROTO_TCP
 	// if the server use UDP we will use: SOCK_DGRAM & IPPROTO_UDP
@@ -51,8 +52,8 @@ void Communicator::startHandleRequest()
 		tr.detach();
 
 		//insert the client to the clients map
-		LoginRequestHandler* handler = new LoginRequestHandler();
-		m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, handler));
+		//TODO: call createLoginRequestHandler
+		//m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, handler));
 		TRACE("Client accepted !");
 	}
 }

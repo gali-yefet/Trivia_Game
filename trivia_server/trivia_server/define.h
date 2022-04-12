@@ -5,7 +5,7 @@
 #define PORT 3086
 
 enum codes {
+	ERROR_CODE = 0,
 	SIGN_CODE = 5,
-	LOGIN_CODE = 6,
-	ERROR_CODE = 7
+	LOGIN_CODE = 6
 };

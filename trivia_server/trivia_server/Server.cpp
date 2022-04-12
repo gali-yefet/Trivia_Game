@@ -3,11 +3,11 @@
 #include <thread>
 
 /*
-initilize the m_communicator with a communicator.
+initilize the db, communicator, and factory
 in: none
 */
 Server::Server():
-	m_communicator(Communicator())
+	m_database(new IDatabase), m_handlerFactory(RequestHandlerFactory(m_database)),	m_communicator(Communicator(m_handlerFactory)) //TODO: add db, and add a pointer to it to the factory
 {
 }
 
