@@ -26,7 +26,6 @@ public:
 	static std::vector<unsigned char> serializeErrorResponse(ErrorResponse s);
 
 private:
-	template <class T>
-	static std::vector<unsigned char> serializeLogins(int code, std::string atr, T response);
+	static std::vector<unsigned char> serializeLogins(char code, std::string data);
 
 };
