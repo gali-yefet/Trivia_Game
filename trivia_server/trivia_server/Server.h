@@ -1,5 +1,6 @@
 #pragma once
 #include "Communicator.h"
+#include "RequestHandlerFactory.h"
 
 class Server
 {

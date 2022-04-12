@@ -1,7 +1,26 @@
 ﻿  Communicator.cpp
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,21): error C2143: syntax error: missing ';' before '*'
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,50): error C2238: unexpected token(s) preceding ';'
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\Communicator.cpp(54,57): error C2512: 'LoginRequestHandler::LoginRequestHandler': no appropriate default constructor available
   JsonRequestPacketDeserializer.cpp
-  JsonResponsePacketSerializer.cpp
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,21): error C2143: syntax error: missing ';' before '*'
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,50): error C2238: unexpected token(s) preceding ';'
+  LoginRequesHandler.cpp
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,21): error C2143: syntax error: missing ';' before '*'
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,50): error C2238: unexpected token(s) preceding ';'
+  RequestHandlerFactory.cpp
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,21): error C2143: syntax error: missing ';' before '*'
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,50): error C2238: unexpected token(s) preceding ';'
   Server.cpp
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,21): error C2143: syntax error: missing ';' before '*'
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,50): error C2238: unexpected token(s) preceding ';'
   Source.cpp
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,21): error C2143: syntax error: missing ';' before '*'
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(9,50): error C2238: unexpected token(s) preceding ';'
   Generating Code...
-  trivia_server.vcxproj -> C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe

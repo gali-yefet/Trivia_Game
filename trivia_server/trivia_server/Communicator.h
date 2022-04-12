@@ -1,10 +1,12 @@
 #pragma comment (lib, "ws2_32.lib")
 #include "IRequestHandler.h"
+#include "RequestHandlerFactory.h"
+#include "define.h"
+
 #include <WinSock2.h>
 #include <Windows.h>
 #include <map>
 #include <iostream>
-#include "define.h"
 
 class Communicator
 {
