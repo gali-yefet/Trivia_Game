@@ -1,5 +1,4 @@
 #pragma once
-#define SIGN_CODE 6
 
 #include <iostream>
 #include <vector>

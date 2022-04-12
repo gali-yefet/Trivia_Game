@@ -3,6 +3,10 @@
 #include <iostream>
 #include <vector>
 
+#define SIGN_CODE 5
+#define LOGIN_CODE 6
+#define ERROR_CODE 7
+
 typedef struct LoginResponse
 {
 	unsigned int status;
@@ -26,6 +30,6 @@ public:
 	static std::vector<unsigned char> serializeErrorResponse(ErrorResponse s);
 
 private:
-	static std::vector<unsigned char> serializeLogins(char code, std::string data);
+	static std::vector<unsigned char> serializeMsg(int code, std::string data);
 
 };

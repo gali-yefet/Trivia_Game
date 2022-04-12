@@ -27,14 +27,7 @@ close server socket
 Communicator::~Communicator()
 {
 	TRACE(__FUNCTION__ " closing accepting socket");
-	// why is this try necessarily ?
-	try
-	{
-		// the only use of the destructor should be for freeing 
-		// resources that was allocated in the constructor
-		::closesocket(m_serverSocket);
-	}
-	catch (...) {}
+	closesocket(m_serverSocket);
 }
 
 /*
@@ -76,7 +69,6 @@ void Communicator::bindAndListen()
 	sa.sin_port = htons(PORT);
 	sa.sin_family = AF_INET;
 	sa.sin_addr.s_addr = IFACE;
-	// again stepping out to the global namespace
 	if (bind(m_serverSocket, (struct sockaddr*)&sa, sizeof(sa)) == SOCKET_ERROR)
 		throw std::exception(__FUNCTION__ " - bind");
 	TRACE("binded");
@@ -103,9 +95,8 @@ void Communicator::HandleNewClient(SOCKET socket)
 		int bytes = std::stoi(msg);
 		msg = getData(socket, bytes); // get the json
 		r.json = std::vector<unsigned char>(msg.begin(), msg.end());
-		JsonRequestPacketDeseializer j;
-		RequestResult res = j.handleRequest(r);
-		sendData(socket, res.buffer);
+		//TODO: handle request
+		//sendData(socket, res.buffer);
 	}
 	catch (const std::exception& e)
 	{
