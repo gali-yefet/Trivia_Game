@@ -4,10 +4,7 @@
 #include <Windows.h>
 #include <map>
 #include <iostream>
-
-#define PORT 3086
-
-#define TRACE(msg, ...) printf(msg "\n", __VA_ARGS__);
+#include "define.h"
 
 class Communicator
 {

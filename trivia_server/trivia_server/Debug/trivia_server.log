@@ -1,4 +1,6 @@
-﻿  LoginRequesHandler.cpp
+﻿  Communicator.cpp
+  JsonRequestPacketDeserializer.cpp
+  JsonResponsePacketSerializer.cpp
   Server.cpp
   Source.cpp
   Generating Code...

@@ -5,7 +5,6 @@
 #include <thread>
 #include <string>
 
-#define IFACE 0;
 
 /*
 create the server socket
