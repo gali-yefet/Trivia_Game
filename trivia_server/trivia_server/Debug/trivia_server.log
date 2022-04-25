@@ -1,34 +1,5 @@
-﻿  JsonRequestPacketDeserializer.cpp
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(10,21): error C2143: syntax error: missing ';' before '*'
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(10,21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(10,50): error C2238: unexpected token(s) preceding ';'
-  Communicator.cpp
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.h(10,21): error C2061: syntax error: identifier 'RequestHandlerFactory'
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.h(16,23): error C2143: syntax error: missing ';' before '&'
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.h(16,23): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.h(16,41): error C2238: unexpected token(s) preceding ';'
-  LoginRequestHandler.cpp
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(10,21): error C2143: syntax error: missing ';' before '*'
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(10,21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(10,50): error C2238: unexpected token(s) preceding ';'
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.cpp(73,40): error C2039: 'createLoginRequestHandler': is not a member of 'RequestHandlerFactory'
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(6): message : see declaration of 'RequestHandlerFactory'
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.cpp(108,40): error C2039: 'createLoginRequestHandler': is not a member of 'RequestHandlerFactory'
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.h(6): message : see declaration of 'RequestHandlerFactory'
-  RequestHandlerFactory.cpp
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.h(10,21): error C2061: syntax error: identifier 'RequestHandlerFactory'
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.h(16,23): error C2143: syntax error: missing ';' before '&'
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.h(16,23): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.h(16,41): error C2238: unexpected token(s) preceding ';'
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RequestHandlerFactory.cpp(19,59): error C2661: 'LoginRequestHandler::LoginRequestHandler': no overloaded function takes 2 arguments
+﻿  Communicator.cpp
   Server.cpp
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.h(10,21): error C2061: syntax error: identifier 'RequestHandlerFactory'
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.h(16,23): error C2143: syntax error: missing ';' before '&'
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.h(16,23): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.h(16,41): error C2238: unexpected token(s) preceding ';'
   Source.cpp
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.h(10,21): error C2061: syntax error: identifier 'RequestHandlerFactory'
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.h(16,23): error C2143: syntax error: missing ';' before '&'
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.h(16,23): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\LoginRequestHandler.h(16,41): error C2238: unexpected token(s) preceding ';'
   Generating Code...
+  trivia_server.vcxproj -> C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe

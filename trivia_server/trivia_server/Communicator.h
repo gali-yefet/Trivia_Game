@@ -14,14 +14,14 @@ public:
 	Communicator(RequestHandlerFactory& handlerFactory);
 	~Communicator();
 	void startHandleRequest();
+	void bindAndListen();
 
 private:
 	SOCKET m_serverSocket;
 	std::map<SOCKET, IRequestHandler*> m_clients;
 	RequestHandlerFactory& m_handlerFactory;
 
-	void bindAndListen();
-	void HandleNewClient(SOCKET socket);
+	void HandleNewClient(SOCKET socket); //TODO - actualy handle the client
 	void sendData(const SOCKET sc, const std::string message);
 	std::string getData(const SOCKET sc, const int bytesNum, const int flags = 0);
 };

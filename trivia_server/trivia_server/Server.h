@@ -1,7 +1,7 @@
 #pragma once
 #include "Communicator.h"
 #include "RequestHandlerFactory.h"
-#include "IDatabase.h"
+#include "SqliteDataBase.h"
 
 class Server
 {

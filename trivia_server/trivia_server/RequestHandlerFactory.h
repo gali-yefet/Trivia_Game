@@ -1,7 +1,9 @@
 #pragma once
-#include "LoginManager.h"
 #include "LoginRequestHandler.h"
 #include "IDatabase.h"
+#include "LoginManager.h"
+
+class LoginRequestHandler; //Circular reference
 
 class RequestHandlerFactory
 {

@@ -52,8 +52,8 @@ void Communicator::startHandleRequest()
 		tr.detach();
 
 		//insert the client to the clients map
-		//TODO: call createLoginRequestHandler
-		//m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, handler));
+		LoginRequestHandler* handler = m_handlerFactory.createLoginRequestHandler();
+		m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, handler));
 		TRACE("Client accepted !");
 	}
 }
