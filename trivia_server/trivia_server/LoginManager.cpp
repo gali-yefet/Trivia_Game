@@ -1,5 +1,10 @@
 #include "LoginManager.h"
 
+LoginManager::LoginManager(IDatabase* db):
+	m_database(db)
+{
+}
+
 bool LoginManager::signup(std::string username, std::string password, std::string email)
 {
 	this->m_database->addNewUser(username, password, email);

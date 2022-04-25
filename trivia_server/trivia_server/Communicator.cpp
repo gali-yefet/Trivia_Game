@@ -85,23 +85,36 @@ out: void
 */
 void Communicator::HandleNewClient(SOCKET socket)
 {
-	try
+	while (true)
 	{
-		RequestInfo r;
-		r.receivalTime = time(&r.receivalTime);
-		std::string msg = getData(socket, 1); // get the message code
-		r.requestCode = std::stoi(msg);
-		msg = getData(socket, 4);// get the json size
-		int bytes = std::stoi(msg);
-		msg = getData(socket, bytes); // get the json
-		r.json = std::vector<unsigned char>(msg.begin(), msg.end());
-		//TODO: handle request
-		//sendData(socket, res.buffer);
+		try
+		{
+			RequestInfo r;
+
+			//get the msg into the struct
+			r.receivalTime = time(&r.receivalTime);
+			std::string msg = getData(socket, 1); // get the message code
+			r.requestCode = std::stoi(msg);
+			msg = getData(socket, 4);// get the json size
+			int bytes = std::stoi(msg);
+			msg = getData(socket, bytes); // get the json
+			r.json = std::vector<unsigned char>(msg.begin(), msg.end());
+
+			//handle the client request according to socket
+			IRequestHandler* handler = m_clients.find(socket)->second;
+			if (handler->isRequestRelevant(r))
+			{
+				RequestResult res = handler->handleRequest(r);
+				sendData(socket, res.buffer);
+			}
+			
+		}
+		catch (const std::exception& e)
+		{
+			std::cout << "Exception was thrown in function: " << e.what() << std::endl;
+		}
 	}
-	catch (const std::exception& e)
-	{
-		std::cout << "Exception was thrown in function: " << e.what() << std::endl;
-	}
+	
 }
 
 /*

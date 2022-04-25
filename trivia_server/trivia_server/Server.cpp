@@ -6,8 +6,8 @@
 initilize the db, communicator, and factory
 in: none
 */
-Server::Server() :
-	m_database(new SqliteDataBase), m_handlerFactory(RequestHandlerFactory(m_database)), m_communicator(Communicator(m_handlerFactory))
+Server::Server():
+	m_database(new SqliteDataBase()), m_handlerFactory(RequestHandlerFactory(m_database)), m_communicator(Communicator(m_handlerFactory)) //TODO: find out whats wrong with the communicator
 {
 }
 
