@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "define.h"
+#include "Room.h"
 
 typedef struct LoginResponse
 {
@@ -18,6 +19,47 @@ typedef struct ErrorResponse
 {
 	std::string message;
 }ErrorResponse;
+
+typedef struct LogoutResponse
+{
+	unsigned int status;
+}LogoutResponse;
+
+typedef struct GetRoomsResponse
+{
+	unsigned int status;
+	std::vector<RoomData> rooms;
+}GetRoomsResponse;
+
+typedef struct GetPlayersInRoomResponse
+{
+	std::vector<std::string> players;
+}GetPlayersInRoomResponse;
+
+typedef struct GetHighScoreResponse
+{
+	unsigned int status;
+	std::vector<std::string> statistics;
+}GetHighScoreResponse;
+
+typedef struct GetPersonalStateResponse
+{
+	unsigned int status;
+	std::vector<std::string> statistics;
+}GetPersonalStateResponse;
+
+typedef struct JoinRoomResponse
+{
+	unsigned int status;
+
+}JoinRoomResponse;
+
+typedef struct CreateRoomResponse
+{
+	unsigned int status;
+
+}CreateRoomResponse;
+
 
 class JsonResponsePacketSerializer
 {
