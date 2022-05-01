@@ -2,10 +2,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <vector>
-
-#define SIGN_CODE 5
-#define LOGIN_CODE 6
-#define ERROR_CODE 7
+#include "define.h"
 
 typedef struct LoginResponse
 {

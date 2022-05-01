@@ -1,9 +1,16 @@
-﻿  Communicator.cpp
-  JsonRequestPacketDeserializer.cpp
+﻿  JsonRequestPacketDeserializer.cpp
   JsonResponsePacketSerializer.cpp
-  LoginRequesHandler.cpp
+  LoggedUser.cpp
+  LoginManager.cpp
+  Communicator.cpp
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\Communicator.cpp(104,32): warning C4101: 'e': unreferenced local variable
+  LoginRequestHandler.cpp
+  MenuRequestHandler.cpp
+  RequestHandlerFactory.cpp
   Server.cpp
   Source.cpp
+  SqliteDataBase.cpp
+  User.cpp
   Generating Code...
-  LINK : C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe not found or not built by the last incremental link; performing full link
+  sqlite3.c
   trivia_server.vcxproj -> C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe
