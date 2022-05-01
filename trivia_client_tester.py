@@ -50,7 +50,7 @@ def main():
 
     #seposed to work
     print("signup (work): " + signup("n1", "111", "1@gmail.com", sock))
-    print("login (work): " + login("n1", "111", sock))
+    #print("login (work): " + login("n1", "111", sock))
 
     print("login (fail, cant login to a loged in user): " + login("n1", "111", sock))
     print("signup (fail, can't signup with the same name): " + signup("n1", "111", "1@gmail.com", sock))

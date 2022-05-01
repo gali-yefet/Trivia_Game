@@ -20,6 +20,11 @@ std::string User::getEmail()
 	return this->email;
 }
 
+int User::getIsActive()
+{
+	return isActive;
+}
+
 void User::setUsername(const std::string& username)
 {
 	this->username = username;
@@ -33,4 +38,9 @@ void User::setPassword(const std::string& password)
 void User::setEmail(const std::string& email)
 {
 	this->email = email;
+}
+
+void User::setIsActive(const int& isActive)
+{
+	this->isActive = isActive;
 }

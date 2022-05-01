@@ -15,21 +15,23 @@ bool LoginManager::signup(std::string username, std::string password, std::strin
 
 bool LoginManager::login(std::string username, std::string password)
 {
-	if (this->m_database->doesUserExist(username) && this->m_database->doesPasswordMatch(username, password))
+	if (this->m_database->doesUserExist(username) && this->m_database->doesPasswordMatch(username, password) && !(this->m_database->isActive(username)))
 	{
 		this->m_loggedUsers.push_back(LoggedUser(username));
+		this->m_database->login(username);
 		return true;
 	}
-	return false;
+	return false;	
 }
 
 bool LoginManager::logout(std::string username)
 {
 	for (auto it = this->m_loggedUsers.begin(); it != this->m_loggedUsers.end(); it++)
 	{
-		if ((*it).getUsername() == username)
+		if ((*it).getUsername() == username && this->m_database->isActive(username))
 		{
 			this->m_loggedUsers.erase(it);
+			this->m_database->logout(username);
 			return true;
 		}
 	}

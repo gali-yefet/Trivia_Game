@@ -17,7 +17,7 @@ bool SqliteDataBase::open()
 
 	if (doesFileExist != 0) {
 		// init database
-		bool res = query("CREATE TABLE IF NOT EXISTS USER (USERNAME TEXT PRIMARY KEY NOT NULL, PASSWORD TEXT NOT NULL, EMAIL TEXT NOT NULL);");
+		bool res = query("CREATE TABLE IF NOT EXISTS USER (USERNAME TEXT PRIMARY KEY NOT NULL, PASSWORD TEXT NOT NULL, EMAIL TEXT NOT NULL, IS_ACTIVE INTEGER NOT NULL);");
 		if (!res)
 			std::cout << "Failed to create Table USER" << std::endl;
 		/*res = query("CREATE TABLE IF NOT EXISTS QUESTION (Q_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, K_ID INTEGER NOT NULL, FOREIGN KEY(K_ID) REFERENCES KEY(ID));");
@@ -59,8 +59,30 @@ bool SqliteDataBase::doesPasswordMatch(std::string username, std::string passwor
 
 void SqliteDataBase::addNewUser(std::string username, std::string password, std::string email)
 {
-	std::string q = "INSERT INTO USER(USERNAME, PASSWORD, EMAIL) VALUES('" + username + "', '" + password + "', '" + email + "'); ";
+	std::string q = "INSERT INTO USER(USERNAME, PASSWORD, EMAIL, IS_ACTIVE) VALUES('" + username + "', '" + password + "', '" + email + "', 1); ";
 	query(q.c_str());
+}
+
+void SqliteDataBase::login(std::string username)
+{
+	std::string q = "UPDATE USER SET IS_ACTIVE = 1 WHERE USERNAME = '" + username + "';";
+	query(q.c_str());
+}
+
+void SqliteDataBase::logout(std::string username)
+{
+	std::string q = "UPDATE USER SET IS_ACTIVE = 0 WHERE USERNAME = '" + username + "';";
+	query(q.c_str());
+}
+
+bool SqliteDataBase::isActive(std::string username)
+{
+	std::string q = "SELECT IS_ACTIVE FROM USER WHERE USERNAME = '" + username + "';";
+	std::list<User> listOfUsers;
+	this->execSelectCmd(q.c_str(), this->usersCallback, &listOfUsers);
+	User currentUser = listOfUsers.front();
+
+	return currentUser.getIsActive() == 1;
 }
 
 std::list<Question> SqliteDataBase::getQuestions(int) //TODO
@@ -106,6 +128,8 @@ int SqliteDataBase::usersCallback(void* data, int argc, char** argv, char** azCo
 			currUser.setPassword(argv[i]);
 		else if (std::string(azColName[i]) == EMAIL_COLUMN)
 			currUser.setEmail(argv[i]);
+		else if (std::string(azColName[i]) == IS_ACTIVE_COLUMN)
+			currUser.setIsActive(std::stoi(argv[i]));
 	}
 	now->push_back(currUser);
 	return 0;
