@@ -1,4 +1,5 @@
 ﻿  JsonRequestPacketDeserializer.cpp
+<<<<<<< HEAD
   JsonResponsePacketSerializer.cpp
   LoggedUser.cpp
   LoginManager.cpp
@@ -13,4 +14,6 @@ C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gal
   User.cpp
   Generating Code...
   sqlite3.c
+=======
+>>>>>>> 56e683f1202b707f2154e8a187793845a9c4c984
   trivia_server.vcxproj -> C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe
