@@ -12,6 +12,8 @@ public:
 	virtual bool doesUserExist(std::string username);
 	virtual bool doesPasswordMatch(std::string username, std::string password);
 	virtual void addNewUser(std::string username, std::string password, std::string email);
+	virtual void login(std::string username);
+	virtual void logout(std::string username);
 
 	virtual std::list<Question> getQuestions(int);
 	virtual float getPlayerAverageAnswerTime(std::string);
@@ -53,4 +55,6 @@ private:
 	static constexpr const char* K_ID_COLUMN = "K_ID";
 	static constexpr const char* WINS_COLUMN = "WINS";
 	static constexpr const char* GAMES_COLUMN = "GAMES";
+	static constexpr const char* IS_ACTIVE_COLUMN = "IS_ACTIVE";
+
 };

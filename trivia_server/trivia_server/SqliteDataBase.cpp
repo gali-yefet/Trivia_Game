@@ -17,7 +17,7 @@ bool SqliteDataBase::open()
 
 	if (doesFileExist != 0) {
 		// init database
-		bool res = query("CREATE TABLE IF NOT EXISTS USER (USERNAME TEXT PRIMARY KEY NOT NULL, PASSWORD TEXT NOT NULL, EMAIL TEXT NOT NULL);");
+		bool res = query("CREATE TABLE IF NOT EXISTS USER (USERNAME TEXT PRIMARY KEY NOT NULL, PASSWORD TEXT NOT NULL, EMAIL TEXT NOT NULL, IS_ACTIVE INTEGER NOT NULL);");
 		if (!res)
 			std::cout << "Failed to create Table USER" << std::endl;
 		/*res = query("CREATE TABLE IF NOT EXISTS QUESTION (Q_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, K_ID INTEGER NOT NULL, FOREIGN KEY(K_ID) REFERENCES KEY(ID));");
@@ -59,7 +59,19 @@ bool SqliteDataBase::doesPasswordMatch(std::string username, std::string passwor
 
 void SqliteDataBase::addNewUser(std::string username, std::string password, std::string email)
 {
-	std::string q = "INSERT INTO USER(USERNAME, PASSWORD, EMAIL) VALUES('" + username + "', '" + password + "', '" + email + "'); ";
+	std::string q = "INSERT INTO USER(USERNAME, PASSWORD, EMAIL, IS_ACTIVE) VALUES('" + username + "', '" + password + "', '" + email + "', 1); ";
+	query(q.c_str());
+}
+
+void SqliteDataBase::login(std::string username)
+{
+	std::string q = "UPDATE USER SET IS_ACTIVE = 1 WHERE USERNAME = '" + username + "';";
+	query(q.c_str());
+}
+
+void SqliteDataBase::logout(std::string username)
+{
+	std::string q = "UPDATE USER SET IS_ACTIVE = 0 WHERE USERNAME = '" + username + "';";
 	query(q.c_str());
 }
 
