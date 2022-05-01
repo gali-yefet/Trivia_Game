@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "define.h"
-#include "Room.h"
+#include "Room"
 
 typedef struct LoginResponse
 {
@@ -64,9 +64,16 @@ typedef struct CreateRoomResponse
 class JsonResponsePacketSerializer
 {
 public:
-	static std::vector<unsigned char> serializeLoginResponse(LoginResponse s);
-	static std::vector<unsigned char> serializeSignUpResponse(SignupResponse s);
-	static std::vector<unsigned char> serializeErrorResponse(ErrorResponse s);
+	static std::vector<unsigned char> serializeLoginResponse(LoginResponse r);
+	static std::vector<unsigned char> serializeSignUpResponse(SignupResponse r);
+	static std::vector<unsigned char> serializeErrorResponse(ErrorResponse r);
+	static std::vector<unsigned char> serializeLogoutResponse(LogoutResponse r);
+	static std::vector<unsigned char> serializeJoinRoomResponse(JoinRoomResponse r);
+	static std::vector<unsigned char> serializeCreateRoomResponse(CreateRoomResponse r);
+	static std::vector<unsigned char> serializeGetRoomsResponse(GetRoomsResponse r);
+	static std::vector<unsigned char> serializeGetPlayersInRoomResponse(GetPlayersInRoomResponse r);
+	//static std::vector<unsigned char> serializeHighScoreResponse(GetHighScoreResponse r); //TODO
+	
 
 private:
 	static std::vector<unsigned char> serializeMsg(int code, std::string data);
