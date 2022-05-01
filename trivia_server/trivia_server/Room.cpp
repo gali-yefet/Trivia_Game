@@ -49,3 +49,8 @@ std::vector<std::string> Room::getAllUsers()
 		list.push_back(i->getUsername());
 	return list;
 }
+
+RoomData Room::getRoomData()
+{
+	return m_metadata;
+}
