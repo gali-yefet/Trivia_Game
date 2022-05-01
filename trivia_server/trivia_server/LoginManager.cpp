@@ -7,6 +7,8 @@ LoginManager::LoginManager(IDatabase* db):
 
 bool LoginManager::signup(std::string username, std::string password, std::string email)
 {
+	if (this->m_database->doesUserExist(username))
+		return false;
 	this->m_database->addNewUser(username, password, email);
 	return true;
 }

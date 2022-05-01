@@ -1,18 +1,23 @@
 #include "SqliteDataBase.h"
 
+SqliteDataBase::SqliteDataBase()
+{
+	open();
+}
+
 bool SqliteDataBase::open()
 {
 	int doesFileExist = _access(DB_FILE_NAME, 0);
-	int res = sqlite3_open(DB_FILE_NAME, &db);
+	int res = sqlite3_open(DB_FILE_NAME, &_db);
 	if (res != SQLITE_OK) {
-		db = nullptr;
+		_db = nullptr;
 		std::cout << "Failed to open DB" << std::endl;
 		return false;
 	}
 
 	if (doesFileExist != 0) {
 		// init database
-		bool res = query("CREATE TABLE IF NOT EXISTS USER (USERNAME TEXT PRIMARY KEY AUTOINCREMENT NOT NULL, PASSWORD TEXT NOT NULL, EMAIL TEXT NOT NULL);");
+		bool res = query("CREATE TABLE IF NOT EXISTS USER (USERNAME TEXT PRIMARY KEY NOT NULL, PASSWORD TEXT NOT NULL, EMAIL TEXT NOT NULL);");
 		if (!res)
 			std::cout << "Failed to create Table USER" << std::endl;
 		/*res = query("CREATE TABLE IF NOT EXISTS QUESTION (Q_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, K_ID INTEGER NOT NULL, FOREIGN KEY(K_ID) REFERENCES KEY(ID));");
@@ -36,7 +41,7 @@ bool SqliteDataBase::open()
 
 bool SqliteDataBase::doesUserExist(std::string username)
 {
-	std::string q = "SELECT * FROM USER where USERNAME = " + username + ";";
+	std::string q = "SELECT * FROM USER where USERNAME = '" + username + "';";
 	std::list<User> listOfUsers;
 	this->execSelectCmd(q.c_str(), this->usersCallback, &listOfUsers);
 	return listOfUsers.size() != 0;
@@ -44,46 +49,46 @@ bool SqliteDataBase::doesUserExist(std::string username)
 
 bool SqliteDataBase::doesPasswordMatch(std::string username, std::string password)
 {
-	std::string q = "SELECT PASSWORD FROM USER where USERNAME = " + username + ";";
+	std::string q = "SELECT PASSWORD FROM USER where USERNAME = '" + username + "';";
 	std::list<User> listOfUsers;
 	this->execSelectCmd(q.c_str(), this->usersCallback, &listOfUsers);
 	User currentUser = listOfUsers.front();
-	return currentUser.getPassword() == password;
 
+	return currentUser.getPassword() == password;
 }
 
 void SqliteDataBase::addNewUser(std::string username, std::string password, std::string email)
 {
-	std::string q = "INSERT INTO USER(USERNAME, PASSWORD, EMAIL) VALUES('" + username + "'" + ", '" + password + "', '" + email + "'); ";
+	std::string q = "INSERT INTO USER(USERNAME, PASSWORD, EMAIL) VALUES('" + username + "', '" + password + "', '" + email + "'); ";
 	query(q.c_str());
 }
 
-std::list<Question> SqliteDataBase::getQuestions(int)
+std::list<Question> SqliteDataBase::getQuestions(int) //TODO
 {
 	return std::list<Question>();
 }
 
-float SqliteDataBase::getPlayerAverageAnswerTime(std::string)
+float SqliteDataBase::getPlayerAverageAnswerTime(std::string)//TODO
 {
 	return 0.0f;
 }
 
-int SqliteDataBase::getNumOfCorrectAnswers(std::string)
+int SqliteDataBase::getNumOfCorrectAnswers(std::string)//TODO
 {
 	return 0;
 }
 
-int SqliteDataBase::getNumOfTotalAnswers(std::string)
+int SqliteDataBase::getNumOfTotalAnswers(std::string)//TODO
 {
 	return 0;
 }
 
-int SqliteDataBase::getNumOfPlayerGames(std::string)
+int SqliteDataBase::getNumOfPlayerGames(std::string)//TODO
 {
 	return 0;
 }
 
-int SqliteDataBase::getSecurityKey(std::string)
+int SqliteDataBase::getSecurityKey(std::string)//TODO
 {
 	return 0;
 }
@@ -114,7 +119,7 @@ bool SqliteDataBase::query(const char* sqlStatement)
 	const char* sql_statement = sqlStatement;
 
 	char* errMessage = nullptr;
-	int res = sqlite3_exec(db, sql_statement, nullptr, nullptr, &errMessage);
+	int res = sqlite3_exec(_db, sql_statement, nullptr, nullptr, &errMessage);
 	if (res != SQLITE_OK)
 	{
 		std::cerr << sqlStatement << ":\n" << errMessage << std::endl;
@@ -128,7 +133,7 @@ bool SqliteDataBase::query(const char* sqlStatement)
 void SqliteDataBase::execSelectCmd(const char* sqlStatement, int(*callback)(void*, int, char**, char**), void* callbackParam)
 {
 	char* errMessage = nullptr;
-	int res = sqlite3_exec(db, sqlStatement, callback, callbackParam, &errMessage);
+	int res = sqlite3_exec(_db, sqlStatement, callback, callbackParam, &errMessage);
 	if (res != SQLITE_OK) // (errMessage != nullptr)
 		throw std::exception(errMessage);
 

@@ -13,6 +13,7 @@ class Communicator
 public:
 	Communicator(RequestHandlerFactory& handlerFactory);
 	~Communicator();
+
 	void startHandleRequest();
 	void bindAndListen();
 
@@ -21,7 +22,7 @@ private:
 	std::map<SOCKET, IRequestHandler*> m_clients;
 	RequestHandlerFactory& m_handlerFactory;
 
-	void HandleNewClient(SOCKET socket); //TODO - actualy handle the client
+	void HandleNewClient(SOCKET socket);
 	void sendData(const SOCKET sc, const std::string message);
 	std::string getData(const SOCKET sc, const int bytesNum, const int flags = 0);
 };

@@ -7,6 +7,7 @@
 class SqliteDataBase : public IDatabase
 {
 public:
+	SqliteDataBase();
 	virtual bool open();
 	virtual bool doesUserExist(std::string username);
 	virtual bool doesPasswordMatch(std::string username, std::string password);
@@ -21,7 +22,6 @@ public:
 	virtual int getSecurityKey(std::string);
 
 	//callback functions
-	//callback Functions
 	static int albumsCallback(void* data, int argc, char** argv, char** azColName);
 	static int usersCallback(void* data, int argc, char** argv, char** azColName);
 	static int tagsCallback(void* data, int argc, char** argv, char** azColName);
@@ -32,6 +32,10 @@ private:
 	bool query(const char* sqlStatement);
 	void execSelectCmd(const char* sqlStatement, int (*callback)(void*, int, char**, char**), void* callbackParam);
 
+	sqlite3* _db;
+
+
+	//define some variables
 	const char* DB_FILE_NAME = "DB.sqlite";
 
 	// tables names
@@ -49,8 +53,4 @@ private:
 	static constexpr const char* K_ID_COLUMN = "K_ID";
 	static constexpr const char* WINS_COLUMN = "WINS";
 	static constexpr const char* GAMES_COLUMN = "GAMES";
-
-
-	sqlite3* db;
-
 };

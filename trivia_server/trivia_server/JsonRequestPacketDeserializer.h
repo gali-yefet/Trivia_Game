@@ -22,4 +22,6 @@ public:
 	static LoginRequest deserializeLoginRequest(RequestInfo r);
 	static SignupRequest deserializeSignupRequest(RequestInfo r);
 
+private:
+	static std::string eraseQuotes(std::string str);
 };

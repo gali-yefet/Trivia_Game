@@ -33,10 +33,7 @@ RequestResult LoginRequestHandler::handleRequest(RequestInfo r)
 	RequestResult result;
 
 	if (isRequestRelevant(r))
-	{
-		int requestCode = r.requestCode;
-		result = (requestCode == LOGIN_CODE) ? login(r) : signup(r);
-	}
+		result = (r.requestCode == LOGIN_CODE) ? login(r) : signup(r);
 	
 	return result;
 }
@@ -58,7 +55,7 @@ RequestResult LoginRequestHandler::login(RequestInfo r)
 		LoginResponse res;
 		res.status = LOGIN_CODE;
 		buffer = JsonResponsePacketSerializer::serializeLoginResponse(res);
-
+	
 		//create handler
 		result.newHandler = new MenuRequestHandler(); //TODO: after the factory can create a menu handler, change so the factory fo that
 	}
@@ -68,7 +65,7 @@ RequestResult LoginRequestHandler::login(RequestInfo r)
 		ErrorResponse res;
 		res.message = "Login Faild";
 		buffer = JsonResponsePacketSerializer::serializeErrorResponse(res);
-
+	
 		//create handler
 		result.newHandler = m_handlerFactory.createLoginRequestHandler();
 	}
@@ -93,7 +90,7 @@ RequestResult LoginRequestHandler::signup(RequestInfo r)
 		SignupResponse res;
 		res.status = SIGN_CODE;
 		buffer = JsonResponsePacketSerializer::serializeSignUpResponse(res);
-
+	
 		//create handler
 		result.newHandler = new MenuRequestHandler(); //TODO: after the factory can create a menu handler, change so the factory do that
 	}
@@ -103,7 +100,7 @@ RequestResult LoginRequestHandler::signup(RequestInfo r)
 		ErrorResponse res;
 		res.message = "signup Faild";
 		buffer = JsonResponsePacketSerializer::serializeErrorResponse(res);
-
+	
 		//create handler
 		result.newHandler = m_handlerFactory.createLoginRequestHandler();
 	}
