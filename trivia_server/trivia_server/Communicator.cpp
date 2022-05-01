@@ -5,13 +5,13 @@
 #include <thread>
 #include <string>
 
-#define IFACE 0;
 
 /*
 create the server socket
 in: void
 */
-Communicator::Communicator()
+Communicator::Communicator(RequestHandlerFactory& handlerFactory):
+	m_handlerFactory(handlerFactory)
 {
 	// this server use TCP. that's why SOCK_STREAM & IPPROTO_TCP
 	// if the server use UDP we will use: SOCK_DGRAM & IPPROTO_UDP
@@ -30,6 +30,7 @@ Communicator::~Communicator()
 	closesocket(m_serverSocket);
 }
 
+
 /*
 start handling clients. create a new socket and thread for each client
 in: void
@@ -38,7 +39,7 @@ out: void
 void Communicator::startHandleRequest()
 {
 	bindAndListen();
-
+	
 	//accept clients
 	while (true)
 	{
@@ -46,16 +47,16 @@ void Communicator::startHandleRequest()
 		SOCKET client_socket = accept(m_serverSocket, NULL, NULL);
 		if (client_socket == INVALID_SOCKET)
 			throw std::exception(__FUNCTION__);
-
+	
 		// create new thread for client	and detach from it
 		std::thread tr(&Communicator::HandleNewClient, this, client_socket);
 		tr.detach();
-
+	
 		//insert the client to the clients map
-		LoginRequestHandler* handler = new LoginRequestHandler();
+		LoginRequestHandler* handler = m_handlerFactory.createLoginRequestHandler();
 		m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, handler));
 		TRACE("Client accepted !");
-	}
+	}//TODO
 }
 
 /*
@@ -69,13 +70,14 @@ void Communicator::bindAndListen()
 	sa.sin_port = htons(PORT);
 	sa.sin_family = AF_INET;
 	sa.sin_addr.s_addr = IFACE;
+
 	if (bind(m_serverSocket, (struct sockaddr*)&sa, sizeof(sa)) == SOCKET_ERROR)
 		throw std::exception(__FUNCTION__ " - bind");
 	TRACE("binded");
-
+	
 	if (listen(m_serverSocket, SOMAXCONN) == SOCKET_ERROR)
 		throw std::exception(__FUNCTION__ " - listen");
-	TRACE("listening...");
+	TRACE("listening...");//TODO
 }
 
 /*
@@ -84,23 +86,33 @@ in: client socket
 out: void
 */
 void Communicator::HandleNewClient(SOCKET socket)
-{
-	try
+{	
+	RequestInfo r;
+
+	while (true)
 	{
-		RequestInfo r;
+		//get the msg into the struct
 		r.receivalTime = time(&r.receivalTime);
-		std::string msg = getData(socket, 1); // get the message code
-		r.requestCode = std::stoi(msg);
-		msg = getData(socket, 4);// get the json size
-		int bytes = std::stoi(msg);
-		msg = getData(socket, bytes); // get the json
-		r.json = std::vector<unsigned char>(msg.begin(), msg.end());
-		//TODO: handle request
-		//sendData(socket, res.buffer);
-	}
-	catch (const std::exception& e)
-	{
-		std::cout << "Exception was thrown in function: " << e.what() << std::endl;
+		try
+		{
+			r.requestCode = getData(socket, 1)[0] - '0'; // get the message code, and convert to int
+			std::string len = getData(socket, 4);
+			int bytes = std::stoi(len);// get the json size
+			std::string msg = getData(socket, bytes); // get the json
+			r.json = std::vector<unsigned char>(msg.begin(), msg.end());
+		}
+		catch (const std::exception& e)
+		{
+			continue;
+		}
+
+		//handle the client request according to socket
+		IRequestHandler* handler = m_clients.find(socket)->second;
+		if (handler->isRequestRelevant(r))
+		{
+			RequestResult res = handler->handleRequest(r);
+			sendData(socket, res.buffer);
+		}	
 	}
 }
 
@@ -130,7 +142,7 @@ std::string Communicator::getData(const SOCKET sc, const int bytesNum, const int
 
 	char* data = new char[bytesNum + 1];
 	int res = recv(sc, data, bytesNum, flags);
-	if (res == INVALID_SOCKET)
+	if (res == INVALID_SOCKET || res!= bytesNum)
 	{
 		std::string s = "Error while recieving from socket: ";
 		s += std::to_string(sc);
