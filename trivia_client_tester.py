@@ -17,8 +17,8 @@ def main():
     server_address = (SERVER_IP, SERVER_PORT)
     sock.connect(server_address)
 
-    sock.send(createLoginMessage().encode())
-    server_msg = sock.recv(34).decode()
+    sock.send(createSignUpMessage().encode())
+    server_msg = sock.recv(63).decode()
     print(server_msg)
 
 if __name__ == "__main__":

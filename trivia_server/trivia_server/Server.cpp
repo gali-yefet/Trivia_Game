@@ -1,13 +1,14 @@
 #include "Server.h"
 
 #include <thread>
+#include <iostream>
 
 /*
-initilize the m_communicator with a communicator.
+initilize the db, communicator, and factory
 in: none
 */
 Server::Server():
-	m_communicator(Communicator())
+	m_database(new SqliteDataBase()), m_handlerFactory(m_database), m_communicator(m_handlerFactory)
 {
 }
 
@@ -21,11 +22,11 @@ void Server::run()
 	//start the communicator to handle clients
 	std::thread tr(&Communicator::startHandleRequest, m_communicator);
 	tr.detach();
-
+	
 	//check whether to exit or not 
-	while (true)
+	std::string in;
+	while (true) //TODO: find out why it abort here...
 	{
-		std::string in;
 		std::cin >> in;
 		if (in == "EXIT")
 			break;

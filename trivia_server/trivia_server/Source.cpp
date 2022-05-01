@@ -10,6 +10,7 @@ int main()
 		TRACE("Starting...");
 		WSAInitializer wsa_init;
 		Server md_server;
+
 		md_server.run();
 	}
 	catch (const std::exception& e)
