@@ -1,11 +1,6 @@
-﻿  JsonRequestPacketDeserializer.cpp
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\JsonResponsePacketSerializer.h(6,10): fatal error C1083: Cannot open include file: 'Room.h': No such file or directory
-  JsonResponsePacketSerializer.cpp
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\JsonResponsePacketSerializer.h(6,10): fatal error C1083: Cannot open include file: 'Room.h': No such file or directory
-  LoginRequestHandler.cpp
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\JsonResponsePacketSerializer.h(6,10): fatal error C1083: Cannot open include file: 'Room.h': No such file or directory
-  Room.cpp
-c1xx : fatal error C1083: Cannot open source file: 'Room.cpp': No such file or directory
-  RoomManager.cpp
-c1xx : fatal error C1083: Cannot open source file: 'RoomManager.cpp': No such file or directory
+﻿  RoomManager.cpp
+  Server.cpp
+  Source.cpp
   Generating Code...
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(40): warning C4715: 'RoomManager::getRoomState': not all control paths return a value
+  trivia_server.vcxproj -> C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe

@@ -47,7 +47,6 @@ out: vector of the rooms data
 std::vector<RoomData> RoomManager::getRooms()
 {
 	std::vector<RoomData> list;
-	std::vector<std::string> list;
 	for (auto i = m_rooms.begin(); i != m_rooms.end(); ++i)
 		list.push_back(i->second.getRoomData());
 	return list;
