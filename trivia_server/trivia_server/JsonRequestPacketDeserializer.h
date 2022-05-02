@@ -16,12 +16,33 @@ typedef struct SignupRequest
 	std::string email;
 }SignupRequest;
 
+typedef struct GetPlayersInRoomRequest
+{
+	unsigned int roomId;
+}GetPlayersInRoomRequest;
+
+typedef struct JoinRoomRequest
+{
+	unsigned int roomId;
+}JoinRoomRequest;
+
+typedef struct CreateRoomRequest
+{
+	std::string roomName;
+	unsigned int maxUsers;
+	unsigned int questionCount;
+	unsigned int answerTimeOut;
+}CreateRoomRequest;
+
 class JsonRequestPacketDeseializer
 {
 public:
 	static LoginRequest deserializeLoginRequest(RequestInfo r);
 	static SignupRequest deserializeSignupRequest(RequestInfo r);
+	static GetPlayersInRoomRequest deserializeGetPlayersInRoomRequest(RequestInfo r);
+	static JoinRoomRequest deserializeJoinRoomRequest(RequestInfo r);
+	static CreateRoomRequest deserializeCreateRoomRequest(RequestInfo r);
 
 private:
-	static std::string eraseQuotes(std::string str);
+	static std::string extractValue(std::string& json);
 };

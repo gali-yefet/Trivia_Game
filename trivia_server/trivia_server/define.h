@@ -7,5 +7,8 @@
 enum codes {
 	ERROR_CODE = 0,
 	SIGN_CODE = 5,
-	LOGIN_CODE = 6
+	LOGIN_CODE = 6,
+	GET_PLAYERS_IN_ROOM = 7,
+	JOIN_ROOM = 8,
+	CREATE_ROOM = 9
 };
