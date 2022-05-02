@@ -12,7 +12,7 @@ RequestHandlerFactory::RequestHandlerFactory(IDatabase* db):
 /*
 create a new LoginRequestHandler
 in: void
-out: void
+out: LoginRequestHandler
 */
 LoginRequestHandler* RequestHandlerFactory::createLoginRequestHandler()
 {
@@ -21,12 +21,12 @@ LoginRequestHandler* RequestHandlerFactory::createLoginRequestHandler()
 
 /*
 create a new MenuRequestHandler
-in: void
-out: void
+in: username
+out: MenuRequestHandler
 */
-MenuRequestHandler* RequestHandlerFactory::createMenuRequestHandler()
+MenuRequestHandler* RequestHandlerFactory::createMenuRequestHandler(std::string username)
 {
-    return new MenuRequestHandler(); //TODO: change after actualy making MenuRequestHandler
+    return new MenuRequestHandler(LoggedUser(username), m_roomManager, *this); //TODO: add statistics
 }
 
 LoginManager& RequestHandlerFactory::getLoginManager()
@@ -37,4 +37,9 @@ LoginManager& RequestHandlerFactory::getLoginManager()
 RoomManager& RequestHandlerFactory::getRoomManager()
 {
     return m_roomManager;
+}
+
+IDatabase* RequestHandlerFactory::getDatabase()
+{
+    return m_database;
 }

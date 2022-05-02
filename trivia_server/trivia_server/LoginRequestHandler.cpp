@@ -57,7 +57,7 @@ RequestResult LoginRequestHandler::login(RequestInfo r)
 		buffer = JsonResponsePacketSerializer::serializeLoginResponse(res);
 	
 		//create handler
-		result.newHandler = new MenuRequestHandler(); //TODO: after the factory can create a menu handler, change so the factory fo that
+		result.newHandler = m_handlerFactory.createMenuRequestHandler(request.username);
 	}
 	else
 	{
@@ -92,7 +92,7 @@ RequestResult LoginRequestHandler::signup(RequestInfo r)
 		buffer = JsonResponsePacketSerializer::serializeSignUpResponse(res);
 	
 		//create handler
-		result.newHandler = new MenuRequestHandler(); //TODO: after the factory can create a menu handler, change so the factory do that
+		result.newHandler = m_handlerFactory.createMenuRequestHandler(request.username);
 	}
 	else
 	{

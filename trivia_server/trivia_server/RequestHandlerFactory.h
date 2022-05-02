@@ -7,16 +7,18 @@
 //#include "StatisticsManager.h" //TODO: add when adding statistics.
 
 class LoginRequestHandler; //Circular reference
+class MenuRequestHandler; //Circular reference
 
 class RequestHandlerFactory
 {
 public:
 	RequestHandlerFactory(IDatabase* db);
 	LoginRequestHandler* createLoginRequestHandler();
-	MenuRequestHandler* createMenuRequestHandler();
+	MenuRequestHandler* createMenuRequestHandler(std::string username);
 
 	LoginManager& getLoginManager();
 	RoomManager& getRoomManager();
+	IDatabase* getDatabase();
 	//StatisticsManager& getStatisticsManager(); //TODO: add when adding statistics.
 
 private:
