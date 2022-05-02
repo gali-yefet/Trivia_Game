@@ -12,6 +12,8 @@ public:
 	virtual void addNewUser(std::string username, std::string password, std::string email) = 0;
 	virtual void login(std::string username) = 0;
 	virtual void logout(std::string username) = 0;
+	virtual bool isActive(std::string username) = 0;
+
 
 	virtual std::list<Question> getQuestions(int) = 0;
 	virtual float getPlayerAverageAnswerTime(std::string) = 0;

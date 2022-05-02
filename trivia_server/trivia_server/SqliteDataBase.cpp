@@ -75,6 +75,16 @@ void SqliteDataBase::logout(std::string username)
 	query(q.c_str());
 }
 
+bool SqliteDataBase::isActive(std::string username)
+{
+	std::string q = "SELECT IS_ACTIVE FROM USER WHERE USERNAME = '" + username + "';";
+	std::list<User> listOfUsers;
+	this->execSelectCmd(q.c_str(), this->usersCallback, &listOfUsers);
+	User currentUser = listOfUsers.front();
+
+	return currentUser.getIsActive() == 1;
+}
+
 std::list<Question> SqliteDataBase::getQuestions(int) //TODO
 {
 	return std::list<Question>();
@@ -118,6 +128,8 @@ int SqliteDataBase::usersCallback(void* data, int argc, char** argv, char** azCo
 			currUser.setPassword(argv[i]);
 		else if (std::string(azColName[i]) == EMAIL_COLUMN)
 			currUser.setEmail(argv[i]);
+		else if (std::string(azColName[i]) == IS_ACTIVE_COLUMN)
+			currUser.setIsActive(std::stoi(argv[i]));
 	}
 	now->push_back(currUser);
 	return 0;
