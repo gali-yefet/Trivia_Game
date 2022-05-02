@@ -5,7 +5,7 @@ create a new factory
 in: pointer to db
 */
 RequestHandlerFactory::RequestHandlerFactory(IDatabase* db):
-    m_database(db), m_loginManager(LoginManager(db))
+    m_database(db), m_loginManager(LoginManager(db)), m_roomManager(RoomManager())
 {
 }
 
@@ -20,11 +20,21 @@ LoginRequestHandler* RequestHandlerFactory::createLoginRequestHandler()
 }
 
 /*
-get the loginManager
+create a new MenuRequestHandler
 in: void
-out: reference to m_loginManager
+out: void
 */
+MenuRequestHandler* RequestHandlerFactory::createMenuRequestHandler()
+{
+    return new MenuRequestHandler(); //TODO: change after actualy making MenuRequestHandler
+}
+
 LoginManager& RequestHandlerFactory::getLoginManager()
 {
     return m_loginManager;
+}
+
+RoomManager& RequestHandlerFactory::getRoomManager()
+{
+    return m_roomManager;
 }
