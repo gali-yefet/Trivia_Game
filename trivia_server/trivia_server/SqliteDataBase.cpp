@@ -20,6 +20,9 @@ bool SqliteDataBase::open()
 		bool res = query("CREATE TABLE IF NOT EXISTS USER (USERNAME TEXT PRIMARY KEY NOT NULL, PASSWORD TEXT NOT NULL, EMAIL TEXT NOT NULL, IS_ACTIVE INTEGER NOT NULL);");
 		if (!res)
 			std::cout << "Failed to create Table USER" << std::endl;
+		res = query("CREATE TABLE IF NOT EXISTS QUESTION (Q_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, QUESTION TEXT NOT NULL, ANS1 TEXT NOT NULL, ANS2 TEXT NOT NULL, ANS3 TEXT NOT NULL, ANS4 TEXT NOT NULL, RIGHT_ANS INTEGER NOT NULL);");
+		if (!res)
+			std::cout << "Failed to create Table QUESTION" << std::endl;
 		/*res = query("CREATE TABLE IF NOT EXISTS QUESTION (Q_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, K_ID INTEGER NOT NULL, FOREIGN KEY(K_ID) REFERENCES KEY(ID));");
 		if (!res)
 			std::cout << "Failed to create Table QUESTION" << std::endl;
@@ -83,6 +86,26 @@ bool SqliteDataBase::isActive(std::string username)
 	User currentUser = listOfUsers.front();
 
 	return currentUser.getIsActive() == 1;
+}
+
+void SqliteDataBase::createQuestions()
+{
+	std::string q = "";
+	int j = 0;
+	for (int i = 0; i < questions->length(); i++)
+	{
+		q = "INSERT INTO QUESTION (QUESTION, ANS1, ANS2, ANS3, ANS4, RIGHT_ANS) VALUES('" + questions[i] + "', '";
+		for (int k = 0; k < ANSWERS; k++)
+		{
+			if (k == ANSWERS - 1)
+				q += answers[j] + "', ";
+			else
+				q += answers[j] + "', '";
+			j++;
+		}
+		q += rightAns[i] + ");";
+		query(q.c_str());
+	}
 }
 
 std::list<Question> SqliteDataBase::getQuestions(int) //TODO

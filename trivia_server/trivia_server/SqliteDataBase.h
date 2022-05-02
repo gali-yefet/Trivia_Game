@@ -3,6 +3,7 @@
 #include "sqlite3.h"
 #include "User.h"
 #include <io.h>
+#include "define.h"
 
 class SqliteDataBase : public IDatabase
 {
@@ -16,6 +17,7 @@ public:
 	virtual void logout(std::string username);
 	virtual bool isActive(std::string username);
 
+	virtual void createQuestions();
 	virtual std::list<Question> getQuestions(int);
 	virtual float getPlayerAverageAnswerTime(std::string);
 	virtual int getNumOfCorrectAnswers(std::string);
@@ -37,7 +39,6 @@ private:
 
 	sqlite3* _db;
 
-
 	//define some variables
 	const char* DB_FILE_NAME = "DB.sqlite";
 
@@ -53,6 +54,11 @@ private:
 	static constexpr const char* PASSWORD_COLUMN = "PASSWORD";
 	static constexpr const char* EMAIL_COLUMN = "EMAIL";
 	static constexpr const char* Q_ID_COLUMN = "Q_ID";
+	static constexpr const char* ANS1_COLUMN = "ANS1";
+	static constexpr const char* ANS2_COLUMN = "ANS2";
+	static constexpr const char* ANS3_COLUMN = "ANS3";
+	static constexpr const char* ANS4_COLUMN = "ANS4";
+	static constexpr const char* RIGHT_ANS_COLUMN = "RIGHT_ANS";
 	static constexpr const char* K_ID_COLUMN = "K_ID";
 	static constexpr const char* WINS_COLUMN = "WINS";
 	static constexpr const char* GAMES_COLUMN = "GAMES";
