@@ -51,3 +51,23 @@ std::vector<RoomData> RoomManager::getRooms()
 		list.push_back(i->second.getRoomData());
 	return list;
 }
+
+/*
+get referance to room according to id
+in: room id
+out: room
+*/
+Room& RoomManager::getRoom(int id)
+{
+	return m_rooms.find(id)->second;
+}
+
+/*
+join a room according to id
+in: id, user to join
+out: void
+*/
+void RoomManager::joinRoom(int id, LoggedUser user)
+{
+	m_rooms.find(id)->second.addUser(user);
+}

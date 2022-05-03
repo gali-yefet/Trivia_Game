@@ -11,6 +11,8 @@ public:
 	void deleteRoom( int id);
 	unsigned int getRoomState(int id);
 	std::vector<RoomData> getRooms();
+	Room& getRoom(int id);
+	void joinRoom(int id, LoggedUser user);
 
 private:
 	std::map<unsigned int, Room> m_rooms; //<id, room>
