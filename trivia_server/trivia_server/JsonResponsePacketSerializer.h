@@ -72,7 +72,7 @@ public:
 	static std::vector<unsigned char> serializeCreateRoomResponse(CreateRoomResponse r);
 	static std::vector<unsigned char> serializeGetRoomsResponse(GetRoomsResponse r);
 	static std::vector<unsigned char> serializeGetPlayersInRoomResponse(GetPlayersInRoomResponse r);
-	//static std::vector<unsigned char> serializeHighScoreResponse(GetHighScoreResponse r); //TODO
+	//static std::vector<unsigned char> serializeHighScoreResponse(GetHighScoreResponse r); //TODO: after statistics
 	
 
 private:

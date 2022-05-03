@@ -77,7 +77,7 @@ void Communicator::bindAndListen()
 	
 	if (listen(m_serverSocket, SOMAXCONN) == SOCKET_ERROR)
 		throw std::exception(__FUNCTION__ " - listen");
-	TRACE("listening...");//TODO
+	TRACE("listening...");
 }
 
 /*
