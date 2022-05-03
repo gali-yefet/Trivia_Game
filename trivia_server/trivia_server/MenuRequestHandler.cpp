@@ -72,3 +72,12 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo r)
 	std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeCreateRoomResponse(response);
 	return IRequestHandler::createRequestResult(buffer, new RoomAdminRequestHandler); //TODO: change to creating a RoomAdminRequestHandler with the factory method}
 }
+
+RequestResult MenuRequestHandler::signout(RequestInfo r)
+{
+	m_handlerFactory.getDatabase()->logout(m_user.getUsername());
+	LogoutResponse response;
+	response.status = LOGOUT;
+	std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeLogoutResponse(response);
+	return IRequestHandler::createRequestResult(buffer, nullptr);
+}

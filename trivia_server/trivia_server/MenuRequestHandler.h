@@ -19,10 +19,10 @@ private:
 	RequestResult getPlayesrInRoom(RequestInfo r);
 	RequestResult joinRoom(RequestInfo r);
 	RequestResult createRoom(RequestInfo r);
-	//RequestResult signout(RequestInfo r); //TODO: signout of what?? how?
+	RequestResult signout(RequestInfo r);
 
-	//RequestResult getPersonalState(RequestInfo r); //TODO: statistics?
-	//RequestResult getHighScore(RequestInfo r); //TODO: how? statistics?
+	//RequestResult getPersonalState(RequestInfo r); //TODO: statistics
+	//RequestResult getHighScore(RequestInfo r); //TODO: statistics
 
 	LoggedUser m_user;
 	RoomManager& m_roomManger;
