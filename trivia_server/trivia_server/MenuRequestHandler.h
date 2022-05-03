@@ -12,7 +12,7 @@ class MenuRequestHandler : public IRequestHandler
 public:
 	MenuRequestHandler(LoggedUser user, RoomManager& roomManger, RequestHandlerFactory& handlerFactory); //TODO: add StatisticsManager
 	virtual bool isRequestRelevant(RequestInfo r);
-	virtual RequestResult handleRequest(RequestInfo r); //TODO
+	virtual RequestResult handleRequest(RequestInfo r);
 
 private:
 	RequestResult getRooms(RequestInfo r);
@@ -21,7 +21,7 @@ private:
 	RequestResult createRoom(RequestInfo r);
 	RequestResult signout(RequestInfo r);
 
-	//RequestResult getPersonalState(RequestInfo r); //TODO: statistics
+	//RequestResult getPersonalStats(RequestInfo r); //TODO: statistics
 	//RequestResult getHighScore(RequestInfo r); //TODO: statistics
 
 	LoggedUser m_user;

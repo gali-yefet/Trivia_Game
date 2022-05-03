@@ -16,13 +16,41 @@ bool MenuRequestHandler::isRequestRelevant(RequestInfo r)
 		r.requestCode == GET_ROOMS || 
 		r.requestCode == GET_PLAYERS_IN_ROOM || 
 		r.requestCode == JOIN_ROOM || 
-		r.requestCode == GET_STATISTICS ||
+		r.requestCode == GET_HIGH_SCORE ||
+		r.requestCode == GET_PERSONAL_STATS ||
 		r.requestCode == LOGOUT;
 }
 
 RequestResult MenuRequestHandler::handleRequest(RequestInfo r)
 {
-    return RequestResult(); //TODO
+	RequestResult result;
+	switch (r.requestCode)
+	{
+	case CREATE_ROOM:
+		result = createRoom(r);
+		break;
+	case GET_ROOMS:
+		result = getRooms(r);
+		break;
+	case GET_PLAYERS_IN_ROOM:
+		result = getPlayesrInRoom(r);
+		break;
+	case JOIN_ROOM:
+		result = joinRoom(r);
+		break;
+	case GET_PERSONAL_STATS:
+		//TODO: after statistics
+		break;
+	case GET_HIGH_SCORE:
+		//TODO: after statistics
+		break;
+	case LOGOUT:
+		result = signout(r);
+		break;
+	default:
+		break;
+	}
+	return result;
 }
 
 RequestResult MenuRequestHandler::getRooms(RequestInfo r)
