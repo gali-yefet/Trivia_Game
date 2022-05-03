@@ -15,12 +15,10 @@ public:
 	virtual RequestResult handleRequest(RequestInfo r); //TODO
 
 private:
-	//RequestResult getRooms(RequestInfo r); //m_roomManger->getRooms
-	//RequestResult getPlayesrInRoom(RequestInfo r); // RoomManager->getRoom->getAllUsers
-	//RequestResult joinRoom(RequestInfo r); //roomManager->joinRoom
-	//RequestResult createRoom(RequestInfo r); //roomManaget->createRoom
-
-
+	RequestResult getRooms(RequestInfo r);
+	RequestResult getPlayesrInRoom(RequestInfo r);
+	RequestResult joinRoom(RequestInfo r);
+	RequestResult createRoom(RequestInfo r);
 	//RequestResult signout(RequestInfo r); //TODO: signout of what?? how?
 
 	//RequestResult getPersonalState(RequestInfo r); //TODO: statistics?

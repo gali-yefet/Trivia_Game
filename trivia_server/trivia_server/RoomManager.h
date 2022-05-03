@@ -13,6 +13,7 @@ public:
 	std::vector<RoomData> getRooms();
 	Room& getRoom(int id);
 	void joinRoom(int id, LoggedUser user);
+	int createRoomId();
 
 private:
 	std::map<unsigned int, Room> m_rooms; //<id, room>

@@ -71,3 +71,15 @@ void RoomManager::joinRoom(int id, LoggedUser user)
 {
 	m_rooms.find(id)->second.addUser(user);
 }
+
+/*
+get a room id that isn't used already
+in: void
+out: room id
+*/
+int RoomManager::createRoomId()
+{
+	for (int i = 0; i < m_rooms.size() + 1; i++)
+		if (m_rooms.find(i) == m_rooms.end())
+			return i;
+}

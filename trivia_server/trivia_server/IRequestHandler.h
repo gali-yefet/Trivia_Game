@@ -27,4 +27,6 @@ public:
 	virtual bool isRequestRelevant(RequestInfo r) = 0;
 	virtual RequestResult handleRequest(RequestInfo r) = 0;
 
+	static RequestResult createRequestResult(std::vector<unsigned char> buffer, IRequestHandler* newHandler);
+
 };
