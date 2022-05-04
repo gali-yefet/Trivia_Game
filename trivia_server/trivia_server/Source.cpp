@@ -1,10 +1,13 @@
 #include "Server.h"
 #include "WSAInitializer.h"
+#include "SqliteDataBase.h"
 #include <exception>
 #include <iostream>
 
 int main()
 {
+	SqliteDataBase db;
+	db.open();
 	try
 	{
 		TRACE("Starting...");

@@ -1,5 +1,6 @@
 #pragma once
 #include "Question.h"
+#include "userStatistics.h"
 #include <iostream>
 #include <list>
 
@@ -20,6 +21,7 @@ public:
 	virtual int getNumOfCorrectAnswers(std::string) = 0;
 	virtual int getNumOfTotalAnswers(std::string) = 0;
 	virtual int getNumOfPlayerGames(std::string) = 0;
-
+	virtual userStatistics getUserStatistics(std::string username) = 0;
 	virtual int getSecurityKey(std::string) = 0;
+	virtual std::list<userStatistics> getTopFive() = 0;
 };

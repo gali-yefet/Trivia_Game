@@ -12,16 +12,16 @@ public:
 	std::string getPassword();
 	std::string getEmail();
 	int getIsActive();
-
+	
 	void setUsername(const std::string& username);
 	void setPassword(const std::string& password);
 	void setEmail(const std::string& email);
 	void setIsActive(const int& isActive);
-
-
+	
 private:
 	std::string username;
 	std::string password;
 	std::string email;
 	int isActive;
+
 };
