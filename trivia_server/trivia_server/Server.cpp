@@ -25,7 +25,7 @@ void Server::run()
 	
 	//check whether to exit or not 
 	std::string in;
-	while (true) //TODO: find out why it abort here...
+	while (true)
 	{
 		std::cin >> in;
 		if (in == "EXIT")

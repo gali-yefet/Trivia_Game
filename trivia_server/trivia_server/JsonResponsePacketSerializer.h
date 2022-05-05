@@ -42,11 +42,11 @@ typedef struct GetHighScoreResponse
 	std::vector<std::string> statistics;
 }GetHighScoreResponse;
 
-typedef struct GetPersonalStateResponse
+typedef struct GetPersonalStatsResponse
 {
 	unsigned int status;
 	std::vector<std::string> statistics;
-}GetPersonalStateResponse;
+}GetPersonalStatsResponse;
 
 typedef struct JoinRoomResponse
 {
@@ -72,7 +72,8 @@ public:
 	static std::vector<unsigned char> serializeCreateRoomResponse(CreateRoomResponse r);
 	static std::vector<unsigned char> serializeGetRoomsResponse(GetRoomsResponse r);
 	static std::vector<unsigned char> serializeGetPlayersInRoomResponse(GetPlayersInRoomResponse r);
-	//static std::vector<unsigned char> serializeHighScoreResponse(GetHighScoreResponse r); //TODO
+	static std::vector<unsigned char> serializeGetHighScoreResponse(GetHighScoreResponse r);
+	static std::vector<unsigned char> serializeGetPersonalStatsResponse(GetPersonalStatsResponse r);
 	
 
 private:

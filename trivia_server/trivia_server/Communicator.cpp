@@ -56,7 +56,7 @@ void Communicator::startHandleRequest()
 		LoginRequestHandler* handler = m_handlerFactory.createLoginRequestHandler();
 		m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, handler));
 		TRACE("Client accepted !");
-	}//TODO
+	}
 }
 
 /*
@@ -77,7 +77,7 @@ void Communicator::bindAndListen()
 	
 	if (listen(m_serverSocket, SOMAXCONN) == SOCKET_ERROR)
 		throw std::exception(__FUNCTION__ " - listen");
-	TRACE("listening...");//TODO
+	TRACE("listening...");
 }
 
 /*
@@ -88,7 +88,6 @@ out: void
 void Communicator::HandleNewClient(SOCKET socket)
 {	
 	RequestInfo r;
-
 	while (true)
 	{
 		//get the msg into the struct

@@ -20,12 +20,13 @@ bool SqliteDataBase::open()
 		bool res = query("CREATE TABLE IF NOT EXISTS USER (USERNAME TEXT PRIMARY KEY NOT NULL, PASSWORD TEXT NOT NULL, EMAIL TEXT NOT NULL, IS_ACTIVE INTEGER NOT NULL);");
 		if (!res)
 			std::cout << "Failed to create Table USER" << std::endl;
-		/*res = query("CREATE TABLE IF NOT EXISTS QUESTION (Q_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, K_ID INTEGER NOT NULL, FOREIGN KEY(K_ID) REFERENCES KEY(ID));");
+		res = query("CREATE TABLE IF NOT EXISTS QUESTION (Q_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, QUESTION TEXT NOT NULL, ANS1 TEXT NOT NULL, ANS2 TEXT NOT NULL, ANS3 TEXT NOT NULL, ANS4 TEXT NOT NULL, RIGHT_ANS INTEGER NOT NULL);");
 		if (!res)
 			std::cout << "Failed to create Table QUESTION" << std::endl;
-		res = query("CREATE TABLE IF NOT EXISTS STATISTICS (USERNAME TEXT PRIMARY KEY AUTOINCREMENT NOT NULL, WINS INTEGER NOT NULL, GAMES INTEGER NOT NULL, FOREIGN KEY(USERNAME) REFERENCES USER(USERNAME));");
+		res = query("CREATE TABLE IF NOT EXISTS STATISTICS (USERNAME TEXT PRIMARY KEY NOT NULL, WINS INTEGER NOT NULL, GAMES INTEGER NOT NULL, AVE_TIME REAL NOT NULL, CORRECT_ANS INTEGER NOT NULL, TOTAL_ANS INTEGER NOT NULL, FOREIGN KEY(USERNAME) REFERENCES USER(USERNAME));");
 		if (!res)
 			std::cout << "Failed to create Table STATISTICS" << std::endl;
+		/*
 		res = query("CREATE TABLE IF NOT EXISTS GAME (GAME_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL;");
 		if (!res)
 			std::cout << "Failed to create Table GAME" << std::endl;
@@ -85,35 +86,95 @@ bool SqliteDataBase::isActive(std::string username)
 	return currentUser.getIsActive() == 1;
 }
 
+void SqliteDataBase::createQuestions()
+{
+	std::string q = "";
+	int j = 0;
+	for (int i = 0; i < questions->length(); i++)
+	{
+		q = "INSERT INTO QUESTION (QUESTION, ANS1, ANS2, ANS3, ANS4, RIGHT_ANS) VALUES('" + questions[i] + "', '";
+		for (int k = 0; k < ANSWERS; k++)
+		{
+			if (k == ANSWERS - 1)
+				q += answers[j] + "', ";
+			else
+				q += answers[j] + "', '";
+			j++;
+		}
+		q += rightAns[i] + ");";
+		query(q.c_str());
+	}
+}
+
 std::list<Question> SqliteDataBase::getQuestions(int) //TODO
 {
-	return std::list<Question>();
+	return std::list<Question>();// what is the int parameter?
 }
 
-float SqliteDataBase::getPlayerAverageAnswerTime(std::string)//TODO
+float SqliteDataBase::getPlayerAverageAnswerTime(std::string username)//TODO
 {
-	return 0.0f;
+	std::string q = "SELECT AVE_TIME FROM STATISTICS WHERE USERNAME = '" + username + "';";
+	std::list<userStatistics> listOfUsers;
+	this->execSelectCmd(q.c_str(), this->userStatisticsCallback, &listOfUsers);
+	userStatistics currentUser = listOfUsers.front();
+
+	return currentUser.getAveTime();
 }
 
-int SqliteDataBase::getNumOfCorrectAnswers(std::string)//TODO
+int SqliteDataBase::getNumOfCorrectAnswers(std::string username)//TODO
+{
+	std::string q = "SELECT CORRECT_ANS FROM STATISTICS WHERE USERNAME = '" + username + "';";
+	std::list<userStatistics> listOfUsers;
+	this->execSelectCmd(q.c_str(), this->userStatisticsCallback, &listOfUsers);
+	userStatistics currentUser = listOfUsers.front();
+
+	return currentUser.getAveTime();
+}
+
+int SqliteDataBase::getNumOfTotalAnswers(std::string username)//TODO
+{
+	std::string q = "SELECT TOTAL_ANS FROM STATISTICS WHERE USERNAME = '" + username + "';";
+	std::list<userStatistics> listOfUsers;
+	this->execSelectCmd(q.c_str(), this->userStatisticsCallback, &listOfUsers);
+	userStatistics currentUser = listOfUsers.front();
+
+	return currentUser.getTotalAns();
+}
+
+int SqliteDataBase::getNumOfPlayerGames(std::string username)//TODO
+{
+	std::string q = "SELECT GAMES FROM STATISTICS WHERE USERNAME = '" + username + "';";
+	std::list<userStatistics> listOfUsers;
+	this->execSelectCmd(q.c_str(), this->userStatisticsCallback, &listOfUsers);
+	userStatistics currentUser = listOfUsers.front();
+
+	return currentUser.getGames();
+}
+
+userStatistics SqliteDataBase::getUserStatistics(std::string username)
+{
+	std::string q = "SELECT * FROM STATISTICS WHERE USERNAME = '" + username + "';";
+	std::list<userStatistics> listOfUsers;
+	this->execSelectCmd(q.c_str(), this->userStatisticsCallback, &listOfUsers);
+	userStatistics currentUser = listOfUsers.front();
+
+	return currentUser;
+}
+
+int SqliteDataBase::getSecurityKey(std::string username)//TODO
 {
 	return 0;
 }
 
-int SqliteDataBase::getNumOfTotalAnswers(std::string)//TODO
+std::list<userStatistics> SqliteDataBase::getTopFive()
 {
-	return 0;
+	std::string q = "SELECT * FROM STATISTICS ORDER BY WINS DESC, AVE_TIME ASC LIMIT 5;";
+	std::list<userStatistics> listOfUsers;
+	this->execSelectCmd(q.c_str(), this->userStatisticsCallback, &listOfUsers);
+	return listOfUsers;
 }
 
-int SqliteDataBase::getNumOfPlayerGames(std::string)//TODO
-{
-	return 0;
-}
 
-int SqliteDataBase::getSecurityKey(std::string)//TODO
-{
-	return 0;
-}
 
 //call backs
 int SqliteDataBase::usersCallback(void* data, int argc, char** argv, char** azColName)
@@ -132,6 +193,49 @@ int SqliteDataBase::usersCallback(void* data, int argc, char** argv, char** azCo
 			currUser.setIsActive(std::stoi(argv[i]));
 	}
 	now->push_back(currUser);
+	return 0;
+}
+
+int SqliteDataBase::userStatisticsCallback(void* data, int argc, char** argv, char** azColName)
+{
+	std::list<userStatistics>* now = (std::list<userStatistics>*)data;
+	userStatistics currUser;
+	for (int i = 0; i < argc; i++)
+	{
+		if (std::string(azColName[i]) == USERNAME_COLUMN)
+			currUser.setUsername(argv[i]);
+		else if (std::string(azColName[i]) == GAMES_COLUMN)
+			currUser.setGames(std::stoi(argv[i]));
+		else if (std::string(azColName[i]) == WINS_COLUMN)
+			currUser.setWins(std::stoi(argv[i]));
+		else if (std::string(azColName[i]) == AVE_TIME_COLUMN)
+			currUser.setAveTime(std::stoi(argv[i]));
+
+	}
+	now->push_back(currUser);
+	return 0;
+}
+
+int SqliteDataBase::questionsCallback(void* data, int argc, char** argv, char** azColName)
+{
+	std::list<Question>* now = (std::list<Question>*)data;
+	Question currQ;
+	for (int i = 0; i < argc; i++)
+	{
+		if (std::string(azColName[i]) == QUESTION_COLUMN)
+			currQ.setQuestion(argv[i]);
+		else if (std::string(azColName[i]) == ANS1_COLUMN)
+			currQ.setAns1(argv[i]);
+		else if (std::string(azColName[i]) == ANS2_COLUMN)
+			currQ.setAns2(argv[i]);
+		else if (std::string(azColName[i]) == ANS3_COLUMN)
+			currQ.setAns3(argv[i]);
+		else if (std::string(azColName[i]) == ANS4_COLUMN)
+			currQ.setAns4(argv[i]);
+		else if (std::string(azColName[i]) == RIGHT_ANS_COLUMN)
+			currQ.setRightAns(std::stoi(argv[i]));
+	}
+	now->push_back(currQ);
 	return 0;
 }
 

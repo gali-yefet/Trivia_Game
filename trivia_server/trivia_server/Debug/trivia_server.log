@@ -1,6 +1,2 @@
-﻿  RoomManager.cpp
-  Server.cpp
-  Source.cpp
-  Generating Code...
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(40): warning C4715: 'RoomManager::getRoomState': not all control paths return a value
+﻿  JsonRequestPacketDeserializer.cpp
   trivia_server.vcxproj -> C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe

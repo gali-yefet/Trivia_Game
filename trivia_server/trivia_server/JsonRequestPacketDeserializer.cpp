@@ -60,7 +60,7 @@ GetPlayersInRoomRequest JsonRequestPacketDeseializer::deserializeGetPlayersInRoo
 JoinRoomRequest JsonRequestPacketDeseializer::deserializeJoinRoomRequest(RequestInfo r)
 {
 	JoinRoomRequest j;
-	if (r.requestCode == GET_PLAYERS_IN_ROOM)
+	if (r.requestCode == JOIN_ROOM)
 	{
 		std::string data(r.json.begin(), r.json.end());// converts the data from bytes to string
 		//now the data looks like this:
@@ -81,7 +81,7 @@ JoinRoomRequest JsonRequestPacketDeseializer::deserializeJoinRoomRequest(Request
 CreateRoomRequest JsonRequestPacketDeseializer::deserializeCreateRoomRequest(RequestInfo r)
 {
 	CreateRoomRequest c;
-	if (r.requestCode == GET_PLAYERS_IN_ROOM)
+	if (r.requestCode == CREATE_ROOM)
 	{
 		std::string data(r.json.begin(), r.json.end());// converts the data from bytes to string
 		//now the data looks like this:
