@@ -5,7 +5,7 @@ create a new factory
 in: pointer to db
 */
 RequestHandlerFactory::RequestHandlerFactory(IDatabase* db):
-    m_database(db), m_loginManager(LoginManager(db)), m_roomManager(RoomManager())
+    m_database(db), m_loginManager(LoginManager(db)), m_roomManager(RoomManager()), m_statisticsManager(StatisticsManager())
 {
 }
 
@@ -26,7 +26,7 @@ out: MenuRequestHandler
 */
 MenuRequestHandler* RequestHandlerFactory::createMenuRequestHandler(std::string username)
 {
-    return new MenuRequestHandler(LoggedUser(username), m_roomManager, *this); //TODO: add statistics
+    return new MenuRequestHandler(LoggedUser(username), m_roomManager, m_statisticsManager, *this);
 }
 
 LoginManager& RequestHandlerFactory::getLoginManager()
@@ -42,4 +42,9 @@ RoomManager& RequestHandlerFactory::getRoomManager()
 IDatabase* RequestHandlerFactory::getDatabase()
 {
     return m_database;
+}
+
+StatisticsManager& RequestHandlerFactory::getStatisticsManager()
+{
+    return m_statisticsManager;
 }

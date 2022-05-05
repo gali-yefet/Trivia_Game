@@ -88,7 +88,6 @@ out: void
 void Communicator::HandleNewClient(SOCKET socket)
 {	
 	RequestInfo r;
-
 	while (true)
 	{
 		//get the msg into the struct

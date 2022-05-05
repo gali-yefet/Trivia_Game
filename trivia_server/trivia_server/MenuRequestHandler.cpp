@@ -5,8 +5,8 @@
 #include "RoomMemberRequestHandler.h"
 #include "RoomAdminRequestHandler.h"
 
-MenuRequestHandler::MenuRequestHandler(LoggedUser user, RoomManager& roomManger, RequestHandlerFactory& handlerFactory):
-	m_user(user), m_roomManger(roomManger), m_handlerFactory(handlerFactory)
+MenuRequestHandler::MenuRequestHandler(LoggedUser user, RoomManager& roomManger, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory):
+	m_user(user), m_roomManger(roomManger), m_statisticsManager(statisticsManager), m_handlerFactory(handlerFactory)
 {
 }
 
@@ -39,10 +39,10 @@ RequestResult MenuRequestHandler::handleRequest(RequestInfo r)
 		result = joinRoom(r);
 		break;
 	case GET_PERSONAL_STATS:
-		//TODO: after statistics
+		result = getPersonalStats(r);
 		break;
 	case GET_HIGH_SCORE:
-		//TODO: after statistics
+		result = getHighScore(r);
 		break;
 	case LOGOUT:
 		result = signout(r);
@@ -108,4 +108,22 @@ RequestResult MenuRequestHandler::signout(RequestInfo r)
 	response.status = LOGOUT;
 	std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeLogoutResponse(response);
 	return IRequestHandler::createRequestResult(buffer, nullptr);
+}
+
+RequestResult MenuRequestHandler::getPersonalStats(RequestInfo r)
+{
+	GetPersonalStatsResponse response;
+	response.status = GET_PERSONAL_STATS;
+	response.statistics = m_statisticsManager.getUserStatistics(m_user.getUsername());
+	std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeGetPersonalStatsResponse(response);
+	return IRequestHandler::createRequestResult(buffer, this);
+}
+
+RequestResult MenuRequestHandler::getHighScore(RequestInfo r)
+{
+	GetHighScoreResponse response;
+	response.status = GET_HIGH_SCORE;
+	response.statistics = m_statisticsManager.getHighScore();
+	std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeGetHighScoreResponse(response);
+	return IRequestHandler::createRequestResult(buffer, this);
 }

@@ -8,7 +8,6 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeLoginResponse(
 {
 	// create an empty structure (null)
 	json j;
-
 	j["status"] = r.status;
 
 	std::string data = j.dump();  // returns the json as a string
@@ -19,7 +18,6 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeSignUpResponse
 {
 	// create an empty structure (null)
 	json j;
-
 	j["status"] = r.status;
 
 	std::string data = j.dump();  // returns the json as a string
@@ -30,7 +28,6 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeErrorResponse(
 {
 	// create an empty structure (null)
 	json j;
-
 	j["message"] = r.message;
 
 	std::string data = j.dump();  // returns the json as a string
@@ -41,33 +38,30 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeLogoutResponse
 {
 	// create an empty structure (null)
 	json j;
-
 	j["status"] = r.status;
 
 	std::string data = j.dump();  // returns the json as a string
-	return serializeMsg(SIGN_CODE, data);
+	return serializeMsg(LOGOUT, data);
 }
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeJoinRoomResponse(JoinRoomResponse r)
 {
 	// create an empty structure (null)
 	json j;
-
 	j["status"] = r.status;
 
 	std::string data = j.dump();  // returns the json as a string
-	return serializeMsg(SIGN_CODE, data);
+	return serializeMsg(JOIN_ROOM, data);
 }
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeCreateRoomResponse(CreateRoomResponse r)
 {
 	// create an empty structure (null)
 	json j;
-
 	j["status"] = r.status;
 
 	std::string data = j.dump();  // returns the json as a string
-	return serializeMsg(SIGN_CODE, data);
+	return serializeMsg(CREATE_ROOM, data);
 }
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetRoomsResponse(GetRoomsResponse r)
@@ -80,11 +74,10 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetRoomsRespon
 
 	// create an empty structure (null)
 	json j;
-
 	j["Rooms"] = roomsNames;
 
 	std::string data = j.dump();  // returns the json as a string
-	return serializeMsg(SIGN_CODE, data);
+	return serializeMsg(GET_ROOMS, data);
 
 }
 
@@ -98,11 +91,28 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetPlayersInRo
 
 	// create an empty structure (null)
 	json j;
-
 	j["PlayesrInRoom"] = roomsNames;
 
 	std::string data = j.dump();  // returns the json as a string
-	return serializeMsg(SIGN_CODE, data);
+	return serializeMsg(GET_PLAYERS_IN_ROOM, data);
+}
+
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetHighScoreResponse(GetHighScoreResponse r)
+{
+	json j;
+	j["status"] = r.status;
+	j["statistics"] = r.statistics;
+	std::string data = j.dump();  // returns the json as a string
+	return serializeMsg(GET_HIGH_SCORE, data);
+}
+
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetPersonalStatsResponse(GetPersonalStatsResponse r)
+{
+	json j;
+	j["status"] = r.status;
+	j["statistics"] = r.statistics;
+	std::string data = j.dump();  // returns the json as a string
+	return serializeMsg(GET_PERSONAL_STATS, data);
 }
 
 /*

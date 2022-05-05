@@ -2,8 +2,15 @@ import json
 import socket
 SERVER_IP = '127.0.0.1'
 SERVER_PORT = 3086
-SIGN_CODE = 5
-LOGIN_CODE = 6
+ERROR_CODE = 0
+SIGN_CODE = 1
+LOGIN_CODE = 2
+CREATE_ROOM = 3
+GET_ROOMS = 4
+GET_PLAYERS_IN_ROOM = 5
+JOIN_ROOM = 6
+GET_STATISTICS = 7
+LOGOUT = 8
 
 SIZE_OF_LEN = 4
 
@@ -14,14 +21,6 @@ def create_socket(ip, port):
     sock.connect(server_address)
     return sock
 
-#send msg and get the response from the server
-def send_msg(msg, sock):
-    sock.send(msg.encode())
-    sock.recv(1).decode()
-    len = int(sock.recv(SIZE_OF_LEN).decode())
-    server_msg = sock.recv(len).decode()
-    return server_msg
-
 #create buffer according to protocol
 def create_buffer(code, dictionary):
     json_str = json.dumps(dictionary)
@@ -30,32 +29,28 @@ def create_buffer(code, dictionary):
     buffer = str(code) + json_len_str +json_str
     return buffer
 
-#send a login msg according to name and passworrd
-def login(name, password, sock):
-    dict = {"name": name, "password":password}
-    buffer = create_buffer(LOGIN_CODE, dict)
-    return send_msg(buffer, sock)
-
-#send a signup msg according to name, password and email
-def signup(name, password, email, sock):
-    dict = {"name": name, "password":password, "email": email}
-    buffer = create_buffer(SIGN_CODE, dict)
-    return send_msg(buffer, sock)
+#send msg and get the response from the server
+def send_msg(code, sock, dict):
+    #send
+    msg = create_buffer(code, dict)
+    sock.send(msg.encode())
+    #recv
+    sock.recv(1).decode()
+    len = int(sock.recv(SIZE_OF_LEN).decode())
+    server_msg = sock.recv(len).decode()
+    return server_msg
 
 
 
 def main():
     print("start")
-    sock = create_socket(SERVER_IP, SERVER_PORT)
+    sock1 = create_socket(SERVER_IP, SERVER_PORT)
+    sock2 = create_socket(SERVER_IP, SERVER_PORT)
 
-    #seposed to work
-    print("signup (work): " + signup("n1", "111", "1@gmail.com", sock))
-    #print("login (work): " + login("n1", "111", sock))
-
-    print("login (fail, cant login to a loged in user): " + login("n1", "111", sock))
-    print("signup (fail, can't signup with the same name): " + signup("n1", "111", "1@gmail.com", sock))
-
-    print("signup (?): " + signup("n2", "222", "2@gmail.com", sock))
+    print("sign user 1:", send_msg(SIGN_CODE, sock1, {"username": "user1", "password": "111", "email": "1@gmail.com"}))
+    print("sign user 2:", send_msg(SIGN_CODE, sock2, {"username": "user2", "password": "22222222", "email": "2@gmail.com"}))
+    print("user1 create room1:", send_msg(CREATE_ROOM, sock1, {"roomName": "room1", "maxUsers":"3", "questionsCount": "5", "answerTimeout": "30"}))
+    print("user2 join roomId 0:", send_msg(JOIN_ROOM, sock2, {"roomID": "0"}))
 
 
 if __name__ == "__main__":

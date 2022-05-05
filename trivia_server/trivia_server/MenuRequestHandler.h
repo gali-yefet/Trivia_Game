@@ -2,7 +2,7 @@
 #include "IRequestHandler.h"
 #include "LoggedUser.h"
 #include "RoomManager.h"
-//#include "StatisticsManager.h" //TODO: add after creating StatisticsManager
+#include "StatisticsManager.h"
 #include "RequestHandlerFactory.h"
 
 class RequestHandlerFactory; //Circular reference
@@ -10,7 +10,7 @@ class RequestHandlerFactory; //Circular reference
 class MenuRequestHandler : public IRequestHandler
 {
 public:
-	MenuRequestHandler(LoggedUser user, RoomManager& roomManger, RequestHandlerFactory& handlerFactory); //TODO: add StatisticsManager
+	MenuRequestHandler(LoggedUser user, RoomManager& roomManger, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory);
 	virtual bool isRequestRelevant(RequestInfo r);
 	virtual RequestResult handleRequest(RequestInfo r);
 
@@ -20,13 +20,12 @@ private:
 	RequestResult joinRoom(RequestInfo r);
 	RequestResult createRoom(RequestInfo r);
 	RequestResult signout(RequestInfo r);
-
-	//RequestResult getPersonalStats(RequestInfo r); //TODO: statistics
-	//RequestResult getHighScore(RequestInfo r); //TODO: statistics
+	RequestResult getPersonalStats(RequestInfo r);
+	RequestResult getHighScore(RequestInfo r);
 
 	LoggedUser m_user;
 	RoomManager& m_roomManger;
-	//StatisticsManager& m_statisticsManager //TODO: add after creating StatisticsManager
+	StatisticsManager& m_statisticsManager;
 	RequestHandlerFactory& m_handlerFactory;
 };
 

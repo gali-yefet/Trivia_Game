@@ -4,7 +4,7 @@
 #include "LoginManager.h"
 #include "MenuRequestHandler.h"
 #include "RoomManager.h"
-//#include "StatisticsManager.h" //TODO: add when adding statistics.
+#include "StatisticsManager.h"
 
 class LoginRequestHandler; //Circular reference
 class MenuRequestHandler; //Circular reference
@@ -19,13 +19,13 @@ public:
 	LoginManager& getLoginManager();
 	RoomManager& getRoomManager();
 	IDatabase* getDatabase();
-	//StatisticsManager& getStatisticsManager(); //TODO: add when adding statistics.
+	StatisticsManager& getStatisticsManager();
 
 private:
 	IDatabase* m_database;
 	LoginManager m_loginManager;
 	RoomManager m_roomManager;
-	//StatisticsManager* m_statisticsManager; //TODO: add when adding statistics.
+	StatisticsManager m_statisticsManager;
 
 };
 
