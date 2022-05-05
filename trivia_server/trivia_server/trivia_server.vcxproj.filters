@@ -69,12 +69,15 @@
     <ClInclude Include="RoomManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="RoomMemberRequestHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RoomAdminRequestHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+=======
+>>>>>>> ce8e6e8a8c648a34f5f2d9b0e676dc121cb433a0
     <ClInclude Include="StatisticsManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -128,6 +131,7 @@
     <ClCompile Include="RoomManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="IRequestHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -135,14 +139,20 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RoomAdminRequestHandler.cpp">
+=======
+    <ClCompile Include="StatisticsManager.cpp">
+>>>>>>> ce8e6e8a8c648a34f5f2d9b0e676dc121cb433a0
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Question.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="StatisticsManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+=======
+>>>>>>> ce8e6e8a8c648a34f5f2d9b0e676dc121cb433a0
     <ClCompile Include="userStatistics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
