@@ -55,6 +55,7 @@ GetPlayersInRoomRequest JsonRequestPacketDeseializer::deserializeGetPlayersInRoo
 		}
 	}
 	return g;
+
 }
 
 JoinRoomRequest JsonRequestPacketDeseializer::deserializeJoinRoomRequest(RequestInfo r)

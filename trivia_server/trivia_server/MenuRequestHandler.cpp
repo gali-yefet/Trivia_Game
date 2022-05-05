@@ -35,7 +35,7 @@ RequestResult MenuRequestHandler::handleRequest(RequestInfo r)
 	case GET_PLAYERS_IN_ROOM:
 		result = getPlayesrInRoom(r);
 		break;
-	case JOIN_ROOM:
+	case JOIN_ROOM: //TODO: find out what's wrong with join
 		result = joinRoom(r);
 		break;
 	case GET_PERSONAL_STATS:

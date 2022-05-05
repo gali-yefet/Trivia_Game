@@ -107,9 +107,11 @@ void Communicator::HandleNewClient(SOCKET socket)
 
 		//handle the client request according to socket
 		IRequestHandler* handler = m_clients.find(socket)->second;
+		m_clients.erase(socket);
 		if (handler->isRequestRelevant(r))
 		{
 			RequestResult res = handler->handleRequest(r);
+			m_clients.insert(std::pair<SOCKET, IRequestHandler*>(socket, res.newHandler));
 			sendData(socket, res.buffer);
 		}	
 	}

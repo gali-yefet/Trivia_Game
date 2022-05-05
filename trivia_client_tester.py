@@ -47,10 +47,10 @@ def main():
     sock1 = create_socket(SERVER_IP, SERVER_PORT)
     sock2 = create_socket(SERVER_IP, SERVER_PORT)
 
-    print("sign user 1:", send_msg(SIGN_CODE, sock1, {"username": "user1", "password": "111", "email": "1@gmail.com"}))
-    print("sign user 2:", send_msg(SIGN_CODE, sock2, {"username": "user2", "password": "22222222", "email": "2@gmail.com"}))
+    print("login user 1:", send_msg(LOGIN_CODE, sock1, {"username": "user1", "password": "111"}))
+    print("login user 2:", send_msg(LOGIN_CODE, sock2, {"username": "user2", "password": "22222"}))
     print("user1 create room1:", send_msg(CREATE_ROOM, sock1, {"roomName": "room1", "maxUsers":"3", "questionsCount": "5", "answerTimeout": "30"}))
-    print("user2 join roomId 0:", send_msg(JOIN_ROOM, sock2, {"roomID": "0"}))
+    print("user2 join roomId 0:", send_msg(JOIN_ROOM, sock2, {"roomID": "0"})) #TODO: check what's wrong with join
 
 
 if __name__ == "__main__":
