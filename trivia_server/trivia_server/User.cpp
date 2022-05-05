@@ -22,7 +22,7 @@ std::string User::getEmail()
 
 int User::getIsActive()
 {
-	return isActive;
+	return this->isActive;
 }
 
 void User::setUsername(const std::string& username)
@@ -44,3 +44,4 @@ void User::setIsActive(const int& isActive)
 {
 	this->isActive = isActive;
 }
+
