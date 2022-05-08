@@ -15,7 +15,7 @@ public:
 	virtual RequestResult handleRequest(RequestInfo r);
 
 private:
-	RequestResult getRooms(RequestInfo r); //TODO: get also room id
+	RequestResult getRooms(RequestInfo r);
 	RequestResult getPlayesrInRoom(RequestInfo r);
 	RequestResult joinRoom(RequestInfo r);
 	RequestResult createRoom(RequestInfo r);
