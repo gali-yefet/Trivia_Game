@@ -5,7 +5,7 @@ create a new factory
 in: pointer to db
 */
 RequestHandlerFactory::RequestHandlerFactory(IDatabase* db):
-    m_database(db), m_loginManager(LoginManager(db)), m_roomManager(RoomManager()), m_statisticsManager(StatisticsManager())
+    m_database(db), m_loginManager(LoginManager(db)), m_roomManager(RoomManager()), m_statisticsManager(StatisticsManager(db))
 {
 }
 

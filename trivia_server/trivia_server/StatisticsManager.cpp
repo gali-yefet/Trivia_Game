@@ -1,5 +1,10 @@
 #include "StatisticsManager.h"
 
+StatisticsManager::StatisticsManager(IDatabase* db):
+	m_database(db)
+{
+}
+
 std::vector<std::string> StatisticsManager::getHighScore()
 {
 	std::vector<std::string> top5;

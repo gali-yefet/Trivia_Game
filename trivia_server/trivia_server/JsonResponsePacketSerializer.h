@@ -57,8 +57,6 @@ typedef struct JoinRoomResponse
 typedef struct CreateRoomResponse
 {
 	unsigned int status;
-	//TODO: add room id?
-
 }CreateRoomResponse;
 
 
@@ -79,5 +77,6 @@ public:
 
 private:
 	static std::vector<unsigned char> serializeMsg(int code, std::string data);
+	static std::string eraseQuotes(std::string data);
 
 };

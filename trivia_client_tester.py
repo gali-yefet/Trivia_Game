@@ -2,7 +2,8 @@ import json
 import socket
 SERVER_IP = '127.0.0.1'
 SERVER_PORT = 3086
-ERROR_CODE = 0,
+
+ERROR_CODE = 0
 SIGN_CODE = 1
 LOGIN_CODE = 2
 LOGOUT = 3
@@ -25,7 +26,7 @@ def create_socket(ip, port):
 #create buffer according to protocol
 def create_buffer(code, dictionary):
     json_str = json.dumps(dictionary)
-    json_len = str(len(json_str))#mabey it wouldn't be here 4 bytes...
+    json_len = str(len(json_str))
     json_len_str = "0"*(SIZE_OF_LEN - len(json_len)) + json_len
     buffer = str(code) + json_len_str +json_str
     return buffer
@@ -47,11 +48,17 @@ def main():
     print("start")
     sock1 = create_socket(SERVER_IP, SERVER_PORT)
     sock2 = create_socket(SERVER_IP, SERVER_PORT)
+    sock3 = create_socket(SERVER_IP, SERVER_PORT)
 
     print("login user 1:", send_msg(LOGIN_CODE, sock1, {"username": "user1", "password": "111"}))
     print("login user 2:", send_msg(LOGIN_CODE, sock2, {"username": "user2", "password": "22222"}))
+    print("logout user 2:", send_msg(LOGOUT, sock2, {}))
+    print("login user 2:", send_msg(LOGIN_CODE, sock3, {"username": "user2", "password": "22222"}))
     print("user1 create room1:", send_msg(CREATE_ROOM, sock1, {"roomName": "room1", "maxUsers":"3", "questionsCount": "5", "answerTimeout": "30"}))
-    print("user2 join roomId 0:", send_msg(JOIN_ROOM, sock2, {"roomID": "0"})) #TODO: check what's wrong with join
+    print("user2 get rooms", send_msg(GET_ROOMS, sock3, {}))
+    print("user2 get high score", send_msg(GET_HIGH_SCORE, sock3, {}))
+    print("user2 get players in roomId 0", send_msg(GET_PLAYERS_IN_ROOM, sock3, {"roomID": "0"}))
+    print("user2 join roomId 0:", send_msg(JOIN_ROOM, sock3, {"roomID": "0"}))
 
 
 if __name__ == "__main__":

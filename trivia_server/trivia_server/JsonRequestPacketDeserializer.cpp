@@ -54,7 +54,7 @@ GetPlayersInRoomRequest JsonRequestPacketDeseializer::deserializeGetPlayersInRoo
 			std::cout << "Exception was thrown in JsonRequestPacketDeseializer::deserializeGetPlayersInRoomRequest: " << e.what() << std::endl;
 		}
 	}
-	return g; //TODO: find out why it does'nt do into 
+	return g;
 }
 
 JoinRoomRequest JsonRequestPacketDeseializer::deserializeJoinRoomRequest(RequestInfo r)

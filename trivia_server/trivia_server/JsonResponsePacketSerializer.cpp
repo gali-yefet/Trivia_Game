@@ -66,15 +66,22 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeCreateRoomResp
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetRoomsResponse(GetRoomsResponse r)
 {
-	//create msg
-	std::string roomsNames = "";
+	//create a vector of rooms data
+	std::vector<json> rooms;
 	for (auto i = r.rooms.begin(); i != r.rooms.end(); ++i)
-		roomsNames += i->name + ", ";
-	roomsNames = roomsNames.substr(0, roomsNames.length() - 2);
+	{
+		json roomData;
+		roomData["name"] = eraseQuotes(i->name);
+		roomData["id"] = i->id;
+		roomData["isActive"] = i->isActive;
+		roomData["maxPlayers"] = i->maxPlayers;
+		roomData["numOfQuestionsInGame"] = i->numOfQuestionsInGame;
+		roomData["timePerQuestion"] = i->timePerQuestion;
+		rooms.push_back(roomData);
+	}
 
-	// create an empty structure (null)
 	json j;
-	j["Rooms"] = roomsNames;
+	j["Rooms"] = rooms;
 
 	std::string data = j.dump();  // returns the json as a string
 	return serializeMsg(GET_ROOMS, data);
@@ -84,14 +91,14 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetRoomsRespon
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetPlayersInRoomResponse(GetPlayersInRoomResponse r)
 {
 	//create msg
-	std::string roomsNames = "";
+	std::string players = "";
 	for (auto i = r.players.begin(); i != r.players.end(); ++i)
-		roomsNames += *i + ", ";
-	roomsNames = roomsNames.substr(0, roomsNames.length() - 2);
+		players += eraseQuotes(*i) + ", ";
+	players = players.substr(0, players.length() - 2);
 
 	// create an empty structure (null)
 	json j;
-	j["PlayesrInRoom"] = roomsNames;
+	j["PlayesrInRoom"] = players;
 
 	std::string data = j.dump();  // returns the json as a string
 	return serializeMsg(GET_PLAYERS_IN_ROOM, data);
@@ -129,4 +136,9 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeMsg(int code, 
 	std::string message = codeStr + bytes + data;
 	std::vector<unsigned char> bytes_buffer(message.begin(), message.end());// enter the response to a vector of bytes
 	return bytes_buffer;
+}
+
+std::string JsonResponsePacketSerializer::eraseQuotes(std::string data)
+{
+	return data.substr(1, data.length() - 2);
 }
