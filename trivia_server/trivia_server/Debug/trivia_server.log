@@ -1,3 +1,7 @@
 ﻿  Communicator.cpp
 C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\Communicator.cpp(103,32): warning C4101: 'e': unreferenced local variable
+  JsonRequestPacketDeserializer.cpp
+  LoginRequestHandler.cpp
+  MenuRequestHandler.cpp
+  Generating Code...
   trivia_server.vcxproj -> C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe

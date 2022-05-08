@@ -57,6 +57,7 @@ typedef struct JoinRoomResponse
 typedef struct CreateRoomResponse
 {
 	unsigned int status;
+	//TODO: add room id?
 
 }CreateRoomResponse;
 

@@ -44,5 +44,5 @@ public:
 	static CreateRoomRequest deserializeCreateRoomRequest(RequestInfo r);
 
 private:
-	static std::string extractValue(std::string& json);
+	static std::string extractValue(std::string& json, bool toInt=false);
 };

@@ -47,15 +47,14 @@ GetPlayersInRoomRequest JsonRequestPacketDeseializer::deserializeGetPlayersInRoo
 
 		try
 		{
-			g.roomId = std::stoi(extractValue(data));
+			g.roomId = std::stoi(extractValue(data, true));
 		}
 		catch (const std::exception& e)
 		{
 			std::cout << "Exception was thrown in JsonRequestPacketDeseializer::deserializeGetPlayersInRoomRequest: " << e.what() << std::endl;
 		}
 	}
-	return g;
-
+	return g; //TODO: find out why it does'nt do into 
 }
 
 JoinRoomRequest JsonRequestPacketDeseializer::deserializeJoinRoomRequest(RequestInfo r)
@@ -69,7 +68,7 @@ JoinRoomRequest JsonRequestPacketDeseializer::deserializeJoinRoomRequest(Request
 
 		try
 		{
-			j.roomId = std::stoi(extractValue(data));
+			j.roomId = std::stoi(extractValue(data, true));
 		}
 		catch (const std::exception& e)
 		{
@@ -91,9 +90,9 @@ CreateRoomRequest JsonRequestPacketDeseializer::deserializeCreateRoomRequest(Req
 		try
 		{
 			c.roomName = extractValue(data);
-			c.maxUsers = std::stoi(extractValue(data));
-			c.questionCount = std::stoi(extractValue(data));
-			c.answerTimeOut = std::stoi(extractValue(data));
+			c.maxUsers = std::stoi(extractValue(data, true));
+			c.questionCount = std::stoi(extractValue(data, true));
+			c.answerTimeOut = std::stoi(extractValue(data, true));
 		}
 		catch (const std::exception& e)
 		{
@@ -107,10 +106,10 @@ CreateRoomRequest JsonRequestPacketDeseializer::deserializeCreateRoomRequest(Req
 
 /*
 get the value from the json
-in: string that represent the json
+in: string that represent the json, a flag that check if it would be int or string
 out: value
 */
-std::string JsonRequestPacketDeseializer::extractValue(std::string& json)
+std::string JsonRequestPacketDeseializer::extractValue(std::string& json, bool toInt)
 {
 	std::string value = "";
 	if (json.find(':') != std::string::npos)
@@ -128,5 +127,10 @@ std::string JsonRequestPacketDeseializer::extractValue(std::string& json)
 		while (value[value.length() -1] == ' ')
 			value = value.substr(1, value.length() - 1);
 	}
+
+	//erace " in order to get an int
+	if (toInt)
+		value = value.substr(1, value.length() - 2);
+
 	return value;
 }
