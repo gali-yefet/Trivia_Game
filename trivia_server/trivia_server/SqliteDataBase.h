@@ -19,11 +19,11 @@ public:
 	virtual bool isActive(std::string username);
 
 	virtual void createQuestions();
-	virtual std::list<Question> getQuestions(int);
-	virtual float getPlayerAverageAnswerTime(std::string);
-	virtual int getNumOfCorrectAnswers(std::string);
-	virtual int getNumOfTotalAnswers(std::string);
-	virtual int getNumOfPlayerGames(std::string);
+	virtual std::list<Question> getQuestions(int limit);
+	virtual float getPlayerAverageAnswerTime(std::string username);
+	virtual int getNumOfCorrectAnswers(std::string username);
+	virtual int getNumOfTotalAnswers(std::string username);
+	virtual int getNumOfPlayerGames(std::string username);
 	virtual userStatistics getUserStatistics(std::string username);
 	virtual int getSecurityKey(std::string);
 	virtual std::list<userStatistics> getTopFive();

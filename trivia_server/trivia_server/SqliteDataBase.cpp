@@ -106,9 +106,13 @@ void SqliteDataBase::createQuestions()
 	}
 }
 
-std::list<Question> SqliteDataBase::getQuestions(int) //TODO
+std::list<Question> SqliteDataBase::getQuestions(int limit)
 {
-	return std::list<Question>();// what is the int parameter?
+	std::string q = "SELECT * FROM QUESTION LIMIT " + std::to_string(limit) + "; ";
+	std::list<Question> listOfQuestions;
+	this->execSelectCmd(q.c_str(), this->questionsCallback, &listOfQuestions);
+
+	return listOfQuestions;
 }
 
 float SqliteDataBase::getPlayerAverageAnswerTime(std::string username)
