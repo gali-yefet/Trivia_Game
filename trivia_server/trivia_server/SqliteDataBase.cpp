@@ -111,7 +111,7 @@ std::list<Question> SqliteDataBase::getQuestions(int) //TODO
 	return std::list<Question>();// what is the int parameter?
 }
 
-float SqliteDataBase::getPlayerAverageAnswerTime(std::string username)//TODO
+float SqliteDataBase::getPlayerAverageAnswerTime(std::string username)
 {
 	std::string q = "SELECT AVE_TIME FROM STATISTICS WHERE USERNAME = '" + username + "';";
 	std::list<userStatistics> listOfUsers;
@@ -121,7 +121,7 @@ float SqliteDataBase::getPlayerAverageAnswerTime(std::string username)//TODO
 	return currentUser.getAveTime();
 }
 
-int SqliteDataBase::getNumOfCorrectAnswers(std::string username)//TODO
+int SqliteDataBase::getNumOfCorrectAnswers(std::string username)
 {
 	std::string q = "SELECT CORRECT_ANS FROM STATISTICS WHERE USERNAME = '" + username + "';";
 	std::list<userStatistics> listOfUsers;
@@ -131,7 +131,7 @@ int SqliteDataBase::getNumOfCorrectAnswers(std::string username)//TODO
 	return currentUser.getAveTime();
 }
 
-int SqliteDataBase::getNumOfTotalAnswers(std::string username)//TODO
+int SqliteDataBase::getNumOfTotalAnswers(std::string username)
 {
 	std::string q = "SELECT TOTAL_ANS FROM STATISTICS WHERE USERNAME = '" + username + "';";
 	std::list<userStatistics> listOfUsers;
@@ -141,7 +141,7 @@ int SqliteDataBase::getNumOfTotalAnswers(std::string username)//TODO
 	return currentUser.getTotalAns();
 }
 
-int SqliteDataBase::getNumOfPlayerGames(std::string username)//TODO
+int SqliteDataBase::getNumOfPlayerGames(std::string username)
 {
 	std::string q = "SELECT GAMES FROM STATISTICS WHERE USERNAME = '" + username + "';";
 	std::list<userStatistics> listOfUsers;
