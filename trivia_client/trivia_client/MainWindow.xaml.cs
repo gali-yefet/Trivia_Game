@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 
 namespace trivia_client
@@ -24,9 +25,24 @@ namespace trivia_client
         public MainWindow()
         {
             InitializeComponent();
-
             //connect to server
-            Connector connector = new Connector();
+            //Connector connector = new Connector(); //TODO
+
+
+        }
+
+        private void login_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow window = new LoginWindow();
+            window.Show();
+            this.Close();
+        }
+
+        private void signup_Click(object sender, RoutedEventArgs e)
+        {
+            SignupWindow window = new SignupWindow();
+            window.Show();
+            this.Close();
         }
     }
 }
