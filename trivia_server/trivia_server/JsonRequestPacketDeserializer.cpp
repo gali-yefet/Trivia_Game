@@ -119,7 +119,7 @@ std::string JsonRequestPacketDeseializer::extractValue(std::string& json, bool t
 
 		// cuts the data string
 		if (goTo == ',')
-			json = json.substr(json.find(',') + 1);
+			json = json.substr(0, json.find(',') + 1);
 
 		//erase spaces
 		while (value[0] == ' ')
