@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace trivia_client
 {
     /// <summary>
@@ -23,6 +24,9 @@ namespace trivia_client
         public MainWindow()
         {
             InitializeComponent();
+
+            //connect to server
+            Connector connector = new Connector();
         }
     }
 }

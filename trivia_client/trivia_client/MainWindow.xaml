@@ -7,8 +7,32 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="460" Width="785">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+
+        <!--background-->
         <Grid.Background>
             <ImageBrush ImageSource="/img/background2.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
+
+        <!--header-->
+        <Label Grid.Row="0" Content="WANNACRY" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial Black" FontSize="48"/>
+
+        <!--buttons-->
+        <Grid Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button FontSize="16" Height="50" Width="150" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15" Content="login"/>
+            <Button FontSize="16" Height="50" Width="150" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15" Content="signup"/>
+        </Grid>
+
+
     </Grid>
 </Window>
