@@ -1,0 +1,45 @@
+﻿<Page x:Class="trivia_client.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:trivia_client"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="LoginPage">
+    <Grid>
+        <Frame x:Name="backgroundPage"/>
+        <Grid Margin="40, 40, 40, 100">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!--header-->
+            <Label Content="LOGIN" Grid.Row="0" Foreground="White" FontFamily="Arial Black" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+            <!--input-->
+            <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="150, 10, 150, 10">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="username:" Grid.Column="0" Grid.Row="0" Foreground="White" FontSize="14" VerticalAlignment="Center"/>
+                <TextBox Name="usernameInput" Grid.Column="1" Grid.Row="0" Margin="10" Padding="5" Height="25"/>
+                <Label Content="password:" Grid.Column="0" Grid.Row="1" Foreground="White" FontSize="14" VerticalAlignment="Center" />
+                <TextBox Name="passwordInput" Grid.Column="1" Grid.Row="1" Margin="10" Padding="5" Height="25"/>
+            </Grid>
+
+            <!--buttons-->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button Name="backButton" Content="back" Click="backButton_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
+                <Button Name="SendButton" Content="login" Click="SendButton_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

@@ -5,40 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:trivia_client"
         mc:Ignorable="d"
-        Title="MainWindow" Height="460" Width="785">
-    
+        Title="MainWindow" Height="514" Width="713">
+
     <Grid>
         <!--background-->
         <Grid.Background>
             <ImageBrush ImageSource="/img/background2.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
-        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="3*" />
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="3*" />
-        </Grid.RowDefinitions>
 
-        
-        <!--header-->
-        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="WANNACRY" Foreground="White" FontFamily="Arial Black" FontSize="48" HorizontalAlignment="Center" />
-            <Label Content="TRIVIA" Foreground="White" FontFamily="Arial Black" FontSize="30"  HorizontalAlignment="Center"/>
-        </StackPanel>
-       
-
-        <!--buttons-->
-        <Grid Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Button Name="login" Content="login" Click="login_Click" FontSize="16" Height="50" Width="150" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15"/>
-            <Button Name="signup" Content="signup" Click="signup_Click" FontSize="16" Height="50" Width="150" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15"/>
-        </Grid>
-
-
+        <Frame x:Name="currentPage" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

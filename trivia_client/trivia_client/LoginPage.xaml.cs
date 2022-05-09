@@ -8,25 +8,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace trivia_client
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for LoginPage.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class LoginPage : Page
     {
-        public LoginWindow()
+        public LoginPage()
         {
             InitializeComponent();
+            backgroundPage.Content = new BackgroundPage();
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow window = new MainWindow();
-            window.Show();
-            this.Close();
+            WelcomePage page = new WelcomePage();
+            NavigationService.Navigate(page);
         }
 
         private void SendButton_Click(object sender, RoutedEventArgs e)

@@ -8,34 +8,34 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace trivia_client
 {
     /// <summary>
-    /// Interaction logic for SignupWindow.xaml
+    /// Interaction logic for SignupPage.xaml
     /// </summary>
-    public partial class SignupWindow : Window
+    public partial class SignupPage : Page
     {
-        public SignupWindow()
+        public SignupPage()
         {
             InitializeComponent();
+            backgroundPage.Content = new BackgroundPage();
+        }
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            WelcomePage page = new WelcomePage();
+            NavigationService.Navigate(page);
         }
 
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
             //TODO
             //if some field is empty - paint it's border red
-            //else - send signup request
-                //if valid - move to main menu window
-                //else - print not valid to the screen
-        }
-
-        private void backButton_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow window = new MainWindow();
-            window.Show();
-            this.Close();
+            //else - send login request
+            //if valid - move to main menu window
+            //else - print not valid to the screen
         }
     }
 }
