@@ -22,14 +22,16 @@ namespace trivia_client
     /// </summary>
     public partial class MainWindow : Window
     {
+        Connector _connector;
+
         public MainWindow()
         {
             InitializeComponent();
-            currentPage.Content = new WelcomePage();
 
             //connect to server
-            //Connector connector = new Connector(); //TODO
+            _connector = new Connector();
 
+            currentPage.Content = new WelcomePage(_connector);
 
         }
     }

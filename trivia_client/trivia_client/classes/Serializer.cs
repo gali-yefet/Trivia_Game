@@ -8,33 +8,33 @@ namespace trivia_client.classes
 
     struct LoginRequest
     {
-        String username;
-        String password;
+        public String username;
+        public String password;
     }
 
     struct SignupRequest
     {
-        String username;
-        String password;
-        String email;
+        public String username;
+        public String password;
+        public String email;
     }
 
     struct GetPlayersInROmmRequest
     {
-        uint roomId;
+        public uint roomId;
     }
 
     struct JoinRoomRequest
     {
-        uint roomId;
+        public uint roomId;
     }
 
     struct CreateRoomRequest
     {
-        String roomName;
-        uint maxUsers;
-        uint questionsCount;
-        uint answerTimeOut;
+        public String roomName;
+        public uint maxUsers;
+        public uint questionsCount;
+        public uint answerTimeOut;
     }
 
     class Serializer

@@ -7,7 +7,7 @@ using System.Net;
 
 namespace trivia_client
 {
-    class Connector
+    public class Connector
     {
         public const int PORT = 3086;
         public const String IP = "127.0.0.1";
@@ -41,14 +41,13 @@ namespace trivia_client
             return buffer;
         }
 
-        private void sendData(String msg)
+        private void sendData(byte[] msg)
         {
-            byte[] buffer = new ASCIIEncoding().GetBytes(msg);
-            _clientStream.Write(buffer, 0, buffer.Length);
+            _clientStream.Write(msg, 0, msg.Length);
             _clientStream.Flush();
         }
 
-        public byte[] sendGetData(String msg)
+        public byte[] sendGetData(byte[] msg)
         {
             sendData(msg);
             return readData();
