@@ -21,6 +21,12 @@ namespace trivia_client
         public LeaderB()
         {
             InitializeComponent();
+            //--> get data from database and put it in the list
+            //ServiceReference1.ImojWCFServiceClient client = new ServiceReference1.ImojWCFServiceClient();
+            //listView1.Items.Clear();
+            //var userList = client.getUsers();
+            //listView1.ItemsSource = userList;
+
         }
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
