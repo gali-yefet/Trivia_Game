@@ -34,8 +34,30 @@ namespace trivia_client
             //TODO
             //if some field is empty - paint it's border red
             //else - send login request
-            //if valid - move to main menu window
-            //else - print not valid to the screen
+
+            if (usernameInput.Text.Length == 0 || passwordInput.Text.Length == 0 || email.Text.Length == 0)
+            {
+                if (usernameInput.Text.Length == 0)
+                {
+                    usernameInput.Background = Brushes.OrangeRed;
+
+                }
+                if (passwordInput.Text.Length == 0)
+                {
+                    passwordInput.Background = Brushes.OrangeRed;
+                }
+
+                if (email.Text.Length == 0)
+                {
+                    email.Background = Brushes.OrangeRed;
+                }
+            }
+            else
+            {
+                //TODO: send signup req
+                //if valid - move to main menu window
+                //else - print not valid to the screen
+            }
         }
     }
 }

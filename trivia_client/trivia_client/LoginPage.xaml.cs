@@ -32,11 +32,29 @@ namespace trivia_client
 
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+
             //if some field is empty - paint it's border red
-            //else - send login request
-            //if valid - move to main menu window
-            //else - print not valid to the screen
+            //else - send login request            
+            if(usernameInput.Text.Length == 0 || passwordInput.Text.Length == 0)
+            {
+                if (usernameInput.Text.Length == 0)
+                {
+                    usernameInput.Background = Brushes.OrangeRed;
+
+                }
+                if (passwordInput.Text.Length == 0)
+                {
+                    passwordInput.Background = Brushes.OrangeRed;
+                }
+
+            }
+            else
+            {
+                //TODO: send login req
+                //if valid - move to main menu window
+                //else - print not valid to the screen
+
+            }
         }
     }
 }
