@@ -10,10 +10,10 @@
 
     <Grid>
         <Frame x:Name="backgroundPage"/>
-        <Grid Margin="40, 40, 40, 100">
+        <Grid Margin="40,40,40,21">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="0" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
@@ -21,13 +21,24 @@
             <Label Content="JOIN ROOM" Grid.Row="0" Foreground="White" FontFamily="Arial Black" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
             <!--list of rooms-->
-            <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="150, 10, 150, 10">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="100, 0, 100, 0">
+                <ListView x:Name="ConectedUsers" Margin="139,76,135,-244" >
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Room Name"  DisplayMemberBinding="{Binding ROOM_NAME}" Width="240"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
 
             <!--buttons-->
-            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Button Name="backButton" Content="back" Click="backButton_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
-                <Button Name="SendButton" Content="join" Click="SendButton_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,270,0,0">
+                <Button x:Name="backButton" Content="back" Click="backButton_Click" FontSize="16" Height="35" Width="150"/>
             </StackPanel>
         </Grid>
 

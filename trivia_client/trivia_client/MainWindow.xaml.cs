@@ -25,7 +25,7 @@ namespace trivia_client
         public MainWindow()
         {
             InitializeComponent();
-            currentPage.Content = new CreateRoomPage();
+            currentPage.Content = new Menu();
         }
     }
 }

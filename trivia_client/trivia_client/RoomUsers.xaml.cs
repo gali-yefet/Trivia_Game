@@ -14,24 +14,18 @@ using System.Windows.Shapes;
 namespace trivia_client
 {
     /// <summary>
-    /// Interaction logic for CreateRoomPage.xaml
+    /// Interaction logic for RoomUsers.xaml
     /// </summary>
-    public partial class CreateRoomPage : Page
+    public partial class RoomUsers : Page
     {
-        public CreateRoomPage()
+        public RoomUsers()
         {
             InitializeComponent();
         }
-
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            Menu page = new Menu();
-            NavigationService.Navigate(page);
+         //TODO: return to create room / join room
         }
 
-        private void SendButton_Click(object sender, RoutedEventArgs e)
-        {
-            //TODO: send a CreateRoomRequest
-        }
     }
 }

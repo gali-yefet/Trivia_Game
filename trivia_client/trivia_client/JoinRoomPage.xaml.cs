@@ -21,16 +21,28 @@ namespace trivia_client
         public JoinRoomPage()
         {
             InitializeComponent();
+            //--> get data from database and put it in the list
+            //ServiceReference1.ImojWCFServiceClient client = new ServiceReference1.ImojWCFServiceClient();
+            //listView1.Items.Clear();
+            //var userList = client.getUsers();
+            //listView1.ItemsSource = userList;
+
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: create a new mainManu
+            Menu page = new Menu();
+            NavigationService.Navigate(page);
         }
 
-        private void SendButton_Click(object sender, RoutedEventArgs e)
+        private void ListViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //TODO: send a join room request
+            var item = sender as ListViewItem;
+            if (item != null && item.IsSelected)
+            {
+                var RoomName = item.Content;
+                //Join the room by name
+            }
         }
     }
 }
