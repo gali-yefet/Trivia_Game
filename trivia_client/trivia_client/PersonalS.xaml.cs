@@ -8,23 +8,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace trivia_client
 {
     /// <summary>
-    /// Interaction logic for PersonalStatistics.xaml
+    /// Interaction logic for PersonalS.xaml
     /// </summary>
-    public partial class PersonalStatistics : Window
+    public partial class PersonalS : Page
     {
-        public PersonalStatistics()
+        public PersonalS()
         {
             InitializeComponent();
-            //-->
-            //ServiceReference1.ImojWCFServiceClient client = new ServiceReference1.ImojWCFServiceClient();
-            //listView1.Items.Clear();
-            //var userList = client.getUsers();
-            //listView1.ItemsSource = userList;
         }
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            Statistics page = new Statistics();
+            NavigationService.Navigate(page);
+        }
+
     }
 }

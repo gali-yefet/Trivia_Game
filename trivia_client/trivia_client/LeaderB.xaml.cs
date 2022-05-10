@@ -14,32 +14,19 @@ using System.Windows.Shapes;
 namespace trivia_client
 {
     /// <summary>
-    /// Interaction logic for Statistics.xaml
+    /// Interaction logic for LeaderB.xaml
     /// </summary>
-    public partial class Statistics : Page
+    public partial class LeaderB : Page
     {
-        public Statistics()
+        public LeaderB()
         {
             InitializeComponent();
         }
-
-        private void LeaderB_Click(object sender, RoutedEventArgs e)
-        {
-            LeaderB page = new LeaderB();
-            NavigationService.Navigate(page);
-        }
-
-        private void PersonalS_Click(object sender, RoutedEventArgs e)
-        {
-            PersonalS page = new PersonalS();
-            NavigationService.Navigate(page);
-        }
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            Menu page = new Menu();
+            Statistics page = new Statistics();
             NavigationService.Navigate(page);
         }
-
 
     }
 }

@@ -8,23 +8,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace trivia_client
 {
     /// <summary>
-    /// Interaction logic for LeaderBoard.xaml
+    /// Interaction logic for Menu.xaml
     /// </summary>
-    public partial class LeaderBoard : Window
+    public partial class Menu : Page
     {
-        public LeaderBoard()
+        public Menu()
         {
             InitializeComponent();
-            //-->
-            //ServiceReference1.ImojWCFServiceClient client = new ServiceReference1.ImojWCFServiceClient();
-            //listView1.Items.Clear();
-            //var userList = client.getUsers();
-            //listView1.ItemsSource = userList;
         }
+
+        private void Statistics_Click(object sender, RoutedEventArgs e)
+        {
+            Statistics page = new Statistics();
+            NavigationService.Navigate(page);
+        }
+
     }
 }
