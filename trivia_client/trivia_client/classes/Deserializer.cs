@@ -34,7 +34,7 @@ namespace trivia_client.classes
     struct GetRoomsResponse
     {
         public uint status;
-        public RoomData[] rooms; //TODO
+        public RoomData[] rooms;
     }
 
     struct GetPlayersInRoomResponse
@@ -109,31 +109,31 @@ namespace trivia_client.classes
         public static LoginResponse deserializeLoginResponse(byte[] buffer)
         {
             LoginResponse r;
-            String bufferStr = buffer.ToString();
-            r.status = UInt32.Parse(extractValue(bufferStr, true));
+            String bufferStr = Encoding.UTF8.GetString(buffer);
+            r.status = bufferStr.Contains("status") ? UInt32.Parse(extractValue(bufferStr)) : ERROR_CODE;
             return r;
         }
 
         public static SignupResponse deserializeSignupResponse(byte[] buffer)
         {
             SignupResponse r;
-            String bufferStr = buffer.ToString();
-            r.status = UInt32.Parse(extractValue(bufferStr, true));
+            String bufferStr = Encoding.UTF8.GetString(buffer);
+            r.status = bufferStr.Contains("status") ? UInt32.Parse(extractValue(bufferStr)) : ERROR_CODE;
             return r;
         }
 
         public static LogoutResponse deserializeLogoutResponse(byte[] buffer)
         {
             LogoutResponse r;
-            String bufferStr = buffer.ToString();
-            r.status = UInt32.Parse(extractValue(bufferStr, true));
+            String bufferStr = Encoding.UTF8.GetString(buffer);
+            r.status = bufferStr.Contains("status") ? UInt32.Parse(extractValue(bufferStr)) : ERROR_CODE;
             return r;
         }
 
         public static GetRoomsResponse deserializeGetRoomsResponse(byte[] buffer)
         {
             GetRoomsResponse r;
-            String bufferStr = buffer.ToString();
+            String bufferStr = Encoding.UTF8.GetString(buffer);
             r.status = UInt32.Parse(extractValue(bufferStr, true));
             bufferStr = bufferStr.Substring(0, bufferStr.IndexOf(',') + 1);
 
@@ -169,7 +169,7 @@ namespace trivia_client.classes
         public static GetPlayersInRoomResponse deserializeGetPlayersInRoomResponse(byte[] buffer)
         {
             GetPlayersInRoomResponse r;
-            String bufferStr = buffer.ToString();
+            String bufferStr = Encoding.UTF8.GetString(buffer);
 
             //add players
             String nameArrayStr = extractValue(bufferStr, true);
@@ -187,7 +187,7 @@ namespace trivia_client.classes
         public static GetHighScoreResponse deserializeGetHighScoreResponse(byte[] buffer)
         {
             GetHighScoreResponse r;
-            String bufferStr = buffer.ToString();
+            String bufferStr = Encoding.UTF8.GetString(buffer);
             r.status = UInt32.Parse(extractValue(bufferStr, true));
             bufferStr = bufferStr.Substring(0, bufferStr.IndexOf(',') + 1);
 
@@ -207,7 +207,7 @@ namespace trivia_client.classes
         public static GetPersonalStatsResponse deserializeGetPersonalStatsResponse(byte[] buffer)
         {
             GetPersonalStatsResponse r;
-            String bufferStr = buffer.ToString();
+            String bufferStr = Encoding.UTF8.GetString(buffer);
             r.status = UInt32.Parse(extractValue(bufferStr, true));
             bufferStr = bufferStr.Substring(bufferStr.IndexOf(',') + 1);
 
@@ -227,7 +227,7 @@ namespace trivia_client.classes
         public static JoinRoomResponse deserializeJoinRoomResponse(byte[] buffer)
         {
             JoinRoomResponse r;
-            String bufferStr = buffer.ToString();
+            String bufferStr = Encoding.UTF8.GetString(buffer);
             r.status = UInt32.Parse(extractValue(bufferStr, true));
             return r;
         }
@@ -235,7 +235,7 @@ namespace trivia_client.classes
         public static CreateRoomResponse deserializeCreateRoomResponse(byte[] buffer)
         {
             CreateRoomResponse r;
-            String bufferStr = buffer.ToString();
+            String bufferStr = Encoding.UTF8.GetString(buffer);
             r.status = UInt32.Parse(extractValue(bufferStr, true));
             return r;
         }
