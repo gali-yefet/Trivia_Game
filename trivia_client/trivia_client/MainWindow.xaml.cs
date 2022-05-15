@@ -27,9 +27,7 @@ namespace trivia_client
         public MainWindow()
         {
             InitializeComponent();
-            //connect to server
-            _connector = new Connector();
-            currentPage.Content = new WelcomePage(_connector);
+            currentPage.Content = new WelcomePage();
         }
     }
 }

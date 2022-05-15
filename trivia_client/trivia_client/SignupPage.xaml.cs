@@ -31,7 +31,7 @@ namespace trivia_client
         }
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            WelcomePage page = new WelcomePage(_connector);
+            WelcomePage page = new WelcomePage();
             NavigationService.Navigate(page);
         }
 

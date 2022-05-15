@@ -16,7 +16,7 @@
         <Button Content="Back" Height="30" Width="100" HorizontalAlignment="Left" Click="backButton_Click" Margin="40, 350, 60, 20"></Button>
         <Grid>
             <Label Content="Leader Board" FontWeight="Bold" Foreground="Azure" HorizontalAlignment="Center" VerticalAlignment="Top" Margin ="0,30,0,0" FontSize="36" FontStyle="Italic" />
-            <ListView x:Name="LeaderBoard" Margin="90" >
+            <ListView x:Name="LeaderBoard" Margin="100" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="User name" DisplayMemberBinding="{Binding USERNAME}" Width="130"/>

@@ -21,10 +21,10 @@
 
             <!--buttons-->
             <StackPanel Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Button Content="Log Out" FontSize="16" Height="35" Width="300"  Margin="10" Background ="AliceBlue"/>
-                <Button Content="Statistics" FontSize="16" Height="35" Width="300"  Margin="10" Background ="AliceBlue"/>
-                <Button Content="Join Room" FontSize="16" Height="35" Width="300"  Margin="10" Background ="AliceBlue"/>
-                <Button Content="Create Room" FontSize="16" Height="35" Width="300"  Margin="10" Background ="AliceBlue"/>
+                <Button Name="logout" Content="Log Out" Click="logout_Click" FontSize="16" Height="35" Width="300"  Margin="10" Background ="AliceBlue"/>
+                <Button Name="statistics" Content="Statistics" Click="Statistics_Click" FontSize="16" Height="35" Width="300"  Margin="10" Background ="AliceBlue"/>
+                <Button Name="join" Content="Join Room" Click="join_Click" FontSize="16" Height="35" Width="300"  Margin="10" Background ="AliceBlue"/>
+                <Button Name="create" Content="Create Room" Click="create_Click" FontSize="16" Height="35" Width="300"  Margin="10" Background ="AliceBlue"/>
             </StackPanel>
 
         </Grid>

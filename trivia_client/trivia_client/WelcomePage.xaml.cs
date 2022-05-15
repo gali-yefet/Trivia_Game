@@ -19,10 +19,11 @@ namespace trivia_client
     public partial class WelcomePage : Page
     {
         Connector _connector;
-        public WelcomePage(Connector connector)
+        public WelcomePage()
         {
             InitializeComponent();
-            _connector = connector;
+            //connect to server
+            _connector = new Connector();
         }
 
         private void login_Click(object sender, RoutedEventArgs e)

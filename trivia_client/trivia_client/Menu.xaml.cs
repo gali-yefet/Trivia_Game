@@ -32,5 +32,23 @@ namespace trivia_client
             Statistics page = new Statistics(_connector);
             NavigationService.Navigate(page);
         }
+
+        private void logout_Click(object sender, RoutedEventArgs e)
+        {
+            byte[] msg = classes.Serializer.serializeRequest(classes.Deserializer.LOGOUT_CODE);
+            _connector.sendGetData(msg);
+            WelcomePage page = new WelcomePage();
+            NavigationService.Navigate(page);
+        }
+
+        private void join_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO
+        }
+
+        private void create_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO
+        }
     }
 }
