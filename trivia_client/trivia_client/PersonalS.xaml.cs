@@ -25,7 +25,8 @@ namespace trivia_client
             _connector = connector;
             //--> get data from database and put it in the listView
             PersonalStatistics.Items.Clear();
-            var personalS = classes.Deserializer.deserializeGetHighScoreResponse(_connector.sendGetData(BitConverter.GetBytes(classes.Deserializer.GET_HIGH_SCORE_CODE))).statistics;
+            var res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_PERSONAL_STATS_CODE));
+            var personalS = classes.Deserializer.deserializeGetPersonalStatsResponse(res).statistics;
             PersonalStatistics.ItemsSource = personalS;
 
         }

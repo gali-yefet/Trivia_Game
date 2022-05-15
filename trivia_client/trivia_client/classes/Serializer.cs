@@ -44,10 +44,12 @@ namespace trivia_client.classes
          * in: request code, msg
          * out: request in byte[]
          */
-        private static byte[] serializeRequest(int code, String msg)
+        public static byte[] serializeRequest(int code, String msg = "")
         {
-            int len = msg.Length;
-            String allMsg = code.ToString() + len.ToString() + msg;
+            String len = msg.Length.ToString();
+            while (len.Length < 4)
+                len += " ";
+            String allMsg = code.ToString() + len + msg;
             byte[] buffer = new ASCIIEncoding().GetBytes(allMsg);
             return buffer;
         }

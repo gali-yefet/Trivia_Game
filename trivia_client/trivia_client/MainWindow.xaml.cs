@@ -28,7 +28,7 @@ namespace trivia_client
             //connect to server
             _connector = new Connector();
 
-            currentPage.Content = new Menu(_connector);
+            currentPage.Content = new WelcomePage(_connector);
 
 
         }
