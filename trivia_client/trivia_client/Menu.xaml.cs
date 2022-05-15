@@ -21,6 +21,7 @@ namespace trivia_client
         public Menu()
         {
             InitializeComponent();
+            backgroundPage.Content = new BackgroundPage();
         }
     }
 }

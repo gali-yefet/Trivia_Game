@@ -103,7 +103,7 @@ void Communicator::HandleNewClient(SOCKET socket)
 			r.json = std::vector<unsigned char>(msg.begin(), msg.end());
 
 			std::string json_text(r.json.begin(), r.json.end());
-			std::cout << json_text << std::endl; //TODO
+			std::cout << json_text << std::endl; //TODO:DEBUG
 		}
 		catch (const std::exception& e)
 		{
@@ -118,7 +118,7 @@ void Communicator::HandleNewClient(SOCKET socket)
 			RequestResult res = handler->handleRequest(r);
 			m_clients.insert(std::pair<SOCKET, IRequestHandler*>(socket, res.newHandler));
 			sendData(socket, res.buffer);
-			std::cout << res.buffer << std::endl; //TODO
+			std::cout << res.buffer << std::endl; //TODO:DEBUG
 
 		}	
 	}
