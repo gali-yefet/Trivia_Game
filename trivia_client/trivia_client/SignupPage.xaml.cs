@@ -76,9 +76,8 @@ namespace trivia_client
             }
             else
             {
-                SignupPage page = new SignupPage(_connector);
+                Menu page = new Menu();
                 NavigationService.Navigate(page);
-                //TODO: go to mainMenu
             }
         }
     }

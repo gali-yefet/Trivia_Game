@@ -68,10 +68,8 @@ namespace trivia_client
             }
             else
             {
-                LoginPage page = new LoginPage(_connector);
+                Menu page = new Menu();
                 NavigationService.Navigate(page);
-
-                //TODO: move to mainMenu page
             }
         }
     }
