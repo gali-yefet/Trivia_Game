@@ -63,13 +63,12 @@ namespace trivia_client
                 return;
             }
 
-            //TODO: find out why from here it's not responding
             //send a signup request
             byte[] msg = classes.Serializer.serializeSignupRequest(r);
             msg = _connector.sendGetData(msg);
             classes.SignupResponse response = classes.Deserializer.deserializeSignupResponse(msg);
 
-            //check if login failed and move to page accordingly
+            //check if signup failed and move to page accordingly
             if (response.status != classes.Deserializer.SIGNUP_CODE)
             {
                 SignupPage page = new SignupPage(_connector, false);

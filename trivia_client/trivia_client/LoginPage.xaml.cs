@@ -55,11 +55,10 @@ namespace trivia_client
                 return;
             }
 
-            //TODO: find out why from here it's not responding
             //send a login request
             byte[] msg = classes.Serializer.serializeLoginRequest(r);
-            msg = _connector.sendGetData(msg);
-            classes.LoginResponse response = classes.Deserializer.deserializeLoginResponse(msg);
+            byte[] res = _connector.sendGetData(msg);
+            classes.LoginResponse response = classes.Deserializer.deserializeLoginResponse(res);
 
             //check if login failed and move to page accordingly
             if(response.status != classes.Deserializer.LOGIN_CODE)
