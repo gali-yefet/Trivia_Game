@@ -1,33 +1,17 @@
-﻿  IRequestHandler.cpp
-  JsonRequestPacketDeserializer.cpp
-  JsonResponsePacketSerializer.cpp
-  LoggedUser.cpp
-  LoginManager.cpp
-  Communicator.cpp
-C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\Communicator.cpp(103,32): warning C4101: 'e': unreferenced local variable
-  LoginRequestHandler.cpp
-  MenuRequestHandler.cpp
-  Question.cpp
-  RequestHandlerFactory.cpp
-  Room.cpp
-  RoomAdminRequestHandler.cpp
-  RoomManager.cpp
-C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(82,20): warning C4018: '<': signed/unsigned mismatch
-  RoomMemberRequestHandler.cpp
-  Server.cpp
-  Source.cpp
-  SqliteDataBase.cpp
-C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(93,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(131,31): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(212,33): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-  StatisticsManager.cpp
-  User.cpp
-  userStatistics.cpp
-  Generating Code...
-C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(40): warning C4715: 'RoomManager::getRoomState': not all control paths return a value
-C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(85): warning C4715: 'RoomManager::createRoomId': not all control paths return a value
-  Compiling...
-  WSAInitializer.cpp
-  Generating Code...
-  sqlite3.c
+﻿  LINK : C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe not found or not built by the last incremental link; performing full link
+userStatistics.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'userStatistics.obj' or at 'C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\vc142.pdb'; linking object as if no debug info
+User.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'User.obj' or at 'C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\vc142.pdb'; linking object as if no debug info
+StatisticsManager.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'StatisticsManager.obj' or at 'C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\vc142.pdb'; linking object as if no debug info
+SqliteDataBase.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'SqliteDataBase.obj' or at 'C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\vc142.pdb'; linking object as if no debug info
+sqlite3.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'sqlite3.obj' or at 'C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\vc142.pdb'; linking object as if no debug info
+RoomMemberRequestHandler.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'RoomMemberRequestHandler.obj' or at 'C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\vc142.pdb'; linking object as if no debug info
+RoomManager.obj : warning LNK4099: PDB '' was not found with 'RoomManager.obj' or at ''; linking object as if no debug info
+RoomAdminRequestHandler.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'RoomAdminRequestHandler.obj' or at 'C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\vc142.pdb'; linking object as if no debug info
+Room.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'Room.obj' or at 'C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\vc142.pdb'; linking object as if no debug info
+RequestHandlerFactory.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'RequestHandlerFactory.obj' or at 'C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\vc142.pdb'; linking object as if no debug info
+Question.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'Question.obj' or at 'C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\vc142.pdb'; linking object as if no debug info
+MenuRequestHandler.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'MenuRequestHandler.obj' or at 'C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\vc142.pdb'; linking object as if no debug info
+LoginManager.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'LoginManager.obj' or at 'C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\vc142.pdb'; linking object as if no debug info
+LoggedUser.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'LoggedUser.obj' or at 'C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\vc142.pdb'; linking object as if no debug info
+IRequestHandler.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'IRequestHandler.obj' or at 'C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\vc142.pdb'; linking object as if no debug info
   trivia_server.vcxproj -> C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe

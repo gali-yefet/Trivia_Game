@@ -18,19 +18,20 @@ namespace trivia_client
     /// </summary>
     public partial class PersonalS : Page
     {
-        public PersonalS()
+        Connector _connector;
+        public PersonalS(Connector connector)
         {
             InitializeComponent();
-            //--> get data from database and put it in the list
-            //ServiceReference1.ImojWCFServiceClient client = new ServiceReference1.ImojWCFServiceClient();
-            //listView1.Items.Clear();
-            //var userList = client.getUsers();
-            //listView1.ItemsSource = userList;
+            _connector = connector;
+            //--> get data from database and put it in the listView
+            PersonalStatistics.Items.Clear();
+            var personalS = classes.Deserializer.deserializeGetHighScoreResponse(_connector.sendGetData(BitConverter.GetBytes(classes.Deserializer.GET_HIGH_SCORE_CODE))).statistics;
+            PersonalStatistics.ItemsSource = personalS;
 
         }
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            Statistics page = new Statistics();
+            Statistics page = new Statistics(_connector);
             NavigationService.Navigate(page);
         }
 

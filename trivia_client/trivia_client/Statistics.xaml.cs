@@ -18,25 +18,26 @@ namespace trivia_client
     /// </summary>
     public partial class Statistics : Page
     {
-        public Statistics()
+        Connector _connector;
+        public Statistics(Connector connector)
         {
             InitializeComponent();
+            _connector = connector;
         }
-
         private void LeaderB_Click(object sender, RoutedEventArgs e)
         {
-            LeaderB page = new LeaderB();
+            LeaderB page = new LeaderB(_connector);
             NavigationService.Navigate(page);
         }
 
         private void PersonalS_Click(object sender, RoutedEventArgs e)
         {
-            PersonalS page = new PersonalS();
+            PersonalS page = new PersonalS(_connector);
             NavigationService.Navigate(page);
         }
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            Menu page = new Menu();
+            Menu page = new Menu(_connector);
             NavigationService.Navigate(page);
         }
 
