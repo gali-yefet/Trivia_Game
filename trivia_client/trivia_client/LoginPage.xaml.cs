@@ -19,7 +19,7 @@ namespace trivia_client
     public partial class LoginPage : Page
     {
         Connector _connector;
-        public LoginPage(Connector connector, bool firstTime=true)
+        public LoginPage(Connector connector, bool firstTime = true)
         {
             InitializeComponent();
             backgroundPage.Content = new BackgroundPage();
@@ -49,7 +49,8 @@ namespace trivia_client
                 usernameInput.BorderBrush = Brushes.Red;
                 return;
             }
-            if(r.password == "")
+
+            if (r.password == "")
             {
                 passwordInput.BorderBrush = Brushes.Red;
                 return;
@@ -61,14 +62,14 @@ namespace trivia_client
             classes.LoginResponse response = classes.Deserializer.deserializeLoginResponse(res);
 
             //check if login failed and move to page accordingly
-            if(response.status != classes.Deserializer.LOGIN_CODE)
+            if (response.status != classes.Deserializer.LOGIN_CODE)
             {
                 LoginPage page = new LoginPage(_connector, false);
                 NavigationService.Navigate(page);
             }
             else
             {
-                Menu page = new Menu();
+                Menu page = new Menu(_connector);
                 NavigationService.Navigate(page);
             }
         }

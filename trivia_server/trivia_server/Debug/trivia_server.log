@@ -1,10 +1,10 @@
-﻿  IRequestHandler.cpp
+﻿  Communicator.cpp
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\Communicator.cpp(108,32): warning C4101: 'e': unreferenced local variable
+  IRequestHandler.cpp
   JsonRequestPacketDeserializer.cpp
   JsonResponsePacketSerializer.cpp
   LoggedUser.cpp
   LoginManager.cpp
-  Communicator.cpp
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\Communicator.cpp(108,32): warning C4101: 'e': unreferenced local variable
   LoginRequestHandler.cpp
   MenuRequestHandler.cpp
   Question.cpp
@@ -19,15 +19,15 @@ C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gal
   SqliteDataBase.cpp
 C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(93,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(135,31): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(216,33): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(218,33): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
   StatisticsManager.cpp
   User.cpp
-  userStatistics.cpp
+  WSAInitializer.cpp
   Generating Code...
 C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(40): warning C4715: 'RoomManager::getRoomState': not all control paths return a value
 C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(85): warning C4715: 'RoomManager::createRoomId': not all control paths return a value
   Compiling...
-  WSAInitializer.cpp
+  userStatistics.cpp
   Generating Code...
   sqlite3.c
   trivia_server.vcxproj -> C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe

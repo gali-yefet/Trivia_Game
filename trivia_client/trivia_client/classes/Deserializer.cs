@@ -15,13 +15,12 @@ namespace trivia_client.classes
         public uint timePerQuestion;
         public uint isActive;
     }
-
-	struct LoginResponse
+    struct LoginResponse
     {
         public uint status;
     }
 
-	struct SignupResponse
+    struct SignupResponse
     {
         public uint status;
     }
@@ -77,30 +76,35 @@ namespace trivia_client.classes
         public const int JOIN_ROOM_CODE = 7;
         public const int GET_HIGH_SCORE_CODE = 8;
         public const int GET_PERSONAL_STATS_CODE = 9;
-
-        private static string extractValue(String json, bool eraseSides=false)
+        private static string extractValue(String json, bool eraseSides = false)
         {
             String value = "";
             if (json.IndexOf(':') != -1)
-	        {
+            {
                 //check where is the end of this value
                 char goTo;
-                if(json.IndexOf('[') == json.IndexOf(':')+1)
+                if (json.IndexOf('[') == json.IndexOf(':') + 1)
                     goTo = ']';
                 else
-                    goTo = (json.IndexOf(',') != -1) ? ',' : '}'; 
+                    goTo = (json.IndexOf(',') != -1) ? ',' : '}';
 
                 value = json.Substring(json.IndexOf(':') + 1, json.IndexOf(goTo) - json.IndexOf(':') - 1);
 
-                //erase spaces
-                while (value[0] == ' ')
+                if(goTo == ']')
                     value = value.Substring(1, value.Length - 1);
-                while (value[value.Length - 1] == ' ')
-                    value = value.Substring(1, value.Length - 1);
-            }
 
+                //erase spaces
+                if (value.Length > 0)
+                {
+                    while (value[0] == ' ')
+                        value = value.Substring(1, value.Length - 1);
+                    while (value[value.Length - 1] == ' ')
+                        value = value.Substring(1, value.Length - 1);
+                }
+                
+            }
             //erace " in order to get an int
-            if (eraseSides)
+            if (eraseSides && value.Length > 2)
                 value = value.Substring(1, value.Length - 2);
 
             return value;
@@ -188,19 +192,20 @@ namespace trivia_client.classes
         {
             GetHighScoreResponse r;
             String bufferStr = Encoding.UTF8.GetString(buffer);
-            r.status = UInt32.Parse(extractValue(bufferStr, true));
-            bufferStr = bufferStr.Substring(0, bufferStr.IndexOf(',') + 1);
-
             //add statistics
-            bufferStr = extractValue(bufferStr, true);
+            String statistics = extractValue(bufferStr, true);
             Stack<String> stack = new Stack<String>();
-            while (bufferStr.IndexOf('"') != -1)
+            while (statistics.IndexOf('"') != -1)
             {
-                String name = bufferStr.Substring(0, bufferStr.IndexOf(','));
+                String name = statistics.Substring(statistics.IndexOf(','));
                 stack.Push(name);
-                bufferStr = bufferStr.Substring(name.Length + 1);
+                statistics = statistics.Substring(name.Length + 1);
             }
             r.statistics = stack.ToArray();
+
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf(']') + 2);
+            r.status = UInt32.Parse(extractValue(bufferStr, true));
+
             return r;
         }
 
@@ -208,19 +213,21 @@ namespace trivia_client.classes
         {
             GetPersonalStatsResponse r;
             String bufferStr = Encoding.UTF8.GetString(buffer);
-            r.status = UInt32.Parse(extractValue(bufferStr, true));
-            bufferStr = bufferStr.Substring(bufferStr.IndexOf(',') + 1);
 
             //add statistics
-            bufferStr = extractValue(bufferStr, true);
+            String statistics = extractValue(bufferStr, true);
             Stack<String> stack = new Stack<String>();
-            while (bufferStr.IndexOf('"') != -1)
+            while (statistics.IndexOf('"') != -1)
             {
-                String name = bufferStr.Substring(0, bufferStr.IndexOf(','));
+                String name = statistics.Substring(statistics.IndexOf(','));
                 stack.Push(name);
-                bufferStr = bufferStr.Substring(name.Length + 1);
+                statistics = statistics.Substring(name.Length + 1);
             }
             r.statistics = stack.ToArray();
+
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf(']') + 2);
+            r.status = UInt32.Parse(extractValue(bufferStr, true));
+
             return r;
         }
 

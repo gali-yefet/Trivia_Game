@@ -18,10 +18,19 @@ namespace trivia_client
     /// </summary>
     public partial class Menu : Page
     {
-        public Menu()
+        Connector _connector;
+        public Menu(Connector connector)
         {
             InitializeComponent();
             backgroundPage.Content = new BackgroundPage();
+            _connector = connector;
+
+        }
+
+        private void Statistics_Click(object sender, RoutedEventArgs e)
+        {
+            Statistics page = new Statistics(_connector);
+            NavigationService.Navigate(page);
         }
     }
 }

@@ -26,6 +26,7 @@
                 <Button Content="Join Room" FontSize="16" Height="35" Width="300"  Margin="10" Background ="AliceBlue"/>
                 <Button Content="Create Room" FontSize="16" Height="35" Width="300"  Margin="10" Background ="AliceBlue"/>
             </StackPanel>
+
         </Grid>
     </Grid>
 </Page>
