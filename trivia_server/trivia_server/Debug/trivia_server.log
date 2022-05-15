@@ -1,44 +1,8 @@
-<<<<<<< HEAD
-﻿  trivia_server.vcxproj -> C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe
-=======
-<<<<<<< HEAD
-﻿  Communicator.cpp
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\Communicator.cpp(108,32): warning C4101: 'e': unreferenced local variable
-  trivia_server.vcxproj -> C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe
-=======
-﻿  IRequestHandler.cpp
-  JsonRequestPacketDeserializer.cpp
-  JsonResponsePacketSerializer.cpp
-  LoggedUser.cpp
-  LoginManager.cpp
-  Communicator.cpp
-C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\Communicator.cpp(103,32): warning C4101: 'e': unreferenced local variable
-  LoginRequestHandler.cpp
-  MenuRequestHandler.cpp
-  Question.cpp
-  RequestHandlerFactory.cpp
-  Room.cpp
-  RoomAdminRequestHandler.cpp
-  RoomManager.cpp
-C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(82,20): warning C4018: '<': signed/unsigned mismatch
-  RoomMemberRequestHandler.cpp
-  Server.cpp
-  Source.cpp
-  SqliteDataBase.cpp
+﻿  SqliteDataBase.cpp
 C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(93,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(135,31): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(216,33): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-  StatisticsManager.cpp
-  User.cpp
-  userStatistics.cpp
-  Generating Code...
-C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(40): warning C4715: 'RoomManager::getRoomState': not all control paths return a value
-C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(85): warning C4715: 'RoomManager::createRoomId': not all control paths return a value
-  Compiling...
-  WSAInitializer.cpp
-  Generating Code...
-  sqlite3.c
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(218,33): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
   LINK : C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe not found or not built by the last incremental link; performing full link
+WSAInitializer.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'WSAInitializer.obj' or at 'C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\vc142.pdb'; linking object as if no debug info
+sqlite3.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'sqlite3.obj' or at 'C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\vc142.pdb'; linking object as if no debug info
   trivia_server.vcxproj -> C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe
->>>>>>> 1dc1c2189683a1c3aba0c9691a66d1596b4a9ec0
->>>>>>> 899e388df26527f96017f31c495b46d01be0e533

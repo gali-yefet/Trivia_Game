@@ -15,7 +15,7 @@
         <Grid>
             <Label Content="Main Menu" FontWeight="Bold" Foreground="Azure" HorizontalAlignment="Center" VerticalAlignment="Top" Margin ="0,30,0,0" FontSize="36" FontStyle="Italic" />
             <Button Content="Log Out" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="300" Height="35" Margin="0,200,0,0" Background ="AliceBlue"/>
-            <Button Content="Statistics" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="300" Height="35" Margin="0,100,0,0" Background ="AliceBlue"/>
+            <Button Content="Statistics" Click="Statistics_Click" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="300" Height="35" Margin="0,100,0,0" Background ="AliceBlue"/>
             <Button Content="Join Room" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="300" Height="35" Margin="0,0,0,0" Background ="AliceBlue"/>
             <Button Content="Create Room" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="300" Height="35" Margin="0,-100,0,0" Background ="AliceBlue"/>
         </Grid>

@@ -19,13 +19,13 @@ namespace trivia_client
     public partial class SignupPage : Page
     {
         Connector _connector;
-        public SignupPage(Connector connector, bool isFirst=true)
+        public SignupPage(Connector connector, bool isFirst = true)
         {
             InitializeComponent();
             _connector = connector;
             backgroundPage.Content = new BackgroundPage();
 
-            if(!isFirst)
+            if (!isFirst)
                 Error.Visibility = Visibility.Visible;
 
         }
@@ -76,7 +76,7 @@ namespace trivia_client
             }
             else
             {
-                Menu page = new Menu();
+                Menu page = new Menu(_connector);
                 NavigationService.Navigate(page);
             }
         }
