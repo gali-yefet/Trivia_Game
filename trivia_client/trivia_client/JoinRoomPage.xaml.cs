@@ -30,7 +30,12 @@ namespace trivia_client
             //ServiceReference1.ImojWCFServiceClient client = new ServiceReference1.ImojWCFServiceClient();
             //listView1.Items.Clear();
             //var userList = client.getUsers();
-            //listView1.ItemsSource = userList;
+            //listView1.ItemsSource = userList;//TODO
+
+            ConectedUsers.Items.Clear();
+            byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_ROOMS_CODE));
+            classes.GetRoomsResponse r = classes.Deserializer.deserializeGetRoomsResponse(res);
+            ConectedUsers.ItemsSource = r.rooms;
 
         }
 

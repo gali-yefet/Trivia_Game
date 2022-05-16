@@ -138,15 +138,13 @@ namespace trivia_client.classes
         {
             GetRoomsResponse r;
             String bufferStr = Encoding.UTF8.GetString(buffer);
-            r.status = UInt32.Parse(extractValue(bufferStr, true));
-            bufferStr = bufferStr.Substring(0, bufferStr.IndexOf(',') + 1);
 
             //add rooms
-            bufferStr = extractValue(bufferStr, true);
+            String rooms = extractValue(bufferStr, true);
             Stack<RoomData> stack = new Stack<RoomData>();
-            while (bufferStr.IndexOf('"') != -1)
+            while (rooms.IndexOf('"') != -1)
             {
-                String roomStr = bufferStr.Substring(0, bufferStr.IndexOf(','));
+                String roomStr = rooms.Substring(0, rooms.IndexOf(','));
                 int len = roomStr.Length;
 
                 //get the current room data
@@ -164,9 +162,13 @@ namespace trivia_client.classes
                 roomData.timePerQuestion = UInt32.Parse(extractValue(roomStr, true));
 
                 stack.Push(roomData);
-                bufferStr = bufferStr.Substring(len + 1);
+                rooms = rooms.Substring(len + 1);
             }
             r.rooms = stack.ToArray();
+
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf(']') + 2);
+            r.status = UInt32.Parse(extractValue(bufferStr));
+
             return r;
         }
 
