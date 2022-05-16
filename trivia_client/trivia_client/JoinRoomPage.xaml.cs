@@ -18,9 +18,13 @@ namespace trivia_client
     /// </summary>
     public partial class JoinRoomPage : Page
     {
-        public JoinRoomPage()
+        Connector _connector;
+        public JoinRoomPage(Connector connector)
         {
             InitializeComponent();
+            _connector = connector;
+
+            //TODO:
             //--> get data from database and put it in the list
             //ServiceReference1.ImojWCFServiceClient client = new ServiceReference1.ImojWCFServiceClient();
             //listView1.Items.Clear();
@@ -31,8 +35,8 @@ namespace trivia_client
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            //Menu page = new Menu();
-            //NavigationService.Navigate(page);//TODO
+            Menu page = new Menu(_connector);
+            NavigationService.Navigate(page);
         }
 
         private void ListViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -41,7 +45,7 @@ namespace trivia_client
             if (item != null && item.IsSelected)
             {
                 var RoomName = item.Content;
-                //Join the room by name
+                //TODO:Join the room by name
             }
         }
     }
