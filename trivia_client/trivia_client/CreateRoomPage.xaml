@@ -45,7 +45,7 @@
             <!--buttons-->
             <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Button Name="backButton" Content="back" Click="backButton_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
-                <Button Name="SendButton" Content="join" Click="SendButton_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
+                <Button Name="SendButton" Content="create" Click="SendButton_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
             </StackPanel>
         </Grid>
     </Grid>

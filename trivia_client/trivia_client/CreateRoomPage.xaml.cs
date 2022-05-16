@@ -22,6 +22,7 @@ namespace trivia_client
         public CreateRoomPage(Connector connector)
         {
             InitializeComponent();
+            backgroundPage.Content = new BackgroundPage();
             _connector = connector;
         }
 

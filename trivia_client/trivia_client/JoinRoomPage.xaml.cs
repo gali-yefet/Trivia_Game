@@ -22,6 +22,7 @@ namespace trivia_client
         public JoinRoomPage(Connector connector)
         {
             InitializeComponent();
+            backgroundPage.Content = new BackgroundPage();
             _connector = connector;
 
             //TODO:
@@ -45,8 +46,9 @@ namespace trivia_client
             if (item != null && item.IsSelected)
             {
                 var RoomName = item.Content;
-                //TODO:Join the room by name
+                //TODO:Join the room by id
             }
         }
+
     }
 }
