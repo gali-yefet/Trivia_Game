@@ -52,7 +52,5 @@ namespace trivia_client
             sendData(msg);
             return readData();
         }
-
-
     }
 }

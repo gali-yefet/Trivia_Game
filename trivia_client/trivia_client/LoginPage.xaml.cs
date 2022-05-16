@@ -24,8 +24,11 @@ namespace trivia_client
             InitializeComponent();
             backgroundPage.Content = new BackgroundPage();
             _connector = connector;
+
             if (!firstTime)
                 Error.Visibility = Visibility.Visible;
+            usernameInput.BorderBrush = Brushes.Transparent;
+            passwordInput.BorderBrush = Brushes.Transparent;
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
@@ -36,9 +39,6 @@ namespace trivia_client
 
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            usernameInput.BorderBrush = Brushes.Transparent;
-            passwordInput.BorderBrush = Brushes.Transparent;
-
             classes.LoginRequest r;
             r.username = usernameInput.Text;
             r.password = passwordInput.Text;
@@ -49,7 +49,6 @@ namespace trivia_client
                 usernameInput.BorderBrush = Brushes.Red;
                 return;
             }
-
             if (r.password == "")
             {
                 passwordInput.BorderBrush = Brushes.Red;

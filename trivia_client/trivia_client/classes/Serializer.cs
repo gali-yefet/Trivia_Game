@@ -44,6 +44,18 @@ namespace trivia_client.classes
          * in: request code, msg
          * out: request in byte[]
          */
+
+        //check if a string is only digits
+        public static bool checkifNumber(String str)
+        {
+            foreach (char c in str)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+            return true;
+        }
+
         public static byte[] serializeRequest(int code, String msg = "")
         {
             String len = msg.Length.ToString();

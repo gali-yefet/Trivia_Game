@@ -18,13 +18,17 @@ namespace trivia_client
     /// </summary>
     public partial class RoomUsers : Page
     {
-        public RoomUsers()
+        Connector _connector;
+
+        public RoomUsers(Connector connector)
         {
             InitializeComponent();
+            _connector = connector;
         }
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-         //TODO: return to create room / join room
+            Menu page = new Menu(_connector);
+            NavigationService.Navigate(page);
         }
 
     }
