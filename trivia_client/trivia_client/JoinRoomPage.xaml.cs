@@ -31,8 +31,8 @@ namespace trivia_client
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            Menu page = new Menu();
-            NavigationService.Navigate(page);
+            //Menu page = new Menu();
+            //NavigationService.Navigate(page);//TODO
         }
 
         private void ListViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

@@ -18,22 +18,36 @@ namespace trivia_client
     /// </summary>
     public partial class Menu : Page
     {
-        public Menu()
+        Connector _connector;
+        public Menu(Connector connector)
         {
             InitializeComponent();
+            backgroundPage.Content = new BackgroundPage();
+            _connector = connector;
+
         }
 
-        private void JoinRoom_Click(object sender, RoutedEventArgs e)
+        private void Statistics_Click(object sender, RoutedEventArgs e)
         {
-            JoinRoomPage page = new JoinRoomPage();
+            //TODO
+        }
+
+        private void logout_Click(object sender, RoutedEventArgs e)
+        {
+            byte[] msg = classes.Serializer.serializeRequest(classes.Deserializer.LOGOUT_CODE);
+            _connector.sendGetData(msg);
+            WelcomePage page = new WelcomePage();
             NavigationService.Navigate(page);
         }
 
-        private void CreateRoom_Click(object sender, RoutedEventArgs e)
+        private void join_Click(object sender, RoutedEventArgs e)
         {
-            CreateRoomPage page = new CreateRoomPage();
-            NavigationService.Navigate(page);
+            //TODO
         }
 
+        private void create_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO
+        }
     }
 }

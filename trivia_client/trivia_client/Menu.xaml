@@ -9,15 +9,25 @@
       Title="Menu">
 
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/img/background2.jpg" Stretch="UniformToFill"/>
-        </Grid.Background>
-        <Grid>
-            <Label Content="Main Menu" FontWeight="Bold" Foreground="Azure" HorizontalAlignment="Center" VerticalAlignment="Top" Margin ="0,30,0,0" FontSize="36" FontStyle="Italic" />
-            <Button Content="Log Out" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="300" Height="35" Margin="0,200,0,0" Background ="AliceBlue"/>
-            <Button Content="Statistics" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="300" Height="35" Margin="0,100,0,0" Background ="AliceBlue"/>
-            <Button Content="Join Room" Click="JoinRoom_Click" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="300" Height="35" Margin="0,0,0,0" Background ="AliceBlue"/>
-            <Button Content="Create Room" Click="CreateRoom_Click" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="300" Height="35" Margin="0,-100,0,0" Background ="AliceBlue"/>
+        <Frame x:Name="backgroundPage"/>
+        <Grid Margin="40, 40, 40, 100">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!--header-->
+            <Label Content="MAIN MENU" Grid.Row="0" Foreground="White" FontFamily="Arial Black" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+            <!--buttons-->
+            <StackPanel Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button Name="logout" Content="Log Out" Click="logout_Click" FontSize="16" Height="35" Width="300"  Margin="10" Background ="AliceBlue"/>
+                <Button Name="statistics" Content="Statistics" Click="Statistics_Click" FontSize="16" Height="35" Width="300"  Margin="10" Background ="AliceBlue"/>
+                <Button Name="join" Content="Join Room" Click="join_Click" FontSize="16" Height="35" Width="300"  Margin="10" Background ="AliceBlue"/>
+                <Button Name="create" Content="Create Room" Click="create_Click" FontSize="16" Height="35" Width="300"  Margin="10" Background ="AliceBlue"/>
+            </StackPanel>
+
         </Grid>
     </Grid>
+
 </Page>

@@ -5,14 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:trivia_client"
         mc:Ignorable="d"
-        Title="MainWindow" Height="620" Width="800">
+        Title="MainWindow" Height="550" Width="800">
 
     <Grid>
-        <!--background-->
         <Grid.Background>
             <ImageBrush ImageSource="/img/background2.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
-
         <Frame x:Name="currentPage" NavigationUIVisibility="Hidden"/>
     </Grid>
+
 </Window>
