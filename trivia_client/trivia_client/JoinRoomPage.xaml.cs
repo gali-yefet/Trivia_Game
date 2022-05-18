@@ -19,24 +19,17 @@ namespace trivia_client
     public partial class JoinRoomPage : Page
     {
         Connector _connector;
+        classes.RoomData[] _rooms;
         public JoinRoomPage(Connector connector)
         {
             InitializeComponent();
             backgroundPage.Content = new BackgroundPage();
             _connector = connector;
+            _rooms = getRoomsFromServer();
 
-            //TODO:
-            //--> get data from database and put it in the list
-            //ServiceReference1.ImojWCFServiceClient client = new ServiceReference1.ImojWCFServiceClient();
-            //listView1.Items.Clear();
-            //var userList = client.getUsers();
-            //listView1.ItemsSource = userList;//TODO
-
+            //show rooms names
             ConectedUsers.Items.Clear();
-            byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_ROOMS_CODE));
-            classes.GetRoomsResponse r = classes.Deserializer.deserializeGetRoomsResponse(res);
-            ConectedUsers.ItemsSource = r.rooms;
-
+            ConectedUsers.ItemsSource = _rooms; //TODO: make this work
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
@@ -55,5 +48,11 @@ namespace trivia_client
             }
         }
 
+        private classes.RoomData[] getRoomsFromServer()
+        {
+            byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_ROOMS_CODE));
+            classes.GetRoomsResponse r = classes.Deserializer.deserializeGetRoomsResponse(res);
+            return r.rooms;
+        }
     }
 }

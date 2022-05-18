@@ -90,15 +90,14 @@ CreateRoomRequest JsonRequestPacketDeseializer::deserializeCreateRoomRequest(Req
 		try
 		{
 			c.roomName = extractValue(data);
-			c.maxUsers = std::stoi(extractValue(data, true));
-			c.questionCount = std::stoi(extractValue(data, true));
-			c.answerTimeOut = std::stoi(extractValue(data, true));
+			c.maxUsers = std::stoi(extractValue(data));
+			c.questionCount = std::stoi(extractValue(data));
+			c.answerTimeOut = std::stoi(extractValue(data));
 		}
 		catch (const std::exception& e)
 		{
 			std::cout << "Exception was thrown in JsonRequestPacketDeseializer::deserializeCreateRoomRequest: " << e.what() << std::endl;
 		}
-		
 	}
 	return c;
 }
