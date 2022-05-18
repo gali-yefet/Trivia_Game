@@ -9,13 +9,18 @@
       Title="RoomUsers">
 
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/img/background2.jpg" Stretch="UniformToFill"/>
-        </Grid.Background>
-        <Button Content="Back" Height="30" Width="100" HorizontalAlignment="Left" Click="backButton_Click" Margin="40, 350, 60, 20"></Button>
-        <Grid>
-            <Label Content="Conected Users" FontWeight="Bold" Foreground="Azure" HorizontalAlignment="Center" VerticalAlignment="Top" Margin ="0,30,0,0" FontSize="36" FontStyle="Italic" />
-            <ListView x:Name="ConectedUsers" Margin="180,90,180,90" >
+        <Frame x:Name="backgroundPage"/>
+        <Grid Margin="40, 40, 40, 100">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!--header-->
+            <Label x:Name="header" Content="CONNECTED USER" Grid.Row="0" Foreground="White" FontFamily="Arial Black" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+            <!--input-->
+            <ListView x:Name="ConectedUsers" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="User name" DisplayMemberBinding="{Binding USERNAME}" Width="220"/>
@@ -24,6 +29,5 @@
                 </ListView.View>
             </ListView>
         </Grid>
-
     </Grid>
 </Page>

@@ -23,12 +23,9 @@ namespace trivia_client
         public RoomUsers(Connector connector)
         {
             InitializeComponent();
+            backgroundPage.Content = new BackgroundPage();
+
             _connector = connector;
-        }
-        private void backButton_Click(object sender, RoutedEventArgs e)
-        {
-            Menu page = new Menu(_connector);
-            NavigationService.Navigate(page);
         }
 
     }
