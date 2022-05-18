@@ -43,12 +43,14 @@ namespace trivia_client
 
         private void join_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            JoinRoomPage page = new JoinRoomPage(_connector);
+            NavigationService.Navigate(page);
         }
 
         private void create_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            CreateRoomPage page = new CreateRoomPage(_connector);
+            NavigationService.Navigate(page);
         }
     }
 }

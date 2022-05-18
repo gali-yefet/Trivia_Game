@@ -6,14 +6,15 @@ using System.Collections;
 
 namespace trivia_client.classes
 {
-    struct RoomData
+    public struct RoomData
     {
-        public uint id;
-        public String name;
-        public uint maxPlayers;
-        public uint numOfQuestionsInGame;
-        public uint timePerQuestion;
-        public uint isActive;
+        public uint id { get; set; }
+        public String name { get; set; }
+        public uint maxPlayers { get; set; }
+        public uint numOfQuestionsInGame { get; set; }
+        public uint timePerQuestion { get; set; }
+        public uint isActive { get; set; }
+
     }
     struct LoginResponse
     {
@@ -87,10 +88,13 @@ namespace trivia_client.classes
                     goTo = ']';
                 else
                     goTo = (json.IndexOf(',') != -1) ? ',' : '}';
+                
+                if(json.IndexOf(goTo) != -1)
+                    value = json.Substring(json.IndexOf(':') + 1, json.IndexOf(goTo) - json.IndexOf(':') - 1);
+                else
+                    value = json.Substring(json.IndexOf(':') + 1);
 
-                value = json.Substring(json.IndexOf(':') + 1, json.IndexOf(goTo) - json.IndexOf(':') - 1);
-
-                if(goTo == ']')
+                if (goTo == ']')
                     value = value.Substring(1, value.Length - 1);
 
                 //erase spaces
@@ -138,35 +142,40 @@ namespace trivia_client.classes
         {
             GetRoomsResponse r;
             String bufferStr = Encoding.UTF8.GetString(buffer);
-            r.status = UInt32.Parse(extractValue(bufferStr, true));
-            bufferStr = bufferStr.Substring(0, bufferStr.IndexOf(',') + 1);
 
             //add rooms
-            bufferStr = extractValue(bufferStr, true);
+            String rooms = extractValue(bufferStr);
             Stack<RoomData> stack = new Stack<RoomData>();
-            while (bufferStr.IndexOf('"') != -1)
+            while (rooms.Length>0)
             {
-                String roomStr = bufferStr.Substring(0, bufferStr.IndexOf(','));
+                String roomStr = rooms.Substring(0, rooms.IndexOf('}')+1);
                 int len = roomStr.Length;
 
                 //get the current room data
-                RoomData roomData;
+                RoomData roomData = new RoomData() { };
+                roomData.id = UInt32.Parse(extractValue(roomStr));
+                roomStr = roomStr.Substring(roomStr.IndexOf(',') + 1);
+                roomData.isActive = UInt32.Parse(extractValue(roomStr));
+                roomStr = roomStr.Substring(roomStr.IndexOf(',') + 1);
+                roomData.maxPlayers = UInt32.Parse(extractValue(roomStr));
+                roomStr = roomStr.Substring(roomStr.IndexOf(',') + 1);
                 roomData.name = extractValue(roomStr);
-                roomStr = roomStr.Substring(0, roomStr.IndexOf(',') + 1);
-                roomData.id = UInt32.Parse(extractValue(roomStr, true));
-                roomStr = roomStr.Substring(0, roomStr.IndexOf(',') + 1);
-                roomData.isActive = UInt32.Parse(extractValue(roomStr, true));
-                roomStr = roomStr.Substring(0, roomStr.IndexOf(',') + 1);
-                roomData.maxPlayers = UInt32.Parse(extractValue(roomStr, true));
-                roomStr = roomStr.Substring(0, roomStr.IndexOf(',') + 1);
-                roomData.numOfQuestionsInGame = UInt32.Parse(extractValue(roomStr, true));
-                roomStr = roomStr.Substring(0, roomStr.IndexOf(',') + 1);
-                roomData.timePerQuestion = UInt32.Parse(extractValue(roomStr, true));
-
+                roomStr = roomStr.Substring(roomStr.IndexOf(',') + 1);
+                roomData.numOfQuestionsInGame = UInt32.Parse(extractValue(roomStr));
+                roomStr = roomStr.Substring(roomStr.IndexOf(',') + 1);
+                roomData.timePerQuestion = UInt32.Parse(extractValue(roomStr));
                 stack.Push(roomData);
-                bufferStr = bufferStr.Substring(len + 1);
+
+                if (rooms.Length > len)
+                    rooms = rooms.Substring(len + 1);
+                else
+                    break;
             }
             r.rooms = stack.ToArray();
+
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf(']') + 2);
+            r.status = UInt32.Parse(extractValue(bufferStr));
+
             return r;
         }
 

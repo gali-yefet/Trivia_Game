@@ -6,10 +6,12 @@
         xmlns:local="clr-namespace:trivia_client"
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="800">
+
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/img/background2.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Frame x:Name="currentPage" NavigationUIVisibility="Hidden"/>
     </Grid>
+
 </Window>
