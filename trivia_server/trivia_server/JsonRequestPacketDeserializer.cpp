@@ -68,7 +68,7 @@ JoinRoomRequest JsonRequestPacketDeseializer::deserializeJoinRoomRequest(Request
 
 		try
 		{
-			j.roomId = std::stoi(extractValue(data, true));
+			j.roomId = std::stoi(extractValue(data));
 		}
 		catch (const std::exception& e)
 		{

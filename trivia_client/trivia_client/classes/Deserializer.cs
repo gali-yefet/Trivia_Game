@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace trivia_client.classes
 {
-    struct RoomData
+    public struct RoomData
     {
         public uint id { get; set; }
         public String name { get; set; }

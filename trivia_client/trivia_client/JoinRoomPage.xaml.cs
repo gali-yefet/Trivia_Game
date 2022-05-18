@@ -16,13 +16,18 @@ namespace trivia_client
     /// <summary>
     /// Interaction logic for JoinRoomPage.xaml
     /// </summary>
+    class Room
+    {
+        public String name { get; set; }
+        public int maxPlayers { get; set; }
+    }
 
     public partial class JoinRoomPage : Page
     {
         Connector _connector;
         List<classes.RoomData> _rooms;
         
-        public JoinRoomPage(Connector connector)
+        public JoinRoomPage(Connector connector, bool firstTime = true)
         {
             InitializeComponent();
             backgroundPage.Content = new BackgroundPage();
@@ -32,6 +37,9 @@ namespace trivia_client
             //show rooms names
             ConectedUsers.Items.Clear();
             ConectedUsers.ItemsSource = _rooms;
+
+            if (!firstTime)
+                Error.Visibility = Visibility.Visible;
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
@@ -45,8 +53,35 @@ namespace trivia_client
             var item = sender as ListViewItem;
             if (item != null && item.IsSelected)
             {
-                var RoomName = item.Content;
-                //TODO:Join the room by id
+                //find the right id
+                classes.JoinRoomRequest r;
+                r.roomId = 0;
+                var room = (classes.RoomData)ConectedUsers.SelectedItems[0];
+                foreach (var curr in _rooms)
+                {
+                    if (curr.name == room.name)
+                    {
+                        r.roomId = curr.id;
+                        break;
+                    }
+                }
+
+                //send the request to the server
+                byte[] msg = classes.Serializer.serializeJoinRoomRequest(r);
+                msg = _connector.sendGetData(msg);
+                classes.JoinRoomResponse response = classes.Deserializer.deserializeJoinRoomResponse(msg);
+
+                //check if joining failed and move to page accordingly
+                if (response.status != classes.Deserializer.JOIN_ROOM_CODE)
+                {
+                    JoinRoomPage page = new JoinRoomPage(_connector, false);
+                    NavigationService.Navigate(page);
+                }
+                else
+                {
+                    RoomUsers page = new RoomUsers(_connector);
+                    NavigationService.Navigate(page);
+                }
             }
         }
 

@@ -14,6 +14,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="80" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="60" />
             </Grid.RowDefinitions>
 
@@ -35,9 +36,11 @@
                     </GridView>
                 </ListView.View>
             </ListView>
+            <Label Name ="Error" Visibility="Hidden" Content="join Room Faild" Grid.Row="2" Foreground="Red" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
 
             <!--buttons-->
-            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Button x:Name="backButton" Content="back" Click="backButton_Click" FontSize="16" Height="35" Width="150"/>
             </StackPanel>
         </Grid>
