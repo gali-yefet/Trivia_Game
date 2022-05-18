@@ -25,11 +25,13 @@
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Room Name" DisplayMemberBinding="{Binding ROOM_NAME}" Width="400"/>
+                        <GridViewColumn Header="Room Name" DisplayMemberBinding="{Binding name}" Width="240"/>
+                        <GridViewColumn Header="Max Players" DisplayMemberBinding="{Binding maxPlayers}" Width="100"/>
                     </GridView>
                 </ListView.View>
             </ListView>

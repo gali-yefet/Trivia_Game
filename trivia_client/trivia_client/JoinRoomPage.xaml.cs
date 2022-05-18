@@ -16,20 +16,22 @@ namespace trivia_client
     /// <summary>
     /// Interaction logic for JoinRoomPage.xaml
     /// </summary>
+
     public partial class JoinRoomPage : Page
     {
         Connector _connector;
-        classes.RoomData[] _rooms;
+        List<classes.RoomData> _rooms;
+        
         public JoinRoomPage(Connector connector)
         {
             InitializeComponent();
             backgroundPage.Content = new BackgroundPage();
             _connector = connector;
-            _rooms = getRoomsFromServer();
+            _rooms = getActiveRoomsFromServer();
 
             //show rooms names
             ConectedUsers.Items.Clear();
-            ConectedUsers.ItemsSource = _rooms; //TODO: make this work
+            ConectedUsers.ItemsSource = _rooms;
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
@@ -48,11 +50,28 @@ namespace trivia_client
             }
         }
 
-        private classes.RoomData[] getRoomsFromServer()
+        private List<classes.RoomData> getActiveRoomsFromServer()
         {
             byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_ROOMS_CODE));
             classes.GetRoomsResponse r = classes.Deserializer.deserializeGetRoomsResponse(res);
-            return r.rooms;
+            List<classes.RoomData> rooms = new List<classes.RoomData>();
+            foreach(classes.RoomData room in r.rooms)
+            {
+                if(room.isActive==1)
+                {
+                    rooms.Add(new classes.RoomData()
+                    {
+                        id = room.id,
+                        isActive = room.id,
+                        maxPlayers = room.maxPlayers,
+                        name = room.name.Substring(1, room.name.Length - 2),
+                        numOfQuestionsInGame = room.numOfQuestionsInGame,
+                        timePerQuestion = room.timePerQuestion
+                    });
+                }
+            }
+            return rooms;
         }
+
     }
 }

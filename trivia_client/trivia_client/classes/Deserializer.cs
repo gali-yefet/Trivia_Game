@@ -8,12 +8,12 @@ namespace trivia_client.classes
 {
     struct RoomData
     {
-        public uint id;
-        public String name;
-        public uint maxPlayers;
-        public uint numOfQuestionsInGame;
-        public uint timePerQuestion;
-        public uint isActive;
+        public uint id { get; set; }
+        public String name { get; set; }
+        public uint maxPlayers { get; set; }
+        public uint numOfQuestionsInGame { get; set; }
+        public uint timePerQuestion { get; set; }
+        public uint isActive { get; set; }
     }
     struct LoginResponse
     {
@@ -151,7 +151,7 @@ namespace trivia_client.classes
                 int len = roomStr.Length;
 
                 //get the current room data
-                RoomData roomData;
+                RoomData roomData = new RoomData() { };
                 roomData.id = UInt32.Parse(extractValue(roomStr));
                 roomStr = roomStr.Substring(roomStr.IndexOf(',') + 1);
                 roomData.isActive = UInt32.Parse(extractValue(roomStr));
