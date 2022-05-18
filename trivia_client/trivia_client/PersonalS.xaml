@@ -9,14 +9,19 @@
       Title="PersonalS">
 
     <Grid>
+        <Frame x:Name="backgroundPage"/>
+        <Grid Margin="40,40,40,100">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <Grid.Background>
-            <ImageBrush ImageSource="/img/background2.jpg" Stretch="UniformToFill"/>
-        </Grid.Background>
-        <Grid>
-            <Button Content="Back" Height="30" Width="100" HorizontalAlignment="Left" Click="backButton_Click" Margin="40, 350, 60, 20"></Button>
-            <Label Content="Personal Statistics" FontWeight="Bold" Foreground="Azure" HorizontalAlignment="Center" VerticalAlignment="Top" Margin ="0,30,0,0" FontSize="36" FontStyle="Italic" />
-            <ListView x:Name="PersonalStatistics" Margin="50,192,50,150" >
+            <!--header-->
+            <Label Content="PERSONAL STATISTICS" Grid.Row="0" Foreground="White" FontFamily="Arial Black" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+            <!--list of rooms-->
+            <ListView Grid.Row="1" x:Name="PersonalStatistics" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="User name" DisplayMemberBinding="{Binding USERNAME}" Width="130"/>
@@ -26,7 +31,11 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-        </Grid>
 
+            <!--buttons-->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+                <Button x:Name="backButton" Content="back" Click="backButton_Click" FontSize="16" Height="35" Width="150"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

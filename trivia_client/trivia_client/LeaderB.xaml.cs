@@ -22,6 +22,8 @@ namespace trivia_client
         public LeaderB(Connector connector)
         {
             InitializeComponent();
+            backgroundPage.Content = new BackgroundPage();
+
             _connector = connector;
 
             //--> get data from database and put it in the listView

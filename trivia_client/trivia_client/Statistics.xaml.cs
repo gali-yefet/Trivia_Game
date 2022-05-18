@@ -22,6 +22,8 @@ namespace trivia_client
         public Statistics(Connector connector)
         {
             InitializeComponent();
+            backgroundPage.Content = new BackgroundPage();
+
             _connector = connector;
         }
         private void LeaderB_Click(object sender, RoutedEventArgs e)

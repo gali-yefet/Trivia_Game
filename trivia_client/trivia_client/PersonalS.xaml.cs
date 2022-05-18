@@ -22,12 +22,15 @@ namespace trivia_client
         public PersonalS(Connector connector)
         {
             InitializeComponent();
+            backgroundPage.Content = new BackgroundPage();
+
             _connector = connector;
-            //--> get data from database and put it in the listView
+
+            //--> get data from database and put it in the listView 
             PersonalStatistics.Items.Clear();
             var res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_PERSONAL_STATS_CODE));
             var personalS = classes.Deserializer.deserializeGetPersonalStatsResponse(res).statistics;
-            PersonalStatistics.ItemsSource = personalS;
+            PersonalStatistics.ItemsSource = personalS; //TODO: checkout why it isn't working.
 
         }
         private void backButton_Click(object sender, RoutedEventArgs e)

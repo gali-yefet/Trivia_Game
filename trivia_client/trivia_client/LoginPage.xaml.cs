@@ -27,6 +27,7 @@ namespace trivia_client
 
             if (!firstTime)
                 Error.Visibility = Visibility.Visible;
+
             usernameInput.BorderBrush = Brushes.Transparent;
             passwordInput.BorderBrush = Brushes.Transparent;
 
