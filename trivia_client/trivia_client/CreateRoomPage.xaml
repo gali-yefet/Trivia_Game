@@ -40,8 +40,13 @@
                 <Label Content="qustion count:" Grid.Column="0" Grid.Row="2" Foreground="White" FontSize="14" VerticalAlignment="Center" BorderBrush="#00000000"/>
                 <TextBox Name="questionCountInput" Grid.Column="1" Grid.Row="2" Margin="10" Padding="5" Height="25" BorderBrush="Transparent"/>
                 <Label Content="answer time out:" Grid.Column="0" Grid.Row="3" Foreground="White" FontSize="14" VerticalAlignment="Center" BorderBrush="#00000000"/>
-                <TextBox Name="answerTimeoutInput" Grid.Column="1" Grid.Row="3" Margin="10" Padding="5" Height="25" BorderBrush="Transparent"/>
-                <Label Name ="Error" Visibility="Hidden" Content="Create Room Faild" Grid.ColumnSpan="2" Grid.Row="4" Foreground="Red" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <ComboBox Name="answerTimeoutInput" Grid.Column="1" Grid.Row="3" Margin="10" Padding="5" BorderBrush="Transparent">
+                    <ComboBoxItem>10</ComboBoxItem>
+                    <ComboBoxItem>15</ComboBoxItem>
+                    <ComboBoxItem>30</ComboBoxItem>
+                    <ComboBoxItem>60</ComboBoxItem>
+                </ComboBox>
+                    <Label Name ="Error" Visibility="Hidden" Content="Create Room Faild" Grid.ColumnSpan="2" Grid.Row="4" Foreground="Red" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" />
 
             </Grid>
 

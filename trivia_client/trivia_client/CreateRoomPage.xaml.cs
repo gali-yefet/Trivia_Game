@@ -19,6 +19,7 @@ namespace trivia_client
     public partial class CreateRoomPage : Page
     {
         Connector _connector;
+        int MAX_QUESTIONS = 10;
         public CreateRoomPage(Connector connector, bool firstTime = true)
         {
             InitializeComponent();
@@ -78,12 +79,12 @@ namespace trivia_client
                 answerTimeoutInput.BorderBrush = Brushes.Red;
                 isEmpty = true;
             }
-            if (maxUsersInput.Text == "" || !classes.Serializer.checkifNumber(answerTimeoutInput.Text))
+            if (maxUsersInput.Text == "" || !classes.Serializer.checkifNumber(maxUsersInput.Text))
             {
                 maxUsersInput.BorderBrush = Brushes.Red;
                 isEmpty = true;
             }
-            if (questionCountInput.Text == "" || !classes.Serializer.checkifNumber(answerTimeoutInput.Text))
+            if (questionCountInput.Text == "" || !classes.Serializer.checkifNumber(questionCountInput.Text) || Int32.Parse(questionCountInput.Text)>MAX_QUESTIONS)
             {
                 questionCountInput.BorderBrush = Brushes.Red;
                 isEmpty = true;
