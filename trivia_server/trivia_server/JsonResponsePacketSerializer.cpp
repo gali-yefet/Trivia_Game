@@ -123,6 +123,48 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetPersonalSta
 	return serializeMsg(GET_PERSONAL_STATS, data);
 }
 
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeCloseRoomResponse(CloseRoomResponse r)
+{
+	json j;
+	j["status"] = r.status;
+	std::string data = j.dump();  // returns the json as a string
+	return serializeMsg(CLOSE_ROOM, data);
+}
+
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeStartGameResponse(StartGameResponse r)
+{
+	json j;
+	j["status"] = r.status;
+	std::string data = j.dump();  // returns the json as a string
+	return serializeMsg(START_GAME, data);
+}
+
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetRoomStateResponse(GetRoomStateResponse r)
+{
+	json j;
+	j["status"] = r.status;
+	j["hasGameBegun"] = r.hasGameBegun;
+	j["questionCount"] = r.questionCount;
+	j["answerTimeout"] = r.answerTimeout;
+
+	std::string players = "";
+	for (auto i = r.players.begin(); i != r.players.end(); ++i)
+		players += eraseQuotes(*i) + ", ";
+	players = players.substr(0, players.length() - 2);
+	j["players"] = players;
+
+	std::string data = j.dump();  // returns the json as a string
+	return serializeMsg(GET_ROOM_STATE, data);
+}
+
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeLeaveRoomResponse(LeaveRoomResponse r)
+{
+	json j;
+	j["status"] = r.status;
+	std::string data = j.dump();  // returns the json as a string
+	return serializeMsg(LEAVE_ROOM, data);
+}
+
 /*
 serialize a response msg
 in: code, and data

@@ -59,7 +59,6 @@ typedef struct CreateRoomResponse
 	unsigned int status;
 }CreateRoomResponse;
 
-
 typedef struct CloseRoomResponse 
 {
 	unsigned int status;
@@ -98,11 +97,10 @@ public:
 	static std::vector<unsigned char> serializeGetPlayersInRoomResponse(GetPlayersInRoomResponse r);
 	static std::vector<unsigned char> serializeGetHighScoreResponse(GetHighScoreResponse r);
 	static std::vector<unsigned char> serializeGetPersonalStatsResponse(GetPersonalStatsResponse r);
-
-	static std::vector<unsigned char> serializeCloseRoomResponse(CloseRoomResponse r); //TODO
-	static std::vector<unsigned char> serializeStartGameResponse(StartGameResponse r); //TODO
-	static std::vector<unsigned char> serializeGetRoomStateResponse(GetRoomStateResponse r); //TODO
-	static std::vector<unsigned char> serializeLeaveRoomResponse(LeaveRoomResponse r); //TODO
+	static std::vector<unsigned char> serializeCloseRoomResponse(CloseRoomResponse r);
+	static std::vector<unsigned char> serializeStartGameResponse(StartGameResponse r);
+	static std::vector<unsigned char> serializeGetRoomStateResponse(GetRoomStateResponse r);
+	static std::vector<unsigned char> serializeLeaveRoomResponse(LeaveRoomResponse r);
 	
 
 private:
