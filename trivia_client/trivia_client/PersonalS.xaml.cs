@@ -26,11 +26,9 @@ namespace trivia_client
 
             _connector = connector;
 
-            //--> get data from database and put it in the listView 
+            //show statistics
             PersonalStatistics.Items.Clear();
-            var res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_PERSONAL_STATS_CODE));
-            var personalS = classes.Deserializer.deserializeGetPersonalStatsResponse(res).statistics;
-            PersonalStatistics.ItemsSource = personalS; //TODO: checkout why it isn't working.
+            PersonalStatistics.ItemsSource = Statistics.GetStatisticsListFromServer(_connector);
 
         }
         private void backButton_Click(object sender, RoutedEventArgs e)
@@ -39,5 +37,6 @@ namespace trivia_client
             NavigationService.Navigate(page);
         }
 
+        
     }
 }

@@ -24,10 +24,10 @@
             <ListView Grid.Row="1" x:Name="PersonalStatistics" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="User name" DisplayMemberBinding="{Binding USERNAME}" Width="130"/>
-                        <GridViewColumn Header="Victories" DisplayMemberBinding="{Binding VICTORIES}" Width="130"/>
-                        <GridViewColumn Header="Games" DisplayMemberBinding="{Binding GAMES}" Width="130"/>
-                        <GridViewColumn Header="Average answer time per question" DisplayMemberBinding="{Binding AVE_TIME}" Width="200"/>
+                        <GridViewColumn Header="User name" DisplayMemberBinding="{Binding name}" Width="130"/>
+                        <GridViewColumn Header="Victories" DisplayMemberBinding="{Binding victories}" Width="130"/>
+                        <GridViewColumn Header="Games" DisplayMemberBinding="{Binding games}" Width="130"/>
+                        <GridViewColumn Header="Average answer time per question" DisplayMemberBinding="{Binding avgTime}" Width="200"/>
                     </GridView>
                 </ListView.View>
             </ListView>

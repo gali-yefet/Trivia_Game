@@ -26,11 +26,9 @@ namespace trivia_client
 
             _connector = connector;
 
-            //--> get data from database and put it in the listView
+            //show statistics
             LeaderBoard.Items.Clear();
-            var res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_HIGH_SCORE_CODE));
-            var leaderB = classes.Deserializer.deserializeGetHighScoreResponse(res).statistics;
-            LeaderBoard.ItemsSource = leaderB;
+            LeaderBoard.ItemsSource = Statistics.GetStatisticsListFromServer(_connector);
 
         }
         private void backButton_Click(object sender, RoutedEventArgs e)

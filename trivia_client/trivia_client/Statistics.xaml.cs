@@ -43,6 +43,24 @@ namespace trivia_client
             NavigationService.Navigate(page);
         }
 
+        //for getting statistics List
+        static public List<classes.Statistics> GetStatisticsListFromServer(Connector connector)
+        {
+            byte[] res = connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_PERSONAL_STATS_CODE));
+            classes.GetPersonalStatsResponse r = classes.Deserializer.deserializeGetPersonalStatsResponse(res);
 
+            List<classes.Statistics> statistics = new List<classes.Statistics>();
+            foreach (classes.Statistics currStat in r.statistics)
+            {
+                statistics.Add(new classes.Statistics()
+                {
+                    avgTime = currStat.avgTime,
+                    victories = currStat.victories,
+                    games = currStat.games,
+                    name = currStat.name.Substring(1, currStat.name.Length - 2)
+                });
+            }
+            return statistics;
+        }
     }
 }

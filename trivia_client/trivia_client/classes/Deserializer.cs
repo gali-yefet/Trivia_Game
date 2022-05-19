@@ -14,8 +14,17 @@ namespace trivia_client.classes
         public uint numOfQuestionsInGame { get; set; }
         public uint timePerQuestion { get; set; }
         public uint isActive { get; set; }
+    }
+
+    public struct Statistics
+    {
+        public String name { get; set; }
+        public int victories { get; set; }
+        public int games { get; set; }
+        public int avgTime { get; set; }
 
     }
+
     struct LoginResponse
     {
         public uint status;
@@ -45,13 +54,13 @@ namespace trivia_client.classes
     struct GetHighScoreResponse
     {
         public uint status;
-        public String[] statistics;
+        public Statistics[] statistics;
     }
 
     struct GetPersonalStatsResponse
     {
         public uint status;
-        public String[] statistics;
+        public Statistics[] statistics;
     }
 
     struct JoinRoomResponse
@@ -201,19 +210,38 @@ namespace trivia_client.classes
         {
             GetHighScoreResponse r;
             String bufferStr = Encoding.UTF8.GetString(buffer);
+
             //add statistics
-            String statistics = extractValue(bufferStr, true);
-            Stack<String> stack = new Stack<String>();
-            while (statistics.IndexOf('"') != -1)
+            String statistics = extractValue(bufferStr);
+            Stack<Statistics> stack = new Stack<Statistics>();
+            while (statistics.Length > 0)
             {
-                String name = statistics.Substring(statistics.IndexOf(','));
-                stack.Push(name);
-                statistics = statistics.Substring(name.Length + 1);
+                //get the current statistics
+                Statistics currStatistic = new Statistics() { };
+                String name = extractValue(statistics);
+                currStatistic.name = name.Length >= 2 ? name : "\"\"";
+                statistics = statistics.Substring(statistics.IndexOf(',') + 1);
+
+                String games = extractValue(statistics);
+                currStatistic.games = classes.Serializer.checkifNumber(games) ? Int32.Parse(games) : 0;
+                statistics = statistics.Substring(statistics.IndexOf(',') + 1);
+
+                String victories = extractValue(statistics);
+                currStatistic.victories = classes.Serializer.checkifNumber(victories) ? Int32.Parse(victories) : 0;
+                statistics = statistics.Substring(statistics.IndexOf(',') + 1);
+
+                String avgTime = extractValue(statistics);
+                currStatistic.avgTime = classes.Serializer.checkifNumber(avgTime) ? Int32.Parse(avgTime) : 0;
+                if (statistics.IndexOf(',') != -1)
+                    statistics = statistics.Substring(statistics.IndexOf(',') + 1);
+                else
+                    statistics = "";
+                stack.Push(currStatistic);
             }
             r.statistics = stack.ToArray();
 
             bufferStr = bufferStr.Substring(bufferStr.IndexOf(']') + 2);
-            r.status = UInt32.Parse(extractValue(bufferStr, true));
+            r.status = UInt32.Parse(extractValue(bufferStr));
 
             return r;
         }
@@ -224,18 +252,36 @@ namespace trivia_client.classes
             String bufferStr = Encoding.UTF8.GetString(buffer);
 
             //add statistics
-            String statistics = extractValue(bufferStr, true);
-            Stack<String> stack = new Stack<String>();
-            while (statistics.IndexOf('"') != -1)
+            String statistics = extractValue(bufferStr);
+            Stack<Statistics> stack = new Stack<Statistics>();
+            while (statistics.Length > 0)
             {
-                String name = statistics.Substring(statistics.IndexOf(','));
-                stack.Push(name);
-                statistics = statistics.Substring(name.Length + 1);
+                //get the current statistics
+                Statistics currStatistic = new Statistics() { };
+                String name = extractValue(statistics);
+                currStatistic.name = name.Length>=2 ? name : "\"\"";
+                statistics = statistics.Substring(statistics.IndexOf(',') + 1);
+
+                String games = extractValue(statistics);
+                currStatistic.games = classes.Serializer.checkifNumber(games) ? Int32.Parse(games):0;
+                statistics = statistics.Substring(statistics.IndexOf(',') + 1);
+
+                String victories = extractValue(statistics);
+                currStatistic.victories = classes.Serializer.checkifNumber(victories) ? Int32.Parse(victories) : 0;
+                statistics = statistics.Substring(statistics.IndexOf(',') + 1);
+
+                String avgTime = extractValue(statistics);
+                currStatistic.avgTime = classes.Serializer.checkifNumber(avgTime) ? Int32.Parse(avgTime) : 0;
+                if (statistics.IndexOf(',') != -1)
+                    statistics = statistics.Substring(statistics.IndexOf(',') + 1);
+                else
+                    statistics = "";
+                stack.Push(currStatistic);
             }
             r.statistics = stack.ToArray();
 
             bufferStr = bufferStr.Substring(bufferStr.IndexOf(']') + 2);
-            r.status = UInt32.Parse(extractValue(bufferStr, true));
+            r.status = UInt32.Parse(extractValue(bufferStr));
 
             return r;
         }
