@@ -7,7 +7,26 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="WelcomePage" Foreground="{x:Null}">
-
+    <!--annimation-->
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <!--buttons-->
+                    <DoubleAnimation
+                        Storyboard.TargetName="Buttons" 
+                        Storyboard.TargetProperty="(Grid.Opacity)"
+                        From="0" To="1" 
+                        Duration="0:0:00" BeginTime="00:00:01"/>
+                    <!--logo-->
+                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="logo" Storyboard.TargetProperty="Margin" BeginTime="00:00:00:00">
+                        <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,0,0,50" />
+                        <SplineThicknessKeyFrame KeyTime="00:00:01" Value="0,0,0,180" />
+                    </ThicknessAnimationUsingKeyFrames>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -17,15 +36,15 @@
         </Grid.RowDefinitions>
 
 
-        <!--header-->
-        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <!--logo-->
+        <StackPanel Name="logo" Grid.RowSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,50">
             <Label Content="WANNACRY" Foreground="White" FontFamily="Arial Black" FontSize="48" HorizontalAlignment="Center" />
             <Label Content="TRIVIA" Foreground="White" FontFamily="Arial Black" FontSize="30"  HorizontalAlignment="Center"/>
         </StackPanel>
 
 
         <!--buttons-->
-        <Grid Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid x:Name="Buttons" Grid.Row="2" Opacity="0" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
