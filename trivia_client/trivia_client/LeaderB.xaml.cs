@@ -25,12 +25,19 @@ namespace trivia_client
             backgroundPage.Content = new BackgroundPage();
 
             _connector = connector;
-
-            //show statistics
-            LeaderBoard.Items.Clear();
-            LeaderBoard.ItemsSource = Statistics.GetStatisticsListFromServer(_connector);
-
+            if (Statistics.GetStatisticsListFromServer(_connector).Count <= 1)
+            {
+                Error_noStatistics.Visibility = Visibility.Visible;
+                LeaderBoard.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                //show statistics
+                LeaderBoard.Items.Clear();
+                LeaderBoard.ItemsSource = Statistics.GetStatisticsListFromServer(_connector);
+            }
         }
+
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
             Statistics page = new Statistics(_connector);

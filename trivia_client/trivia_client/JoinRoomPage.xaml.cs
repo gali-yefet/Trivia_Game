@@ -34,12 +34,21 @@ namespace trivia_client
             _connector = connector;
             _rooms = getActiveRoomsFromServer();
 
-            //show rooms names
-            ConectedUsers.Items.Clear();
-            ConectedUsers.ItemsSource = _rooms;
+            if(_rooms.Count == 0)
+            {
+                Error_noRooms.Visibility = Visibility.Visible;
+                ConectedUsers.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                //show rooms names
+                ConectedUsers.Items.Clear();
+                ConectedUsers.ItemsSource = _rooms;
 
-            if (!firstTime)
-                Error.Visibility = Visibility.Visible;
+                if (!firstTime)
+                    Error_joinFaild.Visibility = Visibility.Visible;
+            }
+            
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
