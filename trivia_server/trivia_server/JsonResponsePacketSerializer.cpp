@@ -81,6 +81,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetRoomsRespon
 	}
 
 	json j;
+	j["status"] = r.status;
 	j["Rooms"] = rooms;
 
 	std::string data = j.dump();  // returns the json as a string

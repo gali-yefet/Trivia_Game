@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
+
 
 namespace trivia_client
 {
@@ -20,9 +22,12 @@ namespace trivia_client
     /// </summary>
     public partial class MainWindow : Window
     {
+        Connector _connector;
+
         public MainWindow()
         {
             InitializeComponent();
+            currentPage.Content = new WelcomePage();
         }
     }
 }
