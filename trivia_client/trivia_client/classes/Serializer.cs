@@ -58,10 +58,15 @@ namespace trivia_client.classes
 
         public static byte[] serializeRequest(int code, String msg = "")
         {
+            String codeStr = code.ToString();
+            while (codeStr.Length < 2)
+                codeStr = " "+codeStr;
+
             String len = msg.Length.ToString();
             while (len.Length < 4)
-                len += " ";
-            String allMsg = code.ToString() + len + msg;
+                len = " "+len;
+
+            String allMsg = codeStr + len + msg;
             byte[] buffer = new ASCIIEncoding().GetBytes(allMsg);
             return buffer;
         }

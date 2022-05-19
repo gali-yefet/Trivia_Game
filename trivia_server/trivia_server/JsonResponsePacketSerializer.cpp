@@ -173,9 +173,11 @@ out: the serialized msg
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeMsg(int code, std::string data)
 {
 	std::string codeStr = std::to_string(code);
+	while (codeStr.length() < 2)
+		codeStr = " " + codeStr;
 	std::string bytes = std::to_string(static_cast<int>(data.length() * sizeof(unsigned char)));
 	while (bytes.length() < 4)
-		bytes += " ";
+		bytes = " "+bytes;
 	std::string message = codeStr + bytes + data;
 	std::vector<unsigned char> bytes_buffer(message.begin(), message.end());// enter the response to a vector of bytes
 	return bytes_buffer;
