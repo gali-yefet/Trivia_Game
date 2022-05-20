@@ -15,8 +15,32 @@ bool RoomMemberRequestHandler::isRequestRelevant(RequestInfo r)
 RequestResult RoomMemberRequestHandler::handleRequest(RequestInfo r)
 {
     m_room = m_roomManager.getRoom(m_room.getRoomData().id); //refresh the room
-
-    return RequestResult(); //TODO
+    int roomStatus = m_room.getRoomData().isActive;
+    if (roomStatus == CLOSED)
+    {
+        CloseRoomResponse response;
+        response.status = r.requestCode;
+        std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeCloseRoomResponse(response);
+        return IRequestHandler::createRequestResult(buffer, m_handlerFactory.createMenuRequestHandler(m_user.getUsername()));
+    }
+    else if (roomStatus == IN_GAME)
+    {
+        StartGameResponse response;
+        response.status = r.requestCode;
+        std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeStartGameResponse(response);
+        return IRequestHandler::createRequestResult(buffer, this); //TODO: create room
+    }
+    RequestResult result;
+    switch (r.requestCode)
+    {
+    case LEAVE_ROOM:
+        result = leaveRoom(r);
+        break;
+    case GET_ROOM_STATE:
+        result = getRoomState(r);
+        break;
+    }
+    return result;
 }
 
 
