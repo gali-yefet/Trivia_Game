@@ -1,8 +1,7 @@
 #include "RoomAdminRequestHandler.h"
 
 RoomAdminRequestHandler::RoomAdminRequestHandler(int roomId, std::string username, RoomManager& roomManager, RequestHandlerFactory& handlerFactory):
-    IRoomRequestHandler(roomId, username, roomManager, handlerFactory)
-{
+    m_room(roomManager.getRoom(roomId)), m_user(LoggedUser(username)), m_roomManager(roomManager), m_handlerFactory(handlerFactory) {
 }
 
 bool RoomAdminRequestHandler::isRequestRelevant(RequestInfo r)
