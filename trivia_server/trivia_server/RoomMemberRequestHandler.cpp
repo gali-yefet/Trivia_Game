@@ -7,7 +7,7 @@ RoomMemberRequestHandler::RoomMemberRequestHandler(int roomId, std::string usern
 
 bool RoomMemberRequestHandler::isRequestRelevant(RequestInfo r)
 {
-    return false; //TODO
+    return r.requestCode == LEAVE_ROOM || r.requestCode == GET_ROOM_STATE;
 }
 
 RequestResult RoomMemberRequestHandler::handleRequest(RequestInfo r)

@@ -6,7 +6,7 @@ RoomAdminRequestHandler::RoomAdminRequestHandler(int roomId, std::string usernam
 
 bool RoomAdminRequestHandler::isRequestRelevant(RequestInfo r)
 {
-    return false; //TODO
+    return r.requestCode == CLOSE_ROOM || r.requestCode == START_GAME || r.requestCode == GET_ROOM_STATE;
 }
 
 RequestResult RoomAdminRequestHandler::handleRequest(RequestInfo r)
