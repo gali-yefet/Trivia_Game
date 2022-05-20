@@ -79,7 +79,7 @@ RequestResult MenuRequestHandler::joinRoom(RequestInfo r)
 	JoinRoomResponse response;
 	response.status = JOIN_ROOM;
 	std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeJoinRoomResponse(response);
-	return IRequestHandler::createRequestResult(buffer, new RoomMemberRequestHandler); //TODO: change to creating a RoomMemberRequestHandler with the factory method
+	return IRequestHandler::createRequestResult(buffer, new RoomMemberRequestHandler(request.roomId, m_user.getUsername(), m_roomManger, m_handlerFactory)); //TODO: change to creating a RoomMemberRequestHandler with the factory method
 }
 
 RequestResult MenuRequestHandler::createRoom(RequestInfo r)
@@ -98,7 +98,7 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo r)
 	CreateRoomResponse response;
 	response.status = CREATE_ROOM;
 	std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeCreateRoomResponse(response);
-	return IRequestHandler::createRequestResult(buffer, new RoomAdminRequestHandler); //TODO: change to creating a RoomAdminRequestHandler with the factory method}
+	return IRequestHandler::createRequestResult(buffer, new RoomAdminRequestHandler(roomData.id, m_user.getUsername(), m_roomManger, m_handlerFactory)); //TODO: change to creating a RoomAdminRequestHandler with the factory method}
 }
 
 RequestResult MenuRequestHandler::signout(RequestInfo r)
