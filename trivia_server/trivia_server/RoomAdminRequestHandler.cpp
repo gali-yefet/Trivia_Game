@@ -1,7 +1,7 @@
 #include "RoomAdminRequestHandler.h"
 #include "JsonRequestPacketDeserializer.h"
 #include "JsonResponsePacketSerializer.h"
-
+#include "GameRequestHandler.h"
 RoomAdminRequestHandler::RoomAdminRequestHandler(int roomId, std::string username, RoomManager& roomManager, RequestHandlerFactory& handlerFactory):
     m_room(roomManager.getRoom(roomId)), m_user(LoggedUser(username)), m_roomManager(roomManager), m_handlerFactory(handlerFactory) {
 }
@@ -27,7 +27,7 @@ RequestResult RoomAdminRequestHandler::handleRequest(RequestInfo r)
         StartGameResponse response;
         response.status = r.requestCode;
         std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeStartGameResponse(response);
-        return IRequestHandler::createRequestResult(buffer, this); //TODO: create room
+        return IRequestHandler::createRequestResult(buffer, new GameRequestHandler); //TODO: change to function that creates room
     }
     RequestResult result;
     switch (r.requestCode)
