@@ -18,6 +18,34 @@ RequestResult RoomAdminRequestHandler::handleRequest(RequestInfo r)
     return RequestResult(); //TODO
 }
 
+
+RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo r)
+{
+    //remove all users from room
+    std::vector <std::string> users =  m_room.getAllUsers();
+    for (int i = 0; i < users.size(); i++) 
+    {
+        m_room.removeUser(LoggedUser(users[i]));
+    }
+    //close the room
+    m_roomManager.changeRoomState(m_room.getRoomData().id, CLOSED);
+
+    //send response
+    CloseRoomResponse response;
+    response.status = r.requestCode;
+    std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeCloseRoomResponse(response);
+    return IRequestHandler::createRequestResult(buffer, m_handlerFactory.createMenuRequestHandler(m_user.getUsername()));
+}
+
+RequestResult RoomAdminRequestHandler::startGame(RequestInfo r)
+{
+    m_roomManager.changeRoomState(m_room.getRoomData().id, IN_GAME);//change the roomState to IN_GAME state
+    StartGameResponse response;
+    response.status = r.requestCode;
+    std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeStartGameResponse(response);
+    return IRequestHandler::createRequestResult(buffer, this); //TODO: create room
+}
+
 RequestResult RoomAdminRequestHandler::getRoomState(RequestInfo r)
 {
     GetRoomStateResponse response;

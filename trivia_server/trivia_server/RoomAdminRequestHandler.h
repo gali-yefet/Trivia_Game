@@ -11,9 +11,9 @@ public:
 	virtual RequestResult handleRequest(RequestInfo r); //TODO
 
 private:
-	RequestResult closeRoom(RequestInfo r); //TODO
-	RequestResult startGame(RequestInfo r);	//TODO
-	RequestResult getRoomState(RequestInfo r); //TODO
+	RequestResult closeRoom(RequestInfo r);
+	RequestResult startGame(RequestInfo r);
+	RequestResult getRoomState(RequestInfo r);
 
 	Room m_room;
 	LoggedUser m_user;

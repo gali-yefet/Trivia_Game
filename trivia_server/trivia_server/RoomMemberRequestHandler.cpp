@@ -19,6 +19,15 @@ RequestResult RoomMemberRequestHandler::handleRequest(RequestInfo r)
     return RequestResult(); //TODO
 }
 
+
+RequestResult RoomMemberRequestHandler::leaveRoom(RequestInfo r)
+{
+    LeaveRoomResponse response;
+    response.status = r.requestCode;
+    std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeLeaveRoomResponse(response);
+    return IRequestHandler::createRequestResult(buffer, m_handlerFactory.createMenuRequestHandler(m_user.getUsername()));
+}
+
 RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo r)
 {
     GetRoomStateResponse response;

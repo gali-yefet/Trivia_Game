@@ -11,8 +11,8 @@ public:
 	virtual RequestResult handleRequest(RequestInfo r); //TODO
 
 private:
-	RequestResult leaveRoom(RequestInfo r); //TODO
-	RequestResult getRoomState(RequestInfo r); //TODO
+	RequestResult leaveRoom(RequestInfo r);
+	RequestResult getRoomState(RequestInfo r);
 
 	Room m_room;
 	LoggedUser m_user;
