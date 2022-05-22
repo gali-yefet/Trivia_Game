@@ -47,6 +47,7 @@ RequestResult RoomMemberRequestHandler::handleRequest(RequestInfo r)
 
 RequestResult RoomMemberRequestHandler::leaveRoom(RequestInfo r)
 {
+    m_roomManager.deletePlayer(m_room.getRoomData().id, m_user.getUsername());
     LeaveRoomResponse response;
     response.status = r.requestCode;
     std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeLeaveRoomResponse(response);

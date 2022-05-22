@@ -62,7 +62,7 @@ namespace trivia_client
             }
             else
             {
-                RoomUsers page = new RoomUsers(_connector);
+                RoomUsers page = new RoomUsers(_connector, true);
                 NavigationService.Navigate(page);
             }
 
