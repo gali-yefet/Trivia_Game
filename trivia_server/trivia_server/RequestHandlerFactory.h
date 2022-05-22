@@ -1,13 +1,18 @@
 #pragma once
-#include "LoginRequestHandler.h"
 #include "IDatabase.h"
 #include "LoginManager.h"
-#include "MenuRequestHandler.h"
 #include "RoomManager.h"
 #include "StatisticsManager.h"
+#include "LoginRequestHandler.h"
+#include "MenuRequestHandler.h"
+#include "RoomMemberRequestHandler.h"
+#include "RoomAdminRequestHandler.h"
 
-class LoginRequestHandler; //Circular reference
-class MenuRequestHandler; //Circular reference
+//Circular reference
+class LoginRequestHandler;
+class MenuRequestHandler;
+class RoomAdminRequestHandler;
+class RoomMemberRequestHandler;
 
 class RequestHandlerFactory
 {
@@ -15,6 +20,9 @@ public:
 	RequestHandlerFactory(IDatabase* db);
 	LoginRequestHandler* createLoginRequestHandler();
 	MenuRequestHandler* createMenuRequestHandler(std::string username);
+	RoomAdminRequestHandler* createRoomAdminRequestHandler(int roomId, std::string username);
+	RoomMemberRequestHandler* createRoomMemberRequestHandler(int roomId, std::string username);
+
 
 	LoginManager& getLoginManager();
 	RoomManager& getRoomManager();
