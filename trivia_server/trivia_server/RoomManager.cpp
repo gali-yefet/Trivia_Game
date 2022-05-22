@@ -101,3 +101,8 @@ void RoomManager::changeRoomState(int id, int status)
 		}
 	}
 }
+
+void RoomManager::deletePlayer(int id, std::string username)
+{
+	m_rooms.find(id)->second.removeUser(LoggedUser(username));
+}

@@ -88,7 +88,7 @@ namespace trivia_client
                 }
                 else
                 {
-                    RoomUsers page = new RoomUsers(_connector);
+                    RoomUsers page = new RoomUsers(_connector, false);
                     NavigationService.Navigate(page);
                 }
             }

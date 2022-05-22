@@ -73,6 +73,30 @@ namespace trivia_client.classes
         public uint status;
     }
 
+    struct CloseRoomResponse
+    {
+        public uint status;
+    }
+
+    struct StartGameResponse
+    {
+        public uint status;
+    }
+
+    struct GetRoomStateResponse
+    {
+        public uint status;
+        public bool hasGameBegun;
+        public String[] players;
+        public uint questionCount;
+        public uint answerTimeout;
+    }
+
+    struct LeaveRoomResponse
+    {
+        public uint status;
+    }
+
     class Deserializer
     {
         //define codes
@@ -306,5 +330,59 @@ namespace trivia_client.classes
             return r;
         }
 
+        public static CloseRoomResponse deserializeCloseRoomResponse(byte[] buffer)
+        {
+            CloseRoomResponse r;
+            String bufferStr = Encoding.UTF8.GetString(buffer);
+            r.status = bufferStr.Contains("status") ? UInt32.Parse(extractValue(bufferStr)) : ERROR_CODE;
+            return r;
+        }
+
+        public static StartGameResponse deserializeStartGameResponse(byte[] buffer)
+        {
+            StartGameResponse r;
+            String bufferStr = Encoding.UTF8.GetString(buffer);
+            r.status = bufferStr.Contains("status") ? UInt32.Parse(extractValue(bufferStr)) : ERROR_CODE;
+            return r;
+        }
+
+        public static GetRoomStateResponse deserializeGetRoomStateResponse(byte[] buffer)
+        {
+            GetRoomStateResponse r;
+            String bufferStr = Encoding.UTF8.GetString(buffer);
+
+            r.answerTimeout = UInt32.Parse(extractValue(bufferStr));
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf(',') + 1);
+
+            r.hasGameBegun = extractValue(bufferStr) == "true";
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf(',') + 1);
+
+            //add players
+            String nameArrayStr = extractValue(bufferStr, true);
+            Stack<String> namesStack = new Stack<String>();
+            while (nameArrayStr.IndexOf('"') != -1)
+            {
+                String name = nameArrayStr.Substring(0, nameArrayStr.IndexOf(','));
+                namesStack.Push(name);
+                nameArrayStr = nameArrayStr.Substring(name.Length + 1);
+            }
+            r.players = namesStack.ToArray();
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf(',') + 1);
+
+            r.questionCount = UInt32.Parse(extractValue(bufferStr));
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf(',') + 1);
+
+            r.status = UInt32.Parse(extractValue(bufferStr));
+            return r;
+            //TODO: check if work well
+        }
+
+        public static LeaveRoomResponse deserializeLeaveRoomResponse(byte[] buffer)
+        {
+            LeaveRoomResponse r;
+            String bufferStr = Encoding.UTF8.GetString(buffer);
+            r.status = bufferStr.Contains("status") ? UInt32.Parse(extractValue(bufferStr)) : ERROR_CODE;
+            return r;
+        }
     }
 }

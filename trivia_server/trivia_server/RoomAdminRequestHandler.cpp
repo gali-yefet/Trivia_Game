@@ -70,7 +70,7 @@ RequestResult RoomAdminRequestHandler::startGame(RequestInfo r)
     StartGameResponse response;
     response.status = r.requestCode;
     std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeStartGameResponse(response);
-    return IRequestHandler::createRequestResult(buffer, this); //TODO: create room
+    return IRequestHandler::createRequestResult(buffer, new GameRequestHandler); //TODO: change to function that creates room
 }
 
 RequestResult RoomAdminRequestHandler::getRoomState(RequestInfo r)

@@ -8,7 +8,7 @@ class RoomAdminRequestHandler : public IRequestHandler
 public:
 	RoomAdminRequestHandler(int roomId, std::string username, RoomManager& roomManager, RequestHandlerFactory& handlerFactory);
 	virtual bool isRequestRelevant(RequestInfo r);
-	virtual RequestResult handleRequest(RequestInfo r); //TODO
+	virtual RequestResult handleRequest(RequestInfo r);
 
 private:
 	RequestResult closeRoom(RequestInfo r);

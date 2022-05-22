@@ -15,6 +15,7 @@ public:
 	void joinRoom(int id, LoggedUser user);
 	int createRoomId();
 	void changeRoomState(int id, int status);
+	void deletePlayer(int id, std::string username);
 
 private:
 	std::map<unsigned int, Room> m_rooms; //<id, room>
