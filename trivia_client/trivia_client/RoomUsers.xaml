@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
 
             <!--header-->
-            <Label x:Name="header" Content="CONNECTED USER" Grid.Row="0" Foreground="White" FontFamily="Arial Black" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Label x:Name="header" Content="CONNECTED USERS" Grid.Row="0" Foreground="White" FontFamily="Arial Black" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
             <!--input-->
             <ListView x:Name="ConectedUsers" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20" >

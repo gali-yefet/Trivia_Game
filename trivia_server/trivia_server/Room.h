@@ -17,7 +17,7 @@ class Room
 {
 public:
 	Room(LoggedUser user, RoomData data);
-	void addUser(LoggedUser user);
+	bool addUser(LoggedUser user);
 	void removeUser(LoggedUser user);
 	std::vector<std::string> getAllUsers();
 	RoomData getRoomData();
