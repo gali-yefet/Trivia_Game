@@ -13,11 +13,16 @@ Room::Room(LoggedUser user, RoomData data):
 /*
 add user to the room
 in: user
-out: void
+out: bool- true if added, else false
 */
-void Room::addUser(LoggedUser user)
+bool Room::addUser(LoggedUser user)
 {
-	m_users.push_back(user);
+	if (m_users.size() < this->m_metadata.maxPlayers)// if current players number are less than max players number
+	{
+		m_users.push_back(user);
+		return true;
+	}
+	return false;
 }
 
 /*
