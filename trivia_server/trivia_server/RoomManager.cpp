@@ -83,3 +83,21 @@ int RoomManager::createRoomId()
 		if (m_rooms.find(i) == m_rooms.end())
 			return i;
 }
+
+void RoomManager::changeRoomState(int id, int status)
+{
+	for (auto i = m_rooms.begin(); i != m_rooms.end(); ++i)
+	{
+		if (i->first == id)
+		{
+			RoomData roomData;
+			roomData.id = id;
+			roomData.isActive = status;
+			roomData.maxPlayers = i->second.getRoomData().maxPlayers;
+			roomData.name = i->second.getRoomData().name;
+			roomData.numOfQuestionsInGame = i->second.getRoomData().numOfQuestionsInGame;
+			roomData.timePerQuestion = i->second.getRoomData().timePerQuestion;
+			i->second.setRoomData(roomData);
+		}
+	}
+}

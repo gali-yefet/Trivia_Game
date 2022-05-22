@@ -14,6 +14,7 @@ public:
 	Room& getRoom(int id);
 	bool joinRoom(int id, LoggedUser user);
 	int createRoomId();
+	void changeRoomState(int id, int status);
 
 private:
 	std::map<unsigned int, Room> m_rooms; //<id, room>

@@ -59,3 +59,8 @@ RoomData Room::getRoomData()
 {
 	return m_metadata;
 }
+
+void Room::setRoomData(RoomData roomData)
+{
+	m_metadata = roomData;
+}
