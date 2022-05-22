@@ -27,8 +27,8 @@ namespace trivia_client
         public byte[] readData()
         {
             //get code
-            byte[] code = new byte[1];
-            _clientStream.Read(code, 0, 1);
+            byte[] code = new byte[2];
+            _clientStream.Read(code, 0, 2);
 
             //get length
             byte[] len_byte = new byte[4];

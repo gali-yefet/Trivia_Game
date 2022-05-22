@@ -86,6 +86,10 @@ namespace trivia_client.classes
         public const int JOIN_ROOM_CODE = 7;
         public const int GET_HIGH_SCORE_CODE = 8;
         public const int GET_PERSONAL_STATS_CODE = 9;
+        public const int CLOSE_ROOM = 10;
+	    public const int START_GAME = 11;
+	    public const int GET_ROOM_STATE = 12;
+        public const int LEAVE_ROOM = 13;
         private static string extractValue(String json, bool eraseSides = false)
         {
             String value = "";

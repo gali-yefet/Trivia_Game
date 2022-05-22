@@ -94,7 +94,8 @@ void Communicator::HandleNewClient(SOCKET socket)
 		r.receivalTime = time(&r.receivalTime);
 		try
 		{
-			r.requestCode = getData(socket, 1)[0] - '0'; // get the message code, and convert to int
+			std::string code = getData(socket, 2);
+			r.requestCode = std::stoi(code);//get the code
 
 			std::string len = getData(socket, 4);
 			int bytes = std::stoi(len);// get the json size
