@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net.Sockets;
 using System.Net;
+using System.Threading;
 
 
 namespace trivia_client
@@ -24,6 +25,28 @@ namespace trivia_client
             _clientStream = _client.GetStream();
         }
 
+        public void updateThread()
+        {
+            // Create a secondary thread by passing a ThreadStart delegate  
+            Thread updateThread = new Thread(new ThreadStart(Update));
+            // Start secondary thread  
+            updateThread.Start();
+            updateThread.Abort(); //detach thread
+        }
+        static void Update()
+        {
+            TcpClient client = new TcpClient();
+            IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Parse(IP), PORT);
+            client.Connect(serverEndPoint);
+            NetworkStream clientStream = client.GetStream();
+
+            while(true)
+            {
+
+
+                Thread.Sleep(3000); //will sleep for 3 sec
+            }
+        }
         public byte[] readData()
         {
             //get code
