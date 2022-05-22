@@ -41,7 +41,8 @@ namespace trivia_client
 
         private void leaveRoomButton_Click(object sender, RoutedEventArgs e)
         {
-            byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.LEAVE_ROOM));
+            byte[] msg = classes.Serializer.serializeRequest(classes.Deserializer.LEAVE_ROOM);
+            byte[] res = _connector.sendGetData(msg);
             classes.LeaveRoomResponse response = classes.Deserializer.deserializeLeaveRoomResponse(res);
 
             //check if login failed and move to page accordingly
@@ -58,12 +59,36 @@ namespace trivia_client
 
         private void closeRoomButton_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.CLOSE_ROOM));
+            classes.CloseRoomResponse response = classes.Deserializer.deserializeCloseRoomResponse(res);
+
+            //check if login failed and move to page accordingly
+            if (response.status == classes.Deserializer.CLOSE_ROOM)
+            {
+                Menu page = new Menu(_connector);
+                NavigationService.Navigate(page);
+            }
+            else
+            {
+                //TODO: show an error
+            }
         }
 
         private void startGameButton_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.START_GAME));
+            classes.StartGameResponse response = classes.Deserializer.deserializeStartGameResponse(res);
+
+            //check if login failed and move to page accordingly
+            if (response.status == classes.Deserializer.START_GAME)
+            {
+                GamePage page = new GamePage(_connector);
+                NavigationService.Navigate(page);
+            }
+            else
+            {
+                //TODO: show an error
+            }
         }
     }
 }

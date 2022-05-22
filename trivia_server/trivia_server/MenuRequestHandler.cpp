@@ -77,7 +77,7 @@ RequestResult MenuRequestHandler::joinRoom(RequestInfo r)
 	JoinRoomResponse response;
 	response.status = JOIN_ROOM;
 	std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeJoinRoomResponse(response);
-	return IRequestHandler::createRequestResult(buffer, m_handlerFactory.createRoomAdminRequestHandler(request.roomId, m_user.getUsername()));
+	return IRequestHandler::createRequestResult(buffer, m_handlerFactory.createRoomMemberRequestHandler(request.roomId, m_user.getUsername()));
 }
 
 RequestResult MenuRequestHandler::createRoom(RequestInfo r)
