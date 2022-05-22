@@ -12,7 +12,7 @@ public:
 	unsigned int getRoomState(int id);
 	std::vector<RoomData> getRooms();
 	Room& getRoom(int id);
-	void joinRoom(int id, LoggedUser user);
+	bool joinRoom(int id, LoggedUser user);
 	int createRoomId();
 
 private:

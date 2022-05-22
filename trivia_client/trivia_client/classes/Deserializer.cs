@@ -290,7 +290,10 @@ namespace trivia_client.classes
         {
             JoinRoomResponse r;
             String bufferStr = Encoding.UTF8.GetString(buffer);
-            r.status = UInt32.Parse(extractValue(bufferStr, true));
+            if (bufferStr.Contains("status"))
+                r.status = UInt32.Parse(extractValue(bufferStr, true));
+            else
+                r.status = ERROR_CODE;
             return r;
         }
 

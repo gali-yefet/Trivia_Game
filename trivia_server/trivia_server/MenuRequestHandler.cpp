@@ -74,8 +74,14 @@ RequestResult MenuRequestHandler::getPlayesrInRoom(RequestInfo r)
 RequestResult MenuRequestHandler::joinRoom(RequestInfo r)
 {
 	JoinRoomRequest request = JsonRequestPacketDeseializer::deserializeJoinRoomRequest(r);
-	m_roomManger.joinRoom(request.roomId, m_user);
-
+	bool res = m_roomManger.joinRoom(request.roomId, m_user);
+	if (!res)
+	{
+		ErrorResponse resp;
+		resp.message = "Join Room Faild";
+		std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeErrorResponse(resp);
+		return IRequestHandler::createRequestResult(buffer, this);
+	}
 	JoinRoomResponse response;
 	response.status = JOIN_ROOM;
 	std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeJoinRoomResponse(response);
