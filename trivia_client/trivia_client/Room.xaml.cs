@@ -35,11 +35,25 @@ namespace trivia_client
             {
                 leaveRoomButton.Visibility = Visibility.Visible;
             }
+
+            //TODO - show users
         }
 
         private void leaveRoomButton_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.LEAVE_ROOM));
+            classes.LeaveRoomResponse response = classes.Deserializer.deserializeLeaveRoomResponse(res);
+
+            //check if login failed and move to page accordingly
+            if (response.status == classes.Deserializer.LEAVE_ROOM)
+            {
+                Menu page = new Menu(_connector);
+                NavigationService.Navigate(page);
+            }
+            else
+            {
+                //TODO: show an error
+            }
         }
 
         private void closeRoomButton_Click(object sender, RoutedEventArgs e)
