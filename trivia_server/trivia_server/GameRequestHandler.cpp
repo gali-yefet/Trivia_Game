@@ -7,5 +7,5 @@ bool GameRequestHandler::isRequestRelevant(RequestInfo r)
 
 RequestResult GameRequestHandler::handleRequest(RequestInfo r)
 {
-    return RequestResult();
+    return RequestResult(); //TODO
 }
