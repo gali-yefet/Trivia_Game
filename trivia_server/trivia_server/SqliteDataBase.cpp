@@ -157,10 +157,12 @@ int SqliteDataBase::getNumOfPlayerGames(std::string username)
 
 userStatistics SqliteDataBase::getUserStatistics(std::string username)
 {
+	userStatistics currentUser = userStatistics();
 	std::string q = "SELECT * FROM STATISTICS WHERE USERNAME = '" + username + "';";
 	std::list<userStatistics> listOfUsers;
 	this->execSelectCmd(q.c_str(), this->userStatisticsCallback, &listOfUsers);
-	userStatistics currentUser = listOfUsers.front();
+	if(!listOfUsers.empty())
+		currentUser = listOfUsers.front();
 
 	return currentUser;
 }
