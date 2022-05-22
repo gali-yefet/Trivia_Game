@@ -56,7 +56,7 @@ void Communicator::startHandleRequest()
 		LoginRequestHandler* handler = m_handlerFactory.createLoginRequestHandler();
 		m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, handler));
 		TRACE("Client accepted !");
-	}//TODO
+	}
 }
 
 /*
@@ -77,7 +77,7 @@ void Communicator::bindAndListen()
 	
 	if (listen(m_serverSocket, SOMAXCONN) == SOCKET_ERROR)
 		throw std::exception(__FUNCTION__ " - listen");
-	TRACE("listening...");//TODO
+	TRACE("listening...");
 }
 
 /*
@@ -88,7 +88,6 @@ out: void
 void Communicator::HandleNewClient(SOCKET socket)
 {	
 	RequestInfo r;
-
 	while (true)
 	{
 		//get the msg into the struct
@@ -96,10 +95,14 @@ void Communicator::HandleNewClient(SOCKET socket)
 		try
 		{
 			r.requestCode = getData(socket, 1)[0] - '0'; // get the message code, and convert to int
+
 			std::string len = getData(socket, 4);
 			int bytes = std::stoi(len);// get the json size
+
 			std::string msg = getData(socket, bytes); // get the json
 			r.json = std::vector<unsigned char>(msg.begin(), msg.end());
+
+			std::string json_text(r.json.begin(), r.json.end());
 		}
 		catch (const std::exception& e)
 		{
@@ -108,9 +111,11 @@ void Communicator::HandleNewClient(SOCKET socket)
 
 		//handle the client request according to socket
 		IRequestHandler* handler = m_clients.find(socket)->second;
+		m_clients.erase(socket);
 		if (handler->isRequestRelevant(r))
 		{
 			RequestResult res = handler->handleRequest(r);
+			m_clients.insert(std::pair<SOCKET, IRequestHandler*>(socket, res.newHandler));
 			sendData(socket, res.buffer);
 		}	
 	}

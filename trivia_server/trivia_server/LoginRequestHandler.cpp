@@ -45,32 +45,19 @@ out: login respons. if faild - error response
 */
 RequestResult LoginRequestHandler::login(RequestInfo r)
 {
-	RequestResult result;
-	std::vector<unsigned char> buffer;
 	LoginRequest request = JsonRequestPacketDeseializer::deserializeLoginRequest(r);
 	bool worked = m_loginManager.login(request.username, request.password);
-	if (worked)
+	if (!worked)
 	{
-		//create buffer
-		LoginResponse res;
-		res.status = LOGIN_CODE;
-		buffer = JsonResponsePacketSerializer::serializeLoginResponse(res);
-	
-		//create handler
-		result.newHandler = new MenuRequestHandler(); //TODO: after the factory can create a menu handler, change so the factory fo that
-	}
-	else
-	{
-		//create buffer
 		ErrorResponse res;
 		res.message = "Login Faild";
-		buffer = JsonResponsePacketSerializer::serializeErrorResponse(res);
-	
-		//create handler
-		result.newHandler = m_handlerFactory.createLoginRequestHandler();
+		std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeErrorResponse(res);
+		return IRequestHandler::createRequestResult(buffer, this);
 	}
-	result.buffer = std::string(buffer.begin(), buffer.end());
-	return result;
+	LoginResponse res;
+	res.status = LOGIN_CODE;
+	std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeLoginResponse(res);
+	return IRequestHandler::createRequestResult(buffer, m_handlerFactory.createMenuRequestHandler(request.username));
 }
 
 /*
@@ -80,30 +67,17 @@ out: signup respons. if faild - error response
 */
 RequestResult LoginRequestHandler::signup(RequestInfo r)
 {
-	RequestResult result;
-	std::vector<unsigned char> buffer;
 	SignupRequest request = JsonRequestPacketDeseializer::deserializeSignupRequest(r);
 	bool worked = m_loginManager.signup(request.username, request.password, request.email);
-	if (worked)
+	if (!worked)
 	{
-		//create buffer
-		SignupResponse res;
-		res.status = SIGN_CODE;
-		buffer = JsonResponsePacketSerializer::serializeSignUpResponse(res);
-	
-		//create handler
-		result.newHandler = new MenuRequestHandler(); //TODO: after the factory can create a menu handler, change so the factory do that
-	}
-	else
-	{
-		//create buffer
 		ErrorResponse res;
-		res.message = "signup Faild";
-		buffer = JsonResponsePacketSerializer::serializeErrorResponse(res);
-	
-		//create handler
-		result.newHandler = m_handlerFactory.createLoginRequestHandler();
+		res.message = "Signup Faild";
+		std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeErrorResponse(res);
+		return IRequestHandler::createRequestResult(buffer, this);
 	}
-	result.buffer = std::string(buffer.begin(), buffer.end());
-	return result;
+	SignupResponse res;
+	res.status = SIGN_CODE;
+	std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeSignUpResponse(res);
+	return IRequestHandler::createRequestResult(buffer, m_handlerFactory.createMenuRequestHandler(request.username));
 }
