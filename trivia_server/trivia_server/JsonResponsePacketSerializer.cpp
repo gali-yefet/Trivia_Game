@@ -146,12 +146,9 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetRoomStateRe
 	j["hasGameBegun"] = r.hasGameBegun;
 	j["questionCount"] = r.questionCount;
 	j["answerTimeout"] = r.answerTimeout;
-
-	std::string players = "";
-	for (auto i = r.players.begin(); i != r.players.end(); ++i)
-		players += eraseQuotes(*i) + ", ";
-	players = players.substr(0, players.length() - 2);
-	j["players"] = players;
+	for (int i = 0; i < r.players.size(); i++)
+		r.players[i] = eraseQuotes(r.players[i]);
+	j["players"] = r.players;
 
 	std::string data = j.dump();  // returns the json as a string
 	return serializeMsg(GET_ROOM_STATE, data);

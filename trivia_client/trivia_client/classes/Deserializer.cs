@@ -361,23 +361,30 @@ namespace trivia_client.classes
             bufferStr = bufferStr.Substring(bufferStr.IndexOf(',') + 1);
 
             //add players
-            String nameArrayStr = extractValue(bufferStr, true);
+            String nameArrayStr = extractValue(bufferStr);
             Stack<String> namesStack = new Stack<String>();
-            while (nameArrayStr.IndexOf('"') != -1)
+            while (nameArrayStr.Length>0)
             {
-                String name = nameArrayStr.Substring(0, nameArrayStr.IndexOf(','));
+                String name;
+                if (nameArrayStr.IndexOf(',') != -1)
+                    name = nameArrayStr.Substring(0, nameArrayStr.IndexOf(','));
+                else
+                    name = nameArrayStr;
                 namesStack.Push(name);
-                nameArrayStr = nameArrayStr.Substring(name.Length + 1);
+
+                if (nameArrayStr.IndexOf(',') != -1)
+                    nameArrayStr = nameArrayStr.Substring(name.Length + 1);
+                else
+                    nameArrayStr = "";
             }
             r.players = namesStack.ToArray();
-            bufferStr = bufferStr.Substring(bufferStr.IndexOf(',') + 1);
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf(']') + 2);
 
             r.questionCount = UInt32.Parse(extractValue(bufferStr));
             bufferStr = bufferStr.Substring(bufferStr.IndexOf(',') + 1);
 
             r.status = UInt32.Parse(extractValue(bufferStr));
             return r;
-            //TODO: check if work well
         }
 
         public static LeaveRoomResponse deserializeLeaveRoomResponse(byte[] buffer)

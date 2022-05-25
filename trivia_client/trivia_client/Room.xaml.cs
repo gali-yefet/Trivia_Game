@@ -16,17 +16,27 @@ namespace trivia_client
     /// <summary>
     /// Interaction logic for RoomUsers.xaml
     /// </summary>
+    /// 
+
+    class User
+    {
+        public String username { get; set; }
+        public bool isAdmin { get; set; }
+    }
+
     public partial class RoomUsers : Page
     {
         Connector _connector;
+        List<User> _users;
 
         public RoomUsers(Connector connector, bool isAdmin)
         {
             InitializeComponent();
             backgroundPage.Content = new BackgroundPage();
             _connector = connector;
+            _users = getUsersFromServer();
 
-            if(isAdmin)
+            if (isAdmin)
             {
                 closeRoomButton.Visibility = Visibility.Visible;
                 startGameButton.Visibility = Visibility.Visible;
@@ -36,7 +46,9 @@ namespace trivia_client
                 leaveRoomButton.Visibility = Visibility.Visible;
             }
 
-            //TODO - show users
+            //show users list
+            ConectedUsers.Items.Clear();
+            ConectedUsers.ItemsSource = _users;
         }
 
         private void leaveRoomButton_Click(object sender, RoutedEventArgs e)
@@ -89,6 +101,22 @@ namespace trivia_client
             {
                 //TODO: show an error
             }
+        }
+
+        private List<User> getUsersFromServer()
+        {
+            byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_ROOM_STATE));
+            classes.GetRoomStateResponse r = classes.Deserializer.deserializeGetRoomStateResponse(res);
+            List<User> users = new List<User>();
+            for(int i = 0; i< r.players.Length; i++)
+            {
+                users.Add(new User()
+                {
+                    username = r.players[i].Substring(1, r.players[i].Length - 2),
+                    isAdmin = i == r.players.Length - 1
+                }) ;
+            }
+            return users;
         }
     }
 }

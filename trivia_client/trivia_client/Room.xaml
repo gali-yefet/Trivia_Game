@@ -25,7 +25,8 @@
             <ListView x:Name="ConectedUsers" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20" >
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Users" DisplayMemberBinding="{Binding USERNAME}" Width="220"/>
+                        <GridViewColumn Header="Users" DisplayMemberBinding="{Binding username}" Width="220"/>
+                        <GridViewColumn Header="Admin" DisplayMemberBinding="{Binding isAdmin}" Width="220"/>
                     </GridView>
                 </ListView.View>
             </ListView>
