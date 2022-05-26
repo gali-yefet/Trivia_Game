@@ -25,24 +25,35 @@ namespace trivia_client
             _clientStream = _client.GetStream();
         }
 
-        public void updateThread()
+        public void updateRoomsThread()
         {
             // Create a secondary thread by passing a ThreadStart delegate  
-            Thread updateThread = new Thread(new ThreadStart(Update));
+            Thread updateThread = new Thread(new ThreadStart(UpdateRooms));
             // Start secondary thread  
             updateThread.Start();
             updateThread.Abort(); //detach thread
         }
-        static void Update()
+        public void updateUsersThread()
         {
-            TcpClient client = new TcpClient();
-            IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Parse(IP), PORT);
-            client.Connect(serverEndPoint);
-            NetworkStream clientStream = client.GetStream();
-
+            // Create a secondary thread by passing a ThreadStart delegate  
+            Thread updateThread = new Thread(new ThreadStart(UpdateUsers));
+            // Start secondary thread  
+            updateThread.Start();
+            updateThread.Abort(); //detach thread
+        }
+        static void UpdateRooms()
+        {
             while(true)
             {
 
+            
+                Thread.Sleep(3000); //will sleep for 3 sec
+            }
+        }
+        static void UpdateUsers()
+        {
+            while (true)
+            {
 
                 Thread.Sleep(3000); //will sleep for 3 sec
             }

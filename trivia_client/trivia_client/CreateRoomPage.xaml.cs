@@ -41,7 +41,7 @@ namespace trivia_client
             clearBorders();
             if (checkIfValid())
                 return;
-            
+
             //initilize a request
             classes.CreateRoomRequest r;
             r.answerTimeOut = UInt32.Parse(answerTimeoutInput.Text);
@@ -62,7 +62,7 @@ namespace trivia_client
             }
             else
             {
-                RoomUsers page = new RoomUsers(_connector);
+                RoomUsers page = new RoomUsers(_connector, true);
                 NavigationService.Navigate(page);
             }
 
@@ -84,7 +84,7 @@ namespace trivia_client
                 maxUsersInput.BorderBrush = Brushes.Red;
                 isEmpty = true;
             }
-            if (questionCountInput.Text == "" || !classes.Serializer.checkifNumber(questionCountInput.Text) || Int32.Parse(questionCountInput.Text)>MAX_QUESTIONS)
+            if (questionCountInput.Text == "" || !classes.Serializer.checkifNumber(questionCountInput.Text) || Int32.Parse(questionCountInput.Text) > MAX_QUESTIONS)
             {
                 questionCountInput.BorderBrush = Brushes.Red;
                 isEmpty = true;

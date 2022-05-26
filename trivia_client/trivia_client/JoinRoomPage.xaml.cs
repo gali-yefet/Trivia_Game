@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 
 namespace trivia_client
 {
@@ -26,15 +27,23 @@ namespace trivia_client
     {
         Connector _connector;
         List<classes.RoomData> _rooms;
-        
+        bool _firstTime;
+
         public JoinRoomPage(Connector connector, bool firstTime = true)
         {
             InitializeComponent();
             backgroundPage.Content = new BackgroundPage();
             _connector = connector;
+            _firstTime = firstTime;
+            display();
+            createThread();
+        }
+
+        public void display()
+        {
             _rooms = getActiveRoomsFromServer();
 
-            if(_rooms.Count == 0)
+            if (_rooms.Count == 0)
             {
                 Error_noRooms.Visibility = Visibility.Visible;
                 ConectedUsers.Visibility = Visibility.Hidden;
@@ -45,12 +54,28 @@ namespace trivia_client
                 ConectedUsers.Items.Clear();
                 ConectedUsers.ItemsSource = _rooms;
 
-                if (!firstTime)
+                if (!_firstTime)
                     Error_joinFaild.Visibility = Visibility.Visible;
             }
-            
         }
 
+        public void update()
+        {
+            while(true)
+            {
+                display();
+                Thread.Sleep(3000); //will sleep for 3 sec
+            }
+        }
+
+        public void createThread()
+        {
+            // Create a secondary thread by passing a ThreadStart delegate  
+            Thread updateThread = new Thread(new ThreadStart(update));
+            // Start secondary thread  
+            updateThread.Start();
+            updateThread.Abort(); //detach thread
+        }
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
             Menu page = new Menu(_connector);
@@ -88,7 +113,7 @@ namespace trivia_client
                 }
                 else
                 {
-                    RoomUsers page = new RoomUsers(_connector);
+                    RoomUsers page = new RoomUsers(_connector, false);
                     NavigationService.Navigate(page);
                 }
             }
@@ -99,9 +124,9 @@ namespace trivia_client
             byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_ROOMS_CODE));
             classes.GetRoomsResponse r = classes.Deserializer.deserializeGetRoomsResponse(res);
             List<classes.RoomData> rooms = new List<classes.RoomData>();
-            foreach(classes.RoomData room in r.rooms)
+            foreach (classes.RoomData room in r.rooms)
             {
-                if(room.isActive==1)
+                if (room.isActive == 1)
                 {
                     rooms.Add(new classes.RoomData()
                     {

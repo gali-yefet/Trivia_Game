@@ -65,11 +65,11 @@ Room& RoomManager::getRoom(int id)
 /*
 join a room according to id
 in: id, user to join
-out: void
+out: bool- true if joined
 */
-void RoomManager::joinRoom(int id, LoggedUser user)
+bool RoomManager::joinRoom(int id, LoggedUser user)
 {
-	m_rooms.find(id)->second.addUser(user);
+	return m_rooms.find(id)->second.addUser(user);
 }
 
 /*
@@ -100,4 +100,9 @@ void RoomManager::changeRoomState(int id, int status)
 			i->second.setRoomData(roomData);
 		}
 	}
+}
+
+void RoomManager::deletePlayer(int id, std::string username)
+{
+	m_rooms.find(id)->second.removeUser(LoggedUser(username));
 }

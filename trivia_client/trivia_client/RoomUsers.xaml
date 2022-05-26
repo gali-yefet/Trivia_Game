@@ -14,20 +14,33 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="80" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
+
             <!--header-->
-            <Label x:Name="header" Content="CONNECTED USER" Grid.Row="0" Foreground="White" FontFamily="Arial Black" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Label x:Name="header" Content="ROOM" Grid.Row="0" Foreground="White" FontFamily="Arial Black" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
             <!--input-->
             <ListView x:Name="ConectedUsers" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20" >
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="User name" DisplayMemberBinding="{Binding USERNAME}" Width="220"/>
-                        <GridViewColumn Header="Is Admin" DisplayMemberBinding="{Binding IS_ADMIN}" Width="220"/>
+                        <GridViewColumn Header="Users" DisplayMemberBinding="{Binding username}" Width="220"/>
+                        <GridViewColumn Header="Admin" DisplayMemberBinding="{Binding isAdmin}" Width="220"/>
                     </GridView>
                 </ListView.View>
             </ListView>
+
+            <!--buttons-->
+            <Grid Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Name="leaveRoomButton" Visibility="Hidden" Grid.ColumnSpan="2" Content="leave room" Click="leaveRoomButton_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
+                <Button Name="closeRoomButton" Visibility="Hidden" Grid.Column="0" Content="close room" Click="closeRoomButton_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
+                <Button Name="startGameButton" Visibility="Hidden" Grid.Column="1" Content="start game" Click="startGameButton_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

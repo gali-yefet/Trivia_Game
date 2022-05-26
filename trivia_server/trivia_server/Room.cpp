@@ -15,9 +15,14 @@ add user to the room
 in: user
 out: void
 */
-void Room::addUser(LoggedUser user)
+bool Room::addUser(LoggedUser user)
 {
-	m_users.push_back(user);
+	if (this->m_metadata.maxPlayers > this->m_users.size())
+	{
+		m_users.push_back(user);
+		return true;
+	}
+	return false;
 }
 
 /*
