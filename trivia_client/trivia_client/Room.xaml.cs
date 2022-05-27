@@ -16,18 +16,12 @@ namespace trivia_client
     /// <summary>
     /// Interaction logic for RoomUsers.xaml
     /// </summary>
-    /// 
-
-    class User
-    {
-        public String username { get; set; }
-        public bool isAdmin { get; set; }
-    }
+    ///
 
     public partial class RoomUsers : Page
     {
         Connector _connector;
-        List<User> _users;
+        List<classes.User> _users;
 
         public RoomUsers(Connector connector, bool isAdmin)
         {
@@ -103,14 +97,14 @@ namespace trivia_client
             }
         }
 
-        private List<User> getUsersFromServer()
+        private List<classes.User> getUsersFromServer()
         {
             byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_ROOM_STATE));
             classes.GetRoomStateResponse r = classes.Deserializer.deserializeGetRoomStateResponse(res);
-            List<User> users = new List<User>();
+            List<classes.User> users = new List<classes.User>();
             for(int i = 0; i< r.players.Length; i++)
             {
-                users.Add(new User()
+                users.Add(new classes.User()
                 {
                     username = r.players[i].Substring(1, r.players[i].Length - 2),
                     isAdmin = i == r.players.Length - 1

@@ -91,15 +91,11 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetRoomsRespon
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetPlayersInRoomResponse(GetPlayersInRoomResponse r)
 {
-	//create msg
-	std::string players = "";
-	for (auto i = r.players.begin(); i != r.players.end(); ++i)
-		players += eraseQuotes(*i) + ", ";
-	players = players.substr(0, players.length() - 2);
-
 	// create an empty structure (null)
 	json j;
-	j["PlayesrInRoom"] = players;
+	for (int i = 0; i < r.players.size(); i++)
+		r.players[i] = eraseQuotes(r.players[i]);
+	j["PlayesrInRoom"] = r.players;
 
 	std::string data = j.dump();  // returns the json as a string
 	return serializeMsg(GET_PLAYERS_IN_ROOM, data);

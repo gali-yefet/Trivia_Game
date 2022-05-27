@@ -25,6 +25,12 @@ namespace trivia_client.classes
 
     }
 
+    class User
+    {
+        public String username { get; set; }
+        public bool isAdmin { get; set; }
+    }
+
     struct LoginResponse
     {
         public uint status;
@@ -222,15 +228,24 @@ namespace trivia_client.classes
             String bufferStr = Encoding.UTF8.GetString(buffer);
 
             //add players
-            String nameArrayStr = extractValue(bufferStr, true);
+            String nameArrayStr = extractValue(bufferStr);
             Stack<String> namesStack = new Stack<String>();
-            while (nameArrayStr.IndexOf('"') != -1)
+            while (nameArrayStr.Length > 0)
             {
-                String name = nameArrayStr.Substring(0, nameArrayStr.IndexOf(','));
+                String name;
+                if (nameArrayStr.IndexOf(',') != -1)
+                    name = nameArrayStr.Substring(0, nameArrayStr.IndexOf(','));
+                else
+                    name = nameArrayStr;
                 namesStack.Push(name);
-                nameArrayStr = nameArrayStr.Substring(name.Length + 1);
+
+                if (nameArrayStr.IndexOf(',') != -1)
+                    nameArrayStr = nameArrayStr.Substring(name.Length + 1);
+                else
+                    nameArrayStr = "";
             }
             r.players = namesStack.ToArray();
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf(']') + 2);
             return r;
         }
 
