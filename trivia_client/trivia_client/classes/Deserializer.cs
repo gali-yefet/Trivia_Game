@@ -148,7 +148,7 @@ namespace trivia_client.classes
         public const int LEAVE_ROOM = 13;
         public const int LEAVE_GAME = 14;
 	    public const int GET_QUESTION = 15;
-        public const int SUBMIT_ANSER = 16;
+        public const int SUBMIT_ANSWER = 16;
         public const int GET_GAME_RESULTS = 17;
 
         private static string extractValue(String json, bool eraseSides = false)
@@ -445,16 +445,26 @@ namespace trivia_client.classes
             GetQuestionResponse r;
             String bufferStr = Encoding.UTF8.GetString(buffer);
 
-            //TODO: get answers
-            r.answers = new Dictionary<uint, string>();
-            bufferStr = bufferStr.Substring(bufferStr.IndexOf(']') + 2); //TODO
+            //add answers
+            Dictionary<uint, String> map = new Dictionary<uint, String>();
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf('[')+1);
+            while (bufferStr.IndexOf(']') != -1)
+            {
+                String answer = bufferStr.Substring(1, bufferStr.IndexOf(']')-1);
+                uint correctAnswerId = UInt32.Parse(answer.Substring(0, answer.IndexOf(',')));
+                String question = answer.Substring(answer.IndexOf(',') + 2, answer.Length - answer.IndexOf(',') - 3);
+                map.Add(correctAnswerId, question);
+                bufferStr = bufferStr.Substring(bufferStr.IndexOf(']') + 2);
+            }
+            r.answers = map;
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf(',') + 1);
 
             r.question = extractValue(bufferStr);
             bufferStr = bufferStr.Substring(bufferStr.IndexOf(',') + 1);
 
             r.status = bufferStr.Contains("status") ? UInt32.Parse(extractValue(bufferStr)) : ERROR_CODE;
             return r;
-        }//TODO
+        }
 
         public static SubmitAnswerResponse deserializeSubmitAnswerResponse(byte[] buffer)
         {

@@ -110,7 +110,7 @@ namespace trivia_client.classes
         public static byte[] serializeSubmitAnswerRequest(SubmitAnswerRequest r)
         {
             String json = JsonConvert.SerializeObject(r);
-            return serializeRequest(Deserializer.SUBMIT_ANSER, json);
+            return serializeRequest(Deserializer.SUBMIT_ANSWER, json);
         }
     }
 }
