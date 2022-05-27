@@ -102,6 +102,28 @@ CreateRoomRequest JsonRequestPacketDeseializer::deserializeCreateRoomRequest(Req
 	return c;
 }
 
+SubmitAnswerRequest JsonRequestPacketDeseializer::deserializeSubmitAnswerRequest(RequestInfo r)
+{
+	SubmitAnswerRequest request;
+	if (r.requestCode == GET_PLAYERS_IN_ROOM)
+	{
+		std::string data(r.json.begin(), r.json.end());// converts the data from bytes to string
+		//now the data looks like this:
+		//{ username: <username>, password: <password>, email:<email> }
+
+		try
+		{
+			request.answerId = std::stoi(extractValue(data, true));
+		}
+		catch (const std::exception& e)
+		{
+			request.answerId = ERROR_CODE;
+			std::cout << "Exception was thrown in JsonRequestPacketDeseializer::deserializeSubmitAnswerRequest: " << e.what() << std::endl;
+		}
+	}
+	return request;
+}
+
 
 /*
 get the value from the json
