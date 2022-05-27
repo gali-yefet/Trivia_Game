@@ -25,6 +25,14 @@ namespace trivia_client.classes
 
     }
 
+    public struct PlayerResults
+    {
+        public String username;
+        public uint correctAnswerCount;
+        public uint wrongAnswerCount;
+        public uint averageAnserTime;
+    }
+
     struct LoginResponse
     {
         public uint status;
@@ -97,6 +105,30 @@ namespace trivia_client.classes
         public uint status;
     }
 
+    struct LeaveGameResponse
+    {
+        uint status;
+    }
+
+    struct GetQuestionResponse
+    {
+        uint status;
+        String question;
+        Dictionary<uint, String> answers;
+    }
+
+    struct SubmitAnswerResponse
+    {
+        uint status;
+        uint correctAnswerId;
+    }
+
+    struct GetGameResultsResponse
+    {
+        uint status;
+        PlayerResults[] results;
+    }
+
     class Deserializer
     {
         //define codes
@@ -114,6 +146,11 @@ namespace trivia_client.classes
 	    public const int START_GAME = 11;
 	    public const int GET_ROOM_STATE = 12;
         public const int LEAVE_ROOM = 13;
+        public const int LEAVE_GAME = 14;
+	    public const int GET_QUESTION = 15;
+        public const int SUBMIT_ANSER = 16;
+        public const int GET_GAME_RESULTS = 17;
+
         private static string extractValue(String json, bool eraseSides = false)
         {
             String value = "";
