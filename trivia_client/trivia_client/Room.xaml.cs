@@ -10,35 +10,80 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 
 namespace trivia_client
 {
     /// <summary>
     /// Interaction logic for RoomUsers.xaml
     /// </summary>
+    /// 
+
+    class User
+    {
+        public String username { get; set; }
+        public bool isAdmin { get; set; }
+    }
+
     public partial class RoomUsers : Page
     {
         Connector _connector;
-
+        List<User> _users;
+        bool _isAdmin;
         public RoomUsers(Connector connector, bool isAdmin)
         {
             InitializeComponent();
             backgroundPage.Content = new BackgroundPage();
             _connector = connector;
+            _isAdmin = isAdmin;
+            display();
+            createThread();
+        }
 
-            if(isAdmin)
+        public void display()
+        {
+            _users = getUsersFromServer();
+
+            if (_isAdmin)
             {
-                closeRoomButton.Visibility = Visibility.Visible;
-                startGameButton.Visibility = Visibility.Visible;
+                this.Dispatcher.Invoke(() =>
+                {
+                    closeRoomButton.Visibility = Visibility.Visible;
+                    startGameButton.Visibility = Visibility.Visible;
+
+                });
             }
             else
             {
-                leaveRoomButton.Visibility = Visibility.Visible;
+                this.Dispatcher.Invoke(() =>
+                {
+                    leaveRoomButton.Visibility = Visibility.Visible;
+                });
             }
+            this.Dispatcher.Invoke(() =>
+            {
+                //show users names
+                ConectedUsers.ClearValue(ItemsControl.ItemsSourceProperty);
+                ConectedUsers.ItemsSource = _users;
+            });
 
-            //TODO - show users
         }
 
+        public void update()
+        {
+            while (true)
+            {
+                display();
+                Thread.Sleep(3000); //will sleep for 3 sec
+            }
+        }
+        public void createThread()
+        {
+            // Create a secondary thread by passing a ThreadStart delegate  
+            Thread updateThread = new Thread(new ThreadStart(update));
+            // Start secondary thread  
+            updateThread.Start();
+        }
         private void leaveRoomButton_Click(object sender, RoutedEventArgs e)
         {
             byte[] msg = classes.Serializer.serializeRequest(classes.Deserializer.LEAVE_ROOM);
@@ -82,13 +127,29 @@ namespace trivia_client
             //check if login failed and move to page accordingly
             if (response.status == classes.Deserializer.START_GAME)
             {
-                GamePage page = new GamePage(_connector);
-                NavigationService.Navigate(page);
+                //       GamePage page = new GamePage(_connector);
+                //      NavigationService.Navigate(page);
             }
             else
             {
                 //TODO: show an error
             }
+        }
+
+        private List<User> getUsersFromServer()
+        {
+            byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_ROOM_STATE));
+            classes.GetRoomStateResponse r = classes.Deserializer.deserializeGetRoomStateResponse(res);
+            List<User> users = new List<User>();
+            for (int i = 0; i < r.players.Length; i++)
+            {
+                users.Add(new User()
+                {
+                    username = r.players[i].Substring(1, r.players[i].Length - 2),
+                    isAdmin = i == r.players.Length - 1
+                });
+            }
+            return users;
         }
     }
 }
