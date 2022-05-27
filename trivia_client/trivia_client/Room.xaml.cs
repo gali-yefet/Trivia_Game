@@ -10,17 +10,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 
 namespace trivia_client
 {
     /// <summary>
     /// Interaction logic for RoomUsers.xaml
     /// </summary>
-    ///
-
     public partial class RoomUsers : Page
     {
         Connector _connector;
+        bool _isAdmin;
         List<classes.User> _users;
 
         public RoomUsers(Connector connector, bool isAdmin)
@@ -28,23 +28,54 @@ namespace trivia_client
             InitializeComponent();
             backgroundPage.Content = new BackgroundPage();
             _connector = connector;
+            _isAdmin = isAdmin;
+            display();
+            createThread();
+        }
+
+        public void display()
+        {
             _users = getUsersFromServer();
 
-            if (isAdmin)
+            if (_isAdmin)
             {
-                closeRoomButton.Visibility = Visibility.Visible;
-                startGameButton.Visibility = Visibility.Visible;
+                this.Dispatcher.Invoke(() =>
+                {
+                    closeRoomButton.Visibility = Visibility.Visible;
+                    startGameButton.Visibility = Visibility.Visible;
+
+                });
             }
             else
             {
-                leaveRoomButton.Visibility = Visibility.Visible;
+                this.Dispatcher.Invoke(() =>
+                {
+                    leaveRoomButton.Visibility = Visibility.Visible;
+                });
             }
-
-            //show users list
-            ConectedUsers.Items.Clear();
-            ConectedUsers.ItemsSource = _users;
+            this.Dispatcher.Invoke(() =>
+            {
+                //show users names
+                ConectedUsers.ClearValue(ItemsControl.ItemsSourceProperty);
+                ConectedUsers.ItemsSource = _users;
+            });
         }
 
+        public void update()
+        {
+            while (true)
+            {
+                display();
+                Thread.Sleep(3000); //will sleep for 3 sec
+            }
+        }
+        public void createThread()
+        {
+            // Create a secondary thread by passing a ThreadStart delegate  
+            Thread updateThread = new Thread(new ThreadStart(update));
+            // Start secondary thread  
+            updateThread.Start();
+        }
         private void leaveRoomButton_Click(object sender, RoutedEventArgs e)
         {
             byte[] msg = classes.Serializer.serializeRequest(classes.Deserializer.LEAVE_ROOM);
@@ -96,6 +127,7 @@ namespace trivia_client
                 //TODO: show an error
             }
         }
+
 
         private List<classes.User> getUsersFromServer()
         {

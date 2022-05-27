@@ -22,7 +22,7 @@
             <Label Content="JOIN ROOM" Grid.Row="0" Foreground="White" FontFamily="Arial Black" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
             <!--list of rooms-->
-            <ListView x:Name="ConectedUsers" Grid.Row="1" Visibility="Visible" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
+            <ListView x:Name="ActiveRooms" Grid.Row="1" Visibility="Visible" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
