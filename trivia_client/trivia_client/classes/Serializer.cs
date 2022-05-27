@@ -19,7 +19,7 @@ namespace trivia_client.classes
         public String email;
     }
 
-    struct GetPlayersInROmmRequest
+    struct GetPlayersInRoomRequest
     {
         public uint roomId;
     }
@@ -37,13 +37,14 @@ namespace trivia_client.classes
         public uint answerTimeOut;
     }
 
+    struct SubmitAnswerRequest
+    {
+        private uint answerId;
+    }
+
     class Serializer
     {
-        /*
-         * serilize a request
-         * in: request code, msg
-         * out: request in byte[]
-         */
+ 
 
         //check if a string is only digits
         public static bool checkifNumber(String str)
@@ -56,6 +57,11 @@ namespace trivia_client.classes
             return true;
         }
 
+        /*
+        * serilize a request
+        * in: request code, msg
+        * out: request in byte[]
+        */
         public static byte[] serializeRequest(int code, String msg = "")
         {
             String codeStr = code.ToString();
@@ -83,7 +89,7 @@ namespace trivia_client.classes
             return serializeRequest(Deserializer.SIGNUP_CODE, json);
         }
 
-        public static byte[] serializeGetPlayersInRoomRequest(GetPlayersInROmmRequest r)
+        public static byte[] serializeGetPlayersInRoomRequest(GetPlayersInRoomRequest r)
         {
             String json = JsonConvert.SerializeObject(r);
             return serializeRequest(Deserializer.GET_PLAYERS_IN_ROOM_CODE, json);
@@ -99,6 +105,12 @@ namespace trivia_client.classes
         {
             String json = JsonConvert.SerializeObject(r);
             return serializeRequest(Deserializer.CREATE_ROOM_CODE, json);
+        }
+
+        public static byte[] serializeSubmitAnswerRequest(SubmitAnswerRequest r)
+        {
+            String json = JsonConvert.SerializeObject(r);
+            return serializeRequest(Deserializer.SUBMIT_ANSER, json);
         }
     }
 }
