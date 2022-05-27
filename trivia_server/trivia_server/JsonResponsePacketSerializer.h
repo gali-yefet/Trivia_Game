@@ -2,8 +2,17 @@
 #include <stdio.h>
 #include <iostream>
 #include <vector>
+#include <map>
 #include "define.h"
 #include "Room.h"
+
+typedef struct PlayerResults
+{
+	std::string username;
+	unsigned int correctAnswerCount;
+	unsigned int wrongAnswerCount;
+	unsigned int averageAnserTime;
+}PlayerResults;
 
 typedef struct LoginResponse
 {
@@ -82,6 +91,30 @@ typedef struct LeaveRoomResponse
 {
 	unsigned int status;
 }LeaveRoomResponse;
+
+typedef struct LeaveGameResponse 
+{
+	unsigned int status;
+}LeaveGameResponse;
+
+typedef struct GetQuestionResponse 
+{
+	unsigned int status;
+	std::string question;
+	std::map<unsigned int, std::string> answers;
+}GetQuestionResponse;
+
+typedef struct SubmitAnswerResponse 
+{
+	unsigned int status;
+	unsigned int correctAnswerId;
+}SubmitAnswerResponse;
+
+typedef struct GetGameResultsResponse 
+{
+	unsigned int status;
+	std::vector<PlayerResults> results;
+}GetGameResultsResponse;
 
 
 class JsonResponsePacketSerializer
