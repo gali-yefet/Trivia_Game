@@ -107,26 +107,26 @@ namespace trivia_client.classes
 
     struct LeaveGameResponse
     {
-        uint status;
+        public uint status;
     }
 
     struct GetQuestionResponse
     {
-        uint status;
-        String question;
-        Dictionary<uint, String> answers;
+        public uint status;
+        public String question;
+        public Dictionary<uint, String> answers;
     }
 
     struct SubmitAnswerResponse
     {
-        uint status;
-        uint correctAnswerId;
+        public uint status;
+        public uint correctAnswerId;
     }
 
     struct GetGameResultsResponse
     {
-        uint status;
-        PlayerResults[] results;
+        public uint status;
+        public PlayerResults[] results;
     }
 
     class Deserializer
