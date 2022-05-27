@@ -162,6 +162,55 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeLeaveRoomRespo
 	return serializeMsg(LEAVE_ROOM, data);
 }
 
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeLeaveGameResponse(LeaveGameResponse r)
+{
+	json j;
+	j["status"] = r.status;
+	std::string data = j.dump();  // returns the json as a string
+	return serializeMsg(LEAVE_GAME, data);
+}
+
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetQuestionResponse(GetQuestionResponse r)
+{
+	json j;
+	j["status"] = r.status;
+	j["ansers"] = r.answers;
+	j["question"] = r.question;
+	std::string data = j.dump();  // returns the json as a string
+	return serializeMsg(GET_QUESTION, data);
+}
+
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeSubmitAnswerResponse(SubmitAnswerResponse r)
+{
+	json j;
+	j["status"] = r.status;
+	j["correctAnswerId"] = r.correctAnswerId;
+	std::string data = j.dump();  // returns the json as a string
+	return serializeMsg(LEAVE_GAME, data);
+}
+
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetGameResultsResponse(GetGameResultsResponse r)
+{
+	json j;
+	j["status"] = r.status;
+
+	//create a vector of results response
+	std::vector<json> results;
+	for (auto i = r.results.begin(); i != r.results.end(); ++i)
+	{
+		json result;
+		result["averageAnserTime"] = i->averageAnserTime;
+		result["correctAnswerCount"] = i->correctAnswerCount;
+		result["username"] = eraseQuotes(i->username);
+		result["wrongAnswerCount"] = i->wrongAnswerCount;
+		results.push_back(result);
+	}
+	j["results"] = results;
+
+	std::string data = j.dump();  // returns the json as a string
+	return serializeMsg(LEAVE_GAME, data);
+}
+
 /*
 serialize a response msg
 in: code, and data

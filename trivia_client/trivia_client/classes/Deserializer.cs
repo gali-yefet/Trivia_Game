@@ -25,6 +25,14 @@ namespace trivia_client.classes
 
     }
 
+    public struct PlayerResults
+    {
+        public String username;
+        public uint correctAnswerCount;
+        public uint wrongAnswerCount;
+        public uint averageAnserTime;
+    }
+
     struct LoginResponse
     {
         public uint status;
@@ -97,6 +105,30 @@ namespace trivia_client.classes
         public uint status;
     }
 
+    struct LeaveGameResponse
+    {
+        public uint status;
+    }
+
+    struct GetQuestionResponse
+    {
+        public uint status;
+        public String question;
+        public Dictionary<uint, String> answers;
+    }
+
+    struct SubmitAnswerResponse
+    {
+        public uint status;
+        public uint correctAnswerId;
+    }
+
+    struct GetGameResultsResponse
+    {
+        public uint status;
+        public PlayerResults[] results;
+    }
+
     class Deserializer
     {
         //define codes
@@ -114,6 +146,11 @@ namespace trivia_client.classes
 	    public const int START_GAME = 11;
 	    public const int GET_ROOM_STATE = 12;
         public const int LEAVE_ROOM = 13;
+        public const int LEAVE_GAME = 14;
+	    public const int GET_QUESTION = 15;
+        public const int SUBMIT_ANSWER = 16;
+        public const int GET_GAME_RESULTS = 17;
+
         private static string extractValue(String json, bool eraseSides = false)
         {
             String value = "";
@@ -394,5 +431,91 @@ namespace trivia_client.classes
             r.status = bufferStr.Contains("status") ? UInt32.Parse(extractValue(bufferStr)) : ERROR_CODE;
             return r;
         }
+
+        public static LeaveGameResponse deserializeLeaveGameResponse(byte[] buffer) 
+        {
+            LeaveGameResponse r;
+            String bufferStr = Encoding.UTF8.GetString(buffer);
+            r.status = bufferStr.Contains("status") ? UInt32.Parse(extractValue(bufferStr)) : ERROR_CODE;
+            return r;
+        }
+
+        public static GetQuestionResponse deserializeGetQuestionResponse(byte[] buffer)
+        {
+            GetQuestionResponse r;
+            String bufferStr = Encoding.UTF8.GetString(buffer);
+
+            //add answers
+            Dictionary<uint, String> map = new Dictionary<uint, String>();
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf('[')+1);
+            while (bufferStr.IndexOf(']') != -1)
+            {
+                String answer = bufferStr.Substring(1, bufferStr.IndexOf(']')-1);
+                uint correctAnswerId = UInt32.Parse(answer.Substring(0, answer.IndexOf(',')));
+                String question = answer.Substring(answer.IndexOf(',') + 2, answer.Length - answer.IndexOf(',') - 3);
+                map.Add(correctAnswerId, question);
+                bufferStr = bufferStr.Substring(bufferStr.IndexOf(']') + 2);
+            }
+            r.answers = map;
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf(',') + 1);
+
+            r.question = extractValue(bufferStr);
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf(',') + 1);
+
+            r.status = bufferStr.Contains("status") ? UInt32.Parse(extractValue(bufferStr)) : ERROR_CODE;
+            return r;
+        }
+
+        public static SubmitAnswerResponse deserializeSubmitAnswerResponse(byte[] buffer)
+        {
+            SubmitAnswerResponse r;
+            String bufferStr = Encoding.UTF8.GetString(buffer);
+            r.correctAnswerId = UInt32.Parse(extractValue(bufferStr));
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf(',') + 1);
+            r.status = bufferStr.Contains("status") ? UInt32.Parse(extractValue(bufferStr)) : ERROR_CODE;
+            return r;
+        }
+
+        public static GetGameResultsResponse deserializeGetGameResultsResponse(byte[] buffer)
+        {
+            GetGameResultsResponse r;
+            String bufferStr = Encoding.UTF8.GetString(buffer);
+
+            //add statistics
+            String results = extractValue(bufferStr);
+            Stack<PlayerResults> stack = new Stack<PlayerResults>();
+            while (results.Length > 0)
+            {
+                //get the current statistics
+                PlayerResults currrResults;
+
+                String averageAnserTime = extractValue(results);
+                currrResults.averageAnserTime = classes.Serializer.checkifNumber(averageAnserTime) ? UInt32.Parse(averageAnserTime) : 0;
+                results = results.Substring(results.IndexOf(',') + 1);
+
+                String correctAnswerCount = extractValue(results);
+                currrResults.correctAnswerCount = classes.Serializer.checkifNumber(correctAnswerCount) ? UInt32.Parse(correctAnswerCount) : 0;
+                results = results.Substring(results.IndexOf(',') + 1);
+
+                String name = extractValue(results);
+                currrResults.username = name.Length >= 2 ? name : "\"\"";
+                results = results.Substring(results.IndexOf(',') + 1);
+
+                String wrongAnswerCount = extractValue(results);
+                currrResults.wrongAnswerCount = classes.Serializer.checkifNumber(wrongAnswerCount) ? UInt32.Parse(wrongAnswerCount) : 0;
+
+                if (results.IndexOf(',') != -1)
+                    results = results.Substring(results.IndexOf(',') + 1);
+                else
+                    results = "";
+                stack.Push(currrResults);
+            }
+            r.results = stack.ToArray();
+
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf(']') + 2);
+            r.status = bufferStr.Contains("status") ? UInt32.Parse(extractValue(bufferStr)) : ERROR_CODE;
+            return r;
+        }
+
     }
 }
