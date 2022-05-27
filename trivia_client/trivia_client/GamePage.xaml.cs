@@ -25,12 +25,6 @@ namespace trivia_client
             InitializeComponent();
             backgroundPage.Content = new BackgroundPage();
             _connector = connector;
-
-
-            //testing
-            byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_QUESTION));
-            classes.GetQuestionResponse r = classes.Deserializer.deserializeGetQuestionResponse(res);
-
         }
     }
 }
