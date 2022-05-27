@@ -134,7 +134,6 @@ public:
 	static std::vector<unsigned char> serializeStartGameResponse(StartGameResponse r);
 	static std::vector<unsigned char> serializeGetRoomStateResponse(GetRoomStateResponse r);
 	static std::vector<unsigned char> serializeLeaveRoomResponse(LeaveRoomResponse r);
-
 	static std::vector<unsigned char> serializeLeaveGameResponse(LeaveGameResponse r);
 	static std::vector<unsigned char> serializeGetQuestionResponse(GetQuestionResponse r);
 	static std::vector<unsigned char> serializeSubmitAnswerResponse(SubmitAnswerResponse r);
