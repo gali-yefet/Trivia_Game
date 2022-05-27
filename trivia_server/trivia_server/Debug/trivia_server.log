@@ -1,4 +1,22 @@
-﻿RoomAdminRequestHandler.obj : error LNK2001: unresolved external symbol "private: virtual bool __thiscall GameRequestHandler::isRequestRelevant(struct RequestInfo)" (?isRequestRelevant@GameRequestHandler@@EAE_NURequestInfo@@@Z)
+﻿  Communicator.cpp
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\Communicator.cpp(108,32): warning C4101: 'e': unreferenced local variable
+  JsonRequestPacketDeserializer.cpp
+  LoginManager.cpp
+  LoginRequestHandler.cpp
+  MenuRequestHandler.cpp
+  RequestHandlerFactory.cpp
+  Room.cpp
+  RoomAdminRequestHandler.cpp
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomAdminRequestHandler.cpp(53,23): warning C4018: '<': signed/unsigned mismatch
+  RoomManager.cpp
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(82,20): warning C4018: '<': signed/unsigned mismatch
+  RoomMemberRequestHandler.cpp
+  Server.cpp
+  Source.cpp
+  Generating Code...
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(40): warning C4715: 'RoomManager::getRoomState': not all control paths return a value
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(85): warning C4715: 'RoomManager::createRoomId': not all control paths return a value
+RoomAdminRequestHandler.obj : error LNK2001: unresolved external symbol "private: virtual bool __thiscall GameRequestHandler::isRequestRelevant(struct RequestInfo)" (?isRequestRelevant@GameRequestHandler@@EAE_NURequestInfo@@@Z)
 RoomMemberRequestHandler.obj : error LNK2001: unresolved external symbol "private: virtual bool __thiscall GameRequestHandler::isRequestRelevant(struct RequestInfo)" (?isRequestRelevant@GameRequestHandler@@EAE_NURequestInfo@@@Z)
 RoomAdminRequestHandler.obj : error LNK2001: unresolved external symbol "private: virtual struct RequestResult __thiscall GameRequestHandler::handleRequest(struct RequestInfo)" (?handleRequest@GameRequestHandler@@EAE?AURequestResult@@URequestInfo@@@Z)
 RoomMemberRequestHandler.obj : error LNK2001: unresolved external symbol "private: virtual struct RequestResult __thiscall GameRequestHandler::handleRequest(struct RequestInfo)" (?handleRequest@GameRequestHandler@@EAE?AURequestResult@@URequestInfo@@@Z)
