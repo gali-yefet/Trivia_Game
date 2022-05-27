@@ -17,19 +17,12 @@ namespace trivia_client
     /// <summary>
     /// Interaction logic for RoomUsers.xaml
     /// </summary>
-    /// 
-
-    class User
-    {
-        public String username { get; set; }
-        public bool isAdmin { get; set; }
-    }
-
     public partial class RoomUsers : Page
     {
         Connector _connector;
-        List<User> _users;
         bool _isAdmin;
+        List<classes.User> _users;
+
         public RoomUsers(Connector connector, bool isAdmin)
         {
             InitializeComponent();
@@ -66,7 +59,6 @@ namespace trivia_client
                 ConectedUsers.ClearValue(ItemsControl.ItemsSourceProperty);
                 ConectedUsers.ItemsSource = _users;
             });
-
         }
 
         public void update()
@@ -127,8 +119,8 @@ namespace trivia_client
             //check if login failed and move to page accordingly
             if (response.status == classes.Deserializer.START_GAME)
             {
-                //       GamePage page = new GamePage(_connector);
-                //      NavigationService.Navigate(page);
+                GamePage page = new GamePage(_connector);
+                NavigationService.Navigate(page);
             }
             else
             {
@@ -136,18 +128,19 @@ namespace trivia_client
             }
         }
 
-        private List<User> getUsersFromServer()
+
+        private List<classes.User> getUsersFromServer()
         {
             byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_ROOM_STATE));
             classes.GetRoomStateResponse r = classes.Deserializer.deserializeGetRoomStateResponse(res);
-            List<User> users = new List<User>();
-            for (int i = 0; i < r.players.Length; i++)
+            List<classes.User> users = new List<classes.User>();
+            for(int i = 0; i< r.players.Length; i++)
             {
-                users.Add(new User()
+                users.Add(new classes.User()
                 {
                     username = r.players[i].Substring(1, r.players[i].Length - 2),
                     isAdmin = i == r.players.Length - 1
-                });
+                }) ;
             }
             return users;
         }

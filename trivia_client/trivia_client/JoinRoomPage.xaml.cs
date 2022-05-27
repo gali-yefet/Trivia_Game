@@ -17,12 +17,7 @@ namespace trivia_client
     /// <summary>
     /// Interaction logic for JoinRoomPage.xaml
     /// </summary>
-    class Room
-    {
-        public String name { get; set; }
-        public int maxPlayers { get; set; }
-    }
-
+    
     public partial class JoinRoomPage : Page
     {
         Connector _connector;
