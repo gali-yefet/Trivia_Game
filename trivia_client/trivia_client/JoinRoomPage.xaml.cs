@@ -30,7 +30,6 @@ namespace trivia_client
             backgroundPage.Content = new BackgroundPage();
             _connector = connector;
             _firstTime = firstTime;
-            display();
             createThread();
         }
 
@@ -52,6 +51,8 @@ namespace trivia_client
                 this.Dispatcher.Invoke(() =>
                 {
                     //show rooms names
+                    Error_noRooms.Visibility = Visibility.Hidden;
+                    ActiveRooms.Visibility = Visibility.Visible;
                     ActiveRooms.ClearValue(ItemsControl.ItemsSourceProperty);
                     ActiveRooms.ItemsSource = _rooms;
                 });
@@ -72,7 +73,7 @@ namespace trivia_client
             while (true)
             {
                 display();
-                Thread.Sleep(3000); //will sleep for 3 sec
+                Thread.Sleep(20000); //will sleep for 3 sec
             }
         }
 

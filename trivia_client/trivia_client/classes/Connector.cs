@@ -33,7 +33,11 @@ namespace trivia_client
             //get length
             byte[] len_byte = new byte[4];
             _clientStream.Read(len_byte, 0, 4);
-            int len = Int32.Parse(Encoding.UTF8.GetString(len_byte));
+            string s = Encoding.UTF8.GetString(len_byte);
+            if (s.Contains("{") && s.Length >= 2)
+                s = s.Substring(0, s.Length - 2);
+
+            int len = Int32.Parse(s);
 
             //get data
             byte[] buffer = new byte[len];
@@ -43,8 +47,9 @@ namespace trivia_client
 
         public void sendData(byte[] msg)
         {
-            _clientStream.Write(msg, 0, msg.Length);
-            _clientStream.Flush();
+            string s = System.Text.Encoding.UTF8.GetString(msg);
+            _clientStream.Write(msg, 0, s.Length);
+            _clientStream.FlushAsync();
         }
 
         public byte[] sendGetData(byte[] msg)
