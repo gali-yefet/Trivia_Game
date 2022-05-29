@@ -81,7 +81,7 @@ namespace trivia_client
             //check if login failed and move to page accordingly
             if (response.status == classes.Deserializer.LEAVE_ROOM)
             {
-                Menu page = new Menu(_connector);
+                JoinRoomPage page = new JoinRoomPage(_connector);
                 NavigationService.Navigate(page);
             }
             else

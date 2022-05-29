@@ -111,14 +111,25 @@ void Communicator::HandleNewClient(SOCKET socket)
 		}
 
 		//handle the client request according to socket
-		IRequestHandler* handler = m_clients.find(socket)->second;
-		m_clients.erase(socket);
-		if (handler->isRequestRelevant(r))
+		auto it = m_clients.find(socket);
+		if (it == m_clients.end())
 		{
-			RequestResult res = handler->handleRequest(r);
-			m_clients.insert(std::pair<SOCKET, IRequestHandler*>(socket, res.newHandler));
-			sendData(socket, res.buffer);
-		}	
+			std::cout << "socket not found";
+		}
+		else
+		{
+			IRequestHandler* handler = it->second;
+			if (handler != nullptr)
+			{
+				if (handler->isRequestRelevant(r))
+				{
+					m_clients.erase(socket);
+					RequestResult res = handler->handleRequest(r);
+					m_clients.insert(std::pair<SOCKET, IRequestHandler*>(socket, res.newHandler));
+					sendData(socket, res.buffer);
+				}
+			}
+		}
 	}
 }
 

@@ -73,7 +73,7 @@ namespace trivia_client
             while (true)
             {
                 display();
-                Thread.Sleep(20000); //will sleep for 3 sec
+                Thread.Sleep(3000); //will sleep for 3 sec
             }
         }
 
