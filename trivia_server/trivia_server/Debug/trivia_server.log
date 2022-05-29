@@ -1,4 +1,6 @@
-﻿  GameRequestHandler.cpp
+﻿  Communicator.cpp
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\Communicator.cpp(108,32): warning C4101: 'e': unreferenced local variable
+  GameRequestHandler.cpp
   IRequestHandler.cpp
   JsonRequestPacketDeserializer.cpp
   JsonResponsePacketSerializer.cpp
@@ -6,8 +8,6 @@ C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gal
 C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\JsonResponsePacketSerializer.cpp(145,20): warning C4018: '<': signed/unsigned mismatch
   LoggedUser.cpp
   LoginManager.cpp
-  Communicator.cpp
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\Communicator.cpp(108,32): warning C4101: 'e': unreferenced local variable
   LoginRequestHandler.cpp
   MenuRequestHandler.cpp
   Question.cpp
@@ -27,11 +27,11 @@ C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gal
   StatisticsManager.cpp
   User.cpp
   Generating Code...
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(40): warning C4715: 'RoomManager::getRoomState': not all control paths return a value
 C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(85): warning C4715: 'RoomManager::createRoomId': not all control paths return a value
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(40): warning C4715: 'RoomManager::getRoomState': not all control paths return a value
   Compiling...
-  userStatistics.cpp
   WSAInitializer.cpp
+  userStatistics.cpp
   Generating Code...
   sqlite3.c
   trivia_server.vcxproj -> C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe

@@ -35,6 +35,7 @@ namespace trivia_client
 
         public void display()
         {
+            _users = null;
             _users = getUsersFromServer();
 
             if (_isAdmin)
@@ -43,16 +44,11 @@ namespace trivia_client
                 {
                     closeRoomButton.Visibility = Visibility.Visible;
                     startGameButton.Visibility = Visibility.Visible;
+                    leaveRoomButton.Visibility = Visibility.Hidden;
 
                 });
             }
-            else
-            {
-                this.Dispatcher.Invoke(() =>
-                {
-                    leaveRoomButton.Visibility = Visibility.Visible;
-                });
-            }
+           
             this.Dispatcher.Invoke(() =>
             {
                 //show users names

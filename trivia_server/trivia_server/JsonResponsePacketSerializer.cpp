@@ -144,6 +144,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetRoomStateRe
 	j["answerTimeout"] = r.answerTimeout;
 	for (int i = 0; i < r.players.size(); i++)
 		r.players[i] = eraseQuotes(r.players[i]);
+
 	j["players"] = r.players;
 
 	std::string data = j.dump();  // returns the json as a string

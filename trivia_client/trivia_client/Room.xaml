@@ -37,7 +37,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Name="leaveRoomButton" Visibility="Hidden" Grid.ColumnSpan="2" Content="leave room" Click="leaveRoomButton_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
+                <Button Name="leaveRoomButton" Visibility="Visible" Grid.ColumnSpan="2" Content="leave room" Click="leaveRoomButton_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
                 <Button Name="closeRoomButton" Visibility="Hidden" Grid.Column="0" Content="close room" Click="closeRoomButton_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
                 <Button Name="startGameButton" Visibility="Hidden" Grid.Column="1" Content="start game" Click="startGameButton_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
             </Grid>
