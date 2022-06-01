@@ -23,9 +23,10 @@ private:
 	RequestHandlerFactory& m_handlerFactory;
 
 	void HandleNewClient(SOCKET socket);
-	void closeClient(RequestInfo r, std::string username);
+	void closeClient(RequestInfo r, std::string username, int roomId);
 	void setCurrUsername(RequestInfo r, std::string& username);
 	void setCurrRoomId(RequestInfo r, int& roomId);
+	void setIsAdmin(RequestInfo r, bool& isAdmin);
 
 	void sendData(const SOCKET sc, const std::string message);
 	std::string getData(const SOCKET sc, const int bytesNum, const int flags = 0);

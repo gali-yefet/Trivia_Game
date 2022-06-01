@@ -90,6 +90,7 @@ void Communicator::HandleNewClient(SOCKET socket)
 	RequestInfo r;
 	std::string currUsername = "";
 	int currRoomId = NOT_IN_ROOM;
+	bool isAdmin = false;
 	while (true)
 	{
 		//get the msg into the struct
@@ -110,9 +111,10 @@ void Communicator::HandleNewClient(SOCKET socket)
 			continue;
 		}
 
-		//set the rught data about the user
+		//set the right data about the user
 		setCurrUsername(r, currUsername);
 		setCurrRoomId(r, currRoomId);
+		setIsAdmin(r, isAdmin);
 
 		//handle the client request according to socket
 		auto it = m_clients.find(socket);
@@ -136,6 +138,16 @@ void Communicator::HandleNewClient(SOCKET socket)
 			}
 		}
 	}
+}
+
+void Communicator::closeClient(RequestInfo r, std::string username, int roomId)
+{
+	if (roomId != NOT_IN_ROOM)
+	{
+		if(r.requestCode == )
+		//leave room / close room
+	}
+
 }
 
 void Communicator::setCurrUsername(RequestInfo r, std::string& username)
@@ -166,6 +178,19 @@ void Communicator::setCurrRoomId(RequestInfo r, int& roomId)
 	case LEAVE_ROOM:
 	case CLOSE_ROOM:
 		roomId = NOT_IN_ROOM;
+		break;
+	}
+}
+
+void Communicator::setIsAdmin(RequestInfo r, bool& isAdmin)
+{
+	switch (r.requestCode)
+	{
+	case CREATE_ROOM:
+		isAdmin = true;
+		break;
+	case CLOSE_ROOM:
+		isAdmin = false;
 		break;
 	}
 }
