@@ -115,6 +115,7 @@ void Communicator::HandleNewClient(SOCKET socket)
 		if (it == m_clients.end())
 		{
 			std::cout << "socket not found";
+			//TODO: add logout
 		}
 		else
 		{
