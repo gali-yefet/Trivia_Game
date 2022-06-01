@@ -88,6 +88,7 @@ out: void
 void Communicator::HandleNewClient(SOCKET socket)
 {	
 	RequestInfo r;
+	std::string currUsername = "";
 	while (true)
 	{
 		//get the msg into the struct
@@ -102,12 +103,23 @@ void Communicator::HandleNewClient(SOCKET socket)
 
 			std::string msg = getData(socket, bytes); // get the json
 			r.json = std::vector<unsigned char>(msg.begin(), msg.end());
-
-			std::string json_text(r.json.begin(), r.json.end());
 		}
 		catch (const std::exception& e)
 		{
 			continue;
+		}
+
+		//get curr username
+		switch (r.requestCode)
+		{
+		case LOGIN_CODE:
+			currUsername = JsonRequestPacketDeseializer::deserializeLoginRequest(r).username;
+			break;
+		case SIGN_CODE:
+			currUsername = JsonRequestPacketDeseializer::deserializeSignupRequest(r).username;
+			break;
+		case LOGOUT:
+			currUsername = "";
 		}
 
 		//handle the client request according to socket
@@ -115,7 +127,7 @@ void Communicator::HandleNewClient(SOCKET socket)
 		if (it == m_clients.end())
 		{
 			std::cout << "socket not found";
-			//TODO: add logout
+			//TODO: add logout & break?
 		}
 		else
 		{
