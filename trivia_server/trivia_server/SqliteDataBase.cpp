@@ -73,6 +73,7 @@ void SqliteDataBase::login(std::string username)
 void SqliteDataBase::logout(std::string username)
 {
 	std::string q = "UPDATE USER SET IS_ACTIVE = 0 WHERE USERNAME = '" + username + "';";
+	std::cerr << "loged out" << std::endl;//TODO: erase
 	query(q.c_str());
 }
 

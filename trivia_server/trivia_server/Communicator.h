@@ -23,7 +23,8 @@ private:
 	RequestHandlerFactory& m_handlerFactory;
 
 	void HandleNewClient(SOCKET socket);
-	void closeClient(RequestInfo r, std::string username, int roomId);
+
+	void closeClient(std::string username, int roomId, bool isAdmin);
 	void setCurrUsername(RequestInfo r, std::string& username);
 	void setCurrRoomId(RequestInfo r, int& roomId);
 	void setIsAdmin(RequestInfo r, bool& isAdmin);

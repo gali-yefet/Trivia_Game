@@ -91,7 +91,7 @@ void Communicator::HandleNewClient(SOCKET socket)
 	std::string currUsername = "";
 	int currRoomId = NOT_IN_ROOM;
 	bool isAdmin = false;
-	while (true)
+	while (socket)
 	{
 		//get the msg into the struct
 		r.receivalTime = time(&r.receivalTime);
@@ -121,33 +121,37 @@ void Communicator::HandleNewClient(SOCKET socket)
 		if (it == m_clients.end())
 		{
 			std::cout << "socket not found";
-			//TODO: add logout & break?
 		}
 		else
 		{
 			IRequestHandler* handler = it->second;
-			if (handler != nullptr)
+			if (handler != nullptr && handler->isRequestRelevant(r))
 			{
-				if (handler->isRequestRelevant(r))
-				{
-					m_clients.erase(socket);
-					RequestResult res = handler->handleRequest(r);
-					m_clients.insert(std::pair<SOCKET, IRequestHandler*>(socket, res.newHandler));
-					sendData(socket, res.buffer);
-				}
+				m_clients.erase(socket);
+				RequestResult res = handler->handleRequest(r);
+				m_clients.insert(std::pair<SOCKET, IRequestHandler*>(socket, res.newHandler));
+				sendData(socket, res.buffer);
 			}
 		}
 	}
+	std::cout << "end connector func" << std::endl;
+	closeClient(currUsername, currRoomId, isAdmin);
 }
 
-void Communicator::closeClient(RequestInfo r, std::string username, int roomId)
+void Communicator::closeClient(std::string username, int roomId, bool isAdmin)
 {
+	//close all things
 	if (roomId != NOT_IN_ROOM)
 	{
-		if(r.requestCode == )
-		//leave room / close room
+		if (isAdmin)
+			m_handlerFactory.createRoomAdminRequestHandler(roomId, username)->closeRoom();
+		else
+			m_handlerFactory.createRoomMemberRequestHandler(roomId, username)->leaveRoom();
 	}
 
+	//logout
+	if (username != "")
+		m_handlerFactory.getDatabase()->logout(username);
 }
 
 void Communicator::setCurrUsername(RequestInfo r, std::string& username)
