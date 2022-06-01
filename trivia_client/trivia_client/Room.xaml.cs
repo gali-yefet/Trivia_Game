@@ -39,7 +39,7 @@ namespace trivia_client
         {
             _users = null;
             _users = getUsersFromServer();
-
+            
             if (_isAdmin)
             {
                 this.Dispatcher.Invoke(() =>
@@ -102,7 +102,7 @@ namespace trivia_client
             if (response.status == classes.Deserializer.CLOSE_ROOM)
             {
                 _runUpdateThread = false;
-                Menu page = new Menu(_connector);
+                JoinRoomPage page = new JoinRoomPage(_connector);
                 NavigationService.Navigate(page);
             }
             else
@@ -143,6 +143,11 @@ namespace trivia_client
                     username = r.players[i].Substring(1, r.players[i].Length - 2),
                     isAdmin = i == r.players.Length - 1
                 }) ;
+            }
+            if(r.isRoomClosed)
+            {
+                JoinRoomPage page = new JoinRoomPage(_connector);
+                NavigationService.Navigate(page);
             }
             return users;
         }

@@ -91,7 +91,7 @@ void Communicator::HandleNewClient(SOCKET socket)
 	std::string currUsername = "";
 	int currRoomId = NOT_IN_ROOM;
 	bool isAdmin = false;
-	while (checkIfSocketIsOpen(socket))
+	while(checkIfSocketIsOpen(socket))
 	{
 		//get the msg into the struct
 		r.receivalTime = time(&r.receivalTime);

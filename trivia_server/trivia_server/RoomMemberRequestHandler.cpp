@@ -64,6 +64,7 @@ RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo r)
     GetRoomStateResponse response;
     response.answerTimeout = m_room.getRoomData().timePerQuestion;
     response.hasGameBegun = m_room.getRoomData().isActive == IN_GAME;
+    response.isClosed = m_room.getRoomData().isClosed == CLOSED;
     response.players = m_room.getAllUsers();
     response.questionCount = m_room.getRoomData().numOfQuestionsInGame;
     response.status = r.requestCode;

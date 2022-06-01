@@ -17,7 +17,7 @@ namespace trivia_client
     /// <summary>
     /// Interaction logic for JoinRoomPage.xaml
     /// </summary>
-    
+
     public partial class JoinRoomPage : Page
     {
         Connector _connector;
@@ -32,9 +32,11 @@ namespace trivia_client
             _connector = connector;
             _firstTime = firstTime;
             _runUpdateThread = true;
+            
             createThread();
         }
 
+        [STAThread]
         public void display()
         {
             _rooms = getActiveRoomsFromServer();
@@ -70,6 +72,7 @@ namespace trivia_client
             }
         }
 
+        [STAThread]
         public void update()
         {
             while (_runUpdateThread)
@@ -79,12 +82,15 @@ namespace trivia_client
             }
         }
 
+        [STAThread]
         public Thread createThread()
         {
+
             // Create a secondary thread by passing a ThreadStart delegate  
             Thread updateThread = new Thread(new ThreadStart(update));
             // Start secondary thread  
             updateThread.Start();
+            
             return updateThread;
         }
         private void backButton_Click(object sender, RoutedEventArgs e)
