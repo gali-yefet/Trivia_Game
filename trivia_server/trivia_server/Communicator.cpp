@@ -89,6 +89,7 @@ void Communicator::HandleNewClient(SOCKET socket)
 {	
 	RequestInfo r;
 	std::string currUsername = "";
+	int currRoomId = NOT_IN_ROOM;
 	while (true)
 	{
 		//get the msg into the struct
@@ -109,18 +110,9 @@ void Communicator::HandleNewClient(SOCKET socket)
 			continue;
 		}
 
-		//get curr username
-		switch (r.requestCode)
-		{
-		case LOGIN_CODE:
-			currUsername = JsonRequestPacketDeseializer::deserializeLoginRequest(r).username;
-			break;
-		case SIGN_CODE:
-			currUsername = JsonRequestPacketDeseializer::deserializeSignupRequest(r).username;
-			break;
-		case LOGOUT:
-			currUsername = "";
-		}
+		//set the rught data about the user
+		setCurrUsername(r, currUsername);
+		setCurrRoomId(r, currRoomId);
 
 		//handle the client request according to socket
 		auto it = m_clients.find(socket);
@@ -143,6 +135,38 @@ void Communicator::HandleNewClient(SOCKET socket)
 				}
 			}
 		}
+	}
+}
+
+void Communicator::setCurrUsername(RequestInfo r, std::string& username)
+{
+	switch (r.requestCode)
+	{
+	case LOGIN_CODE:
+		username = JsonRequestPacketDeseializer::deserializeLoginRequest(r).username;
+		break;
+	case SIGN_CODE:
+		username = JsonRequestPacketDeseializer::deserializeSignupRequest(r).username;
+		break;
+	case LOGOUT:
+		username = "";
+	}
+}
+
+void Communicator::setCurrRoomId(RequestInfo r, int& roomId)
+{
+	switch (r.requestCode)
+	{
+	case CREATE_ROOM:
+		roomId = m_handlerFactory.getRoomManager().getRoomId(JsonRequestPacketDeseializer::deserializeCreateRoomRequest(r).roomName);
+		break;
+	case JOIN_ROOM:
+		roomId = JsonRequestPacketDeseializer::deserializeJoinRoomRequest(r).roomId;
+		break;
+	case LEAVE_ROOM:
+	case CLOSE_ROOM:
+		roomId = NOT_IN_ROOM;
+		break;
 	}
 }
 
