@@ -91,7 +91,7 @@ void Communicator::HandleNewClient(SOCKET socket)
 	std::string currUsername = "";
 	int currRoomId = NOT_IN_ROOM;
 	bool isAdmin = false;
-	while (socket)
+	while (checkIfSocketIsOpen(socket))
 	{
 		//get the msg into the struct
 		r.receivalTime = time(&r.receivalTime);
@@ -134,7 +134,6 @@ void Communicator::HandleNewClient(SOCKET socket)
 			}
 		}
 	}
-	std::cout << "end connector func" << std::endl;
 	closeClient(currUsername, currRoomId, isAdmin);
 }
 
@@ -197,6 +196,13 @@ void Communicator::setIsAdmin(RequestInfo r, bool& isAdmin)
 		isAdmin = false;
 		break;
 	}
+}
+
+bool Communicator::checkIfSocketIsOpen(SOCKET socket)
+{
+	char* data = new char[1];
+	int res = recv(socket, data, 0, NULL);
+	return res != INVALID_SOCKET;
 }
 
 /*

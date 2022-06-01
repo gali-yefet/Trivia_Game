@@ -29,6 +29,7 @@ private:
 	void setCurrRoomId(RequestInfo r, int& roomId);
 	void setIsAdmin(RequestInfo r, bool& isAdmin);
 
+	bool checkIfSocketIsOpen(SOCKET socket);
 	void sendData(const SOCKET sc, const std::string message);
 	std::string getData(const SOCKET sc, const int bytesNum, const int flags = 0);
 };
