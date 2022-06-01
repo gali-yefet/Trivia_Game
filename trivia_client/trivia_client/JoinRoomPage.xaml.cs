@@ -23,6 +23,7 @@ namespace trivia_client
         Connector _connector;
         List<classes.RoomData> _rooms;
         bool _firstTime;
+        bool _runUpdateThread;
 
         public JoinRoomPage(Connector connector, bool firstTime = true)
         {
@@ -30,6 +31,7 @@ namespace trivia_client
             backgroundPage.Content = new BackgroundPage();
             _connector = connector;
             _firstTime = firstTime;
+            _runUpdateThread = true;
             createThread();
         }
 
@@ -70,22 +72,24 @@ namespace trivia_client
 
         public void update()
         {
-            while (true)
+            while (_runUpdateThread)
             {
                 display();
                 Thread.Sleep(3000); //will sleep for 3 sec
             }
         }
 
-        public void createThread()
+        public Thread createThread()
         {
             // Create a secondary thread by passing a ThreadStart delegate  
             Thread updateThread = new Thread(new ThreadStart(update));
             // Start secondary thread  
             updateThread.Start();
+            return updateThread;
         }
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
+            _runUpdateThread = false;
             Menu page = new Menu(_connector);
             NavigationService.Navigate(page);
         }
@@ -121,6 +125,7 @@ namespace trivia_client
                 }
                 else
                 {
+                    _runUpdateThread = false;
                     RoomUsers page = new RoomUsers(_connector, false);
                     NavigationService.Navigate(page);
                 }
