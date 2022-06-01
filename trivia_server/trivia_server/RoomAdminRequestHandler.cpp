@@ -45,17 +45,22 @@ RequestResult RoomAdminRequestHandler::handleRequest(RequestInfo r)
     return result;
 }
 
-
-RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo r)
+void RoomAdminRequestHandler::closeRoom()
 {
     //remove all users from room
-    std::vector <std::string> users =  m_room.getAllUsers();
-    for (int i = 0; i < users.size(); i++) 
+    std::vector <std::string> users = m_room.getAllUsers();
+    for (int i = 0; i < users.size(); i++)
     {
         m_room.removeUser(LoggedUser(users[i]));
     }
     //close the room
     m_roomManager.changeRoomState(m_room.getRoomData().id, CLOSED);
+}
+
+
+RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo r)
+{
+    closeRoom();
 
     //send response
     CloseRoomResponse response;

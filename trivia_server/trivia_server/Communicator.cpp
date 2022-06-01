@@ -88,7 +88,10 @@ out: void
 void Communicator::HandleNewClient(SOCKET socket)
 {	
 	RequestInfo r;
-	while (true)
+	std::string currUsername = "";
+	int currRoomId = NOT_IN_ROOM;
+	bool isAdmin = false;
+	while (checkIfSocketIsOpen(socket))
 	{
 		//get the msg into the struct
 		r.receivalTime = time(&r.receivalTime);
@@ -102,36 +105,104 @@ void Communicator::HandleNewClient(SOCKET socket)
 
 			std::string msg = getData(socket, bytes); // get the json
 			r.json = std::vector<unsigned char>(msg.begin(), msg.end());
-
-			std::string json_text(r.json.begin(), r.json.end());
 		}
 		catch (const std::exception& e)
 		{
 			continue;
 		}
 
+		//set the right data about the user
+		setCurrUsername(r, currUsername);
+		setCurrRoomId(r, currRoomId);
+		setIsAdmin(r, isAdmin);
+
 		//handle the client request according to socket
 		auto it = m_clients.find(socket);
 		if (it == m_clients.end())
 		{
 			std::cout << "socket not found";
-			//TODO: add logout
 		}
 		else
 		{
 			IRequestHandler* handler = it->second;
-			if (handler != nullptr)
+			if (handler != nullptr && handler->isRequestRelevant(r))
 			{
-				if (handler->isRequestRelevant(r))
-				{
-					m_clients.erase(socket);
-					RequestResult res = handler->handleRequest(r);
-					m_clients.insert(std::pair<SOCKET, IRequestHandler*>(socket, res.newHandler));
-					sendData(socket, res.buffer);
-				}
+				m_clients.erase(socket);
+				RequestResult res = handler->handleRequest(r);
+				m_clients.insert(std::pair<SOCKET, IRequestHandler*>(socket, res.newHandler));
+				sendData(socket, res.buffer);
 			}
 		}
 	}
+	closeClient(currUsername, currRoomId, isAdmin);
+}
+
+void Communicator::closeClient(std::string username, int roomId, bool isAdmin)
+{
+	//close all things
+	if (roomId != NOT_IN_ROOM)
+	{
+		if (isAdmin)
+			m_handlerFactory.createRoomAdminRequestHandler(roomId, username)->closeRoom();
+		else
+			m_handlerFactory.createRoomMemberRequestHandler(roomId, username)->leaveRoom();
+	}
+
+	//logout
+	if (username != "")
+		m_handlerFactory.getDatabase()->logout(username);
+}
+
+void Communicator::setCurrUsername(RequestInfo r, std::string& username)
+{
+	switch (r.requestCode)
+	{
+	case LOGIN_CODE:
+		username = JsonRequestPacketDeseializer::deserializeLoginRequest(r).username;
+		break;
+	case SIGN_CODE:
+		username = JsonRequestPacketDeseializer::deserializeSignupRequest(r).username;
+		break;
+	case LOGOUT:
+		username = "";
+	}
+}
+
+void Communicator::setCurrRoomId(RequestInfo r, int& roomId)
+{
+	switch (r.requestCode)
+	{
+	case CREATE_ROOM:
+		roomId = m_handlerFactory.getRoomManager().getRoomId(JsonRequestPacketDeseializer::deserializeCreateRoomRequest(r).roomName);
+		break;
+	case JOIN_ROOM:
+		roomId = JsonRequestPacketDeseializer::deserializeJoinRoomRequest(r).roomId;
+		break;
+	case LEAVE_ROOM:
+	case CLOSE_ROOM:
+		roomId = NOT_IN_ROOM;
+		break;
+	}
+}
+
+void Communicator::setIsAdmin(RequestInfo r, bool& isAdmin)
+{
+	switch (r.requestCode)
+	{
+	case CREATE_ROOM:
+		isAdmin = true;
+		break;
+	case CLOSE_ROOM:
+		isAdmin = false;
+		break;
+	}
+}
+
+bool Communicator::checkIfSocketIsOpen(SOCKET socket)
+{
+	char* data = new char[1];
+	int res = recv(socket, data, 0, NULL);
+	return res != INVALID_SOCKET;
 }
 
 /*

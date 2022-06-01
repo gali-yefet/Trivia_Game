@@ -62,6 +62,13 @@ Room& RoomManager::getRoom(int id)
 	return m_rooms.find(id)->second;
 }
 
+int RoomManager::getRoomId(std::string name)
+{
+	for (auto i = m_rooms.begin(); i != m_rooms.end(); ++i)
+		if (i->second.getRoomData().name == name)
+			return i->first;
+}
+
 /*
 join a room according to id
 in: id, user to join

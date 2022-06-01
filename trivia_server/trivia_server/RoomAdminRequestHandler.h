@@ -9,6 +9,7 @@ public:
 	RoomAdminRequestHandler(int roomId, std::string username, RoomManager& roomManager, RequestHandlerFactory& handlerFactory);
 	virtual bool isRequestRelevant(RequestInfo r);
 	virtual RequestResult handleRequest(RequestInfo r);
+	void closeRoom();
 
 private:
 	RequestResult closeRoom(RequestInfo r);

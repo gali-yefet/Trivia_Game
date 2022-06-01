@@ -7,7 +7,7 @@
 
 #define ANSWERS 4
 
-
+#define NOT_IN_ROOM -1
 enum codes {
 	ERROR_CODE = 0,
 	SIGN_CODE = 1,
