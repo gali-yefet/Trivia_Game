@@ -42,6 +42,7 @@ namespace trivia_client
             
             if (_isAdmin)
             {
+                //TODO: add try
                 this.Dispatcher.Invoke(() =>
                 {
                     closeRoomButton.Visibility = Visibility.Visible;
@@ -63,7 +64,8 @@ namespace trivia_client
         {
             while (_runUpdateThread)
             {
-                display();
+                if(!_isAdmin && !checkState() || _isAdmin)
+                    display();
                 Thread.Sleep(3000); //will sleep for 3 sec
             }
         }
@@ -80,17 +82,23 @@ namespace trivia_client
             byte[] res = _connector.sendGetData(msg);
             classes.LeaveRoomResponse response = classes.Deserializer.deserializeLeaveRoomResponse(res);
 
+            bool isOtherRoomState = handleRoomState(response.status, false); //check if the admin changed the room state
+
             //check if the request worked and go to joinRoom
-            if (response.status == classes.Deserializer.LEAVE_ROOM)
+            if(!isOtherRoomState)
             {
-                _runUpdateThread = false;
-                JoinRoomPage page = new JoinRoomPage(_connector);
-                NavigationService.Navigate(page);
+                if (response.status == classes.Deserializer.LEAVE_ROOM)
+                {
+                    _runUpdateThread = false;
+                    JoinRoomPage page = new JoinRoomPage(_connector);
+                    NavigationService.Navigate(page);
+                }
+                else
+                {
+                    //TODO: show an error
+                }
             }
-            else
-            {
-                //TODO: show an error
-            }
+            
         }
 
         private void closeRoomButton_Click(object sender, RoutedEventArgs e)
@@ -102,7 +110,7 @@ namespace trivia_client
             if (response.status == classes.Deserializer.CLOSE_ROOM)
             {
                 _runUpdateThread = false;
-                JoinRoomPage page = new JoinRoomPage(_connector);
+                Menu page = new Menu(_connector);
                 NavigationService.Navigate(page);
             }
             else
@@ -115,6 +123,7 @@ namespace trivia_client
         {
             byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.START_GAME));
             classes.StartGameResponse response = classes.Deserializer.deserializeStartGameResponse(res);
+
 
             //check if login failed and move to page accordingly
             if (response.status == classes.Deserializer.START_GAME)
@@ -144,12 +153,62 @@ namespace trivia_client
                     isAdmin = i == r.players.Length - 1
                 }) ;
             }
-            if(r.isRoomClosed)
-            {
-                JoinRoomPage page = new JoinRoomPage(_connector);
-                NavigationService.Navigate(page);
-            }
+            //if(r.isRoomClosed) //TODO: erase?
+            //{
+            //    _runUpdateThread = false;
+            //    JoinRoomPage page = new JoinRoomPage(_connector);
+            //    NavigationService.Navigate(page);
+            //}
             return users;
+        }
+
+        private bool checkState()
+        {
+            byte[] msg = classes.Serializer.serializeRequest(classes.Deserializer.GET_ROOM_STATE);
+            byte[] res = _connector.sendGetData(msg);
+            classes.GetRoomStateResponse r = classes.Deserializer.deserializeGetRoomStateResponse(res);
+            return handleRoomState(r.status);
+        }
+
+        private bool handleRoomState(uint responseCode, bool forUpdate = true)
+        {
+            if(responseCode == classes.Deserializer.CLOSE_ROOM)
+            {
+                _runUpdateThread = false;
+                if(forUpdate)
+                {
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        JoinRoomPage page = new JoinRoomPage(_connector);
+                        NavigationService.Navigate(page);
+                    });
+                }
+                else
+                {
+                    JoinRoomPage page = new JoinRoomPage(_connector);
+                    NavigationService.Navigate(page);
+                }
+                return true;
+            }
+            if(responseCode == classes.Deserializer.START_GAME)
+            {
+                _runUpdateThread = false;
+                if (forUpdate)
+                {
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        GamePage page = new GamePage(_connector);
+                        NavigationService.Navigate(page);
+                    });
+                }
+                else
+                {
+                    GamePage page = new GamePage(_connector);
+                    NavigationService.Navigate(page);
+                }
+                return true;
+            }
+            return false;
         }
     }
 }
