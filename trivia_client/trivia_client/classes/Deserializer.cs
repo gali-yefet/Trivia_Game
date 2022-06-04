@@ -96,6 +96,7 @@ namespace trivia_client.classes
         public String[] players;
         public uint questionCount;
         public uint answerTimeout;
+        public bool isRoomClosed;
     }
 
     struct LeaveRoomResponse
@@ -373,6 +374,9 @@ namespace trivia_client.classes
             bufferStr = bufferStr.Substring(bufferStr.IndexOf(',') + 1);
 
             r.hasGameBegun = extractValue(bufferStr) == "true";
+            bufferStr = bufferStr.Substring(bufferStr.IndexOf(',') + 1);
+
+            r.isRoomClosed = extractValue(bufferStr) == "true";
             bufferStr = bufferStr.Substring(bufferStr.IndexOf(',') + 1);
 
             //add players

@@ -76,6 +76,7 @@ typedef struct GetRoomStateResponse
 	std::vector<std::string> players;
 	unsigned int questionCount;
 	unsigned int answerTimeout;
+	bool isClosed;
 }GetRoomStateResponse;
 
 typedef struct LeaveRoomResponse 

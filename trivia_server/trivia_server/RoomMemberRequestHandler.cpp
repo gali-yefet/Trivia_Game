@@ -16,21 +16,25 @@ bool RoomMemberRequestHandler::isRequestRelevant(RequestInfo r)
 RequestResult RoomMemberRequestHandler::handleRequest(RequestInfo r)
 {
     m_room = m_roomManager.getRoom(m_room.getRoomData().id); //refresh the room
+
+    //check if the room status has changed by the admin
     int roomStatus = m_room.getRoomData().isActive;
     if (roomStatus == CLOSED)
     {
         CloseRoomResponse response;
-        response.status = r.requestCode;
+        response.status = CLOSE_ROOM;
         std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeCloseRoomResponse(response);
         return IRequestHandler::createRequestResult(buffer, m_handlerFactory.createMenuRequestHandler(m_user.getUsername()));
     }
     else if (roomStatus == IN_GAME)
     {
         StartGameResponse response;
-        response.status = r.requestCode;
+        response.status = START_GAME;
         std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeStartGameResponse(response);
         return IRequestHandler::createRequestResult(buffer, new GameRequestHandler); //TODO: change to function that creates room
     }
+
+    //deal with request
     RequestResult result;
     switch (r.requestCode)
     {
@@ -44,10 +48,15 @@ RequestResult RoomMemberRequestHandler::handleRequest(RequestInfo r)
     return result;
 }
 
+void RoomMemberRequestHandler::leaveRoom()
+{
+    m_roomManager.deletePlayer(m_room.getRoomData().id, m_user.getUsername());
+}
+
 
 RequestResult RoomMemberRequestHandler::leaveRoom(RequestInfo r)
 {
-    m_roomManager.deletePlayer(m_room.getRoomData().id, m_user.getUsername());
+    leaveRoom();
     LeaveRoomResponse response;
     response.status = r.requestCode;
     std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeLeaveRoomResponse(response);
@@ -59,6 +68,7 @@ RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo r)
     GetRoomStateResponse response;
     response.answerTimeout = m_room.getRoomData().timePerQuestion;
     response.hasGameBegun = m_room.getRoomData().isActive == IN_GAME;
+    response.isClosed = m_room.getRoomData().isClosed == CLOSED;
     response.players = m_room.getAllUsers();
     response.questionCount = m_room.getRoomData().numOfQuestionsInGame;
     response.status = r.requestCode;
