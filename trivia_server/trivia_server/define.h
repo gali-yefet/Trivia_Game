@@ -22,7 +22,11 @@ enum codes {
 	CLOSE_ROOM = 10,
 	START_GAME = 11,
 	GET_ROOM_STATE = 12,
-	LEAVE_ROOM = 13
+	LEAVE_ROOM = 13,
+	GET_QUESTION = 14,
+	SUBMIT_ANSWER = 15,
+	GET_GAME_RESULT = 16,
+	LEAVE_GAME = 17
 };
 
 enum roomState {

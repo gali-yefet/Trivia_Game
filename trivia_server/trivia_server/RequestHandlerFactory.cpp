@@ -5,7 +5,7 @@ create a new factory
 in: pointer to db
 */
 RequestHandlerFactory::RequestHandlerFactory(IDatabase* db):
-    m_database(db), m_loginManager(LoginManager(db)), m_roomManager(RoomManager()), m_statisticsManager(StatisticsManager(db))
+    m_database(db), m_loginManager(LoginManager(db)), m_roomManager(RoomManager()), m_statisticsManager(StatisticsManager(db)), m_gameManager(db)
 {
 }
 
@@ -31,12 +31,17 @@ MenuRequestHandler* RequestHandlerFactory::createMenuRequestHandler(std::string 
 
 RoomAdminRequestHandler* RequestHandlerFactory::createRoomAdminRequestHandler(int roomId, std::string username)
 {
-    return new RoomAdminRequestHandler(roomId, username, m_roomManager, *this);
+    return new RoomAdminRequestHandler(roomId, username, m_roomManager, m_gameManager, *this);
 }
 
 RoomMemberRequestHandler* RequestHandlerFactory::createRoomMemberRequestHandler(int roomId, std::string username)
 {
     return new RoomMemberRequestHandler(roomId, username, m_roomManager, *this);
+}
+
+GameRequestHandler* RequestHandlerFactory::createGameRequestHandler(Game m_game, LoggedUser m_user)
+{
+    return new GameRequestHandler(m_game, m_user, m_gameManager, *this);
 }
 
 LoginManager& RequestHandlerFactory::getLoginManager()
@@ -57,4 +62,9 @@ IDatabase* RequestHandlerFactory::getDatabase()
 StatisticsManager& RequestHandlerFactory::getStatisticsManager()
 {
     return m_statisticsManager;
+}
+
+GameManager& RequestHandlerFactory::getGameManager()
+{
+    return m_gameManager;
 }

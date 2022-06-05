@@ -8,12 +8,12 @@
 LoginRequest JsonRequestPacketDeseializer::deserializeLoginRequest(RequestInfo r)
 {
 	LoginRequest l;
-	if(r.requestCode == LOGIN_CODE)
+	if (r.requestCode == LOGIN_CODE)
 	{
 		std::string data(r.json.begin(), r.json.end());// converts the data from bytes to string
 		//now the data looks like this:
 		//{ username: <username>, password: <password> }
-		
+
 		l.username = extractValue(data);
 		l.password = extractValue(data);
 	}
@@ -102,6 +102,28 @@ CreateRoomRequest JsonRequestPacketDeseializer::deserializeCreateRoomRequest(Req
 	return c;
 }
 
+SubmitAnswerRequest JsonRequestPacketDeseializer::deserializeSubmitAnswerRequest(RequestInfo r)
+{
+	SubmitAnswerRequest request;
+	if (r.requestCode == GET_PLAYERS_IN_ROOM)
+	{
+		std::string data(r.json.begin(), r.json.end());// converts the data from bytes to string
+		//now the data looks like this:
+		//{ username: <username>, password: <password>, email:<email> }
+
+		try
+		{
+			request.answerId = std::stoi(extractValue(data, true));
+		}
+		catch (const std::exception& e)
+		{
+			request.answerId = ERROR_CODE;
+			std::cout << "Exception was thrown in JsonRequestPacketDeseializer::deserializeSubmitAnswerRequest: " << e.what() << std::endl;
+		}
+	}
+	return request;
+}
+
 
 /*
 get the value from the json
@@ -123,7 +145,7 @@ std::string JsonRequestPacketDeseializer::extractValue(std::string& json, bool t
 		//erase spaces
 		while (value[0] == ' ')
 			value = value.substr(1, value.length() - 1);
-		while (value[value.length() -1] == ' ')
+		while (value[value.length() - 1] == ' ')
 			value = value.substr(1, value.length() - 1);
 	}
 

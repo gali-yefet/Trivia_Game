@@ -63,3 +63,15 @@ void Question::setRightAns(int rightAns)
 {
 	this->rightAns = rightAns;
 }
+
+std::map<unsigned int, std::string> Question::getAnswers()
+{
+	std::map<unsigned int, std::string> answers;
+
+	answers.emplace(1, ans1);
+	answers.emplace(2, ans2);
+	answers.emplace(3, ans3);
+	answers.emplace(4, ans4);
+
+	return answers;
+}
