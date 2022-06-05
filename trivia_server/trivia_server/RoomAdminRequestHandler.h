@@ -2,11 +2,12 @@
 #include "IRequestHandler.h"
 #include "RoomManager.h"
 #include "RequestHandlerFactory.h"
+#include "GameManager.h"
 
 class RoomAdminRequestHandler : public IRequestHandler
 {
 public:
-	RoomAdminRequestHandler(int roomId, std::string username, RoomManager& roomManager, RequestHandlerFactory& handlerFactory);
+	RoomAdminRequestHandler(int roomId, std::string username, RoomManager& roomManager, GameManager& gameManager, RequestHandlerFactory& handlerFactory);
 	virtual bool isRequestRelevant(RequestInfo r);
 	virtual RequestResult handleRequest(RequestInfo r);
 	void closeRoom();
@@ -19,6 +20,7 @@ private:
 	Room m_room;
 	LoggedUser m_user;
 	RoomManager& m_roomManager;
+	GameManager& m_gameManager;
 	RequestHandlerFactory& m_handlerFactory;
 };
 

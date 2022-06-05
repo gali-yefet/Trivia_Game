@@ -1,1 +1,56 @@
-﻿  trivia_server.vcxproj -> C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe
+﻿  Game.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xstddef(127,22): error C2676: binary '<': 'const _Ty' does not define this operator or a conversion to a type acceptable to the predefined operator
+          with
+          [
+              _Ty=LoggedUser
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xstddef(126): message : while compiling class template member function 'bool std::less<LoggedUser>::operator ()(const _Ty &,const _Ty &) const'
+          with
+          [
+              _Ty=LoggedUser
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xutility(1518): message : see reference to function template instantiation 'bool std::less<LoggedUser>::operator ()(const _Ty &,const _Ty &) const' being compiled
+          with
+          [
+              _Ty=LoggedUser
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(1380): message : see reference to class template instantiation 'std::less<LoggedUser>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(1380): message : see reference to variable template 'const bool is_empty_v<std::less<LoggedUser> >' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\map(75): message : see reference to class template instantiation 'std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>' being compiled
+          with
+          [
+              _Kty=LoggedUser,
+              _Ty=GameData,
+              _Pr=std::less<LoggedUser>,
+              _Alloc=std::allocator<std::pair<const LoggedUser,GameData>>
+          ]
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\Game.h(31): message : see reference to class template instantiation 'std::map<LoggedUser,GameData,std::less<LoggedUser>,std::allocator<std::pair<const LoggedUser,GameData>>>' being compiled
+  GameManager.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xstddef(127,22): error C2676: binary '<': 'const _Ty' does not define this operator or a conversion to a type acceptable to the predefined operator
+          with
+          [
+              _Ty=LoggedUser
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xstddef(126): message : while compiling class template member function 'bool std::less<LoggedUser>::operator ()(const _Ty &,const _Ty &) const'
+          with
+          [
+              _Ty=LoggedUser
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xutility(1518): message : see reference to function template instantiation 'bool std::less<LoggedUser>::operator ()(const _Ty &,const _Ty &) const' being compiled
+          with
+          [
+              _Ty=LoggedUser
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(1380): message : see reference to class template instantiation 'std::less<LoggedUser>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(1380): message : see reference to variable template 'const bool is_empty_v<std::less<LoggedUser> >' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\map(75): message : see reference to class template instantiation 'std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>' being compiled
+          with
+          [
+              _Kty=LoggedUser,
+              _Ty=GameData,
+              _Pr=std::less<LoggedUser>,
+              _Alloc=std::allocator<std::pair<const LoggedUser,GameData>>
+          ]
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\Game.h(31): message : see reference to class template instantiation 'std::map<LoggedUser,GameData,std::less<LoggedUser>,std::allocator<std::pair<const LoggedUser,GameData>>>' being compiled
+  RoomMemberRequestHandler.cpp
+  Generating Code...

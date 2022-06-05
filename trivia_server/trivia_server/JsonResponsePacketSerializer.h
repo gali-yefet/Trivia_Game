@@ -2,8 +2,17 @@
 #include <stdio.h>
 #include <iostream>
 #include <vector>
+#include <map>
 #include "define.h"
 #include "Room.h"
+
+typedef struct PlayerResults
+{
+	std::string username;
+	unsigned int correctAnswerCount;
+	unsigned int wrongAnswerCount;
+	unsigned int averageAnserTime;
+}PlayerResults;
 
 typedef struct LoginResponse
 {
@@ -59,17 +68,17 @@ typedef struct CreateRoomResponse
 	unsigned int status;
 }CreateRoomResponse;
 
-typedef struct CloseRoomResponse 
+typedef struct CloseRoomResponse
 {
 	unsigned int status;
 }CloseRoomResponse;
 
-typedef struct StartGameResponse 
+typedef struct StartGameResponse
 {
 	unsigned int status;
 }StartGameResponse;
 
-typedef struct GetRoomStateResponse 
+typedef struct GetRoomStateResponse
 {
 	unsigned int status;
 	bool hasGameBegun;
@@ -79,10 +88,34 @@ typedef struct GetRoomStateResponse
 	bool isClosed;
 }GetRoomStateResponse;
 
-typedef struct LeaveRoomResponse 
+typedef struct LeaveRoomResponse
 {
 	unsigned int status;
 }LeaveRoomResponse;
+
+typedef struct LeaveGameResponse
+{
+	unsigned int status;
+}LeaveGameResponse;
+
+typedef struct GetQuestionResponse
+{
+	unsigned int status;
+	std::string question;
+	std::map<unsigned int, std::string> answers;
+}GetQuestionResponse;
+
+typedef struct SubmitAnswerResponse
+{
+	unsigned int status;
+	unsigned int correctAnswerId;
+}SubmitAnswerResponse;
+
+typedef struct GetGameResultsResponse
+{
+	unsigned int status;
+	std::vector<PlayerResults> results;
+}GetGameResultsResponse;
 
 
 class JsonResponsePacketSerializer
@@ -102,7 +135,11 @@ public:
 	static std::vector<unsigned char> serializeStartGameResponse(StartGameResponse r);
 	static std::vector<unsigned char> serializeGetRoomStateResponse(GetRoomStateResponse r);
 	static std::vector<unsigned char> serializeLeaveRoomResponse(LeaveRoomResponse r);
-	
+	static std::vector<unsigned char> serializeLeaveGameResponse(LeaveGameResponse r);
+	static std::vector<unsigned char> serializeGetQuestionResponse(GetQuestionResponse r);
+	static std::vector<unsigned char> serializeSubmitAnswerResponse(SubmitAnswerResponse r);
+	static std::vector<unsigned char> serializeGetGameResultsResponse(GetGameResultsResponse r);
+
 
 private:
 	static std::vector<unsigned char> serializeMsg(int code, std::string data);
