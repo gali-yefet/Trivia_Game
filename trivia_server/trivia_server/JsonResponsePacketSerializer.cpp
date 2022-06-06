@@ -173,8 +173,8 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeLeaveGameRespo
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetQuestionResponse(GetQuestionResponse r)
 {
 	json j;
-	j["status"] = r.status;
-	j["ansers"] = r.answers;
+	j["status"] = r.status; //TODO: change to error status if the user answered all the questions
+	j["answers"] = r.answers;
 	j["question"] = r.question;
 	std::string data = j.dump();  // returns the json as a string
 	return serializeMsg(GET_QUESTION, data);
@@ -186,13 +186,13 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeSubmitAnswerRe
 	j["status"] = r.status;
 	j["correctAnswerId"] = r.correctAnswerId;
 	std::string data = j.dump();  // returns the json as a string
-	return serializeMsg(LEAVE_GAME, data);
+	return serializeMsg(SUBMIT_ANSER, data);
 }
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetGameResultsResponse(GetGameResultsResponse r)
 {
 	json j;
-	j["status"] = r.status;
+	j["status"] = r.status;//TODO: change status if game is not over 
 
 	//create a vector of results response
 	std::vector<json> results;
@@ -206,9 +206,9 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetGameResults
 		results.push_back(result);
 	}
 	j["results"] = results;
-
+	
 	std::string data = j.dump();  // returns the json as a string
-	return serializeMsg(LEAVE_GAME, data);
+	return serializeMsg(GET_GAME_RESULTS, data);
 }
 
 /*
