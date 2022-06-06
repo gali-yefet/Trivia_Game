@@ -126,6 +126,7 @@ namespace trivia_client
                 //check if joining failed and move to page accordingly
                 if (response.status != classes.Deserializer.JOIN_ROOM_CODE)
                 {
+                    _runUpdateThread = false;
                     JoinRoomPage page = new JoinRoomPage(_connector, false);
                     NavigationService.Navigate(page);
                 }
