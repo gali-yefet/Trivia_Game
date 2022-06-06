@@ -62,6 +62,13 @@ Room& RoomManager::getRoom(int id)
 	return m_rooms.find(id)->second;
 }
 
+int RoomManager::getRoomId(std::string name)
+{
+	for (auto i = m_rooms.begin(); i != m_rooms.end(); ++i)
+		if (i->second.getRoomData().name == name)
+			return i->first;
+}
+
 /*
 join a room according to id
 in: id, user to join
@@ -82,4 +89,27 @@ int RoomManager::createRoomId()
 	for (int i = 0; i < m_rooms.size() + 1; i++)
 		if (m_rooms.find(i) == m_rooms.end())
 			return i;
+}
+
+void RoomManager::changeRoomState(int id, int status)
+{
+	for (auto i = m_rooms.begin(); i != m_rooms.end(); ++i)
+	{
+		if (i->first == id)
+		{
+			RoomData roomData;
+			roomData.id = id;
+			roomData.isActive = status;
+			roomData.maxPlayers = i->second.getRoomData().maxPlayers;
+			roomData.name = i->second.getRoomData().name;
+			roomData.numOfQuestionsInGame = i->second.getRoomData().numOfQuestionsInGame;
+			roomData.timePerQuestion = i->second.getRoomData().timePerQuestion;
+			i->second.setRoomData(roomData);
+		}
+	}
+}
+
+void RoomManager::deletePlayer(int id, std::string username)
+{
+	m_rooms.find(id)->second.removeUser(LoggedUser(username));
 }

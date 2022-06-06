@@ -10,49 +10,92 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 
 namespace trivia_client
 {
     /// <summary>
     /// Interaction logic for JoinRoomPage.xaml
     /// </summary>
-    class Room
-    {
-        public String name { get; set; }
-        public int maxPlayers { get; set; }
-    }
 
     public partial class JoinRoomPage : Page
     {
         Connector _connector;
         List<classes.RoomData> _rooms;
-        
+        bool _firstTime;
+        bool _runUpdateThread;
+
         public JoinRoomPage(Connector connector, bool firstTime = true)
         {
             InitializeComponent();
             backgroundPage.Content = new BackgroundPage();
             _connector = connector;
+            _firstTime = firstTime;
+            _runUpdateThread = true;
+            
+            createThread();
+        }
+
+        [STAThread]
+        public void display()
+        {
             _rooms = getActiveRoomsFromServer();
 
-            if(_rooms.Count == 0)
+            if (_rooms.Count == 0)
             {
-                Error_noRooms.Visibility = Visibility.Visible;
-                ConectedUsers.Visibility = Visibility.Hidden;
+                this.Dispatcher.Invoke(() =>
+                {
+                    Error_noRooms.Visibility = Visibility.Visible;
+                    ActiveRooms.Visibility = Visibility.Hidden;
+                });
+   
             }
             else
             {
-                //show rooms names
-                ConectedUsers.Items.Clear();
-                ConectedUsers.ItemsSource = _rooms;
+                this.Dispatcher.Invoke(() =>
+                {
+                    //show rooms names
+                    Error_noRooms.Visibility = Visibility.Hidden;
+                    ActiveRooms.Visibility = Visibility.Visible;
+                    ActiveRooms.ClearValue(ItemsControl.ItemsSourceProperty);
+                    ActiveRooms.ItemsSource = _rooms;
+                });
+   
 
-                if (!firstTime)
-                    Error_joinFaild.Visibility = Visibility.Visible;
+                if (!_firstTime)
+                {
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        Error_joinFaild.Visibility = Visibility.Visible;
+                    });
+                }
             }
-            
         }
 
+        [STAThread]
+        public void update()
+        {
+            while (_runUpdateThread)
+            {
+                display();
+                Thread.Sleep(3000); //will sleep for 3 sec
+            }
+        }
+
+        [STAThread]
+        public Thread createThread()
+        {
+
+            // Create a secondary thread by passing a ThreadStart delegate  
+            Thread updateThread = new Thread(new ThreadStart(update));
+            // Start secondary thread  
+            updateThread.Start();
+            
+            return updateThread;
+        }
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
+            _runUpdateThread = false;
             Menu page = new Menu(_connector);
             NavigationService.Navigate(page);
         }
@@ -65,7 +108,7 @@ namespace trivia_client
                 //find the right id
                 classes.JoinRoomRequest r;
                 r.roomId = 0;
-                var room = (classes.RoomData)ConectedUsers.SelectedItems[0];
+                var room = (classes.RoomData)ActiveRooms.SelectedItems[0];
                 foreach (var curr in _rooms)
                 {
                     if (curr.name == room.name)
@@ -83,12 +126,14 @@ namespace trivia_client
                 //check if joining failed and move to page accordingly
                 if (response.status != classes.Deserializer.JOIN_ROOM_CODE)
                 {
+                    _runUpdateThread = false;
                     JoinRoomPage page = new JoinRoomPage(_connector, false);
                     NavigationService.Navigate(page);
                 }
                 else
                 {
-                    RoomUsers page = new RoomUsers(_connector);
+                    _runUpdateThread = false;
+                    RoomUsers page = new RoomUsers(_connector, false);
                     NavigationService.Navigate(page);
                 }
             }
@@ -99,9 +144,9 @@ namespace trivia_client
             byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_ROOMS_CODE));
             classes.GetRoomsResponse r = classes.Deserializer.deserializeGetRoomsResponse(res);
             List<classes.RoomData> rooms = new List<classes.RoomData>();
-            foreach(classes.RoomData room in r.rooms)
+            foreach (classes.RoomData room in r.rooms)
             {
-                if(room.isActive==1)
+                if (room.isActive == 1)
                 {
                     rooms.Add(new classes.RoomData()
                     {
