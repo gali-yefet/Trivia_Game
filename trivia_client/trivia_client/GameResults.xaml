@@ -26,8 +26,8 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="username" DisplayMemberBinding="{Binding username}" Width="220"/>
-                        <GridViewColumn Header="correct answers" DisplayMemberBinding="{Binding correctAnswers}" Width="220"/>
-                        <GridViewColumn Header="average time" DisplayMemberBinding="{Binding avgTime}" Width="220"/>
+                        <GridViewColumn Header="correct answers" DisplayMemberBinding="{Binding correctAnswerCount}" Width="220"/>
+                        <GridViewColumn Header="average time" DisplayMemberBinding="{Binding averageAnserTime}" Width="220"/>
                     </GridView>
                 </ListView.View>
             </ListView>

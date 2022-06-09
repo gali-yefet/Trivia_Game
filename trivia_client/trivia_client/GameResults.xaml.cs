@@ -24,6 +24,7 @@ namespace trivia_client
             InitializeComponent();
             backgroundPage.Content = new BackgroundPage();
             _connector = connector;
+            results.ItemsSource = getResults();
         }
 
         private void backToMenu_Click(object sender, RoutedEventArgs e)
@@ -32,5 +33,17 @@ namespace trivia_client
             NavigationService.Navigate(page);
         }
 
+        private List<classes.PlayerResults> getResults()
+        {
+            classes.GetGameResultsResponse r;
+            do
+            {
+                byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_GAME_RESULTS));
+                r = classes.Deserializer.deserializeGetGameResultsResponse(res);
+            } while (r.status != classes.Deserializer.GET_GAME_RESULTS);
+
+            List <classes.PlayerResults> results = new List<classes.PlayerResults>(r.results);
+            return results;
+        }
     }
 }
