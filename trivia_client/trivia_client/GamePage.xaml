@@ -10,15 +10,51 @@
 
     <Grid>
         <Frame x:Name="backgroundPage"/>
-        <Grid Margin="40, 40, 40, 100">
+        <Grid Margin="40, 40, 40, 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="200" />
+                <RowDefinition/>
+                <RowDefinition Height="80" />
             </Grid.RowDefinitions>
 
             <!--header-->
             <Label Content="GAME" Grid.Row="0" Foreground="White" FontFamily="Arial Black" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
+            <!--answers-->
+            <Grid Grid.Row="1" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Grid.Column="0" Grid.Row="0" Name="Ans1" Click="Ans_Click" Tag="1" FontSize="16" Margin="5" FontWeight="Normal" Content="ans1"/>
+                <Button Grid.Column="1" Grid.Row="0" Name="Ans2" Click="Ans_Click" Tag="2" FontSize="16" Margin="5" FontWeight="Normal" Content="ans2"/>
+                <Button Grid.Column="0" Grid.Row="1" Name="Ans3" Click="Ans_Click" Tag="3" FontSize="16" Margin="5" FontWeight="Normal" Content="ans3"/>
+                <Button Grid.Column="1" Grid.Row="1" Name="Ans4" Click="Ans_Click" Tag="4" FontSize="16" Margin="5" FontWeight="Normal" Content="ans4"/>
+            </Grid>
+            
+            <!--data about game-->
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Answers-->
+                <StackPanel Grid.Column="0" Margin="15">
+                    <TextBlock Name="answers" Text="3/6" FontSize="18" Foreground="White" FontFamily="Arial Black" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBlock Name="correctAnswer" Text="3 correct answers!" FontSize="18" Foreground="#FF74D139" FontFamily="Arial Black" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                </StackPanel>
+                
+                <!--Clock-->
+                <TextBlock Name="Clock" Grid.Column="2" Text="0:26" FontSize="28" Foreground="White" FontFamily="Arial Black" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+            
         </Grid>
     </Grid>
 </Page>
