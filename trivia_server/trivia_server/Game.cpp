@@ -53,7 +53,7 @@ void Game::removePlayer(User user)
 
 Question Game::getCurrentQuestion(LoggedUser user)
 {
-	return m_players.find(user)->second.currentQuestion; //TODO:DEBUG
+	return m_players.find(user)->second.currentQuestion; //TODO: DEBUG
 }
 
 std::map<LoggedUser, GameData> Game::getPlayers()
