@@ -1,7 +1,7 @@
 #include "GameManager.h"
 
-GameManager::GameManager(IDatabase* db)
-    : m_database(db)
+GameManager::GameManager(IDatabase* db):
+	m_database(db)
 {}
 
 Game GameManager::createGame(Room room)
@@ -16,7 +16,7 @@ Game GameManager::createGame(Room room)
 	std::vector<std::string> users = room.getAllUsers();
 	for (auto i = users.begin(); i != users.end(); ++i)
 	{
-		players.emplace(LoggedUser(i->data()), GameData());
+		players.emplace(LoggedUser(*i), GameData());//TODO:DEBUG
 	}
 
 	//create game

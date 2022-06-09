@@ -31,7 +31,7 @@ MenuRequestHandler* RequestHandlerFactory::createMenuRequestHandler(std::string 
 
 RoomAdminRequestHandler* RequestHandlerFactory::createRoomAdminRequestHandler(int roomId, std::string username)
 {
-    return new RoomAdminRequestHandler(roomId, username, m_roomManager, m_gameManager, *this);
+    return new RoomAdminRequestHandler(roomId, username, m_roomManager, *this);
 }
 
 RoomMemberRequestHandler* RequestHandlerFactory::createRoomMemberRequestHandler(int roomId, std::string username)

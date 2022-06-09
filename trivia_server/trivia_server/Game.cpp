@@ -1,8 +1,8 @@
 #include "Game.h"
 
 
-Game::Game(std::vector<Question> m_questions, std::map<LoggedUser, GameData> m_players)
-	:m_questions(m_questions), m_players(m_players)
+Game::Game(std::vector<Question> m_questions, std::map<LoggedUser, GameData> m_players):
+	m_questions(m_questions), m_players(m_players)
 {
 }
 
