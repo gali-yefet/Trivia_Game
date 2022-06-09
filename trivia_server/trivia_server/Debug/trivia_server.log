@@ -52,5 +52,26 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.2
               _Alloc=std::allocator<std::pair<const LoggedUser,GameData>>
           ]
 C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\Game.h(31): message : see reference to class template instantiation 'std::map<LoggedUser,GameData,std::less<LoggedUser>,std::allocator<std::pair<const LoggedUser,GameData>>>' being compiled
+  GameRequestHandler.cpp
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\GameRequestHandler.cpp(17,19): warning C4553: '==': result of expression not used; did you intend '='?
+  JsonRequestPacketDeserializer.cpp
+  JsonResponsePacketSerializer.cpp
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\JsonResponsePacketSerializer.cpp(149,20): warning C4018: '<': signed/unsigned mismatch
+  LoginManager.cpp
+  Communicator.cpp
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\Communicator.cpp(109,32): warning C4101: 'e': unreferenced local variable
+  LoginRequestHandler.cpp
+  MenuRequestHandler.cpp
+  Question.cpp
+  RequestHandlerFactory.cpp
+  RoomAdminRequestHandler.cpp
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomAdminRequestHandler.cpp(38,23): warning C4018: '<': signed/unsigned mismatch
   RoomMemberRequestHandler.cpp
+  Server.cpp
+  Source.cpp
+  SqliteDataBase.cpp
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(93,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(135,31): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(218,33): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+  StatisticsManager.cpp
   Generating Code...

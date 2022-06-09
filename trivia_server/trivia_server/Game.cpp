@@ -14,7 +14,7 @@ std::string Game::getQuestionForUser(User user)
 		LoggedUser u = i->first;
 		if (u.getUsername() == user.getUsername())
 		{
-			if(i->second.currentQuestion.getQuestion() != "left")
+			if(i->second.currentQuestion.getQuestion() != LEFT)
 				q = i->second.currentQuestion.getQuestion();
 		}
 	}
@@ -28,7 +28,7 @@ void Game::submitAnswer(User user, int answer)
 		LoggedUser u = i->first;
 		if (u.getUsername() == user.getUsername())
 		{
-			if (i->second.currentQuestion.getQuestion() != "left")
+			if (i->second.currentQuestion.getQuestion() != LEFT)
 			{
 				if (i->second.currentQuestion.getRightAns() == answer)
 					i->second.correctAnswerCount++;
@@ -46,14 +46,17 @@ void Game::removePlayer(User user)
 		LoggedUser u = i->first;
 		if (u.getUsername() == user.getUsername())
 		{
-			i->second.currentQuestion.setQuestion("left");
+			i->second.currentQuestion.setQuestion(LEFT);
 		}
 	}
 }
 
 Question Game::getCurrentQuestion(LoggedUser user)
 {
-	m_players.find(user)->second.currentQuestion;
+	auto it = m_players.find(user);
+	if(it != m_players.end())// found
+		return it->second.currentQuestion;
+	return Question();
 }
 
 std::map<LoggedUser, GameData> Game::getPlayers()
