@@ -170,12 +170,12 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeLeaveGameRespo
 	return serializeMsg(LEAVE_GAME, data);
 }
 
-std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetQuestionResponse(GetQuestionResponse r)
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetQuestionResponse(GetQuestionResponse r, bool gameOver)
 {
 	json j;
-	j["status"] = r.status; //TODO: change to error status if the user answered all the questions
-	j["answers"] = r.answers;
-	j["question"] = r.question;
+	j["status"] = !gameOver ? r.status : ERROR_CODE;
+	j["answers"] = !gameOver ? r.answers : std::map<unsigned int, std::string>();
+	j["question"] = !gameOver ? r.question : "";
 	std::string data = j.dump();  // returns the json as a string
 	return serializeMsg(GET_QUESTION, data);
 }
@@ -189,21 +189,24 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeSubmitAnswerRe
 	return serializeMsg(SUBMIT_ANSER, data);
 }
 
-std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetGameResultsResponse(GetGameResultsResponse r)
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetGameResultsResponse(GetGameResultsResponse r, bool gameOver)
 {
 	json j;
-	j["status"] = r.status;//TODO: change status if game is not over 
+	j["status"] = gameOver ? r.status : ERROR_CODE;
 
 	//create a vector of results response
 	std::vector<json> results;
-	for (auto i = r.results.begin(); i != r.results.end(); ++i)
+	if (gameOver)
 	{
-		json result;
-		result["averageAnserTime"] = i->averageAnserTime;
-		result["correctAnswerCount"] = i->correctAnswerCount;
-		result["username"] = eraseQuotes(i->username);
-		result["wrongAnswerCount"] = i->wrongAnswerCount;
-		results.push_back(result);
+		for (auto i = r.results.begin(); i != r.results.end(); ++i)
+		{
+			json result;
+			result["averageAnserTime"] = i->averageAnserTime;
+			result["correctAnswerCount"] = i->correctAnswerCount;
+			result["username"] = eraseQuotes(i->username);
+			result["wrongAnswerCount"] = i->wrongAnswerCount;
+			results.push_back(result);
+		}
 	}
 	j["results"] = results;
 	
