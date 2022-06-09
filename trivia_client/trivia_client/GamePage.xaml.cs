@@ -25,7 +25,6 @@ namespace trivia_client
             InitializeComponent();
             backgroundPage.Content = new BackgroundPage();
             _connector = connector;
-
         }
     }
 }
