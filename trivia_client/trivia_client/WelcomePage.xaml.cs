@@ -24,6 +24,7 @@ namespace trivia_client
             InitializeComponent();
             //connect to server
             _connector = new Connector();
+
         }
 
         private void login_Click(object sender, RoutedEventArgs e)
