@@ -2,8 +2,8 @@
 #include "JsonRequestPacketDeserializer.h"
 #include "JsonResponsePacketSerializer.h"
 #include "GameRequestHandler.h"
-RoomAdminRequestHandler::RoomAdminRequestHandler(int roomId, std::string username, RoomManager& roomManager, GameManager& gameManager, RequestHandlerFactory& handlerFactory):
-    m_room(roomManager.getRoom(roomId)), m_user(LoggedUser(username)), m_roomManager(roomManager), m_gameManager(gameManager), m_handlerFactory(handlerFactory) {
+RoomAdminRequestHandler::RoomAdminRequestHandler(int roomId, std::string username, RoomManager& roomManager, RequestHandlerFactory& handlerFactory):
+    m_room(roomManager.getRoom(roomId)), m_user(LoggedUser(username)), m_roomManager(roomManager), m_handlerFactory(handlerFactory) {
 }
 
 bool RoomAdminRequestHandler::isRequestRelevant(RequestInfo r)
@@ -61,7 +61,7 @@ RequestResult RoomAdminRequestHandler::startGame(RequestInfo r)
     StartGameResponse response;
     response.status = r.requestCode;
     std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeStartGameResponse(response);
-    return IRequestHandler::createRequestResult(buffer, this->m_handlerFactory.createGameRequestHandler(m_gameManager.createGame(m_room), m_user));
+    return IRequestHandler::createRequestResult(buffer, this->m_handlerFactory.createGameRequestHandler(m_handlerFactory.getGameManager().createGame(m_room), m_user));
 }
 
 RequestResult RoomAdminRequestHandler::getRoomState(RequestInfo r)
