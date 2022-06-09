@@ -53,8 +53,8 @@ void Game::removePlayer(User user)
 
 Question Game::getCurrentQuestion(LoggedUser user)
 {
-	auto it = m_players.find(user);
-	if(it != m_players.end())// found
+    auto it = m_players.find(user);
+	if(it != m_players.end())// if pair found
 		return it->second.currentQuestion;
 	return Question();
 }

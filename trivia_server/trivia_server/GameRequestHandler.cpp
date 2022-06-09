@@ -55,7 +55,7 @@ RequestResult GameRequestHandler::submitAnswer(RequestInfo r)
     SubmitAnswerRequest request = JsonRequestPacketDeseializer::deserializeSubmitAnswerRequest(r);
     SubmitAnswerResponse response;
     response.status = SUBMIT_ANSWER;
-    response.correctAnswerId = 6;// TODO: GET THE CORRECT ASW ID
+    response.correctAnswerId = m_game.getCurrentQuestion(m_user).getRightAns();
     std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeSubmitAnswerResponse(response);
     return IRequestHandler::createRequestResult(buffer, m_handlerFactory.createGameRequestHandler(m_game, m_user));
 }
