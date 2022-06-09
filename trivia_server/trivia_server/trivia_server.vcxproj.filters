@@ -70,6 +70,10 @@
     <ClCompile Include="GameRequestHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Communicator.h">
@@ -142,6 +146,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameRequestHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

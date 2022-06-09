@@ -1,8 +1,24 @@
 #pragma once
 #include "IRequestHandler.h"
+#include "GameManager.h"
+#include "RequestHandlerFactory.h"
+
 class GameRequestHandler : public IRequestHandler
 {
-	virtual bool isRequestRelevant(RequestInfo r); //TODO
-	virtual RequestResult handleRequest(RequestInfo r); //TODO
+public:
+	GameRequestHandler(Game m_game, LoggedUser m_user, GameManager& m_gameManager, RequestHandlerFactory& m_handlerFactory);
+	virtual bool isRequestRelevant(RequestInfo r); 
+	virtual RequestResult handleRequest(RequestInfo r); 
+
+private:
+	RequestResult getQuestion(RequestInfo r);
+	RequestResult submitAnswer(RequestInfo r);
+	RequestResult getGameResults(RequestInfo r);
+	RequestResult leaveGame(RequestInfo r);
+
+	Game m_game;
+	LoggedUser m_user;
+	GameManager& m_gameManager;
+	RequestHandlerFactory& m_handlerFactory;
 };
 

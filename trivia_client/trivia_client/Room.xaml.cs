@@ -154,11 +154,15 @@ namespace trivia_client
             List<classes.User> users = new List<classes.User>();
             for(int i = 0; i< r.players.Length; i++)
             {
-                users.Add(new classes.User()
+                if(r.players[i].Length > 1)
                 {
-                    username = r.players[i].Substring(1, r.players[i].Length - 2),
-                    isAdmin = i == r.players.Length - 1
-                }) ;
+                    users.Add(new classes.User()
+                    {
+                        username = r.players[i].Substring(1, r.players[i].Length - 2),
+                        isAdmin = i == r.players.Length - 1
+                    });
+                }
+                
             }
             return users;
         }

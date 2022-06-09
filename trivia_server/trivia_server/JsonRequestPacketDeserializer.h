@@ -50,5 +50,5 @@ public:
 	static SubmitAnswerRequest deserializeSubmitAnswerRequest(RequestInfo r);
 
 private:
-	static std::string extractValue(std::string& json, bool toInt=false);
+	static std::string extractValue(std::string& json, bool toInt = false);
 };
