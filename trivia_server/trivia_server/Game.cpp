@@ -1,8 +1,8 @@
 #include "Game.h"
 
 
-Game::Game(std::vector<Question> m_questions, std::map<LoggedUser, GameData> m_players)
-	:m_questions(m_questions), m_players(m_players)
+Game::Game(std::vector<Question> m_questions, std::map<LoggedUser, GameData> m_players):
+	m_questions(m_questions), m_players(m_players)
 {
 }
 
@@ -53,7 +53,7 @@ void Game::removePlayer(User user)
 
 Question Game::getCurrentQuestion(LoggedUser user)
 {
-	m_players.find(user)->second.currentQuestion;
+	return m_players.find(user)->second.currentQuestion; //TODO:DEBUG
 }
 
 std::map<LoggedUser, GameData> Game::getPlayers()
