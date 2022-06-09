@@ -29,11 +29,8 @@ namespace trivia_client
 
         private void login_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: change back to login
-            GamePage page = new GamePage(_connector, 3, 60);
+            LoginPage page = new LoginPage(_connector);
             NavigationService.Navigate(page);
-            //LoginPage page = new LoginPage(_connector);
-            //NavigationService.Navigate(page);
         }
 
         private void signup_Click(object sender, RoutedEventArgs e)

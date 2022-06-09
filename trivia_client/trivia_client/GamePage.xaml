@@ -20,7 +20,7 @@
             </Grid.RowDefinitions>
 
             <!--header-->
-            <Label Content="GAME" Grid.Row="0" Foreground="White" FontFamily="Arial Black" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Label Name="question" Content="GAME" Grid.Row="0" Foreground="White" FontFamily="Arial Black" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
             <!--answers-->
             <Grid Grid.Row="1" Margin="10">
@@ -46,7 +46,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!--Answers-->
+                <!--Answers info-->
                 <StackPanel Grid.Column="0" Margin="15">
                     <TextBlock Name="answers" FontSize="18" Foreground="White" FontFamily="Arial Black" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     <TextBlock Name="correctAnswer" FontSize="18" Foreground="#FF74D139" FontFamily="Arial Black" VerticalAlignment="Center" HorizontalAlignment="Left"/>

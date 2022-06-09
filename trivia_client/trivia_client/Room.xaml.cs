@@ -23,6 +23,8 @@ namespace trivia_client
         bool _isAdmin;
         List<classes.User> _users;
         bool _runUpdateThread;
+        uint _numOfQuestions;
+        uint _timeForQuestions;
 
         public RoomUsers(Connector connector, bool isAdmin)
         {
@@ -42,14 +44,17 @@ namespace trivia_client
             
             if (_isAdmin)
             {
-                //TODO: add try
-                this.Dispatcher.Invoke(() =>
+                try
                 {
-                    closeRoomButton.Visibility = Visibility.Visible;
-                    startGameButton.Visibility = Visibility.Visible;
-                    leaveRoomButton.Visibility = Visibility.Hidden;
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        closeRoomButton.Visibility = Visibility.Visible;
+                        startGameButton.Visibility = Visibility.Visible;
+                        leaveRoomButton.Visibility = Visibility.Hidden;
 
-                });
+                    });
+                }
+                catch { }
             }
            
             this.Dispatcher.Invoke(() =>
@@ -64,7 +69,7 @@ namespace trivia_client
         {
             while (_runUpdateThread)
             {
-                if(!_isAdmin && !checkState() || _isAdmin)
+                if (!_isAdmin && !checkState() || _isAdmin)
                     display();
                 Thread.Sleep(3000); //will sleep for 3 sec
             }
@@ -121,16 +126,17 @@ namespace trivia_client
 
         private void startGameButton_Click(object sender, RoutedEventArgs e)
         {
+            checkState();
+
             byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.START_GAME));
             classes.StartGameResponse response = classes.Deserializer.deserializeStartGameResponse(res);
-
 
             //check if login failed and move to page accordingly
             if (response.status == classes.Deserializer.START_GAME)
             {
                 _runUpdateThread = false;
-                //GamePage page = new GamePage(_connector);//TODO: add parameters to gamePage
-                //NavigationService.Navigate(page); 
+                GamePage page = new GamePage(_connector, _numOfQuestions, _timeForQuestions);
+                NavigationService.Navigate(page); 
             }
             else
             {
@@ -161,6 +167,8 @@ namespace trivia_client
             byte[] msg = classes.Serializer.serializeRequest(classes.Deserializer.GET_ROOM_STATE);
             byte[] res = _connector.sendGetData(msg);
             classes.GetRoomStateResponse r = classes.Deserializer.deserializeGetRoomStateResponse(res);
+            _numOfQuestions = r.questionCount;
+            _timeForQuestions = r.answerTimeout;
             return handleRoomState(r.status);
         }
 
@@ -191,14 +199,14 @@ namespace trivia_client
                 {
                     this.Dispatcher.Invoke(() =>
                     {
-                        //GamePage page = new GamePage(_connector);//TODO: add parameters to gamePage
-                        //NavigationService.Navigate(page); 
+                        GamePage page = new GamePage(_connector, _numOfQuestions, _timeForQuestions);
+                        NavigationService.Navigate(page);
                     });
                 }
                 else
                 {
-                    //GamePage page = new GamePage(_connector);//TODO: add parameters to gamePage
-                    //NavigationService.Navigate(page); 
+                    GamePage page = new GamePage(_connector, _numOfQuestions, _timeForQuestions);
+                    NavigationService.Navigate(page);
                 }
                 return true;
             }

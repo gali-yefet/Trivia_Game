@@ -21,14 +21,14 @@ namespace trivia_client
     public partial class GamePage : Page
     {
         Connector _connector;
-        int _numOfQuestions;
-        int _questionsLeft;
-        int _correctAnswers;
-        int _timeForQuestion;
+        uint _numOfQuestions;
+        uint _questionsLeft;
+        uint _correctAnswers;
+        uint _timeForQuestion;
         DispatcherTimer _timer;
         TimeSpan _time;
 
-        public GamePage(Connector connector, int numOfQuestions, int timeForQuestion)
+        public GamePage(Connector connector, uint numOfQuestions, uint timeForQuestion)
         {
             InitializeComponent();
             backgroundPage.Content = new BackgroundPage();
@@ -37,22 +37,29 @@ namespace trivia_client
             _numOfQuestions = numOfQuestions;
             _questionsLeft = numOfQuestions;
             _correctAnswers = 0;
-            CreateTimer(timeForQuestion);
 
+            CreateTimer(timeForQuestion);
             getQuestion(true);
         }
 
         private void Ans_Click(object sender, RoutedEventArgs e)
         {
-            int ansId = Int32.Parse((String)((Button)sender).Tag); //get the index of the button
+            classes.SubmitAnswerRequest answerRequest;
+            answerRequest.answerId = UInt32.Parse((String)((Button)sender).Tag); //get the index of the button
+            byte[] msg = classes.Serializer.serializeSubmitAnswerRequest(answerRequest);
+            byte[] res = _connector.sendGetData(msg);
+            classes.SubmitAnswerResponse r = classes.Deserializer.deserializeSubmitAnswerResponse(res);
 
-            //TODO:
-            //send answer, and get response
-
-            int correctAnsId = 3;//TODO: change to real ansId
-            checkAnswer(ansId, correctAnsId);
-            Thread.Sleep(500); //wait so the user can see the color of his answer
-            getQuestion();
+            if (r.status == classes.Deserializer.SUBMIT_ANSWER)
+            {
+                checkAnswer(answerRequest.answerId, r.correctAnswerId);
+                Thread.Sleep(500); //wait so the user can see the color of his answer
+                getQuestion();
+            }
+            else
+            {
+                //TODO: show an error
+            }
         }
 
         private void getQuestion(bool isFirst = false)
@@ -66,10 +73,22 @@ namespace trivia_client
                 _questionsLeft--;
                 updateScreen();
 
-                //TODO:
-                //send get quesion request
-                //change question
-                //cahnge all answers
+                byte[] msg = classes.Serializer.serializeRequest(classes.Deserializer.GET_QUESTION);
+                byte[] res = _connector.sendGetData(msg);
+                classes.GetQuestionResponse r = classes.Deserializer.deserializeGetQuestionResponse(res);
+                if(r.status == classes.Deserializer.GET_QUESTION)
+                {
+                    question.Content = r.question;
+                    Ans1.Content = r.answers[1];
+                    Ans2.Content = r.answers[2];
+                    Ans3.Content = r.answers[3];
+                    Ans4.Content = r.answers[4];
+                }
+                else
+                {
+                    //TODO: show an error
+                }
+
             }
             else
             {
@@ -78,7 +97,7 @@ namespace trivia_client
             }
         }
 
-        private void CreateTimer(int timeForQuestion)
+        private void CreateTimer(uint timeForQuestion)
         {
             _timeForQuestion = timeForQuestion;
             _time = TimeSpan.FromSeconds(timeForQuestion);
@@ -90,8 +109,6 @@ namespace trivia_client
                     getQuestion();
                 _time = _time.Add(TimeSpan.FromSeconds(-1));
             }, Application.Current.Dispatcher);
-
-            _timer.Start();
         }
 
         private void updateScreen()
@@ -111,7 +128,7 @@ namespace trivia_client
             Ans4.Background = Brushes.LightGray;
         }
 
-        private void checkAnswer(int answerId, int correctAnswerId)
+        private void checkAnswer(uint answerId, uint correctAnswerId)
         {
             if(answerId == correctAnswerId)
                 _correctAnswers++;
