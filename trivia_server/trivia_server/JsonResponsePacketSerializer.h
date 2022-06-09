@@ -135,9 +135,9 @@ public:
 	static std::vector<unsigned char> serializeGetRoomStateResponse(GetRoomStateResponse r);
 	static std::vector<unsigned char> serializeLeaveRoomResponse(LeaveRoomResponse r);
 	static std::vector<unsigned char> serializeLeaveGameResponse(LeaveGameResponse r);
-	static std::vector<unsigned char> serializeGetQuestionResponse(GetQuestionResponse r, bool gameOver = false);
+	static std::vector<unsigned char> serializeGetQuestionResponse(GetQuestionResponse r, bool gameOver);
 	static std::vector<unsigned char> serializeSubmitAnswerResponse(SubmitAnswerResponse r);
-	static std::vector<unsigned char> serializeGetGameResultsResponse(GetGameResultsResponse r, bool gameOver = true);
+	static std::vector<unsigned char> serializeGetGameResultsResponse(GetGameResultsResponse r, bool gameOver);
 	
 
 private:
