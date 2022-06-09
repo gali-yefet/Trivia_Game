@@ -74,6 +74,7 @@ namespace trivia_client
                 Thread.Sleep(3000); //will sleep for 3 sec
             }
         }
+
         public void createThread()
         {
             // Create a secondary thread by passing a ThreadStart delegate  
@@ -81,6 +82,7 @@ namespace trivia_client
             // Start secondary thread  
             updateThread.Start();
         }
+
         private void leaveRoomButton_Click(object sender, RoutedEventArgs e)
         {
             byte[] msg = classes.Serializer.serializeRequest(classes.Deserializer.LEAVE_ROOM);
@@ -143,7 +145,6 @@ namespace trivia_client
                 //TODO: show an error
             }
         }
-
 
         private List<classes.User> getUsersFromServer()
         {

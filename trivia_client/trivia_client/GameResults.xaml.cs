@@ -22,7 +22,15 @@ namespace trivia_client
         public GameResults(Connector connector)
         {
             InitializeComponent();
+            backgroundPage.Content = new BackgroundPage();
             _connector = connector;
         }
+
+        private void backToMenu_Click(object sender, RoutedEventArgs e)
+        {
+            Menu page = new Menu(_connector);
+            NavigationService.Navigate(page);
+        }
+
     }
 }

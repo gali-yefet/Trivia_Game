@@ -9,6 +9,31 @@
       Title="GameResults">
 
     <Grid>
-        
+        <Frame x:Name="backgroundPage"/>
+        <Grid Margin="40, 40, 40, 100">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+
+            <!--header-->
+            <Label x:Name="header" Content="GAME RESULTS" Grid.Row="0" Foreground="White" FontFamily="Arial Black" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+            <!--input-->
+            <ListView x:Name="results" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="username" DisplayMemberBinding="{Binding username}" Width="220"/>
+                        <GridViewColumn Header="correct answers" DisplayMemberBinding="{Binding correctAnswers}" Width="220"/>
+                        <GridViewColumn Header="average time" DisplayMemberBinding="{Binding avgTime}" Width="220"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <!--buttons-->
+            <Button Name="backToMenu" Visibility="Visible" Content="menu" Click="backToMenu_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
+        </Grid>
     </Grid>
 </Page>
