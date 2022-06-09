@@ -24,12 +24,16 @@ namespace trivia_client
             InitializeComponent();
             //connect to server
             _connector = new Connector();
+
         }
 
         private void login_Click(object sender, RoutedEventArgs e)
         {
-            LoginPage page = new LoginPage(_connector);
+            //TODO: change back to login
+            GamePage page = new GamePage(_connector, 3, 60);
             NavigationService.Navigate(page);
+            //LoginPage page = new LoginPage(_connector);
+            //NavigationService.Navigate(page);
         }
 
         private void signup_Click(object sender, RoutedEventArgs e)

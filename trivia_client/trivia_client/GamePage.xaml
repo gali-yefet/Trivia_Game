@@ -8,6 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GamePage">
 
+    
     <Grid>
         <Frame x:Name="backgroundPage"/>
         <Grid Margin="40, 40, 40, 0">
@@ -47,12 +48,12 @@
 
                 <!--Answers-->
                 <StackPanel Grid.Column="0" Margin="15">
-                    <TextBlock Name="answers" Text="3/6" FontSize="18" Foreground="White" FontFamily="Arial Black" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <TextBlock Name="correctAnswer" Text="3 correct answers!" FontSize="18" Foreground="#FF74D139" FontFamily="Arial Black" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBlock Name="answers" FontSize="18" Foreground="White" FontFamily="Arial Black" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBlock Name="correctAnswer" FontSize="18" Foreground="#FF74D139" FontFamily="Arial Black" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 </StackPanel>
                 
                 <!--Clock-->
-                <TextBlock Name="Clock" Grid.Column="2" Text="0:26" FontSize="28" Foreground="White" FontFamily="Arial Black" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Name="Clock" Grid.Column="2" FontSize="28" Foreground="White" FontFamily="Arial Black" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
             
         </Grid>

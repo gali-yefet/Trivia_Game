@@ -129,8 +129,8 @@ namespace trivia_client
             if (response.status == classes.Deserializer.START_GAME)
             {
                 _runUpdateThread = false;
-                GamePage page = new GamePage(_connector);
-                NavigationService.Navigate(page);
+                //GamePage page = new GamePage(_connector);//TODO: add parameters to gamePage
+                //NavigationService.Navigate(page); 
             }
             else
             {
@@ -153,12 +153,6 @@ namespace trivia_client
                     isAdmin = i == r.players.Length - 1
                 }) ;
             }
-            //if(r.isRoomClosed) //TODO: erase?
-            //{
-            //    _runUpdateThread = false;
-            //    JoinRoomPage page = new JoinRoomPage(_connector);
-            //    NavigationService.Navigate(page);
-            //}
             return users;
         }
 
@@ -197,14 +191,14 @@ namespace trivia_client
                 {
                     this.Dispatcher.Invoke(() =>
                     {
-                        GamePage page = new GamePage(_connector);
-                        NavigationService.Navigate(page);
+                        //GamePage page = new GamePage(_connector);//TODO: add parameters to gamePage
+                        //NavigationService.Navigate(page); 
                     });
                 }
                 else
                 {
-                    GamePage page = new GamePage(_connector);
-                    NavigationService.Navigate(page);
+                    //GamePage page = new GamePage(_connector);//TODO: add parameters to gamePage
+                    //NavigationService.Navigate(page); 
                 }
                 return true;
             }
