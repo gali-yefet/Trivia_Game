@@ -1,1 +1,5 @@
-﻿  trivia_server.vcxproj -> C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe
+﻿  SqliteDataBase.cpp
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(94,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(133,31): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(216,33): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+  trivia_server.vcxproj -> C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe
