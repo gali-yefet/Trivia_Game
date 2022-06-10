@@ -183,7 +183,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeSubmitAnswerRe
 	j["status"] = r.status;
 	j["correctAnswerId"] = r.correctAnswerId;
 	std::string data = j.dump();  // returns the json as a string
-	return serializeMsg(SUBMIT_ANSER, data);
+	return serializeMsg(SUBMIT_ANSWER, data);
 }
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetGameResultsResponse(GetGameResultsResponse r, bool gameOver)
