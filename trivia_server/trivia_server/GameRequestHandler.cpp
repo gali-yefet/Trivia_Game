@@ -43,10 +43,10 @@ RequestResult GameRequestHandler::getQuestion(RequestInfo r)
     response.status = GET_QUESTION;
     User u;
     u.setUsername(m_user.getUsername());
-    response.question = m_game.getQuestionForUser(u);
-    response.answers = m_game.getCurrentQuestion(m_user).getAnswers();
+    response.question = m_game.getQuestionForUser(u); //TODO: why it bring empty question?
+    response.answers = m_game.getCurrentQuestion(m_user).getAnswers(); //TODO: why it bring empty answers?
     std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeGetQuestionResponse(response, m_game.isGameOver(m_user));
-    return IRequestHandler::createRequestResult(buffer, m_handlerFactory.createGameRequestHandler(m_game, m_user));
+    return IRequestHandler::createRequestResult(buffer, this);
 }
 
 RequestResult GameRequestHandler::submitAnswer(RequestInfo r)
@@ -56,7 +56,7 @@ RequestResult GameRequestHandler::submitAnswer(RequestInfo r)
     response.status = SUBMIT_ANSWER;
     response.correctAnswerId = m_game.getCurrentQuestion(m_user).getRightAns();
     std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeSubmitAnswerResponse(response);
-    return IRequestHandler::createRequestResult(buffer, m_handlerFactory.createGameRequestHandler(m_game, m_user));
+    return IRequestHandler::createRequestResult(buffer, this);
 }
 
 RequestResult GameRequestHandler::getGameResults(RequestInfo r)
@@ -78,7 +78,7 @@ RequestResult GameRequestHandler::getGameResults(RequestInfo r)
     response.results = results;
 
     std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeGetGameResultsResponse(response, m_game.isGameOver(m_user));
-    return IRequestHandler::createRequestResult(buffer, m_handlerFactory.createGameRequestHandler(m_game, m_user));
+    return IRequestHandler::createRequestResult(buffer, this);
 }
 
 RequestResult GameRequestHandler::leaveGame(RequestInfo r)
@@ -89,5 +89,5 @@ RequestResult GameRequestHandler::leaveGame(RequestInfo r)
     LeaveGameResponse response;
     response.status = r.requestCode;
     std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeLeaveGameResponse(response);
-    return IRequestHandler::createRequestResult(buffer, m_handlerFactory.createGameRequestHandler(m_game, m_user));
+    return IRequestHandler::createRequestResult(buffer, m_handlerFactory.createMenuRequestHandler(m_user.getUsername()));
 }

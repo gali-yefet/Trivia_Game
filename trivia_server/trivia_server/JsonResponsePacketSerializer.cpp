@@ -144,6 +144,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetRoomStateRe
 	json j;
 	j["status"] = r.status;
 	j["hasGameBegun"] = r.hasGameBegun;
+	j["isRoomClosed"] = r.isClosed;
 	j["questionCount"] = r.questionCount;
 	j["answerTimeout"] = r.answerTimeout;
 	for (int i = 0; i < r.players.size(); i++)

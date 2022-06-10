@@ -15,7 +15,7 @@ std::string Game::getQuestionForUser(User user)
 		if (u.getUsername() == user.getUsername())
 		{
 			if(i->second.currentQuestion.getQuestion() != LEFT)
-				q = i->second.currentQuestion.getQuestion();
+				q = i->second.currentQuestion.getQuestion(); //TODO: find out why it doesn't give the question...
 		}
 	}
 	return q;

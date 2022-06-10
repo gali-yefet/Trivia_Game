@@ -33,7 +33,8 @@ bool SqliteDataBase::open()
 		res = query("CREATE TABLE IF NOT EXISTS KEY (KEY_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Q_ID INTEGER NOT NULL, ANS_ID INTEGER NOT NULL, FOREIGN KEY(Q_ID) REFERENCES QUESTION(Q_ID));");
 		if (!res)
 			std::cout << "Failed to create Table KEY" << std::endl;
-			*/
+			*///TODO: delete
+		createQuestions();
 	}
 
 	return true;

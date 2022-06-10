@@ -71,6 +71,7 @@ namespace trivia_client
             {
                 if (!_isAdmin && !checkState() || _isAdmin)
                     display();
+                
                 Thread.Sleep(3000); //will sleep for 3 sec
             }
         }
@@ -154,7 +155,7 @@ namespace trivia_client
             List<classes.User> users = new List<classes.User>();
             for(int i = 0; i< r.players.Length; i++)
             {
-                if(r.players[i].Length > 1)
+                if(r.players[i].Length > 2)
                 {
                     users.Add(new classes.User()
                     {
