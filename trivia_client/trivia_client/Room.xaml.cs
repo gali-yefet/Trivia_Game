@@ -156,7 +156,7 @@ namespace trivia_client
             List<classes.User> users = new List<classes.User>();
             for(int i = 0; i< r.players.Length; i++)
             {
-                if(r.players[i].Length > 0)
+                if(r.players[i].Length > 2)
                 {
                     users.Add(new classes.User()
                     {
