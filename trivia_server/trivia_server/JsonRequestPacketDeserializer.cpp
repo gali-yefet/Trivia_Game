@@ -105,7 +105,7 @@ CreateRoomRequest JsonRequestPacketDeseializer::deserializeCreateRoomRequest(Req
 SubmitAnswerRequest JsonRequestPacketDeseializer::deserializeSubmitAnswerRequest(RequestInfo r)
 {
 	SubmitAnswerRequest request;
-	if (r.requestCode == GET_PLAYERS_IN_ROOM)
+	if (r.requestCode == SUBMIT_ANSWER)
 	{
 		std::string data(r.json.begin(), r.json.end());// converts the data from bytes to string
 		//now the data looks like this:

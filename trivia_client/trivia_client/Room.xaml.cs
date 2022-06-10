@@ -151,7 +151,6 @@ namespace trivia_client
         {
             byte[] msg = classes.Serializer.serializeRequest(classes.Deserializer.GET_ROOM_STATE);
             byte[] res = _connector.sendGetData(msg);
-            string s = Encoding.Default.GetString(res);
             classes.GetRoomStateResponse r = classes.Deserializer.deserializeGetRoomStateResponse(res);
             List<classes.User> users = new List<classes.User>();
             for(int i = 0; i< r.players.Length; i++)

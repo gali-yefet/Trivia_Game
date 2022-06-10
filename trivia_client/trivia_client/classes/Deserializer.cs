@@ -153,10 +153,10 @@ namespace trivia_client.classes
 	    public const int START_GAME = 11;
 	    public const int GET_ROOM_STATE = 12;
         public const int LEAVE_ROOM = 13;
-        public const int LEAVE_GAME = 14;
-	    public const int GET_QUESTION = 15;
-        public const int SUBMIT_ANSWER = 16;
-        public const int GET_GAME_RESULTS = 17;
+        public const int GET_QUESTION = 14;
+	    public const int SUBMIT_ANSWER = 15;
+	    public const int GET_GAME_RESULTS = 16;
+        public const int LEAVE_GAME = 17;
 
         private static string extractValue(String json, bool eraseSides = false)
         {
