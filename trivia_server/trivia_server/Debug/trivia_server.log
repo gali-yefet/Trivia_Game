@@ -1,1 +1,6 @@
-﻿  trivia_server.vcxproj -> C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe
+﻿  RoomManager.cpp
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(94,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(40): warning C4715: 'RoomManager::getRoomState': not all control paths return a value
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(70): warning C4715: 'RoomManager::getRoomId': not all control paths return a value
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(97): warning C4715: 'RoomManager::createRoomId': not all control paths return a value
+  trivia_server.vcxproj -> C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe
