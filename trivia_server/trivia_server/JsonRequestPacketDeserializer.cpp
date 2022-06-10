@@ -113,7 +113,7 @@ SubmitAnswerRequest JsonRequestPacketDeseializer::deserializeSubmitAnswerRequest
 
 		try
 		{
-			request.answerId = std::stoi(extractValue(data, true));
+			request.answerId = std::stoi(extractValue(data));
 		}
 		catch (const std::exception& e)
 		{
