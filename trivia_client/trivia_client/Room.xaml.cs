@@ -42,27 +42,31 @@ namespace trivia_client
             _users = null;
             _users = getUsersFromServer();
             
-            if (_isAdmin)
+            if(_runUpdateThread)
             {
-                try
+                if (_isAdmin)
                 {
-                    this.Dispatcher.Invoke(() =>
+                    try
                     {
-                        closeRoomButton.Visibility = Visibility.Visible;
-                        startGameButton.Visibility = Visibility.Visible;
-                        leaveRoomButton.Visibility = Visibility.Hidden;
+                        this.Dispatcher.Invoke(() =>
+                        {
+                            closeRoomButton.Visibility = Visibility.Visible;
+                            startGameButton.Visibility = Visibility.Visible;
+                            leaveRoomButton.Visibility = Visibility.Hidden;
 
-                    });
+                        });
+                    }
+                    catch { }
                 }
-                catch { }
+
+                this.Dispatcher.Invoke(() =>
+                {
+                    //show users names
+                    ConectedUsers.ClearValue(ItemsControl.ItemsSourceProperty);
+                    ConectedUsers.ItemsSource = _users;
+                });
             }
-           
-            this.Dispatcher.Invoke(() =>
-            {
-                //show users names
-                ConectedUsers.ClearValue(ItemsControl.ItemsSourceProperty);
-                ConectedUsers.ItemsSource = _users;
-            });
+            
         }
 
         public void update()
@@ -153,17 +157,22 @@ namespace trivia_client
             byte[] res = _connector.sendGetData(msg);
             classes.GetRoomStateResponse r = classes.Deserializer.deserializeGetRoomStateResponse(res);
             List<classes.User> users = new List<classes.User>();
-            for(int i = 0; i< r.players.Length; i++)
+            if (r.hasGameBegun)
+                _runUpdateThread = false;
+            else
             {
-                if(r.players[i].Length > 2)
+                for (int i = 0; i < r.players.Length; i++)
                 {
-                    users.Add(new classes.User()
+                    if (r.players[i].Length > 2)
                     {
-                        username = r.players[i].Substring(1, r.players[i].Length - 2),
-                        isAdmin = i == r.players.Length - 1
-                    });
+                        users.Add(new classes.User()
+                        {
+                            username = r.players[i].Substring(1, r.players[i].Length - 2),
+                            isAdmin = i == r.players.Length - 1
+                        });
+                    }
+
                 }
-                
             }
             return users;
         }
