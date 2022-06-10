@@ -8,12 +8,12 @@
 LoginRequest JsonRequestPacketDeseializer::deserializeLoginRequest(RequestInfo r)
 {
 	LoginRequest l;
-	if(r.requestCode == LOGIN_CODE)
+	if (r.requestCode == LOGIN_CODE)
 	{
 		std::string data(r.json.begin(), r.json.end());// converts the data from bytes to string
 		//now the data looks like this:
 		//{ username: <username>, password: <password> }
-		
+
 		l.username = extractValue(data);
 		l.password = extractValue(data);
 	}
@@ -145,7 +145,7 @@ std::string JsonRequestPacketDeseializer::extractValue(std::string& json, bool t
 		//erase spaces
 		while (value[0] == ' ')
 			value = value.substr(1, value.length() - 1);
-		while (value[value.length() -1] == ' ')
+		while (value[value.length() - 1] == ' ')
 			value = value.substr(1, value.length() - 1);
 	}
 

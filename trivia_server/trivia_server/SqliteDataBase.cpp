@@ -167,7 +167,7 @@ userStatistics SqliteDataBase::getUserStatistics(std::string username)
 	return currentUser;
 }
 
-int SqliteDataBase::getSecurityKey(std::string username)//TODO
+int SqliteDataBase::getSecurityKey(std::string username)
 {
 	return 0;
 }

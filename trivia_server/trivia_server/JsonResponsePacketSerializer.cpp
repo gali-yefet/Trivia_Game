@@ -91,12 +91,16 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetRoomsRespon
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetPlayersInRoomResponse(GetPlayersInRoomResponse r)
 {
+	//create msg
+	std::string players = "";
+	for (auto i = r.players.begin(); i != r.players.end(); ++i)
+		players += eraseQuotes(*i) + ", ";
+	players = players.substr(0, players.length() - 2);
+
 	// create an empty structure (null)
 	json j;
-	for (int i = 0; i < r.players.size(); i++)
-		r.players[i] = eraseQuotes(r.players[i]);
-	j["PlayesrInRoom"] = r.players;
-	
+	j["PlayesrInRoom"] = players;
+
 	std::string data = j.dump();  // returns the json as a string
 	return serializeMsg(GET_PLAYERS_IN_ROOM, data);
 }
@@ -139,13 +143,13 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetRoomStateRe
 {
 	json j;
 	j["status"] = r.status;
+	j["hasGameBegun"] = r.hasGameBegun;
+	j["isRoomClosed"] = r.isClosed;
 	j["questionCount"] = r.questionCount;
+	j["answerTimeout"] = r.answerTimeout;
 	for (int i = 0; i < r.players.size(); i++)
 		r.players[i] = eraseQuotes(r.players[i]);
 	j["players"] = r.players;
-	j["hasGameBegun"] = r.hasGameBegun;
-	j["answerTimeout"] = r.answerTimeout;
-	j["isClosed"] = r.isClosed;
 
 	std::string data = j.dump();  // returns the json as a string
 	return serializeMsg(GET_ROOM_STATE, data);
@@ -183,7 +187,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeSubmitAnswerRe
 	j["status"] = r.status;
 	j["correctAnswerId"] = r.correctAnswerId;
 	std::string data = j.dump();  // returns the json as a string
-	return serializeMsg(SUBMIT_ANSER, data);
+	return serializeMsg(SUBMIT_ANSWER, data);
 }
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetGameResultsResponse(GetGameResultsResponse r, bool gameOver)
@@ -223,7 +227,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeMsg(int code, 
 		codeStr = " " + codeStr;
 	std::string bytes = std::to_string(static_cast<int>(data.length() * sizeof(unsigned char)));
 	while (bytes.length() < 4)
-		bytes = " "+bytes;
+		bytes = " " + bytes;
 	std::string message = codeStr + bytes + data;
 	std::vector<unsigned char> bytes_buffer(message.begin(), message.end());// enter the response to a vector of bytes
 	return bytes_buffer;
