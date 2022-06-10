@@ -11,5 +11,5 @@ std::string LoggedUser::getUsername()
 
 bool operator<(const LoggedUser& user1, const LoggedUser& user2)
 {
-	return user1.m_username.compare(user2.m_username);
+	return user1.m_username > user2.m_username;
 }
