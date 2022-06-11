@@ -96,13 +96,10 @@ void SqliteDataBase::createQuestions()
 		q = "INSERT INTO QUESTION (QUESTION, ANS1, ANS2, ANS3, ANS4, RIGHT_ANS) VALUES('" + questions[i] + "', '";
 		for (int k = 0; k < ANSWERS; k++)
 		{
-			if (k == ANSWERS - 1)
-				q += answers[j] + "', ";
-			else
-				q += answers[j] + "', '";
+			q += answers[j] + "', '";
 			j++;
 		}
-		q += rightAns[i] + ");";
+		q += rightAns[i] + "');";
 		query(q.c_str());
 	}
 }
