@@ -21,7 +21,7 @@ std::string Game::getQuestionForUser(User user)
 	return q;
 }
 
-void Game::submitAnswer(User user, int answer)
+void Game::submitAnswer(LoggedUser user, int answer)
 {
 	for (auto i = m_players.begin(); i != m_players.end(); ++i)
 	{
@@ -68,6 +68,6 @@ bool Game::isGameOver(LoggedUser user)
 {
 	auto it = m_players.find(user);
 	if(it != m_players.end())
-		return (it->second.correctAnswerCount + it->second.wrongAnswerCount) == ANSWERS;
+		return (it->second.correctAnswerCount + it->second.wrongAnswerCount) == m_questions.size();
 	return true;
 }
