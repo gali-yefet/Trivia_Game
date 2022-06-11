@@ -115,7 +115,7 @@ void Communicator::HandleNewClient(SOCKET socket)
 		}
 		catch (const std::exception& e)
 		{
-			continue;//TODO: why continue?
+			continue;//if the user doesn't send a request
 		}
 
 		//set the right data about the user

@@ -25,8 +25,7 @@ public:
 	MenuRequestHandler* createMenuRequestHandler(std::string username);
 	RoomAdminRequestHandler* createRoomAdminRequestHandler(int roomId, std::string username);
 	RoomMemberRequestHandler* createRoomMemberRequestHandler(int roomId, std::string username);
-	GameRequestHandler* createGameRequestHandler(Game m_game, LoggedUser m_user);
-
+	GameRequestHandler* createGameRequestHandler(Room room, LoggedUser user);
 
 	LoginManager& getLoginManager();
 	RoomManager& getRoomManager();
