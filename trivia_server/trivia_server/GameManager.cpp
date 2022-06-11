@@ -7,8 +7,9 @@ GameManager::GameManager(IDatabase* db):
 Game GameManager::createGame(Room room)
 {
 	//get random questions for the game
-	std::list<Question> list = m_database->getQuestions(room.getRoomData().numOfQuestionsInGame);
-	std::vector<Question> questions(list.begin(), list.end());
+	std::list<Question> listOfQuestions;
+	m_database->getQuestions(room.getRoomData().numOfQuestionsInGame, listOfQuestions);
+	std::vector<Question> questions(listOfQuestions.begin(), listOfQuestions.end());
 	std::random_shuffle(questions.begin(), questions.end());
 
 	//set the players for the game

@@ -19,9 +19,16 @@ in: void
 */
 void Server::run()
 {
-	//start the communicator to handle clients
-	std::thread tr(&Communicator::startHandleRequest, m_communicator);
-	tr.detach();
+	try
+	{
+		//start the communicator to handle clients
+		std::thread tr(&Communicator::startHandleRequest, m_communicator);
+		tr.detach();
+	}
+	catch (const std::exception& e)
+	{
+		throw e;
+	}
 	
 	//check whether to exit or not 
 	std::string in;

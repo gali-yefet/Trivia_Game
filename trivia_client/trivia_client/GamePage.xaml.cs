@@ -94,6 +94,7 @@ namespace trivia_client
             {
                 GameResults page = new GameResults(_connector);
                 NavigationService.Navigate(page);
+                _timer.Stop();
             }
         }
 
@@ -101,13 +102,22 @@ namespace trivia_client
         {
             _timeForQuestion = timeForQuestion;
             _time = TimeSpan.FromSeconds(timeForQuestion);
-
+            
             _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
                 Clock.Text = _time.ToString("c").Substring(4); //format the time m::ss
-                if (_time == TimeSpan.Zero)
-                    getQuestion();
-                _time = _time.Add(TimeSpan.FromSeconds(-1));
+                if (_questionsLeft == 0 && _time == TimeSpan.Zero)
+                {
+                    GameResults page = new GameResults(_connector);
+                    NavigationService.Navigate(page);
+                    _timer.Stop();
+                }
+                else
+                {
+                    if (_time == TimeSpan.Zero)
+                        getQuestion();
+                    _time = _time.Add(TimeSpan.FromSeconds(-1));
+                }
             }, Application.Current.Dispatcher);
         }
 
@@ -168,7 +178,14 @@ namespace trivia_client
                     Ans4.Background = Brushes.PaleGreen;
                     break;
             }
+            if(_questionsLeft == 0)
+            {
+                GameResults page = new GameResults(_connector);
+                NavigationService.Navigate(page);
+                _timer.Stop();
+            }
         }
+       
 
     }
 }
