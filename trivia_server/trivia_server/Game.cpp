@@ -72,6 +72,18 @@ Question Game::getCurrentQuestion(LoggedUser user)
 	return Question();
 }
 
+
+void Game::setPlayerAverageTime(int time, LoggedUser user)
+{
+	auto it = m_players.find(user);
+	if (it != m_players.end())
+	{
+		int numOfQuestionsBefore = it->second.correctAnswerCount + it->second.wrongAnswerCount - 1;
+		int avgTimeBefore = it->second.averageAnswerTime;
+		it->second.averageAnswerTime = (avgTimeBefore * numOfQuestionsBefore + time) / (numOfQuestionsBefore + 1);
+	}
+}
+
 //get players of game
 std::map<LoggedUser, GameData> Game::getPlayers()
 {

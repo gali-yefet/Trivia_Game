@@ -24,6 +24,7 @@ public:
 	void submitAnswer(LoggedUser user, int answer);
 	void removePlayer(User user);
 	Question getCurrentQuestion(LoggedUser user);
+	void setPlayerAverageTime(int time, LoggedUser user);
 	std::map<LoggedUser, GameData> getPlayers();
 	bool isGameOver(LoggedUser user);
 

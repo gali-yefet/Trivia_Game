@@ -114,6 +114,7 @@ SubmitAnswerRequest JsonRequestPacketDeseializer::deserializeSubmitAnswerRequest
 		try
 		{
 			request.answerId = std::stoi(extractValue(data));
+			request.time = std::stoi(extractValue(data));
 		}
 		catch (const std::exception& e)
 		{

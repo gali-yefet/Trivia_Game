@@ -31,6 +31,13 @@ namespace trivia_client.classes
         public bool isAdmin { get; set; }
     }
 
+    class PlayerResultsForList
+    {
+        public String username { get; set; }
+        public uint correctAnswerCount { get; set; }
+        public uint averageAnswerTime { get; set; }
+    }
+
     public struct PlayerResults
     {
         public String username;

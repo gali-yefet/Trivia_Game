@@ -33,7 +33,7 @@ namespace trivia_client
             NavigationService.Navigate(page);
         }
 
-        private List<classes.PlayerResults> getResults()
+        private List<classes.PlayerResultsForList> getResults()
         {
             classes.GetGameResultsResponse r;
             do
@@ -42,7 +42,22 @@ namespace trivia_client
                 r = classes.Deserializer.deserializeGetGameResultsResponse(res);
             } while (r.status != classes.Deserializer.GET_GAME_RESULTS);
 
-            List<classes.PlayerResults> results = new List<classes.PlayerResults>(r.results);
+            //get the results to the list
+            List<classes.PlayerResultsForList> results = new List<classes.PlayerResultsForList>();
+            for (int i = 0; i < r.results.Length; i++)
+            {
+                if(r.results[i].username.Length > 2)
+                {
+                    results.Add(new classes.PlayerResultsForList()
+                    {
+                        username = r.results[i].username.Substring(1, r.results[i].username.Length - 2),
+                        correctAnswerCount = r.results[i].correctAnswerCount,
+                        averageAnswerTime = r.results[i].averageAnswerTime
+                    });
+                }
+               
+
+            }
             return results;
         }
     }

@@ -59,6 +59,7 @@ RequestResult GameRequestHandler::submitAnswer(RequestInfo r)
     m_game.submitAnswer(m_user, request.answerId);
     response.status = SUBMIT_ANSWER;
     response.correctAnswerId = m_game.getCurrentQuestion(m_user).getRightAns();
+    m_game.setPlayerAverageTime(request.time, m_user);
     std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeSubmitAnswerResponse(response);
     return IRequestHandler::createRequestResult(buffer, this);
 }

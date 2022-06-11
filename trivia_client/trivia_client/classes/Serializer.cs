@@ -40,6 +40,7 @@ namespace trivia_client.classes
     struct SubmitAnswerRequest
     {
         public uint answerId;
+        public uint time;
     }
 
     class Serializer
