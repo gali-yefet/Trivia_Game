@@ -1,1 +1,18 @@
-﻿  trivia_server.vcxproj -> C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe
+﻿  Communicator.cpp
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\Communicator.cpp(116,32): warning C4101: 'e': unreferenced local variable
+  Game.cpp
+  GameManager.cpp
+  GameRequestHandler.cpp
+  JsonRequestPacketDeserializer.cpp
+  JsonResponsePacketSerializer.cpp
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\JsonResponsePacketSerializer.cpp(150,20): warning C4018: '<': signed/unsigned mismatch
+  LoginRequestHandler.cpp
+  MenuRequestHandler.cpp
+  RequestHandlerFactory.cpp
+  RoomAdminRequestHandler.cpp
+C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomAdminRequestHandler.cpp(38,23): warning C4018: '<': signed/unsigned mismatch
+  RoomMemberRequestHandler.cpp
+  Server.cpp
+  Source.cpp
+  Generating Code...
+  trivia_server.vcxproj -> C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe

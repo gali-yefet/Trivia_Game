@@ -152,6 +152,9 @@ void Communicator::HandleNewClient(SOCKET socket)
 	closeClient(currUsername, currRoomId, isAdmin);
 }
 
+//close client
+//input: user's username, roomId, if the user is an admin
+//output: none
 void Communicator::closeClient(std::string username, int roomId, bool isAdmin)
 {
 	//close all things
@@ -168,6 +171,7 @@ void Communicator::closeClient(std::string username, int roomId, bool isAdmin)
 		m_handlerFactory.getDatabase()->logout(username);
 }
 
+//set user as current user
 void Communicator::setCurrUsername(RequestInfo r, std::string& username)
 {
 	switch (r.requestCode)

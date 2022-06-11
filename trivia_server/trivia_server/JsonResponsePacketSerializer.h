@@ -11,7 +11,7 @@ typedef struct PlayerResults
 	std::string username;
 	unsigned int correctAnswerCount;
 	unsigned int wrongAnswerCount;
-	unsigned int averageAnserTime;
+	unsigned int averageAnswerTime;
 }PlayerResults;
 
 typedef struct LoginResponse

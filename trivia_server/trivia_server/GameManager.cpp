@@ -4,6 +4,9 @@ GameManager::GameManager(IDatabase* db):
 	m_database(db)
 {}
 
+//start game
+//input: room
+//output: new game for the room
 Game GameManager::createGame(Room room)
 {
 	//get random questions for the game
@@ -20,7 +23,7 @@ Game GameManager::createGame(Room room)
 		GameData d;
 		if (questions.size() > 0)
 			d.currentQuestion = questions[0];
-		d.averangeAnswerTime = 0;
+		d.averageAnswerTime = 0;
 		d.correctAnswerCount = 0;
 		d.wrongAnswerCount = 0;
 		players.emplace(LoggedUser(*i), d);
@@ -32,6 +35,7 @@ Game GameManager::createGame(Room room)
 	return game;
 }
 
+//delete games
 void GameManager::deleteGame()
 {
 	this->m_games.clear();

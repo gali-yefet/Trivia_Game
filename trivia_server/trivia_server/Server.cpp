@@ -14,8 +14,8 @@ Server::Server():
 
 /*
 start the server. create a thread that handle clients. if it gets a message with EXIT, it will shut down.
-in: void
-in: void
+in: none
+out: void
 */
 void Server::run()
 {

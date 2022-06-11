@@ -6,6 +6,9 @@ Game::Game(std::vector<Question> m_questions, std::map<LoggedUser, GameData> m_p
 {
 }
 
+//gets question for user
+//input: user
+//output: question
 std::string Game::getQuestionForUser(LoggedUser user)
 {
 	std::string q;
@@ -22,6 +25,9 @@ std::string Game::getQuestionForUser(LoggedUser user)
 	return q;
 }
 
+//submit answer for user
+//input: user
+//output: none
 void Game::submitAnswer(LoggedUser user, int answer)
 {
 	for (auto i = m_players.begin(); i != m_players.end(); ++i)
@@ -40,6 +46,9 @@ void Game::submitAnswer(LoggedUser user, int answer)
 	}
 }
 
+//removes player from game
+//input: user to remove
+//output: none
 void Game::removePlayer(User user)
 {
 	for (auto i = m_players.begin(); i != m_players.end(); ++i)
@@ -52,6 +61,9 @@ void Game::removePlayer(User user)
 	}
 }
 
+//get current question for user
+//input: user
+//output: question
 Question Game::getCurrentQuestion(LoggedUser user)
 {
     auto it = m_players.find(user);
@@ -60,11 +72,13 @@ Question Game::getCurrentQuestion(LoggedUser user)
 	return Question();
 }
 
+//get players of game
 std::map<LoggedUser, GameData> Game::getPlayers()
 {
 	return this->m_players;
 }
 
+//returns if game over
 bool Game::isGameOver(LoggedUser user)
 {
 	auto it = m_players.find(user);

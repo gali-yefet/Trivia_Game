@@ -56,10 +56,7 @@ namespace trivia_client
                 Thread.Sleep(500); //wait so the user can see the color of his answer
                 getQuestion();
             }
-            else
-            {
-                //TODO: show an error
-            }
+         
         }
 
         private void getQuestion(bool isFirst = false)
@@ -83,10 +80,6 @@ namespace trivia_client
                     Ans2.Content = r.answers[2];
                     Ans3.Content = r.answers[3];
                     Ans4.Content = r.answers[4];
-                }
-                else
-                {
-                    //TODO: show an error
                 }
 
             }

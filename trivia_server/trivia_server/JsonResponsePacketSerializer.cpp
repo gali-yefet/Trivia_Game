@@ -202,7 +202,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeGetGameResults
 		for (auto i = r.results.begin(); i != r.results.end(); ++i)
 		{
 			json result;
-			result["averageAnserTime"] = i->averageAnserTime;
+			result["averageAnswerTime"] = i->averageAnswerTime;
 			result["correctAnswerCount"] = i->correctAnswerCount;
 			result["username"] = eraseQuotes(i->username);
 			result["wrongAnswerCount"] = i->wrongAnswerCount;

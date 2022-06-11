@@ -16,6 +16,7 @@ bool GameRequestHandler::isRequestRelevant(RequestInfo r)
         r.requestCode == GET_GAME_RESULTS;
 }
 
+//handle's request
 RequestResult GameRequestHandler::handleRequest(RequestInfo r)
 {
     RequestResult result;
@@ -37,6 +38,9 @@ RequestResult GameRequestHandler::handleRequest(RequestInfo r)
     return result;
 }
 
+//get question
+//input: requestInfo
+//output:request result
 RequestResult GameRequestHandler::getQuestion(RequestInfo r)
 {
     GetQuestionResponse response;
@@ -47,6 +51,7 @@ RequestResult GameRequestHandler::getQuestion(RequestInfo r)
     return IRequestHandler::createRequestResult(buffer, this);
 }
 
+//submit answer
 RequestResult GameRequestHandler::submitAnswer(RequestInfo r)
 {
     SubmitAnswerRequest request = JsonRequestPacketDeseializer::deserializeSubmitAnswerRequest(r);
@@ -58,6 +63,7 @@ RequestResult GameRequestHandler::submitAnswer(RequestInfo r)
     return IRequestHandler::createRequestResult(buffer, this);
 }
 
+//get game results
 RequestResult GameRequestHandler::getGameResults(RequestInfo r)
 {
     GetGameResultsResponse response;
@@ -71,7 +77,7 @@ RequestResult GameRequestHandler::getGameResults(RequestInfo r)
         p.username = u.getUsername();
         p.correctAnswerCount = i->second.correctAnswerCount;
         p.wrongAnswerCount = i->second.wrongAnswerCount;
-        p.averageAnserTime = i->second.averangeAnswerTime;
+        p.averageAnswerTime = i->second.averageAnswerTime;
         results.push_back(p);
     }
     response.results = results;
@@ -80,6 +86,7 @@ RequestResult GameRequestHandler::getGameResults(RequestInfo r)
     return IRequestHandler::createRequestResult(buffer, this);
 }
 
+//leave game
 RequestResult GameRequestHandler::leaveGame(RequestInfo r)
 {
     User u = User();

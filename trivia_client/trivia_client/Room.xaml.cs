@@ -101,10 +101,6 @@ namespace trivia_client
                     JoinRoomPage page = new JoinRoomPage(_connector);
                     NavigationService.Navigate(page);
                 }
-                else
-                {
-                    //TODO: show an error
-                }
             }
             
         }
@@ -121,10 +117,7 @@ namespace trivia_client
                 Menu page = new Menu(_connector);
                 NavigationService.Navigate(page);
             }
-            else
-            {
-                //TODO: show an error
-            }
+            
         }
 
         private void startGameButton_Click(object sender, RoutedEventArgs e)
@@ -141,10 +134,7 @@ namespace trivia_client
                 GamePage page = new GamePage(_connector, _numOfQuestions, _timeForQuestions);
                 NavigationService.Navigate(page); 
             }
-            else
-            {
-                //TODO: show an error
-            }
+            
         }
 
         private List<classes.User> getUsersFromServer()
