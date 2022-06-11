@@ -36,14 +36,12 @@ namespace trivia_client
         private List<classes.PlayerResults> getResults()
         {
             classes.GetGameResultsResponse r;
-            // do
-            // {
-            //    byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_GAME_RESULTS));
-            //   r = classes.Deserializer.deserializeGetGameResultsResponse(res);
-            // } while (r.status != classes.Deserializer.GET_GAME_RESULTS);//TODO: fix infinite loop
+            do
+            {
+                byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_GAME_RESULTS));
+                r = classes.Deserializer.deserializeGetGameResultsResponse(res);
+            } while (r.status != classes.Deserializer.GET_GAME_RESULTS);
 
-            byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_GAME_RESULTS));
-            r = classes.Deserializer.deserializeGetGameResultsResponse(res);
             List<classes.PlayerResults> results = new List<classes.PlayerResults>(r.results);
             return results;
         }
