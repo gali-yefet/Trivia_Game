@@ -104,13 +104,10 @@ void SqliteDataBase::createQuestions()
 	}
 }
 
-std::list<Question> SqliteDataBase::getQuestions(int limit)
+void SqliteDataBase::getQuestions(int limit, std::list<Question>& listOfQuestions)
 {
 	std::string q = "SELECT * FROM QUESTION LIMIT " + std::to_string(limit) + "; ";
-	std::list<Question> listOfQuestions;
 	this->execSelectCmd(q.c_str(), this->questionsCallback, &listOfQuestions);
-
-	return listOfQuestions;
 }
 
 float SqliteDataBase::getPlayerAverageAnswerTime(std::string username)

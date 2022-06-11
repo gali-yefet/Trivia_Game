@@ -49,9 +49,16 @@ void Communicator::startHandleRequest()
 			throw std::exception(__FUNCTION__);
 	
 		// create new thread for client	and detach from it
-		std::thread tr(&Communicator::HandleNewClient, this, client_socket);
-		tr.detach();
-	
+		try
+		{
+			std::thread tr(&Communicator::HandleNewClient, this, client_socket);
+			tr.detach();
+		}
+		catch (const std::exception& e)
+		{
+			throw e;
+		}
+		
 		//insert the client to the clients map
 		LoginRequestHandler* handler = m_handlerFactory.createLoginRequestHandler();
 		m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, handler));
@@ -108,7 +115,7 @@ void Communicator::HandleNewClient(SOCKET socket)
 		}
 		catch (const std::exception& e)
 		{
-			continue;
+			continue;//TODO: why continue?
 		}
 
 		//set the right data about the user
@@ -130,7 +137,15 @@ void Communicator::HandleNewClient(SOCKET socket)
 				m_clients.erase(socket);
 				RequestResult res = handler->handleRequest(r);
 				m_clients.insert(std::pair<SOCKET, IRequestHandler*>(socket, res.newHandler));
-				sendData(socket, res.buffer);
+				try
+				{
+					sendData(socket, res.buffer);
+				}
+				catch (const std::exception& e)
+				{
+					throw e;
+				}
+				
 			}
 		}
 	}

@@ -73,10 +73,11 @@ namespace trivia_client
         {
             while (_runUpdateThread)
             {
-                if (!_isAdmin && !checkState() || _isAdmin)
+                if ((!_isAdmin && !checkState()) || _isAdmin)
+                {
                     display();
-                
-                Thread.Sleep(3000); //will sleep for 3 sec
+                    Thread.Sleep(3000); //will sleep for 3 sec
+                }
             }
         }
 
@@ -157,22 +158,17 @@ namespace trivia_client
             byte[] res = _connector.sendGetData(msg);
             classes.GetRoomStateResponse r = classes.Deserializer.deserializeGetRoomStateResponse(res);
             List<classes.User> users = new List<classes.User>();
-            if (r.hasGameBegun)
-                _runUpdateThread = false;
-            else
+            for (int i = 0; i < r.players.Length; i++)
             {
-                for (int i = 0; i < r.players.Length; i++)
+                if (r.players[i].Length > 2)
                 {
-                    if (r.players[i].Length > 2)
+                    users.Add(new classes.User()
                     {
-                        users.Add(new classes.User()
-                        {
-                            username = r.players[i].Substring(1, r.players[i].Length - 2),
-                            isAdmin = i == r.players.Length - 1
-                        });
-                    }
-
+                        username = r.players[i].Substring(1, r.players[i].Length - 2),
+                        isAdmin = i == r.players.Length - 1
+                    });
                 }
+
             }
             return users;
         }
