@@ -6,7 +6,7 @@ Game::Game(std::vector<Question> m_questions, std::map<LoggedUser, GameData> m_p
 {
 }
 
-std::string Game::getQuestionForUser(User user)
+std::string Game::getQuestionForUser(LoggedUser user)
 {
 	std::string q;
 	for (auto i = m_players.begin(); i != m_players.end(); ++i)
@@ -14,8 +14,9 @@ std::string Game::getQuestionForUser(User user)
 		LoggedUser u = i->first;
 		if (u.getUsername() == user.getUsername())
 		{
+			i->second.currentQuestion = m_questions[i->second.correctAnswerCount + i->second.wrongAnswerCount];
 			if(i->second.currentQuestion.getQuestion() != LEFT)
-				q = i->second.currentQuestion.getQuestion(); //TODO: find out why it doesn't give the question...
+				q = i->second.currentQuestion.getQuestion();
 		}
 	}
 	return q;

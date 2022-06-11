@@ -17,7 +17,13 @@ Game GameManager::createGame(Room room)
 	std::vector<std::string> users = room.getAllUsers();
 	for (auto i = users.begin(); i != users.end(); ++i)
 	{
-		players.emplace(LoggedUser(*i), GameData());
+		GameData d;
+		if (questions.size() > 0)
+			d.currentQuestion = questions[0];
+		d.averangeAnswerTime = 0;
+		d.correctAnswerCount = 0;
+		d.wrongAnswerCount = 0;
+		players.emplace(LoggedUser(*i), d);
 	}
 
 	//create game

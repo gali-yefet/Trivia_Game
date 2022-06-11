@@ -4,8 +4,8 @@
 #include "JsonResponsePacketSerializer.h"
 #include "define.h"
 
-GameRequestHandler::GameRequestHandler(Game m_game, LoggedUser m_user, GameManager& m_gameManager, RequestHandlerFactory& m_handlerFacroty)
-    :m_game(m_game), m_user(m_user), m_gameManager(m_gameManager), m_handlerFactory(m_handlerFacroty)
+GameRequestHandler::GameRequestHandler(LoggedUser m_user, GameManager& gameManager, RequestHandlerFactory& handlerFactory, Room room):
+    m_game(handlerFactory.getGameManager().createGame(room)), m_user(m_user), m_gameManager(gameManager), m_handlerFactory(handlerFactory)
 {}
 
 bool GameRequestHandler::isRequestRelevant(RequestInfo r)
@@ -41,10 +41,8 @@ RequestResult GameRequestHandler::getQuestion(RequestInfo r)
 {
     GetQuestionResponse response;
     response.status = GET_QUESTION;
-    User u;
-    u.setUsername(m_user.getUsername());
-    response.question = m_game.getQuestionForUser(u); //TODO: why it bring empty question?
-    response.answers = m_game.getCurrentQuestion(m_user).getAnswers(); //TODO: why it bring empty answers?
+    response.question = m_game.getQuestionForUser(m_user);
+    response.answers = m_game.getCurrentQuestion(m_user).getAnswers();
     std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeGetQuestionResponse(response, m_game.isGameOver(m_user));
     return IRequestHandler::createRequestResult(buffer, this);
 }
