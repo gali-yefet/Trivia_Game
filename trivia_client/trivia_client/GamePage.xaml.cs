@@ -64,7 +64,6 @@ namespace trivia_client
 
         private void getQuestion(bool isFirst = false)
         {
-
             if (!isFirst)
                 _timer.Stop();//stops the timer
 

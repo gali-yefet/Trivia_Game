@@ -200,17 +200,18 @@ namespace trivia_client
             }
             if(responseCode == classes.Deserializer.START_GAME)
             {
-                _runUpdateThread = false;
                 if (forUpdate)
                 {
                     this.Dispatcher.Invoke(() =>
                     {
+                        _runUpdateThread = false;
                         GamePage page = new GamePage(_connector, _numOfQuestions, _timeForQuestions);
                         NavigationService.Navigate(page);
                     });
                 }
                 else
                 {
+                    _runUpdateThread = false;
                     GamePage page = new GamePage(_connector, _numOfQuestions, _timeForQuestions);
                     NavigationService.Navigate(page);
                 }
