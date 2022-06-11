@@ -44,8 +44,12 @@ namespace trivia_client
 
         private void Ans_Click(object sender, RoutedEventArgs e)
         {
+            //get the time
+            _timer.Stop();//stops the timer
+
             classes.SubmitAnswerRequest answerRequest;
             answerRequest.answerId = UInt32.Parse((String)((Button)sender).Tag); //get the index of the button
+            answerRequest.time =(uint)(_timeForQuestion - _time.TotalSeconds);
             byte[] msg = classes.Serializer.serializeSubmitAnswerRequest(answerRequest);
             byte[] res = _connector.sendGetData(msg);
             classes.SubmitAnswerResponse r = classes.Deserializer.deserializeSubmitAnswerResponse(res);
@@ -64,9 +68,6 @@ namespace trivia_client
 
         private void getQuestion(bool isFirst = false)
         {
-            if (!isFirst)
-                _timer.Stop();//stops the timer
-
             if (_questionsLeft > 0)
             {
                 _questionsLeft--;

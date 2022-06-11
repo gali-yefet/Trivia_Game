@@ -29,6 +29,8 @@ void Game::submitAnswer(LoggedUser user, int answer)
 		LoggedUser u = i->first;
 		if (u.getUsername() == user.getUsername())
 		{
+			//TODO: add avg time
+
 			if (i->second.currentQuestion.getQuestion() != LEFT)
 			{
 				if (i->second.currentQuestion.getRightAns() == answer)
@@ -58,6 +60,17 @@ Question Game::getCurrentQuestion(LoggedUser user)
 	if(it != m_players.end())// if pair found
 		return it->second.currentQuestion;
 	return Question();
+}
+
+void Game::setPlayerAverageTime(int time, LoggedUser user)
+{
+	auto it = m_players.find(user);
+	if (it != m_players.end())
+	{
+		int numOfQuestionsBefore = it->second.correctAnswerCount + it->second.wrongAnswerCount - 1;
+		int avgTimeBefore = it->second.averangeAnswerTime;
+		it->second.averangeAnswerTime = (avgTimeBefore * numOfQuestionsBefore + time) / (numOfQuestionsBefore + 1);
+	}
 }
 
 std::map<LoggedUser, GameData> Game::getPlayers()
