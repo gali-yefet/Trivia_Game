@@ -29,8 +29,6 @@ void Game::submitAnswer(LoggedUser user, int answer)
 		LoggedUser u = i->first;
 		if (u.getUsername() == user.getUsername())
 		{
-			//TODO: add avg time
-
 			if (i->second.currentQuestion.getQuestion() != LEFT)
 			{
 				if (i->second.currentQuestion.getRightAns() == answer)

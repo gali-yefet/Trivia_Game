@@ -31,7 +31,7 @@ RequestResult RoomMemberRequestHandler::handleRequest(RequestInfo r)
         StartGameResponse response;
         response.status = START_GAME;
         std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeStartGameResponse(response);
-        return IRequestHandler::createRequestResult(buffer, m_handlerFactory.createRoomMemberRequestHandler(m_room.getRoomData().id, m_user.getUsername()));
+        return IRequestHandler::createRequestResult(buffer, m_handlerFactory.createGameRequestHandler(m_room, m_user));
     }
 
     //deal with request
