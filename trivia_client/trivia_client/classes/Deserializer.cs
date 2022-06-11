@@ -36,7 +36,7 @@ namespace trivia_client.classes
         public String username;
         public uint correctAnswerCount;
         public uint wrongAnswerCount;
-        public uint averageAnserTime;
+        public uint averageAnswerTime;
     }
 
     struct LoginResponse
@@ -508,8 +508,8 @@ namespace trivia_client.classes
                 //get the current statistics
                 PlayerResults currrResults;
 
-                String averageAnserTime = extractValue(results);
-                currrResults.averageAnserTime = classes.Serializer.checkifNumber(averageAnserTime) ? UInt32.Parse(averageAnserTime) : 0;
+                String averageAnswerTime = extractValue(results);
+                currrResults.averageAnswerTime = classes.Serializer.checkifNumber(averageAnswerTime) ? UInt32.Parse(averageAnswerTime) : 0;
                 results = results.Substring(results.IndexOf(',') + 1);
 
                 String correctAnswerCount = extractValue(results);

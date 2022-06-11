@@ -41,22 +41,17 @@ namespace trivia_client
         {
             _users = null;
             _users = getUsersFromServer();
-            
-            if(_runUpdateThread)
+            if (_runUpdateThread)
             {
                 if (_isAdmin)
                 {
-                    try
+                    this.Dispatcher.Invoke(() =>
                     {
-                        this.Dispatcher.Invoke(() =>
-                        {
-                            closeRoomButton.Visibility = Visibility.Visible;
-                            startGameButton.Visibility = Visibility.Visible;
-                            leaveRoomButton.Visibility = Visibility.Hidden;
+                        closeRoomButton.Visibility = Visibility.Visible;
+                        startGameButton.Visibility = Visibility.Visible;
+                        leaveRoomButton.Visibility = Visibility.Hidden;
 
-                        });
-                    }
-                    catch { }
+                    });
                 }
 
                 this.Dispatcher.Invoke(() =>
