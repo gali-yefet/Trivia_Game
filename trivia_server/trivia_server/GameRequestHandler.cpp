@@ -53,6 +53,7 @@ RequestResult GameRequestHandler::submitAnswer(RequestInfo r)
 {
     SubmitAnswerRequest request = JsonRequestPacketDeseializer::deserializeSubmitAnswerRequest(r);
     SubmitAnswerResponse response;
+    m_game.submitAnswer(m_user, request.answerId);
     response.status = SUBMIT_ANSWER;
     response.correctAnswerId = m_game.getCurrentQuestion(m_user).getRightAns();
     std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeSubmitAnswerResponse(response);

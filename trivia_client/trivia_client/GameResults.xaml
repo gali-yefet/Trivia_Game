@@ -33,7 +33,7 @@
             </ListView>
 
             <!--buttons-->
-            <Button Name="backToMenu" Visibility="Visible" Content="menu" Click="backToMenu_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
+            <Button Name="backToMenu" Grid.Row="2" Visibility="Visible" Content="menu" Click="backToMenu_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
         </Grid>
     </Grid>
 </Page>
