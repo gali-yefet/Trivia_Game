@@ -118,11 +118,6 @@ void Communicator::HandleNewClient(SOCKET socket)
 			continue;//if the user doesn't send a request
 		}
 
-		//set the right data about the user
-		setCurrUsername(r, currUsername);
-		setCurrRoomId(r, currRoomId);
-		setIsAdmin(r, isAdmin);
-
 		//handle the client request according to socket
 		auto it = m_clients.find(socket);
 		if (it == m_clients.end())
@@ -147,6 +142,11 @@ void Communicator::HandleNewClient(SOCKET socket)
 				}
 				
 			}
+
+			//set the right data about the user
+			setCurrUsername(r, currUsername);
+			setCurrRoomId(r, currRoomId);
+			setIsAdmin(r, isAdmin);
 		}
 	}
 	closeClient(currUsername, currRoomId, isAdmin);
@@ -188,12 +188,17 @@ void Communicator::setCurrRoomId(RequestInfo r, int& roomId)
 	switch (r.requestCode)
 	{
 	case CREATE_ROOM:
-		roomId = m_handlerFactory.getRoomManager().getRoomId(JsonRequestPacketDeseializer::deserializeCreateRoomRequest(r).roomName);
+	{
+		RoomManager roomManager = m_handlerFactory.getRoomManager();
+		std::string roomName = JsonRequestPacketDeseializer::deserializeCreateRoomRequest(r).roomName;
+		roomId = roomManager.getRoomId(roomName);
 		break;
+	}
 	case JOIN_ROOM:
 		roomId = JsonRequestPacketDeseializer::deserializeJoinRoomRequest(r).roomId;
 		break;
 	case LEAVE_ROOM:
+
 	case CLOSE_ROOM:
 		roomId = NOT_IN_ROOM;
 		break;
