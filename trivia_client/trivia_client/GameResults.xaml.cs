@@ -29,8 +29,13 @@ namespace trivia_client
 
         private void backToMenu_Click(object sender, RoutedEventArgs e)
         {
-            Menu page = new Menu(_connector);
-            NavigationService.Navigate(page);
+            byte[] res = _connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.LEAVE_GAME));
+            classes.LeaveGameResponse r = classes.Deserializer.deserializeLeaveGameResponse(res);
+            if(r.status == classes.Deserializer.LEAVE_GAME)
+            {
+                Menu page = new Menu(_connector);
+                NavigationService.Navigate(page);
+            }   
         }
 
         private List<classes.PlayerResultsForList> getResults()
@@ -55,8 +60,6 @@ namespace trivia_client
                         averageAnswerTime = r.results[i].averageAnswerTime
                     });
                 }
-               
-
             }
             return results;
         }

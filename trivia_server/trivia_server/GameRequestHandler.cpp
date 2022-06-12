@@ -22,7 +22,7 @@ RequestResult GameRequestHandler::handleRequest(RequestInfo r)
     RequestResult result;
     switch (r.requestCode)
     {
-    case LEAVE_ROOM:
+    case LEAVE_GAME:
         result = leaveGame(r);
         break;
     case GET_QUESTION:
@@ -83,16 +83,14 @@ RequestResult GameRequestHandler::getGameResults(RequestInfo r)
     }
     response.results = results;
 
-    std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeGetGameResultsResponse(response, m_game.isGameOver(m_user));
+    std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeGetGameResultsResponse(response, m_game.isGameOver(m_user)); //TODO: cahnge to cheking if game is over for all users
     return IRequestHandler::createRequestResult(buffer, this);
 }
 
 //leave game
 RequestResult GameRequestHandler::leaveGame(RequestInfo r)
 {
-    User u = User();
-    u.setUsername(m_user.getUsername());
-    m_game.removePlayer(u);
+    m_game.removePlayer(m_user);
     LeaveGameResponse response;
     response.status = r.requestCode;
     std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeLeaveGameResponse(response);

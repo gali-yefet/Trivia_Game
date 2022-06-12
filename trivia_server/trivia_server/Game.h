@@ -22,7 +22,7 @@ public:
 	Game(std::vector<Question> m_questions, std::map<LoggedUser, GameData> m_players);
 	std::string getQuestionForUser(LoggedUser user);
 	void submitAnswer(LoggedUser user, int answer);
-	void removePlayer(User user);
+	void removePlayer(LoggedUser user);
 	Question getCurrentQuestion(LoggedUser user);
 	void setPlayerAverageTime(int time, LoggedUser user);
 	std::map<LoggedUser, GameData> getPlayers();

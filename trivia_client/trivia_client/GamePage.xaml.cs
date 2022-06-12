@@ -171,12 +171,6 @@ namespace trivia_client
                     Ans4.Background = Brushes.PaleGreen;
                     break;
             }
-            if(_questionsLeft == 0)
-            {
-                GameResults page = new GameResults(_connector);
-                NavigationService.Navigate(page);
-                _timer.Stop();
-            }
         }
        
 
