@@ -77,6 +77,7 @@ RequestResult GameRequestHandler::getGameResults(RequestInfo r)
         if (!m_game.isGameOver(i->first))
             allPlayersFinished = false;
     }
+<<<<<<< HEAD
     if (allPlayersFinished)
     {
         response.status = GET_GAME_RESULTS;
@@ -94,6 +95,11 @@ RequestResult GameRequestHandler::getGameResults(RequestInfo r)
     }
     
     std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeGetGameResultsResponse(response, allPlayersFinished); 
+=======
+    response.results = results;
+
+    std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeGetGameResultsResponse(response, m_game.isGameOver(m_user)); //TODO: cahnge to cheking if game is over for all users
+>>>>>>> 51b6f3781e9a0247c0673df430e248118f034f30
     return IRequestHandler::createRequestResult(buffer, this);
 }
 
