@@ -163,8 +163,11 @@ namespace trivia_client
             byte[] msg = classes.Serializer.serializeRequest(classes.Deserializer.GET_ROOM_STATE);
             byte[] res = _connector.sendGetData(msg);
             classes.GetRoomStateResponse r = classes.Deserializer.deserializeGetRoomStateResponse(res);
-            _numOfQuestions = r.questionCount;
-            _timeForQuestions = r.answerTimeout;
+            if(r.status == classes.Deserializer.GET_ROOM_STATE)
+            {
+                _numOfQuestions = r.questionCount;
+                _timeForQuestions = r.answerTimeout;
+            }
             return handleRoomState(r.status);
         }
 
