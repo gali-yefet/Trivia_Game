@@ -22,7 +22,7 @@ RequestResult GameRequestHandler::handleRequest(RequestInfo r)
     RequestResult result;
     switch (r.requestCode)
     {
-    case LEAVE_ROOM:
+    case LEAVE_GAME:
         result = leaveGame(r);
         break;
     case GET_QUESTION:
@@ -68,31 +68,39 @@ RequestResult GameRequestHandler::submitAnswer(RequestInfo r)
 RequestResult GameRequestHandler::getGameResults(RequestInfo r)
 {
     GetGameResultsResponse response;
-    response.status = GET_GAME_RESULTS;
     std::vector<PlayerResults> results;
     std::map<LoggedUser, GameData> players = m_game.getPlayers();
-    PlayerResults p;
+    bool allPlayersFinished = true;
+
     for (auto i = players.begin(); i != players.end(); ++i)
     {
-        LoggedUser u = i->first;
-        p.username = u.getUsername();
-        p.correctAnswerCount = i->second.correctAnswerCount;
-        p.wrongAnswerCount = i->second.wrongAnswerCount;
-        p.averageAnswerTime = i->second.averageAnswerTime;
-        results.push_back(p);
+        if (!m_game.isGameOver(i->first))
+            allPlayersFinished = false;
     }
-    response.results = results;
-
-    std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeGetGameResultsResponse(response, m_game.isGameOver(m_user));
+    if (allPlayersFinished)
+    {
+        response.status = GET_GAME_RESULTS;
+        PlayerResults p;
+        for (auto i = players.begin(); i != players.end(); ++i)
+        {
+            LoggedUser u = i->first;
+            p.username = u.getUsername();
+            p.correctAnswerCount = i->second.correctAnswerCount;
+            p.wrongAnswerCount = i->second.wrongAnswerCount;
+            p.averageAnswerTime = i->second.averageAnswerTime;
+            results.push_back(p);
+        }
+        response.results = results;
+    }
+    
+    std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeGetGameResultsResponse(response, allPlayersFinished); 
     return IRequestHandler::createRequestResult(buffer, this);
 }
 
 //leave game
 RequestResult GameRequestHandler::leaveGame(RequestInfo r)
 {
-    User u = User();
-    u.setUsername(m_user.getUsername());
-    m_game.removePlayer(u);
+    m_game.removePlayer(m_user);
     LeaveGameResponse response;
     response.status = r.requestCode;
     std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeLeaveGameResponse(response);

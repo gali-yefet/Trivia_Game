@@ -49,7 +49,7 @@ void Game::submitAnswer(LoggedUser user, int answer)
 //removes player from game
 //input: user to remove
 //output: none
-void Game::removePlayer(User user)
+void Game::removePlayer(LoggedUser user)
 {
 	for (auto i = m_players.begin(); i != m_players.end(); ++i)
 	{

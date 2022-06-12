@@ -84,7 +84,7 @@ namespace trivia_client
                 maxUsersInput.BorderBrush = Brushes.Red;
                 isEmpty = true;
             }
-            if (questionCountInput.Text == "" || !classes.Serializer.checkifNumber(questionCountInput.Text) || Int32.Parse(questionCountInput.Text) > MAX_QUESTIONS)
+            if (questionCountInput.Text == "" || !classes.Serializer.checkifNumber(questionCountInput.Text) || Int32.Parse(questionCountInput.Text) > MAX_QUESTIONS || Int32.Parse(questionCountInput.Text) <= 0)
             {
                 questionCountInput.BorderBrush = Brushes.Red;
                 isEmpty = true;
