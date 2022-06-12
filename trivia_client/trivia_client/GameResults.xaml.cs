@@ -35,10 +35,13 @@ namespace trivia_client
             List<classes.PlayerResultsForList> res = getResults();
             if(res.ToArray().Length != 0)
             {
-                results.ItemsSource = res;
-                results.Visibility = Visibility.Visible;
-                Error_gameIsNotOver.Visibility = Visibility.Hidden;
-                _runUpdateThread = false;
+                this.Dispatcher.Invoke(() =>
+                {
+                    results.ItemsSource = res;
+                    results.Visibility = Visibility.Visible;
+                    Error_gameIsNotOver.Visibility = Visibility.Hidden;
+                    _runUpdateThread = false;
+                });
             }
         }
 
