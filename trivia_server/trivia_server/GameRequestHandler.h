@@ -16,7 +16,7 @@ private:
 	RequestResult getGameResults(RequestInfo r);
 	RequestResult leaveGame(RequestInfo r);
 
-	Game m_game;
+	Game* m_game;
 	LoggedUser m_user;
 	GameManager& m_gameManager;
 	RequestHandlerFactory& m_handlerFactory;

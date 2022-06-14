@@ -52,7 +52,7 @@ namespace trivia_client
             while (_runUpdateThread)
             {
                 showResults();
-                Thread.Sleep(3000); //will sleep for 3 sec
+                Thread.Sleep(1000); //will sleep for 3 sec
             }
         }
 

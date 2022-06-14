@@ -7,10 +7,10 @@
 class GameManager {
 public:
 	GameManager(IDatabase* db);
-	Game createGame(Room room);
+	Game* createGame(Room room);
 	void deleteGame();
 
 private:
 	IDatabase* m_database;
-	std::vector<Game> m_games;
+	std::vector<Game*> m_games;
 };

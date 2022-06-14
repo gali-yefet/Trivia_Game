@@ -19,7 +19,7 @@ typedef struct GameData
 class Game
 {
 public:
-	Game(std::vector<Question> m_questions, std::map<LoggedUser, GameData> m_players);
+	Game(std::vector<Question> m_questions, std::map<LoggedUser, GameData> m_players, int id);
 	std::string getQuestionForUser(LoggedUser user);
 	void submitAnswer(LoggedUser user, int answer);
 	void removePlayer(LoggedUser user);
@@ -27,9 +27,10 @@ public:
 	void setPlayerAverageTime(int time, LoggedUser user);
 	std::map<LoggedUser, GameData> getPlayers();
 	bool isGameOver(LoggedUser user);
+	int getId();
 
 private:
 	std::vector<Question> m_questions;
 	std::map<LoggedUser, GameData> m_players;
-
+	int m_gameId;
 };

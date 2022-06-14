@@ -33,7 +33,7 @@
             </ListView>
 
             <!--errors-->
-            <Label Name ="Error_gameIsNotOver" Visibility="Hidden" Content="The game is not over, please wait :)" Grid.Row="1" Grid.RowSpan="2" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <Label Name ="Error_gameIsNotOver" Visibility="Hidden" Content="The game is not over, please wait :)" Grid.Row="1" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
 
             <!--buttons-->
             <Button Name="backToMenu" Grid.Row="2" Visibility="Visible" Content="menu" Click="backToMenu_Click" FontSize="16" Height="35" Width="150"  Margin="10"/>
