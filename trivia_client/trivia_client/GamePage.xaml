@@ -20,7 +20,7 @@
             </Grid.RowDefinitions>
 
             <!--header-->
-            <Label Name="question" Content="GAME" Grid.Row="0" Foreground="White" FontFamily="Arial Black" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Label Name="question" Content="GAME" Grid.Row="0" Foreground="White" FontFamily="Arial Black" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
             <!--answers-->
             <Grid Grid.Row="1" Margin="10">

@@ -75,7 +75,7 @@ namespace trivia_client
                 classes.GetQuestionResponse r = classes.Deserializer.deserializeGetQuestionResponse(res);
                 if(r.status == classes.Deserializer.GET_QUESTION)
                 {
-                    question.Content = r.question;
+                    question.Content = r.question.Length>=2 ? r.question.Substring(1, r.question.Length -2): r.question;
                     Ans1.Content = r.answers[1];
                     Ans2.Content = r.answers[2];
                     Ans3.Content = r.answers[3];
