@@ -118,7 +118,9 @@ RequestResult MenuRequestHandler::getPersonalStats(RequestInfo r)
 {
 	GetPersonalStatsResponse response;
 	response.status = GET_PERSONAL_STATS;
-	response.statistics = m_statisticsManager.getUserStatistics(m_user.getUsername());
+	std::vector<std::string> userStat;
+	m_statisticsManager.getUserStatistics(m_user.getUsername(), userStat);
+	response.statistics = userStat;
 	std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeGetPersonalStatsResponse(response);
 	return IRequestHandler::createRequestResult(buffer, this);
 }
@@ -127,7 +129,9 @@ RequestResult MenuRequestHandler::getHighScore(RequestInfo r)
 {
 	GetHighScoreResponse response;
 	response.status = GET_HIGH_SCORE;
-	response.statistics = m_statisticsManager.getHighScore();
+	std::vector<std::string> top5;
+	m_statisticsManager.getHighScore(top5);
+	response.statistics = top5;
 	std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeGetHighScoreResponse(response);
 	return IRequestHandler::createRequestResult(buffer, this);
 }

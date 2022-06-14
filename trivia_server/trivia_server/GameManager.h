@@ -7,10 +7,12 @@
 class GameManager {
 public:
 	GameManager(IDatabase* db);
-	Game createGame(Room room);
+	Game* createGame(Room room);
 	void deleteGame();
+	void updateDB(bool isCorrect, bool won, bool finished, double time, std::string username);
+
 
 private:
 	IDatabase* m_database;
-	std::vector<Game> m_games;
+	std::vector<Game*> m_games;
 };

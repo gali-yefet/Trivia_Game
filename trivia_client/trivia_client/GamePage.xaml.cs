@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Threading;
 
+
 namespace trivia_client
 {
     /// <summary>
@@ -27,6 +28,7 @@ namespace trivia_client
         uint _timeForQuestion;
         DispatcherTimer _timer;
         TimeSpan _time;
+        const int notAnswered = 5;// answer id for question that wasn't answered
 
         public GamePage(Connector connector, uint numOfQuestions, uint timeForQuestion)
         {
@@ -75,7 +77,7 @@ namespace trivia_client
                 classes.GetQuestionResponse r = classes.Deserializer.deserializeGetQuestionResponse(res);
                 if(r.status == classes.Deserializer.GET_QUESTION)
                 {
-                    question.Content = r.question;
+                    question.Content = r.question.Length>=2 ? r.question.Substring(1, r.question.Length -2): r.question;
                     Ans1.Content = r.answers[1];
                     Ans2.Content = r.answers[2];
                     Ans3.Content = r.answers[3];
@@ -102,7 +104,15 @@ namespace trivia_client
                 Clock.Text = _time.ToString("c").Substring(4); //format the time m::ss
                 
                 if (_time == TimeSpan.Zero)
+                {
+                    classes.SubmitAnswerRequest answerRequest;
+                    answerRequest.answerId = notAnswered;
+                    answerRequest.time = (uint)(_timeForQuestion);
+                    byte[] msg = classes.Serializer.serializeSubmitAnswerRequest(answerRequest);
+                    byte[] res = _connector.sendGetData(msg);
                     getQuestion();
+                }
+                    
                 _time = _time.Add(TimeSpan.FromSeconds(-1));
                 
             }, Application.Current.Dispatcher);

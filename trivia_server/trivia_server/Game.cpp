@@ -1,8 +1,8 @@
 #include "Game.h"
 
 
-Game::Game(std::vector<Question> m_questions, std::map<LoggedUser, GameData> m_players):
-	m_questions(m_questions), m_players(m_players)
+Game::Game(std::vector<Question> m_questions, std::map<LoggedUser, GameData> m_players, int id):
+	m_questions(m_questions), m_players(m_players), m_gameId(id)
 {
 }
 
@@ -96,5 +96,25 @@ bool Game::isGameOver(LoggedUser user)
 	auto it = m_players.find(user);
 	if(it != m_players.end())
 		return (it->second.correctAnswerCount + it->second.wrongAnswerCount) == m_questions.size();
+	return false;
+}
+
+bool Game::doesWon(LoggedUser user)
+{
+	if (!isGameOver(user))
+		return false;
+
+	LoggedUser u("");
+	for (auto it = m_players.begin(); it != m_players.end(); ++it)
+	{
+		u = it->first;
+		if (u.getUsername() != user.getUsername() && isGameOver(u))
+			return false;
+	}
 	return true;
+}
+
+int Game::getId()
+{
+	return m_gameId;
 }

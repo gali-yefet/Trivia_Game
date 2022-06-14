@@ -25,7 +25,8 @@ namespace trivia_client
             backgroundPage.Content = new BackgroundPage();
             _connector = connector;
 
-            if (Statistics.GetStatisticsListFromServer(_connector).Count <= 1)
+            List<classes.Statistics> list = Statistics.GetStatisticsListFromServer(_connector);
+            if (list.Count != 1)
             {
                 Error_noStatistics.Visibility = Visibility.Visible;
                 PersonalStatistics.Visibility = Visibility.Hidden;
@@ -34,7 +35,7 @@ namespace trivia_client
             {
                 //show statistics
                 PersonalStatistics.Items.Clear();
-                PersonalStatistics.ItemsSource = Statistics.GetStatisticsListFromServer(_connector);
+                PersonalStatistics.ItemsSource = list;
             }
         }
 

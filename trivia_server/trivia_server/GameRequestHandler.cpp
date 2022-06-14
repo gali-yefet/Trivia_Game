@@ -45,9 +45,9 @@ RequestResult GameRequestHandler::getQuestion(RequestInfo r)
 {
     GetQuestionResponse response;
     response.status = GET_QUESTION;
-    response.question = m_game.getQuestionForUser(m_user);
-    response.answers = m_game.getCurrentQuestion(m_user).getAnswers();
-    std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeGetQuestionResponse(response, m_game.isGameOver(m_user));
+    response.question = m_game->getQuestionForUser(m_user);
+    response.answers = m_game->getCurrentQuestion(m_user).getAnswers();
+    std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeGetQuestionResponse(response, m_game->isGameOver(m_user));
     return IRequestHandler::createRequestResult(buffer, this);
 }
 
@@ -56,10 +56,11 @@ RequestResult GameRequestHandler::submitAnswer(RequestInfo r)
 {
     SubmitAnswerRequest request = JsonRequestPacketDeseializer::deserializeSubmitAnswerRequest(r);
     SubmitAnswerResponse response;
-    m_game.submitAnswer(m_user, request.answerId);
+    m_game->submitAnswer(m_user, request.answerId);
     response.status = SUBMIT_ANSWER;
-    response.correctAnswerId = m_game.getCurrentQuestion(m_user).getRightAns();
-    m_game.setPlayerAverageTime(request.time, m_user);
+    response.correctAnswerId = m_game->getCurrentQuestion(m_user).getRightAns();
+    m_gameManager.updateDB(request.answerId == response.correctAnswerId, m_game->doesWon(m_user), m_game->isGameOver(m_user), request.time, m_user.getUsername());
+    m_game->setPlayerAverageTime(request.time, m_user);
     std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeSubmitAnswerResponse(response);
     return IRequestHandler::createRequestResult(buffer, this);
 }
@@ -69,12 +70,13 @@ RequestResult GameRequestHandler::getGameResults(RequestInfo r)
 {
     GetGameResultsResponse response;
     std::vector<PlayerResults> results;
-    std::map<LoggedUser, GameData> players = m_game.getPlayers();
+    std::map<LoggedUser, GameData> players = m_game->getPlayers();
     bool allPlayersFinished = true;
 
     for (auto i = players.begin(); i != players.end(); ++i)
     {
-        if (!m_game.isGameOver(i->first))
+        bool currentPlayerGameEnded = m_game->isGameOver(i->first);
+        if (!currentPlayerGameEnded)
             allPlayersFinished = false;
     }
 
@@ -101,7 +103,7 @@ RequestResult GameRequestHandler::getGameResults(RequestInfo r)
 //leave game
 RequestResult GameRequestHandler::leaveGame(RequestInfo r)
 {
-    m_game.removePlayer(m_user);
+    m_game->removePlayer(m_user);
     LeaveGameResponse response;
     response.status = r.requestCode;
     std::vector<unsigned char> buffer = JsonResponsePacketSerializer::serializeLeaveGameResponse(response);
