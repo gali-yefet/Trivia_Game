@@ -52,13 +52,16 @@ namespace trivia_client
             List<classes.Statistics> statistics = new List<classes.Statistics>();
             foreach (classes.Statistics currStat in r.statistics)
             {
-                statistics.Add(new classes.Statistics()
+                if (currStat.avgTime <= 60)
                 {
-                    avgTime = currStat.avgTime,
-                    victories = currStat.victories,
-                    games = currStat.games,
-                    name = currStat.name.Substring(1, currStat.name.Length - 2)
-                });
+                    statistics.Add(new classes.Statistics()
+                    {
+                        avgTime = currStat.avgTime,
+                        victories = currStat.victories,
+                        games = currStat.games,
+                        name = currStat.name.Substring(1, currStat.name.Length - 2)
+                    });
+                }
             }
             return statistics;
         }
@@ -72,13 +75,16 @@ namespace trivia_client
             List<classes.Statistics> statistics = new List<classes.Statistics>();
             foreach (classes.Statistics currStat in r.statistics)
             {
-                statistics.Add(new classes.Statistics()
+                if (currStat.avgTime <= 60)
                 {
-                    avgTime = currStat.avgTime,
-                    victories = currStat.victories,
-                    games = currStat.games,
-                    name = currStat.name.Substring(1, currStat.name.Length - 2)
-                });
+                    statistics.Add(new classes.Statistics()
+                    {
+                        avgTime = currStat.avgTime,
+                        victories = currStat.victories,
+                        games = currStat.games,
+                        name = currStat.name.Substring(1, currStat.name.Length - 2)
+                    });
+                }
             }
             return statistics;
         }

@@ -1,10 +1,39 @@
-﻿  SqliteDataBase.cpp
-<<<<<<< HEAD
+﻿  Game.cpp
+  GameManager.cpp
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\GameManager.cpp(13,20): warning C4018: '<': signed/unsigned mismatch
+  GameRequestHandler.cpp
+  IRequestHandler.cpp
+  JsonRequestPacketDeserializer.cpp
+  JsonResponsePacketSerializer.cpp
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\JsonResponsePacketSerializer.cpp(150,20): warning C4018: '<': signed/unsigned mismatch
+  LoggedUser.cpp
+  LoginManager.cpp
+  Communicator.cpp
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\Communicator.cpp(116,32): warning C4101: 'e': unreferenced local variable
+  LoginRequestHandler.cpp
+  MenuRequestHandler.cpp
+  Question.cpp
+  RequestHandlerFactory.cpp
+  Room.cpp
+  RoomAdminRequestHandler.cpp
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomAdminRequestHandler.cpp(38,23): warning C4018: '<': signed/unsigned mismatch
+  RoomManager.cpp
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(94,20): warning C4018: '<': signed/unsigned mismatch
+  RoomMemberRequestHandler.cpp
+  Server.cpp
+  Source.cpp
+  SqliteDataBase.cpp
 C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(88,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(252,33): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+  Generating Code...
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(40): warning C4715: 'RoomManager::getRoomState': not all control paths return a value
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(70): warning C4715: 'RoomManager::getRoomId': not all control paths return a value
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomManager.cpp(97): warning C4715: 'RoomManager::createRoomId': not all control paths return a value
+  Compiling...
+  StatisticsManager.cpp
+  User.cpp
+  userStatistics.cpp
+  WSAInitializer.cpp
+  Generating Code...
+  sqlite3.c
   trivia_server.vcxproj -> C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe
-=======
-C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(88,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(252,33): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-  trivia_server.vcxproj -> C:\Users\magshimim\Documents\Magshimim\YearN2\Advanced_Programming_c++\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe
->>>>>>> f8420f3ead8c8ad6b2f969024f0781eab370d3f8

@@ -55,7 +55,7 @@ void SqliteDataBase::addNewUser(std::string username, std::string password, std:
 {
 	std::string q = "INSERT INTO USER(USERNAME, PASSWORD, EMAIL, IS_ACTIVE) VALUES('" + username + "', '" + password + "', '" + email + "', 1); ";
 	query(q.c_str());
-	q = "INSERT INTO STATISTICS(USERNAME, WINS, GAMES, AVE_TIME, CORRECT_ANS, TOTAL_ANS) VALUES('" + username + "', 0, 0, 0, 0, 0);";
+	q = "INSERT INTO STATISTICS(USERNAME, WINS, GAMES, AVE_TIME, CORRECT_ANS, TOTAL_ANS) VALUES('" + username + "', 0, 0, 100000, 0, 0);";
 	query(q.c_str());
 }
 
