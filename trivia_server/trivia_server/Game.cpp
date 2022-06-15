@@ -99,6 +99,21 @@ bool Game::isGameOver(LoggedUser user)
 	return false;
 }
 
+bool Game::doesWon(LoggedUser user)
+{
+	if (!isGameOver(user))
+		return false;
+
+	LoggedUser u("");
+	for (auto it = m_players.begin(); it != m_players.end(); ++it)
+	{
+		u = it->first;
+		if (u.getUsername() != user.getUsername() && isGameOver(u))
+			return false;
+	}
+	return true;
+}
+
 int Game::getId()
 {
 	return m_gameId;

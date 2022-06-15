@@ -49,3 +49,13 @@ void GameManager::deleteGame()
 {
 	this->m_games.clear();
 }
+
+void GameManager::updateDB(bool isCorrect, bool won, bool finished, double time, std::string username)
+{
+	m_database->submitAnswer(isCorrect, username);
+	m_database->setTime(time, username);
+	if(won)
+		m_database->updateWins(username);
+	if (finished)
+		m_database->updateGames(username);
+}

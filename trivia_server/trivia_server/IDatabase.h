@@ -21,7 +21,12 @@ public:
 	virtual int getNumOfCorrectAnswers(std::string) = 0;
 	virtual int getNumOfTotalAnswers(std::string) = 0;
 	virtual int getNumOfPlayerGames(std::string) = 0;
+	virtual int getNumOfPlayerWins(std::string username) = 0;
+	virtual void submitAnswer(bool correct, std::string username) = 0;
+	virtual void setTime(double time, std::string username) = 0;
+	virtual void updateWins(std::string username) = 0;
+	virtual void updateGames(std::string username) = 0;
 	virtual userStatistics getUserStatistics(std::string username) = 0;
 	virtual int getSecurityKey(std::string) = 0;
-	virtual std::list<userStatistics> getTopFive() = 0;
+	virtual void getTopFive(std::list<userStatistics>& listOfUsers) = 0;
 };

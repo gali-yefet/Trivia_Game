@@ -1,17 +1,4 @@
-﻿  Communicator.cpp
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\Communicator.cpp(116,32): warning C4101: 'e': unreferenced local variable
-  Game.cpp
-  GameManager.cpp
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\GameManager.cpp(13,20): warning C4018: '<': signed/unsigned mismatch
-  GameRequestHandler.cpp
-  JsonRequestPacketDeserializer.cpp
-  LoginRequestHandler.cpp
-  MenuRequestHandler.cpp
-  RequestHandlerFactory.cpp
-  RoomAdminRequestHandler.cpp
-C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\RoomAdminRequestHandler.cpp(38,23): warning C4018: '<': signed/unsigned mismatch
-  RoomMemberRequestHandler.cpp
-  Server.cpp
-  Source.cpp
-  Generating Code...
+﻿  SqliteDataBase.cpp
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(88,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\trivia_server\SqliteDataBase.cpp(252,33): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
   trivia_server.vcxproj -> C:\Users\magshimim\Desktop\magshimim\2_secondYear\cpp\semester2\trivia\edeet_gali_trivia_2022\trivia_server\Debug\trivia_server.exe

@@ -27,6 +27,7 @@ public:
 	void setPlayerAverageTime(int time, LoggedUser user);
 	std::map<LoggedUser, GameData> getPlayers();
 	bool isGameOver(LoggedUser user);
+	bool doesWon(LoggedUser user);
 	int getId();
 
 private:

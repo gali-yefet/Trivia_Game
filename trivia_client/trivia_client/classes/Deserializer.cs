@@ -193,7 +193,6 @@ namespace trivia_client.classes
                     while (value[value.Length - 1] == ' ')
                         value = value.Substring(1, value.Length - 1);
                 }
-                
             }
             //erace " in order to get an int
             if (eraseSides && value.Length > 2)
@@ -307,18 +306,25 @@ namespace trivia_client.classes
                 //get the current statistics
                 Statistics currStatistic = new Statistics() { };
                 String name = extractValue(statistics);
+                if (name.Length > 2)
+                    name = name.Substring(1, name.Length - 3);//cut last '\' and " "
+                else
+                    name = name.Substring(1, name.Length - 2);//cut last '\' and " "
                 currStatistic.name = name.Length >= 2 ? name : "\"\"";
                 statistics = statistics.Substring(statistics.IndexOf(',') + 1);
 
                 String games = extractValue(statistics);
+                games = games.Substring(0, games.Length - 1);//cut last '\'
                 currStatistic.games = classes.Serializer.checkifNumber(games) ? Int32.Parse(games) : 0;
                 statistics = statistics.Substring(statistics.IndexOf(',') + 1);
 
                 String victories = extractValue(statistics);
+                victories = victories.Substring(0, victories.Length - 1);//cut last '\'
                 currStatistic.victories = classes.Serializer.checkifNumber(victories) ? Int32.Parse(victories) : 0;
                 statistics = statistics.Substring(statistics.IndexOf(',') + 1);
 
                 String avgTime = extractValue(statistics);
+                avgTime = avgTime.Substring(0, avgTime.Length - 1); //cut last '\'
                 currStatistic.avgTime = classes.Serializer.checkifNumber(avgTime) ? Int32.Parse(avgTime) : 0;
                 if (statistics.IndexOf(',') != -1)
                     statistics = statistics.Substring(statistics.IndexOf(',') + 1);
@@ -347,18 +353,25 @@ namespace trivia_client.classes
                 //get the current statistics
                 Statistics currStatistic = new Statistics() { };
                 String name = extractValue(statistics);
+                if(name.Length > 2)
+                    name = name.Substring(1, name.Length - 3);//cut last '\' and " "
+                else
+                    name = name.Substring(1, name.Length - 2);//cut last '\' and " "
                 currStatistic.name = name.Length>=2 ? name : "\"\"";
                 statistics = statistics.Substring(statistics.IndexOf(',') + 1);
 
                 String games = extractValue(statistics);
+                games = games.Substring(0, games.Length - 1);//cut last '\'
                 currStatistic.games = classes.Serializer.checkifNumber(games) ? Int32.Parse(games):0;
                 statistics = statistics.Substring(statistics.IndexOf(',') + 1);
 
                 String victories = extractValue(statistics);
+                victories = victories.Substring(0, victories.Length - 1);//cut last '\'
                 currStatistic.victories = classes.Serializer.checkifNumber(victories) ? Int32.Parse(victories) : 0;
                 statistics = statistics.Substring(statistics.IndexOf(',') + 1);
 
                 String avgTime = extractValue(statistics);
+                avgTime = avgTime.Substring(0, avgTime.Length - 1); //cut last '\'
                 currStatistic.avgTime = classes.Serializer.checkifNumber(avgTime) ? Int32.Parse(avgTime) : 0;
                 if (statistics.IndexOf(',') != -1)
                     statistics = statistics.Substring(statistics.IndexOf(',') + 1);
