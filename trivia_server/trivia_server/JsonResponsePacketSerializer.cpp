@@ -1,5 +1,5 @@
 #include "JsonResponsePacketSerializer.h"
-#include "json/single_include/nlohmann/json.hpp"
+#include "json.hpp"
 
 // for convenience
 using json = nlohmann::json;
