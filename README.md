@@ -11,4 +11,3 @@ Clone the repository, run trivia_server.exe and for each client run trivia_clien
 
 # Enjoy! #
 *Gali Yefet*
-

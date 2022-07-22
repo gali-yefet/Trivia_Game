@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Zz8bY5kE4iK1jhMAkYfhcYxubxGEFz+CiTOoDZjOuKC464GdgYw2x/Ir2tUvtwZ6xffZwQzKYGv1nlZqS8EUZA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\magshimim\\Documents\\Magshimim\\YearN2\\Advanced_Programming_c++\\edeet_gali_trivia_2022\\trivia_client\\trivia_client\\trivia_client.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\magshimim\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
