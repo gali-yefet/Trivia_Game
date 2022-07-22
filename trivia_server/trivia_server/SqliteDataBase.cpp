@@ -26,14 +26,7 @@ bool SqliteDataBase::open()
 		res = query("CREATE TABLE IF NOT EXISTS STATISTICS (USERNAME TEXT PRIMARY KEY NOT NULL, WINS INTEGER NOT NULL, GAMES INTEGER NOT NULL, AVE_TIME REAL NOT NULL, CORRECT_ANS INTEGER NOT NULL, TOTAL_ANS INTEGER NOT NULL, FOREIGN KEY(USERNAME) REFERENCES USER(USERNAME));");
 		if (!res)
 			std::cout << "Failed to create Table STATISTICS" << std::endl;
-		/*
-		res = query("CREATE TABLE IF NOT EXISTS GAME (GAME_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL;");
-		if (!res)
-			std::cout << "Failed to create Table GAME" << std::endl;
-		res = query("CREATE TABLE IF NOT EXISTS KEY (KEY_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Q_ID INTEGER NOT NULL, ANS_ID INTEGER NOT NULL, FOREIGN KEY(Q_ID) REFERENCES QUESTION(Q_ID));");
-		if (!res)
-			std::cout << "Failed to create Table KEY" << std::endl;
-			*/
+		createQuestions();
 	}
 
 	return true;
@@ -61,6 +54,8 @@ bool SqliteDataBase::doesPasswordMatch(std::string username, std::string passwor
 void SqliteDataBase::addNewUser(std::string username, std::string password, std::string email)
 {
 	std::string q = "INSERT INTO USER(USERNAME, PASSWORD, EMAIL, IS_ACTIVE) VALUES('" + username + "', '" + password + "', '" + email + "', 1); ";
+	query(q.c_str());
+	q = "INSERT INTO STATISTICS(USERNAME, WINS, GAMES, AVE_TIME, CORRECT_ANS, TOTAL_ANS) VALUES('" + username + "', 0, 0, 100000, 0, 0);";
 	query(q.c_str());
 }
 
@@ -95,24 +90,18 @@ void SqliteDataBase::createQuestions()
 		q = "INSERT INTO QUESTION (QUESTION, ANS1, ANS2, ANS3, ANS4, RIGHT_ANS) VALUES('" + questions[i] + "', '";
 		for (int k = 0; k < ANSWERS; k++)
 		{
-			if (k == ANSWERS - 1)
-				q += answers[j] + "', ";
-			else
-				q += answers[j] + "', '";
+			q += answers[j] + "', '";
 			j++;
 		}
-		q += rightAns[i] + ");";
+		q += rightAns[i] + "');";
 		query(q.c_str());
 	}
 }
 
-std::list<Question> SqliteDataBase::getQuestions(int limit)
+void SqliteDataBase::getQuestions(int limit, std::list<Question>& listOfQuestions)
 {
 	std::string q = "SELECT * FROM QUESTION LIMIT " + std::to_string(limit) + "; ";
-	std::list<Question> listOfQuestions;
 	this->execSelectCmd(q.c_str(), this->questionsCallback, &listOfQuestions);
-
-	return listOfQuestions;
 }
 
 float SqliteDataBase::getPlayerAverageAnswerTime(std::string username)
@@ -132,7 +121,7 @@ int SqliteDataBase::getNumOfCorrectAnswers(std::string username)
 	this->execSelectCmd(q.c_str(), this->userStatisticsCallback, &listOfUsers);
 	userStatistics currentUser = listOfUsers.front();
 
-	return currentUser.getAveTime();
+	return currentUser.getCorrectAns();
 }
 
 int SqliteDataBase::getNumOfTotalAnswers(std::string username)
@@ -155,6 +144,55 @@ int SqliteDataBase::getNumOfPlayerGames(std::string username)
 	return currentUser.getGames();
 }
 
+int SqliteDataBase::getNumOfPlayerWins(std::string username)
+{
+	std::string q = "SELECT WINS FROM STATISTICS WHERE USERNAME = '" + username + "';";
+	std::list<userStatistics> listOfUsers;
+	this->execSelectCmd(q.c_str(), this->userStatisticsCallback, &listOfUsers);
+	userStatistics currentUser = listOfUsers.front();
+
+	return currentUser.getWins();
+}
+
+void SqliteDataBase::submitAnswer(bool correct, std::string username)
+{
+	int answers = getNumOfTotalAnswers(username);
+	
+	if (correct)
+	{
+		int corrAns = getNumOfCorrectAnswers(username);
+		std::string q = "UPDATE STATISTICS SET CORRECT_ANS = " + std::to_string(corrAns + 1) + " WHERE USERNAME = '" + username + "'; ";
+		query(q.c_str());
+	}
+	std::string q = "UPDATE STATISTICS SET TOTAL_ANS = " + std::to_string(answers + 1) + " WHERE USERNAME = '" + username + "'; ";
+	query(q.c_str());
+
+}
+
+void SqliteDataBase::setTime(double time, std::string username)
+{
+	double t = getPlayerAverageAnswerTime(username);
+	if (time < t || t < time && t == 0)
+	{
+		std::string q = "UPDATE STATISTICS SET AVE_TIME = " + std::to_string(time) + " WHERE USERNAME = '" + username + "'; ";
+		query(q.c_str());
+	}
+}
+
+void SqliteDataBase::updateWins(std::string username)
+{
+	int wins = getNumOfPlayerWins(username);
+	std::string q = "UPDATE STATISTICS SET WINS = " + std::to_string(wins + 1) + " WHERE USERNAME = '" + username + "'; ";
+	query(q.c_str());
+}
+
+void SqliteDataBase::updateGames(std::string username)
+{
+	int games = getNumOfPlayerGames(username);
+	std::string q = "UPDATE STATISTICS SET GAMES = " + std::to_string(games + 1) + " WHERE USERNAME = '" + username + "'; ";
+	query(q.c_str());
+}
+
 userStatistics SqliteDataBase::getUserStatistics(std::string username)
 {
 	userStatistics currentUser = userStatistics();
@@ -167,20 +205,16 @@ userStatistics SqliteDataBase::getUserStatistics(std::string username)
 	return currentUser;
 }
 
-int SqliteDataBase::getSecurityKey(std::string username)//TODO
+int SqliteDataBase::getSecurityKey(std::string username)
 {
 	return 0;
 }
 
-std::list<userStatistics> SqliteDataBase::getTopFive()
+void SqliteDataBase::getTopFive(std::list<userStatistics>& listOfUsers)
 {
-	std::string q = "SELECT * FROM STATISTICS ORDER BY WINS DESC, AVE_TIME ASC LIMIT 5;";
-	std::list<userStatistics> listOfUsers;
+	std::string q = "SELECT * FROM STATISTICS ORDER BY WINS ASC, AVE_TIME DESC LIMIT 5;";
 	this->execSelectCmd(q.c_str(), this->userStatisticsCallback, &listOfUsers);
-	return listOfUsers;
 }
-
-
 
 //call backs
 int SqliteDataBase::usersCallback(void* data, int argc, char** argv, char** azColName)
@@ -216,7 +250,10 @@ int SqliteDataBase::userStatisticsCallback(void* data, int argc, char** argv, ch
 			currUser.setWins(std::stoi(argv[i]));
 		else if (std::string(azColName[i]) == AVE_TIME_COLUMN)
 			currUser.setAveTime(std::stoi(argv[i]));
-
+		else if (std::string(azColName[i]) == CORRECT_ANS_COLUMN)
+			currUser.setCorrectAns(std::stoi(argv[i]));
+		else if (std::string(azColName[i]) == TOTAL_ANS_COLUMN)
+			currUser.setTotalAns(std::stoi(argv[i]));
 	}
 	now->push_back(currUser);
 	return 0;

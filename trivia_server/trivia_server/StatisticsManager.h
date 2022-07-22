@@ -8,8 +8,8 @@ class StatisticsManager
 {
 public:
 	StatisticsManager(IDatabase* db);
-	std::vector<std::string> getHighScore();
-	std::vector<std::string> getUserStatistics(std::string username);
+	void getHighScore(std::vector<std::string>& top5);
+	void getUserStatistics(std::string username, std::vector<std::string>& userStat);
 
 private:
 	IDatabase* m_database;

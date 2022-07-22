@@ -1,5 +1,6 @@
 #include "userStatistics.h"
 
+
 userStatistics::userStatistics(std::string username, float aveTime, int games, int wins, int correctAns, int totalAns)
 	:username(username), aveTime(aveTime), games(games), wins(wins), correctAns(correctAns), totalAns(totalAns)
 {}

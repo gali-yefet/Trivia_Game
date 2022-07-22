@@ -5,7 +5,7 @@ create a new factory
 in: pointer to db
 */
 RequestHandlerFactory::RequestHandlerFactory(IDatabase* db):
-    m_database(db), m_loginManager(LoginManager(db)), m_roomManager(RoomManager()), m_statisticsManager(StatisticsManager(db))
+    m_database(db), m_loginManager(LoginManager(db)), m_roomManager(RoomManager()), m_statisticsManager(StatisticsManager(db)), m_gameManager(db)
 {
 }
 
@@ -39,6 +39,11 @@ RoomMemberRequestHandler* RequestHandlerFactory::createRoomMemberRequestHandler(
     return new RoomMemberRequestHandler(roomId, username, m_roomManager, *this);
 }
 
+GameRequestHandler* RequestHandlerFactory::createGameRequestHandler(Room room, LoggedUser user)
+{
+    return new GameRequestHandler(user, m_gameManager, *this, room);
+}
+
 LoginManager& RequestHandlerFactory::getLoginManager()
 {
     return m_loginManager;
@@ -57,4 +62,9 @@ IDatabase* RequestHandlerFactory::getDatabase()
 StatisticsManager& RequestHandlerFactory::getStatisticsManager()
 {
     return m_statisticsManager;
+}
+
+GameManager& RequestHandlerFactory::getGameManager()
+{
+    return m_gameManager;
 }

@@ -49,9 +49,16 @@ void Communicator::startHandleRequest()
 			throw std::exception(__FUNCTION__);
 	
 		// create new thread for client	and detach from it
-		std::thread tr(&Communicator::HandleNewClient, this, client_socket);
-		tr.detach();
-	
+		try
+		{
+			std::thread tr(&Communicator::HandleNewClient, this, client_socket);
+			tr.detach();
+		}
+		catch (const std::exception& e)
+		{
+			throw e;
+		}
+		
 		//insert the client to the clients map
 		LoginRequestHandler* handler = m_handlerFactory.createLoginRequestHandler();
 		m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, handler));
@@ -108,13 +115,8 @@ void Communicator::HandleNewClient(SOCKET socket)
 		}
 		catch (const std::exception& e)
 		{
-			continue;
+			continue;//if the user doesn't send a request
 		}
-
-		//set the right data about the user
-		setCurrUsername(r, currUsername);
-		setCurrRoomId(r, currRoomId);
-		setIsAdmin(r, isAdmin);
 
 		//handle the client request according to socket
 		auto it = m_clients.find(socket);
@@ -130,13 +132,29 @@ void Communicator::HandleNewClient(SOCKET socket)
 				m_clients.erase(socket);
 				RequestResult res = handler->handleRequest(r);
 				m_clients.insert(std::pair<SOCKET, IRequestHandler*>(socket, res.newHandler));
-				sendData(socket, res.buffer);
+				try
+				{
+					sendData(socket, res.buffer);
+				}
+				catch (const std::exception& e)
+				{
+					throw e;
+				}
+				
 			}
+
+			//set the right data about the user
+			setCurrUsername(r, currUsername);
+			setCurrRoomId(r, currRoomId);
+			setIsAdmin(r, isAdmin);
 		}
 	}
 	closeClient(currUsername, currRoomId, isAdmin);
 }
 
+//close client
+//input: user's username, roomId, if the user is an admin
+//output: none
 void Communicator::closeClient(std::string username, int roomId, bool isAdmin)
 {
 	//close all things
@@ -153,6 +171,7 @@ void Communicator::closeClient(std::string username, int roomId, bool isAdmin)
 		m_handlerFactory.getDatabase()->logout(username);
 }
 
+//set user as current user
 void Communicator::setCurrUsername(RequestInfo r, std::string& username)
 {
 	switch (r.requestCode)
@@ -173,12 +192,17 @@ void Communicator::setCurrRoomId(RequestInfo r, int& roomId)
 	switch (r.requestCode)
 	{
 	case CREATE_ROOM:
-		roomId = m_handlerFactory.getRoomManager().getRoomId(JsonRequestPacketDeseializer::deserializeCreateRoomRequest(r).roomName);
+	{
+		RoomManager roomManager = m_handlerFactory.getRoomManager();
+		std::string roomName = JsonRequestPacketDeseializer::deserializeCreateRoomRequest(r).roomName;
+		roomId = roomManager.getRoomId(roomName);
 		break;
+	}
 	case JOIN_ROOM:
 		roomId = JsonRequestPacketDeseializer::deserializeJoinRoomRequest(r).roomId;
 		break;
 	case LEAVE_ROOM:
+
 	case CLOSE_ROOM:
 		roomId = NOT_IN_ROOM;
 		break;

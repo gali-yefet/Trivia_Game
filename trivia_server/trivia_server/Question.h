@@ -1,5 +1,8 @@
 #pragma once
 #include <string>
+#include <iostream>
+#include <map>
+#include "define.h"
 
 class Question
 {
@@ -20,15 +23,13 @@ public:
 	void setAns3(std::string ans3);
 	void setAns4(std::string ans4);
 	void setRightAns(int rightAns);
-
-
-
+	std::map<unsigned int, std::string> getAnswers();
 
 private:
-	std::string question;
-	std::string ans1;
-	std::string ans2;
-	std::string ans3;
-	std::string ans4;
-	int rightAns;
+	std::string _question;
+	std::string _ans1;
+	std::string _ans2;
+	std::string _ans3;
+	std::string _ans4;
+	int _rightAns;
 };

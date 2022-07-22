@@ -43,7 +43,7 @@ namespace trivia_client
             NavigationService.Navigate(page);
         }
 
-        //for getting statistics List
+        //for getting personal statistics List
         static public List<classes.Statistics> GetStatisticsListFromServer(Connector connector)
         {
             byte[] res = connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_PERSONAL_STATS_CODE));
@@ -52,13 +52,39 @@ namespace trivia_client
             List<classes.Statistics> statistics = new List<classes.Statistics>();
             foreach (classes.Statistics currStat in r.statistics)
             {
-                statistics.Add(new classes.Statistics()
+                if (currStat.avgTime <= 60)
                 {
-                    avgTime = currStat.avgTime,
-                    victories = currStat.victories,
-                    games = currStat.games,
-                    name = currStat.name.Substring(1, currStat.name.Length - 2)
-                });
+                    statistics.Add(new classes.Statistics()
+                    {
+                        avgTime = currStat.avgTime,
+                        victories = currStat.victories,
+                        games = currStat.games,
+                        name = currStat.name.Substring(1, currStat.name.Length - 2)
+                    });
+                }
+            }
+            return statistics;
+        }
+
+        //for getting leader board List
+        static public List<classes.Statistics> GetLeaderBoardListFromServer(Connector connector)
+        {
+            byte[] res = connector.sendGetData(classes.Serializer.serializeRequest(classes.Deserializer.GET_HIGH_SCORE_CODE));
+            classes.GetHighScoreResponse r = classes.Deserializer.deserializeGetHighScoreResponse(res);
+
+            List<classes.Statistics> statistics = new List<classes.Statistics>();
+            foreach (classes.Statistics currStat in r.statistics)
+            {
+                if (currStat.avgTime <= 60)
+                {
+                    statistics.Add(new classes.Statistics()
+                    {
+                        avgTime = currStat.avgTime,
+                        victories = currStat.victories,
+                        games = currStat.games,
+                        name = currStat.name.Substring(1, currStat.name.Length - 2)
+                    });
+                }
             }
             return statistics;
         }

@@ -19,14 +19,19 @@ public:
 	virtual bool isActive(std::string username);
 
 	virtual void createQuestions();
-	virtual std::list<Question> getQuestions(int limit);
+	virtual void getQuestions(int limit, std::list<Question>& listOfQuestions);
 	virtual float getPlayerAverageAnswerTime(std::string username);
 	virtual int getNumOfCorrectAnswers(std::string username);
 	virtual int getNumOfTotalAnswers(std::string username);
 	virtual int getNumOfPlayerGames(std::string username);
+	virtual int getNumOfPlayerWins(std::string username);
+	virtual void submitAnswer(bool correct, std::string username);
+	virtual void setTime(double time, std::string username);
+	virtual void updateWins(std::string username);
+	virtual void updateGames(std::string username);
 	virtual userStatistics getUserStatistics(std::string username);
 	virtual int getSecurityKey(std::string);
-	virtual std::list<userStatistics> getTopFive();
+	virtual void getTopFive(std::list<userStatistics>& listOfUsers);
 
 	//callback functions
 	static int questionsCallback(void* data, int argc, char** argv, char** azColName);

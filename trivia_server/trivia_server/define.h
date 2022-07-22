@@ -7,6 +7,8 @@
 
 #define ANSWERS 4
 
+#define LEFT "left"
+
 #define NOT_IN_ROOM -1
 enum codes {
 	ERROR_CODE = 0,
@@ -22,7 +24,11 @@ enum codes {
 	CLOSE_ROOM = 10,
 	START_GAME = 11,
 	GET_ROOM_STATE = 12,
-	LEAVE_ROOM = 13
+	LEAVE_ROOM = 13,
+	GET_QUESTION = 14,
+	SUBMIT_ANSWER = 15,
+	GET_GAME_RESULTS = 16,
+	LEAVE_GAME = 17
 };
 
 enum roomState {

@@ -76,7 +76,12 @@ out: bool- true if joined
 */
 bool RoomManager::joinRoom(int id, LoggedUser user)
 {
-	return m_rooms.find(id)->second.addUser(user);
+	auto it = m_rooms.find(id);
+	if (it != m_rooms.end())
+	{
+		return it->second.addUser(user);
+	}
+	return false;
 }
 
 /*

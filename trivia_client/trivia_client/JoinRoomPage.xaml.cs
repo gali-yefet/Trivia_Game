@@ -32,7 +32,7 @@ namespace trivia_client
             _connector = connector;
             _firstTime = firstTime;
             _runUpdateThread = true;
-            
+
             createThread();
         }
 
@@ -48,7 +48,7 @@ namespace trivia_client
                     Error_noRooms.Visibility = Visibility.Visible;
                     ActiveRooms.Visibility = Visibility.Hidden;
                 });
-   
+
             }
             else
             {
@@ -60,7 +60,7 @@ namespace trivia_client
                     ActiveRooms.ClearValue(ItemsControl.ItemsSourceProperty);
                     ActiveRooms.ItemsSource = _rooms;
                 });
-   
+
 
                 if (!_firstTime)
                 {
@@ -90,7 +90,7 @@ namespace trivia_client
             Thread updateThread = new Thread(new ThreadStart(update));
             // Start secondary thread  
             updateThread.Start();
-            
+
             return updateThread;
         }
         private void backButton_Click(object sender, RoutedEventArgs e)

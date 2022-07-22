@@ -41,7 +41,7 @@ namespace trivia_client
             clearBorders();
             if (checkIfValid())
                 return;
-            
+
             //initilize a request
             classes.CreateRoomRequest r;
             r.answerTimeOut = UInt32.Parse(answerTimeoutInput.Text);
@@ -53,7 +53,7 @@ namespace trivia_client
             byte[] msg = classes.Serializer.serializeCreateRoomRequest(r);
             msg = _connector.sendGetData(msg);
             classes.CreateRoomResponse response = classes.Deserializer.deserializeCreateRoomResponse(msg);
-            
+
             //check if creation failed and move to page accordingly
             if (response.status != classes.Deserializer.CREATE_ROOM_CODE)
             {
@@ -84,7 +84,7 @@ namespace trivia_client
                 maxUsersInput.BorderBrush = Brushes.Red;
                 isEmpty = true;
             }
-            if (questionCountInput.Text == "" || !classes.Serializer.checkifNumber(questionCountInput.Text) || Int32.Parse(questionCountInput.Text)>MAX_QUESTIONS)
+            if (questionCountInput.Text == "" || !classes.Serializer.checkifNumber(questionCountInput.Text) || Int32.Parse(questionCountInput.Text) > MAX_QUESTIONS || Int32.Parse(questionCountInput.Text) <= 0)
             {
                 questionCountInput.BorderBrush = Brushes.Red;
                 isEmpty = true;

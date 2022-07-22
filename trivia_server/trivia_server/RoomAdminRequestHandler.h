@@ -2,6 +2,7 @@
 #include "IRequestHandler.h"
 #include "RoomManager.h"
 #include "RequestHandlerFactory.h"
+#include "GameManager.h"
 
 class RoomAdminRequestHandler : public IRequestHandler
 {
